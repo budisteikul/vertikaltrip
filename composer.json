@@ -9,8 +9,7 @@
     ],
 	"require": {
         "budisteikul/coresdk": "dev-master",
-        "budisteikul/toursdk": "dev-master",
-        "paypal/paypal-checkout-sdk": "^1.0"
+        "budisteikul/toursdk": "dev-master"
     },
     "autoload": {
    		"psr-4": {
