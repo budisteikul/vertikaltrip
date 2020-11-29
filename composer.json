@@ -1,0 +1,20 @@
+{
+    "name": "budisteikul/tourfront",
+    "description": "Tour Front",
+    "authors": [
+        {
+            "name": "Budi",
+            "email": "aku@budi.my.id"
+        }
+    ],
+	"require": {
+        "budisteikul/coresdk": "dev-master",
+        "budisteikul/toursdk": "dev-master",
+        "paypal/paypal-checkout-sdk": "^1.0"
+    },
+    "autoload": {
+   		"psr-4": {
+        	"budisteikul\\tourfront\\": "src/"
+    	}
+	}
+}
