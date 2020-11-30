@@ -78,7 +78,7 @@
         <div class="collapse navbar-collapse stroke" id="navbarResponsive">
             <ul class="navbar-nav text-uppercase ml-auto mb-1">
             
-            @foreach($Category->get() as $category)
+            @foreach($Category->where('parent_id',0)->get() as $category)
             <li class="nav-item">
                <a class="nav-link menu-hover" href="/tours/{{ $category->slug }}">{{ $category->name }}</a>
             </li>

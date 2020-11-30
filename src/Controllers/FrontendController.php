@@ -27,7 +27,7 @@ class FrontendController extends Controller
 	public function index_vertikaltrip()
 	{
 		$count = Review::count();
-		$categories = Category::get();
+		$categories = Category::where('parent_id',0)->get();
 		return view('tourfront::frontend.vertikaltrip',['categories'=>$categories,'count'=>$count]);
 	}
 
