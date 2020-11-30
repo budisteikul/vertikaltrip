@@ -28,13 +28,13 @@ class FrontendController extends Controller
 	{
 		$count = Review::count();
 		$categories = Category::where('parent_id',0)->get();
-		return view('tourfront::frontend.vertikaltrip',['categories'=>$categories,'count'=>$count]);
+		return view('tourfront::custom.vertikaltrip',['categories'=>$categories,'count'=>$count]);
 	}
 
 	public function index_jogjafoodtour()
     {
 		$count = Review::count();
-        return view('tourfront::frontend.jogjafoodtour')->with(['count'=>$count]);
+        return view('tourfront::custom.jogjafoodtour')->with(['count'=>$count]);
     }
 
     public function reviews(Request $request)
