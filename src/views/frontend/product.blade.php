@@ -1,5 +1,5 @@
 @inject('ImageHelper', budisteikul\toursdk\Helpers\ImageHelper)
-@inject('BookingHelper', budisteikul\toursdk\Helpers\BookingHelper)
+@inject('ProductHelper', budisteikul\toursdk\Helpers\ProductHelper)
 @extends('tourfront::layouts.app')
 @section('title',$product->name)
 @if($content->excerpt!="")
@@ -55,7 +55,7 @@
 			<div class="text-muted mt-4 mb-4">
   				<i class="far fa-clock text-danger"></i> <b>{!!$content->durationText!!}</b> &nbsp;&nbsp;
   				@if($content->difficultyLevel!="")
-  				<i class="fas fa-signal text-danger"></i> <b>{!! $BookingHelper->lang('dificulty',$content->difficultyLevel)!!}</b> &nbsp;&nbsp;
+  				<i class="fas fa-signal text-danger"></i> <b>{!! $ProductHelper->lang('dificulty',$content->difficultyLevel)!!}</b> &nbsp;&nbsp;
   				@endif
   				@if($content->privateActivity)
     			<span class="badge badge-danger">PRIVATE TOUR</span>
@@ -146,7 +146,7 @@
     	<div class="card mb-4 shadow p-2">
         									
   				<div class="card-body">
-				<h3>{!! $BookingHelper->lang('type',$content->productCategory)!!} Details</h3>							
+				<h3>{!! $ProductHelper->lang('type',$content->productCategory)!!} Details</h3>							
 				<br>
 											@if($content->bookingCutoffHours!="")
 											<i class="far fa-calendar-alt text-secondary mb-4" style="width:20px;"></i> Booking Cut off: {!!$content->bookingCutoffHours!!} hours
@@ -160,7 +160,7 @@
             								@endif
 				
 											@if($content->difficultyLevel!="")
-											<i class="fas fa-signal text-secondary mb-4" style="width:20px;"></i> Difficulty {!! $BookingHelper->lang('dificulty',$content->difficultyLevel)!!}
+											<i class="fas fa-signal text-secondary mb-4" style="width:20px;"></i> Difficulty {!! $ProductHelper->lang('dificulty',$content->difficultyLevel)!!}
                                             <br>
 											@endif
                                             
@@ -168,7 +168,7 @@
             								@if($content->guidanceTypes[0]->guidanceType=="GUIDED")
               								<i class="fas fa-info-circle text-secondary mb-4" style="width:20px;"></i> Live Tour Guide in 
               								@for($i=0;$i<count($content->guidanceTypes[0]->languages);$i++)
-                							{!! $BookingHelper->lang('language',$content->guidanceTypes[0]->languages[$i])!!}
+                							{!! $ProductHelper->lang('language',$content->guidanceTypes[0]->languages[$i])!!}
               								@endfor
             								@endif
                                             <br>

@@ -1,4 +1,4 @@
-@inject('BookingHelper', budisteikul\toursdk\Helpers\BookingHelper)
+@inject('ProductHelper', budisteikul\toursdk\Helpers\ProductHelper)
 @extends('tourfront::layouts.app')
 @section('title','Checkout')
 @push('scripts')
@@ -96,7 +96,7 @@ function REMOVE(id)
                                 	@endif
                     			</div>
                     			<div class="col-8 product-detail">
-                                	{{ $BookingHelper->datetotext($shoppingcart_product->date) }}
+                                	{{ $ProductHelper->datetotext($shoppingcart_product->date) }}
                                 	<br>
                                     {{ $shoppingcart_product->rate }}
                                     <br>
