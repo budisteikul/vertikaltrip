@@ -64,14 +64,14 @@ class FrontendController extends Controller
 							$star ='<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';	
 					}
 					
-					$reseller_name = '';
-					$rev_resellers = Channel::find($resource->channel_id);
-					if(isset($rev_resellers))
+					$channel_name = '';
+					$channel = Channel::find($resource->channel_id);
+					if(isset($channel))
 					{
-						$reseller_name = $rev_resellers->name;
+						$channel_name = $channel->name;
 					}
 
-					$rev_experiences = Product::findOrFail($resource->product_id);
+					$product = Product::findOrFail($resource->product_id);
 					$title = "";
 					if(isset($resource->title))
 					{
@@ -82,17 +82,20 @@ class FrontendController extends Controller
 					
 					$user = '<b>'. $resource->user .'</b> <small><span class="text-muted">'.$date.'</span></small><br>';
 					$rating = '<span class="text-warning">'. $star .'</span>‎<br>';
-					$post_title = 'Review of : <b>'. $rev_experiences->name.'</b><br>';
+					$post_title = 'Review of : <b>'. $product->name.'</b><br>';
 					$text =  nl2br($resource->text) .'<br>';
+
 					if($resource->link!="")
 					{
-						$from = '<a href="'. $resource->link .'" target="_blank" class="text-theme"><b>'.$reseller_name.'</b></a>';
+						$from = '<a href="'. $resource->link .'" target="_blank" class="text-theme"><b>'.$channel_name.'</b></a>';
 					}
 					else
 					{
-						$from = '<b>'.$reseller_name.'</b>';
+						$from = '<b>'.$channel_name.'</b>';
 					}
+
 					$output = $user.$post_title.$rating.$title.$text.$from;
+					
 					return '<div class="bd-callout bd-callout-theme shadow-sm rounded" style="margin-top:5px;margin-bottom:5px;" >'. $output .'</div>';
 				})
 				->rawColumns(['style'])
