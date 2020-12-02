@@ -1,6 +1,6 @@
 @inject('ImageHelper', budisteikul\toursdk\Helpers\ImageHelper)
 @inject('ProductHelper', budisteikul\toursdk\Helpers\ProductHelper)
-@extends('tourfront::layouts.app')
+@extends('vertikaltrip::layouts.app')
 @section('title',$product->name)
 @if($content->excerpt!="")
     @section('description',$content->excerpt)
@@ -191,7 +191,7 @@
             </div>
             
  			<div id="bookingframe" class="card-body" style="padding-left:1px;padding-right:1px;padding-top:20px;padding-bottom:15px;">
-				@include('tourfront::frontend.calendar')
+				@include('vertikaltrip::frontend.calendar')
 			</div>
       
 		</div>

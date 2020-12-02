@@ -1,6 +1,6 @@
 @inject('BokunHelper', budisteikul\toursdk\Helpers\BokunHelper)
 @inject('ImageHelper', budisteikul\toursdk\Helpers\ImageHelper)
-@extends('tourfront::layouts.app')
+@extends('vertikaltrip::layouts.app')
 @section('title',$category->name)
 @section('content')
 <section id="tour" style="background-color:#ffffff">

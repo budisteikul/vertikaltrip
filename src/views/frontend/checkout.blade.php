@@ -1,5 +1,5 @@
 @inject('ProductHelper', budisteikul\toursdk\Helpers\ProductHelper)
-@extends('tourfront::layouts.app')
+@extends('vertikaltrip::layouts.app')
 @section('title','Checkout')
 @push('scripts')
 <script>
@@ -9,7 +9,7 @@ $( document ).ready(function() {
 </script>
 @endpush
 @section('content')
-@include('tourfront::layouts.loading')
+@include('vertikaltrip::layouts.loading')
 <section id="booking" style="background-color:#ffffff">
 <div class="container">
 	<div class="row">

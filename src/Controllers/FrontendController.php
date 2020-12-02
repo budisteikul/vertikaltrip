@@ -1,6 +1,6 @@
 <?php
 
-namespace budisteikul\tourfront\Controllers;
+namespace budisteikul\vertikaltrip\Controllers;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
@@ -28,13 +28,13 @@ class FrontendController extends Controller
 	{
 		$count = Review::count();
 		$categories = Category::where('parent_id',0)->get();
-		return view('tourfront::custom.vertikaltrip',['categories'=>$categories,'count'=>$count]);
+		return view('vertikaltrip::custom.vertikaltrip',['categories'=>$categories,'count'=>$count]);
 	}
 
 	public function index_jogjafoodtour()
     {
 		$count = Review::count();
-        return view('tourfront::custom.jogjafoodtour')->with(['count'=>$count]);
+        return view('vertikaltrip::custom.jogjafoodtour')->with(['count'=>$count]);
     }
 
     public function reviews(Request $request)
@@ -102,7 +102,7 @@ class FrontendController extends Controller
 	public function page($slug)
 	{
 		$page = Page::where('slug',$slug)->firstOrFail();
-		return view('tourfront::frontend.page',['page'=>$page]);
+		return view('vertikaltrip::frontend.page',['page'=>$page]);
 	}
 
 	public function booking($slug)
@@ -129,7 +129,7 @@ class FrontendController extends Controller
 		$year = date("Y",$microtime/1000);
 		$embedded = "false";
 
-        return view('tourfront::frontend.booking',[
+        return view('vertikaltrip::frontend.booking',[
         	'product'=>$product,
         	'content'=>$content,
         	'currency'=>$this->currency,
@@ -148,7 +148,7 @@ class FrontendController extends Controller
 	{
 		$shoppingcart = Shoppingcart::where('id',$id)->where('session_id', $sessionId)
                         ->where('booking_status','CONFIRMED')->firstOrFail();
-        return view('tourfront::frontend.receipt',['shoppingcart'=>$shoppingcart]);
+        return view('vertikaltrip::frontend.receipt',['shoppingcart'=>$shoppingcart]);
 	}
 
 	public function checkout()
@@ -162,13 +162,13 @@ class FrontendController extends Controller
             return redirect('/booking/shoppingcart/empty');
         }
 
-        return view('tourfront::frontend.checkout',['shoppingcart'=>$shoppingcart]);
+        return view('vertikaltrip::frontend.checkout',['shoppingcart'=>$shoppingcart]);
 	}
 
     public function category($slug)
     {
         $category = Category::where('slug',$slug)->firstOrFail();
-        return view('tourfront::frontend.category',['category'=>$category]);
+        return view('vertikaltrip::frontend.category',['category'=>$category]);
     }
 
     public function product($slug)
@@ -195,7 +195,7 @@ class FrontendController extends Controller
 		$year = date("Y",$microtime/1000);
 		$embedded = "true";
 
-        return view('tourfront::frontend.product',[
+        return view('vertikaltrip::frontend.product',[
         	'product'=>$product,
         	'content'=>$content,
         	'currency'=>$this->currency,

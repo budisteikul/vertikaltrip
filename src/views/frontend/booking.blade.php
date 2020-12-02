@@ -1,4 +1,4 @@
-@extends('tourfront::layouts.app')
+@extends('vertikaltrip::layouts.app')
 @section('title',$product->name)
 @section('content')
 <section id="booking" style="background-color:#ffffff">
@@ -15,7 +15,7 @@
   				</div>
  				 <div class="card-body" style="padding-left:10px;padding-right:10px;padding-top:15px;padding-bottom:15px;">
                 
-                @include('tourfront::frontend.calendar')
+                @include('vertikaltrip::frontend.calendar')
 				
 			</div>
 			</div>

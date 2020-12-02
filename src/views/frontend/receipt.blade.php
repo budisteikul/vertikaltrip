@@ -1,4 +1,4 @@
-@extends('tourfront::layouts.app')
+@extends('vertikaltrip::layouts.app')
 @section('title','Receipt')
 @section('content')
 <section id="booking" style="background-color:#ffffff">

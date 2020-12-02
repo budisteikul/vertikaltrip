@@ -1,7 +1,7 @@
-@extends('tourfront::layouts.app')
+@extends('vertikaltrip::layouts.app')
 @section('title','Shopping Cart')
 @section('content')
-@include('tourfront::layouts.loading')
+@include('vertikaltrip::layouts.loading')
 
 
 <section id="booking" style="background-color:#ffffff">

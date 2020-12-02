@@ -1,4 +1,4 @@
-@extends('tourfront::layouts.app')
+@extends('vertikaltrip::layouts.app')
 @section('title',$page->title)
 @section('content')
 

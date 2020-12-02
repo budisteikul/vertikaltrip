@@ -1,6 +1,6 @@
 {
-    "name": "budisteikul/tourfront",
-    "description": "Tour Front",
+    "name": "budisteikul/vertikaltrip",
+    "description": "Vertikal Trip",
     "authors": [
         {
             "name": "Budi",
@@ -13,7 +13,7 @@
     },
     "autoload": {
    		"psr-4": {
-        	"budisteikul\\tourfront\\": "src/"
+        	"budisteikul\\vertikaltrip\\": "src/"
     	}
 	}
 }
