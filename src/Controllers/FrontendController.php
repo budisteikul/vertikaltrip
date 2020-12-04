@@ -64,22 +64,9 @@ class FrontendController extends Controller
 							$star ='<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i>';	
 					}
 					
-					$channel_name = '';
-					$channel = Channel::find($resource->channel_id);
-					if(isset($channel))
-					{
-						$channel_name = $channel->name;
-					}
-
-					$product = Product::findOrFail($resource->product_id);
-					$title = "";
-					if(isset($resource->title))
-					{
-						$title = '<b>'.$resource->title.'</b><br>';
-					}
-					
+					$channel_name = Channel::find($resource->channel_id)->name;
+					$title = '<b>'.Product::findOrFail($resource->product_id)->title.'</b><br>';
 					$date = Carbon::parse($resource->date)->formatLocalized('%b, %Y');
-					
 					$user = '<b>'. $resource->user .'</b> <small><span class="text-muted">'.$date.'</span></small><br>';
 					$rating = '<span class="text-warning">'. $star .'</span>‎<br>';
 					$post_title = 'Review of : <b>'. $product->name.'</b><br>';
