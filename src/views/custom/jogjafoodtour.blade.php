@@ -17,8 +17,8 @@
   <meta name="theme-color" content="#2e3237">
     <title>Yogyakarta Night Walking and Food Tours</title>
     <link href="https://fonts.googleapis.com/css?family=Barlow:400,700" rel="stylesheet" type="text/css" media="screen,handheld">
-  <script src="/js/vertikaltrip-3.1.1.js"></script>
-  <link href="/css/vertikaltrip-3.1.4.css" rel="stylesheet" media="screen,handheld">
+  <script src="/js/vertikaltrip-4.0.0.js"></script>
+  <link href="/css/vertikaltrip-4.0.0.css" rel="stylesheet" media="screen,handheld">
   <script
     src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&intent=authorize&currency={{ env('BOKUN_CURRENCY') }}"  data-csp-nonce="xyz-123">
 </script>
