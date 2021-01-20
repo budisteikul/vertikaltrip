@@ -218,7 +218,7 @@
 				<h1 id="title" style="text-shadow: 2px 2px #555555;">Yogyakarta Night Walking and Food Tours</h1>
 				<p class="text-faded">
                 	Join us on this experience to try authentic Javanese dishes, play traditional games, travel on a becak, learn interesting fun facts about city, interact with locals and many more. <br>
-                	GET DISCOUNT 15% WITH PROMOCODE <span class="badge badge-success">HOLIDAY2020</span>
+                	GET DISCOUNT 15% WITH PROMOCODE <span class="badge badge-success">JOGJA15</span>
                 	<br>
                     Enjoy Jogja in Local Ways!
 				</p>
