@@ -21,17 +21,19 @@
         				@foreach($category->products as $product)
                         @php
                             $content = $BokunHelper->get_product($product->bokun_id);
+                            $cover = $ImageHelper->cover($product);
                         @endphp
         					<div class="col-lg-4 col-md-6 mb-4">
     							<div class="card h-100 shadow card-block rounded">
                             		
+                                    @if(!empty($cover))
   				 					<div class="container-book">
-                                        <a href="/tour/{{ $product->slug }}" class="text-decoration-none"><img class="card-img-top image-book" src="{{ $ImageHelper->cover($product) }}" alt="{{ $product->name }}"></a>
+                                        <a href="/tour/{{ $product->slug }}" class="text-decoration-none"><img class="card-img-top image-book" src="{{ $cover }}" alt="{{ $product->name }}"></a>
                                     <div class="middle-book">
                                             <a href="/tour/{{ $product->slug }}" class="btn btn-theme btn-md p-3" style="border-radius:0;">BOOK NOW</a>
                                     </div>
                                     </div>
-                                    
+                                    @endif
                                     
   									<div class="card-header bg-white border-0 text-left pb-0">
         								<h3 class="mb-4"><a href="/tour/{{ $product->slug }}" class="text-dark text-decoration-none">{{ $product->name }}</a></h3>
