@@ -398,7 +398,8 @@ function DELETE()
 
 <div id="notice">
     @if($shoppingcart->currency!=$shoppingcart->shoppingcart_payment->currency)
-    All payment will be charge in $shoppingcart->shoppingcart_payment->currency
+    <br />
+    All payment will be charge in {{ $shoppingcart->shoppingcart_payment->currency }}
     <br />
     Rate : {{ $BookingHelper->get_rate($shoppingcart->currency,$shoppingcart->shoppingcart_payment->currency) }}
     @endif
