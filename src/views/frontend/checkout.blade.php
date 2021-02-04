@@ -1,4 +1,5 @@
 @inject('ProductHelper', budisteikul\toursdk\Helpers\ProductHelper)
+@inject('BookingHelper', budisteikul\toursdk\Helpers\BookingHelper)
 @extends('vertikaltrip::layouts.app')
 @section('title','Checkout')
 @push('scripts')
@@ -395,6 +396,13 @@ function DELETE()
 
 <div id="alert-payment"></div>
 
+<div id="notice">
+    @if($shoppingcart->currency!=$shoppingcart->shoppingcart_payment->currency)
+    All payment will be charge in $shoppingcart->shoppingcart_payment->currency
+    <br />
+    Rate : {{ $BookingHelper->get_rate($shoppingcart->currency,$shoppingcart->shoppingcart_payment->currency) }}
+    @endif
+</div>
 
 			</div>
             </div>
