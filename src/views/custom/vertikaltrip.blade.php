@@ -255,7 +255,7 @@ var table = $('#dataTables-example').DataTable(
       <div class="col-lg-8 col-md-10 mx-auto">
       <div class="col-lg-12 text-center">
         <h3 class="section-heading" style="margin-top:50px;">How Our New Friend Talk About The Tour</h3>
-        <h4 class="section-subheading text-muted"><a href="/review" target="_blank" class="text-theme"><i class="fab fa-tripadvisor" aria-hidden="true"></i>  Review us on Trip Advisor</a></h4>
+        <h4 class="section-subheading text-muted"><a href="https://www.tripadvisor.com/UserReviewEdit-g14782503-d17523331-Vertikal_Trip-Yogyakarta_Yogyakarta_Region_Java.html" target="_blank" class="text-theme"><i class="fab fa-tripadvisor" aria-hidden="true"></i>  Review us on Trip Advisor</a></h4>
         <strong> Rating :</strong>
         <span class="text-warning">
           <i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i> <span class="text-secondary" itemprop="ratingValue">(4.9)</span>
