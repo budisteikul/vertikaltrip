@@ -339,9 +339,9 @@ function DELETE()
     @foreach($main_contacts as $main_contact)        
 <div class="form-group">
 	<label for="{{ $main_contact->id }}" class="{{ $main_contact->required ? "required" : "" }}"><strong>{{ $main_contact->label }}</strong></label>
-    @if($main_contact->dataFormat=="EMAIL_ADDRESS")
+    @if($main_contact->data_format=="EMAIL_ADDRESS")
 	<input name="{{ $main_contact->id }}" value="{{ $main_contact->answer }}" type="email" class="form-control" id="{{ $main_contact->id }}" style="height:47px;" {{ $main_contact->required ? "required" : "" }}>
-    @elseif($main_contact->dataFormat=="PHONE_NUMBER")
+    @elseif($main_contact->data_format=="PHONE_NUMBER")
     <input name="{{ $main_contact->id }}" value="{{ $main_contact->answer }}" type="tel" class="form-control" id="{{ $main_contact->id }}" style="height:47px;" {{ $main_contact->required ? "required" : "" }}>
     @else
     @if($main_contact->selectOption)
@@ -435,7 +435,7 @@ $questions = $shoppingcart->shoppingcart_questions()->where('required',1)->get()
 		}
 		else
 		{
-			@if($question->dataFormat=="EMAIL_ADDRESS")
+			@if($question->data_format=="EMAIL_ADDRESS")
 				var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 				if(regex.test($("#{{ $question->id }}").val()))
 				{
