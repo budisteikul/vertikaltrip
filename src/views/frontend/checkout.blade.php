@@ -388,7 +388,7 @@ function DELETE()
 <!-- ########################################### -->    
 
 
-<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme"><i class="fas fa-lock"></i> <strong>Pay {{ $shoppingcart->currency }} {{ $shoppingcart->total }}</strong></button>
+<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme"><i class="fas fa-lock"></i> <strong>Pay {{ $shoppingcart->shoppingcart_payment->currency }} {{ $shoppingcart->shoppingcart_payment->amount }}</strong></button>
 </form>
 
 <div id="payment-container"></div>
@@ -403,7 +403,7 @@ function DELETE()
     <br />
     All payment will be charge in {{ $shoppingcart->shoppingcart_payment->currency }}
     <br />
-    Rate : {{ $BookingHelper->get_rate($shoppingcart->currency,$shoppingcart->shoppingcart_payment->currency) }}
+    Rate : {{ $BookingHelper->get_rate($shoppingcart) }}
     </i>
     @endif
 
