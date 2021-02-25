@@ -431,7 +431,7 @@ $questions = $shoppingcart->shoppingcart_questions()->where('required',1)->get()
     	if($("#{{ $question->id }}").val()=="")
 		{
 			$('#{{ $question->id }}').addClass('is-invalid');
-			$('#{{ $question->id }}').after('<span id="span-{{ $question->id }}" class="invalid-feedback" role="alert"><strong>Please fill out this field</strong></span>');
+			$('#{{ $question->id }}').after('<span id="span-{{ $question->id }}" class="invalid-feedback" role="alert"><strong>Please fill out this field.</strong></span>');
 		}
 		else
 		{
@@ -445,7 +445,7 @@ $questions = $shoppingcart->shoppingcart_questions()->where('required',1)->get()
 				else
 				{
 					$('#{{ $question->id }}').addClass('is-invalid');
-					$('#{{ $question->id }}').after('<span id="span-{{ $question->id }}" class="invalid-feedback" role="alert"><strong>Invalid email</strong></span>');
+					$('#{{ $question->id }}').after('<span id="span-{{ $question->id }}" class="invalid-feedback" role="alert"><strong>Email format not valid.</strong></span>');
 				}
 			@else
 				$('#{{ $question->id }}').removeClass('is-invalid');
