@@ -344,7 +344,7 @@ function DELETE()
     @elseif($main_contact->data_format=="PHONE_NUMBER")
     <input name="{{ $main_contact->id }}" value="{{ $main_contact->answer }}" type="tel" class="form-control" id="{{ $main_contact->id }}" style="height:47px;" {{ $main_contact->required ? "required" : "" }}>
     @else
-    @if($main_contact->selectOption)
+    @if($main_contact->select_option)
     <select style="font-size:16px;height:47px;"  class="form-control" id="{{ $main_contact->id }}" name="{{ $main_contact->id }}" {{ $main_contact->required ? "required" : "" }}>
     	<option value=""></option>
     	@foreach($main_contact->shoppingcart_question_options()->orderBy('order')->get() as $shoppingcart_question_option)
@@ -368,7 +368,7 @@ function DELETE()
     @foreach($activityBookings as $activityBooking)
     	<div class="form-group">
 		<label for="{{ $activityBooking->id }}" class="{{ $activityBooking->required ? "required" : "" }}"><strong>{{ $activityBooking->label }}</strong></label>
-    	@if($activityBooking->selectOption)
+    	@if($activityBooking->select_option)
     	<select style="font-size:16px;height:47px;" class="form-control" id="{{ $activityBooking->id }}" name="{{ $activityBooking->id }}" {{ $activityBooking->required ? "required" : "" }}>
     		<option value=""></option>
     		@foreach($activityBooking->shoppingcart_question_options()->orderBy('order')->get() as $shoppingcart_question_option)
