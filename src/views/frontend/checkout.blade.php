@@ -3,6 +3,9 @@
 @extends('vertikaltrip::layouts.app')
 @section('title','Checkout')
 @push('scripts')
+ <script
+    src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&intent=authorize&currency={{ env('PAYPAL_CURRENCY') }}"  data-csp-nonce="xyz-123">
+</script>
 <script>
 $( document ).ready(function() {
     $('#proses').hide();
