@@ -86,11 +86,14 @@
                         <p>
 						<h3>Receipt</h3>
 						<a target="_blank" class="text-theme" href="/snippets/pdf/invoice/{{ $shoppingcart->session_id }}/Invoice-{{ $shoppingcart->confirmation_code }}.pdf"><i class="fas fa-file-invoice"></i> Invoice-{{ $shoppingcart->confirmation_code }}.pdf</a>
+
+						@if($shoppingcart->shoppingcart_payment->payment_status<=2)
 						<h3>Experience tickets</h3>
                        	@foreach($shoppingcart->shoppingcart_products()->get() as $shoppingcart_product)
                         <a target="_blank" class="text-theme" href="/snippets/pdf/ticket/{{$shoppingcart->session_id}}/Ticket-{{$shoppingcart_product->product_confirmation_code}}.pdf"><i class="fas fa-ticket-alt"></i> Ticket-{{ $shoppingcart_product->product_confirmation_code }}.pdf</a>
                         <br>
                         @endforeach
+                        @endif
                         </p>
 							
 					</div>

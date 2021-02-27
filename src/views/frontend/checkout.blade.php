@@ -585,7 +585,7 @@ function STORE()
 				paypal.Buttons({
     			createOrder: function() {
 					
-  					return fetch('/snippets/payment', {
+  					return fetch('/snippets/payment/paypal', {
     				method: 'POST',
 					credentials: 'same-origin',
     				headers: {
@@ -620,7 +620,7 @@ function STORE()
                                 "sessionId": '{{ $shoppingcart->session_id }}',
         						},
 							type: 'POST',
-							url: '/snippets/payment/confirm'
+							url: '/snippets/payment/paypal/confirm'
 						}).done(function(data) {
 							if(data.id=="1")
 							{
