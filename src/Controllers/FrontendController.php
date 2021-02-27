@@ -156,6 +156,16 @@ class FrontendController extends Controller
         return view('vertikaltrip::frontend.checkout',['shoppingcart'=>$shoppingcart]);
 	}
 
+	public function billing()
+	{
+		$sessionId = BookingHelper::shoppingcart_session();
+		$shoppingcart = Shoppingcart::where('session_id', $sessionId)
+                        ->where('booking_status','CART')->firstOrFail();
+        
+       	
+        return view('vertikaltrip::frontend.billing',['shoppingcart'=>$shoppingcart]);
+	}
+
     public function category($slug)
     {
         $category = Category::where('slug',$slug)->firstOrFail();

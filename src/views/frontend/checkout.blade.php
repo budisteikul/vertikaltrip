@@ -580,6 +580,7 @@ function STORE()
                 $('#payment-container').html('<div id="proses"><h2>Pay with</h2><div id="paypal-button-container"></div></div>');
                 $('#payment-container').fadeIn("slow");
 				$("#proses").fadeIn("slow");
+                
 				//=========================================================
 				paypal.Buttons({
     			createOrder: function() {
