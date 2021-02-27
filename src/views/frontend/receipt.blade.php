@@ -48,6 +48,28 @@
 					</div>
 				</div>
 
+				<div class="card shadow mt-4">
+					<div class="card-header bg-dark text-white pb-1">
+						<h4><i class="fas fa-file-invoice"></i> Payment Status</h4>
+					</div>
+                
+					<div class="card-body">
+                        <p>
+                        <h3>Status</h3>
+						@if($shoppingcart->shoppingcart_payment->payment_status==1)
+                    		<span class="badge badge-success">PAID</span>
+                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==2)
+                    		<span class="badge badge-success">PAID</span>
+                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==3)
+                    		<span class="badge badge-danger">REFUNDED</span>
+                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==4)
+                    		<span class="badge badge-warning">UNPAID</span>
+                  		@endif
+                        </p>
+						
+					</div>
+				</div>
+
 				
 
 			</div>
