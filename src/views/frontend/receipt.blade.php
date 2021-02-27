@@ -12,11 +12,14 @@
 			<div class="card mb-8 shadow p-2 mt-2">
  				 <div class="card-body" style="padding-left:10px;padding-right:10px;padding-top:10px;padding-bottom:15px;">
 				 <div class="col-md-12  mx-auto text-left">
-				 <p>
+				 		<p>
                         <h4>Your booking references is {{ $shoppingcart->confirmation_code }}</h4>
 						
 						Thank you for your booking with <b>{{env('APP_NAME')}}</b>, a confirmation will be sent to your email address.
 						</p>
+
+						
+
 				</div>
 				 </div>
 			</div>
@@ -32,8 +35,6 @@
 					</div>
                 
 					<div class="card-body">
-                		
-                       
                         <p>
 						<h3>Name</h3>
 						{{ $shoppingcart->shoppingcart_questions()->select('answer')->where('type','mainContactDetails')->where('question_id','firstName')->first()->answer }}
@@ -45,8 +46,10 @@
                         </p>
 						
 					</div>
-					
 				</div>
+
+				
+
 			</div>
 			<!-- ################################################################### -->
 			<div class="col-lg-6 col-lg-auto mb-6 mt-4">
