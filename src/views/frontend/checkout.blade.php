@@ -400,7 +400,7 @@ function DELETE()
   <input class="form-check-input" type="radio" name="payment_type" id="payment_paypal" value="paypal" checked>
   <label class="form-check-label ml-2" for="payment_paypal">
     PayPal <br />
-    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png">
+    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" height="20">
     <br />
     <small class="form-text text-muted">Charge in USD, Rate : {{ $BookingHelper->paypal_rate($shoppingcart) }}</small>
  
@@ -411,7 +411,7 @@ function DELETE()
   <input class="form-check-input" type="radio" name="payment_type" id="payment_bni" value="bni_va">
   <label class="form-check-label ml-2" for="payment_bni">
     BNI Virtual Account <br />
-    <img src="/img/bni.jpg">
+    <img src="/img/bni.jpg" height="20">
  
   </label>
 </div>
@@ -420,7 +420,7 @@ function DELETE()
   <input class="form-check-input" type="radio" name="payment_type" id="payment_permata" value="permata_va">
   <label class="form-check-label ml-2" for="payment_permata">
     Permata Virtual Account <br />
-    <img src="/img/permata.jpg">
+    <img src="/img/permata.jpg" height="20">
  
   </label>
 </div>
@@ -626,68 +626,68 @@ function STORE()
                 }
                 else
                 {
-                //=========================================================
-                paypal.Buttons({
-                createOrder: function() {
+                
+                    //=========================================================
+                    paypal.Buttons({
+                    createOrder: function() {
                     
-                    return fetch('/snippets/payment/paypal', {
-                    method: 'POST',
-                    credentials: 'same-origin',
-                    headers: {
-                        'content-type': 'application/json',
-                        'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content"),
-                        'sessionId': '{{ $shoppingcart->session_id }}'
-                        }
-                    }).then(function(res) {
-                        //console.log(res);
-                        return res.json();
-                    }).then(function(data) {
-                        //console.log(data);
-                        return data.result.id;
-                    });
-                    
-                },
-                onError: function (err) {
-                    $("#proses").hide();
-                    $('#alert-payment').html('<div id="alert-failed" class="alert alert-danger text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Error!</h2></div>');
-                                $('#alert-payment').fadeIn("slow");
-                    
-                },
-                onApprove: function(data, actions) {
-                    $("#proses").addClass("loader");
-                    actions.order.authorize().then(function(authorization) {
-                        var authorizationID = authorization.purchase_units[0].payments.authorizations[0].id
-                        $.ajax({
-                            data: {
-                                "_token": $("meta[name=csrf-token]").attr("content"),
-                                "orderID": data.orderID,
-                                "authorizationID": authorizationID,
-                                "sessionId": '{{ $shoppingcart->session_id }}',
-                                },
-                            type: 'POST',
-                            url: '/snippets/payment/paypal/confirm'
-                        }).done(function(data) {
-                            if(data.id=="1")
-                            {
-                                window.location.href = '/booking/receipt/'+ data.message;
-                                $("#proses").hide();
-                                $('#alert-payment').html('<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>');
-                                $('#alert-payment').fadeIn("slow");
-                                
+                        return fetch('/snippets/payment/paypal', {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        headers: {
+                            'content-type': 'application/json',
+                            'X-CSRF-TOKEN': $("meta[name=csrf-token]").attr("content"),
+                            'sessionId': '{{ $shoppingcart->session_id }}'
                             }
-                            else
-                            {
-                                $("#proses").hide();
-                                $('#alert-payment').html('<div id="alert-failed" class="alert alert-danger text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Failed!</h2></div>');
-                                $('#alert-payment').fadeIn("slow");
-                            }
-                        }).fail(function(error) {
-                            console.log(error);
+                        }).then(function(res) {
+                            //console.log(res);
+                            return res.json();
+                        }).then(function(data) {
+                            //console.log(data);
+                            return data.result.id;
                         });
-                    });
-                }
+                    
+                    },
+                    onError: function (err) {
+                        $("#proses").hide();
+                        $('#alert-payment').html('<div id="alert-failed" class="alert alert-danger text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Error!</h2></div>');
+                        $('#alert-payment').fadeIn("slow");
+                    
+                    },
+                    onApprove: function(data, actions) {
+                        $("#proses").addClass("loader");
+                        actions.order.authorize().then(function(authorization) {
+                            var authorizationID = authorization.purchase_units[0].payments.authorizations[0].id
+                            $.ajax({
+                                data: {
+                                    "_token": $("meta[name=csrf-token]").attr("content"),
+                                    "orderID": data.orderID,
+                                    "authorizationID": authorizationID,
+                                    "sessionId": '{{ $shoppingcart->session_id }}',
+                                },
+                                type: 'POST',
+                                url: '/snippets/payment/paypal/confirm'
+                            }).done(function(data) {
+                                if(data.id=="1")
+                                {
+                                    window.location.href = '/booking/receipt/'+ data.message;
+                                    $("#proses").hide();
+                                    $('#alert-payment').html('<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>');
+                                    $('#alert-payment').fadeIn("slow");
+                                }
+                                else
+                                {
+                                    $("#proses").hide();
+                                    $('#alert-payment').html('<div id="alert-failed" class="alert alert-danger text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Failed!</h2></div>');
+                                    $('#alert-payment').fadeIn("slow");
+                                }
+                            }).fail(function(error) {
+                                console.log(error);
+                            });
+                        });
+                        }
             
-                }).render('#paypal-button-container');
+                    }).render('#paypal-button-container');
                 //=========================================================
                 }
 				
