@@ -389,50 +389,44 @@ function DELETE()
     @endif
     @endforeach
 <!-- ########################################### -->
+
 <h2>Billing Information</h2>
+
 <div class="form-group">
-<h3>Payment method</h3>
-<div class="form-check mb-2">
-  <input class="form-check-input" type="radio" name="payment_method" id="payment_method1" value="option1" checked>
-  <label class="form-check-label" for="payment_method1">
-    Full payment
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="payment_method" id="payment_method2" value="option2">
-  <label class="form-check-label" for="payment_method2">
-    Deposit 10%
-  </label>
-</div>
-</div> 
-<div class="form-group">
+
 <h3>Payment type</h3>
-<div class="form-check mb-2">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-  <label class="form-check-label" for="exampleRadios1">
-    Paypal or credit/debit card <br />(Charge in USD, Rate : {{ $BookingHelper->get_rate($shoppingcart) }})
+
+<div class="form-check mb-4">
+  <input class="form-check-input" type="radio" name="payment_type" id="payment_paypal" value="paypal" checked>
+  <label class="form-check-label ml-2" for="payment_paypal">
+    PayPal <br />
+    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png">
+    <br />
+    <small class="form-text text-muted">Charge in USD, Rate : {{ $BookingHelper->get_rate($shoppingcart) }}</small>
+ 
   </label>
 </div>
-<div class="form-check mb-2">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">
-    BNI Virtual Account
+
+<div class="form-check mb-4">
+  <input class="form-check-input" type="radio" name="payment_type" id="payment_bni" value="bni_va">
+  <label class="form-check-label ml-2" for="payment_bni">
+    BNI Virtual Account <br />
+    <img src="/img/bni.jpg">
+ 
   </label>
 </div>
-<div class="form-check mb-2">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">
-    Permata Virtual Account
-  </label>
-</div>
-<div class="form-check mb-2">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">
-    Mandiri Bill
+
+<div class="form-check mb-4">
+  <input class="form-check-input" type="radio" name="payment_type" id="payment_permata" value="permata_va">
+  <label class="form-check-label ml-2" for="payment_permata">
+    Permata Virtual Account <br />
+    <img src="/img/permata.jpg">
+ 
   </label>
 </div>
 
 </div>  
+<hr>
 <!-- ########################################### --> 
 
 <button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Checkout</strong></button>
@@ -578,6 +572,9 @@ function STORE()
 			{
 				$("#apply").attr("disabled", true);
 				$("#promocode").attr("disabled", true);
+                $("#payment_paypal").attr("disabled", true);
+                $("#payment_bni").attr("disabled", true);
+                $("#payment_permata").attr("disabled", true);
 
 				@php
 				$bookingId_buttons = $shoppingcart->shoppingcart_products()->get();
