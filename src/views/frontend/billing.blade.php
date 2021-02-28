@@ -25,40 +25,27 @@ $( document ).ready(function() {
 				<div class="col-lg-6 col-lg-auto mb-6 mt-4">
                 
 <!-- ################################################################### -->  
-<script language="javascript">
-function REMOVE(id)
-{
-    $('#remove-'+id).attr("disabled", true);
-    $('#remove-'+id).html('<i class="fa fa-spinner fa-spin"></i>');
-    
-    $.ajax({
-        data: {
-            "_token": $("meta[name=csrf-token]").attr("content"),
-            "bookingId": id,
-            "sessionId": '{{$shoppingcart->session_id}}',
-        },
-        type: 'POST',
-        url: '/snippets/activity/remove'
-        }).done(function( data ) {
-            if(data.id=="1")
-            {
-                window.location.href = '/booking/checkout';
-            }
-            else
-            {
-                $('#remove-'+id).attr("disabled", false);
-                $('#remove-'+id).html('<i class="fa fa-trash-alt"></i>');
-            }
-        });
-    
-    
-    return false;
-}
-</script>
+
                 <div class="card shadow">
   				<div class="card-header bg-dark text-white pb-1">
     				<h4><i class="fas fa-shopping-cart"></i> Order Summary</h4>
   				</div>
+
+                <div class="card-body">
+                <p>
+                        <h2>Contact Information</h2>
+                        @php
+                        $main_contacts = $shoppingcart->shoppingcart_questions()->where('type','mainContactDetails')->orderBy('order')->get()
+                        @endphp
+                        @foreach($main_contacts as $main_contact)        
+                            <strong>{{ $main_contact->label }} : </strong>
+                            {{ $main_contact->answer }} <br />
+                        @endforeach
+                    </p>
+                    <hr>
+                </div>
+
+
                 <?php
 				$grand_subtotal = 0;
 				$grand_discount = 0;
@@ -112,9 +99,7 @@ function REMOVE(id)
                                     @endforeach
                                 </div>
                 			</div>
-                            <div class="col text-right">
-                            	<button id="remove-{{ $shoppingcart_product->booking_id }}" onClick="REMOVE({{ $shoppingcart_product->booking_id }});" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt fa-sm"></i></button>
-                            </div>
+                            
                             </div>
                             <!-- Product detail booking -->
                             <!-- Pickup booking $activity -->
@@ -208,7 +193,7 @@ function REMOVE(id)
                 
                 <div class="card-body pt-0">
                 	<hr class="mt-0"> 
-                    <div class="row mb-4 mt-0">
+                    <div class="row mt-0">
                 		<div class="col-8">
                     		<b style="font-size:18px">Total ({{ $shoppingcart->currency }})</b>
                     	</div>
@@ -217,116 +202,12 @@ function REMOVE(id)
                     	</div>
                 	</div>
                 </div>
-				</div>
-<!-- ################################################################### -->
-@if(!isset($shoppingcart->promo_code))
-<script language="javascript">
-function PROMOCODE()
-{
-    $('#alert-promocode-success').fadeOut("slow");
-    $('#alert-promocode-failed').fadeOut("slow");
-    $("#apply").attr("disabled", true);
-    $("#promocode").attr("disabled", true);
-    $('#apply').html('<i class="fa fa-spinner fa-spin"></i>');
-    
-    $.ajax({
-        data: {
-            "_token": $("meta[name=csrf-token]").attr("content"),
-            "promocode": $('#promocode').val(),
-            "sessionId": '{{$shoppingcart->session_id}}',
-        },
-        type: 'POST',
-        url: '/snippets/promocode'
-        }).done(function( data ) {
-            if(data.id=="1")
-            {
-                window.location.href = '/booking/checkout';
-                $('#alert-promocode').hide();
-                $('#alert-promocode').html('<div id="alert-promocode-success" class="alert alert-primary text-center" role="alert"><i class="far fa-smile"></i> Promo code applied</div>');
-                $('#alert-promocode').fadeIn("slow");
-            }
-            else
-            {
-                $('#promocode').val('');
-                $('#alert-promocode').hide();
-                $('#alert-promocode').html('<div id="alert-promocode-failed" class="alert alert-danger text-center" role="alert"><i class="far fa-frown"></i> Promo code not valid</div>');
-                $('#alert-promocode').fadeIn("slow");
-                $("#promocode").attr("disabled", false);
-                $("#apply").attr("disabled", false);
-                $('#apply').html('Apply');
-            }
-        });
-    return false;
-}
-</script>
-<!-- ################################################################### -->
-                <div class="card shadow mt-4">
-                	<div class="card-body">
-                            <div id="alert-promocode"></div>
-                    		
-                            
-                    	<form onSubmit="PROMOCODE(); return false;" class="form-inline">
-  							<div class="form-row align-items-center">
-    							<div class="col-auto">
-      								<input type="text" class="form-control" id="promocode" placeholder="Promo code" required>
-    							</div>
-    							<div class="col-auto">
-      								<button id="apply" type="submit" class="btn btn-secondary ">Apply</button>
-    							</div>
-  							</div>
-						</form>
-                	</div>
-                </div>
- <!-- ################################################################### --> 
- @else
- <script>
-$( document ).ready(function() {
-	$('#alert-promocode-failed').hide();
-});
-</script>
-<script language="javascript">
-function DELETE()
-{
-    $("#apply").attr("disabled", true);
-    $('#apply').html('<i class="fa fa-spinner fa-spin"></i>');
-    
-    $.ajax({
-        data: {
-            "_token": $("meta[name=csrf-token]").attr("content"),
-            "sessionId": '{{$shoppingcart->session_id}}',
-        },
-        type: 'POST',
-        url: '/snippets/promocode/remove'
-        }).done(function( data ) {
-            if(data.id=="1")
-            {
-                window.location.href = '/booking/checkout';
-                $('#alert-promocode').hide();
-                $('#alert-promocode').html('<div id="alert-promocode-failed" class="alert alert-danger text-center" role="alert"><i class="far fa-frown"></i> Promo code removed</div>');
-                $('#alert-promocode').fadeIn("slow");
-            }
-        });
-    
-    
-    return false;
-}
-</script>
-<div class="card shadow mt-4">
-	<div class="card-body">
-    		<div id="alert-promocode"></div>
-    	<div class="row mb-2">
-        	<div class="col-8 my-auto">
-				<strong>Promo code : {{ $shoppingcart->promo_code }}</strong>
-			</div>
-			<div class="col-4 my-auto text-right">
-				<button id="apply" type="button" onClick="DELETE();" class="btn btn-sm btn-danger"><i class="fa fa-trash-alt"></i></button>
-			</div>
-		</div>	
-	</div>
-</div>
-@endif         
-<!-- ################################################################### -->
 
+                
+                    
+				</div>
+           
+<!-- ################################################################### -->
             </div>
             
             <div class="col-lg-6 col-lg-auto mb-6 mt-4">
@@ -342,22 +223,9 @@ function DELETE()
     @foreach($main_contacts as $main_contact)        
 <div class="form-group">
 	<label for="{{ $main_contact->id }}" class="{{ $main_contact->required ? "required" : "" }}"><strong>{{ $main_contact->label }}</strong></label>
-    @if($main_contact->data_format=="EMAIL_ADDRESS")
-	<input name="{{ $main_contact->id }}" value="{{ $main_contact->answer }}" type="email" class="form-control" id="{{ $main_contact->id }}" style="height:47px;" {{ $main_contact->required ? "required" : "" }}>
-    @elseif($main_contact->data_format=="PHONE_NUMBER")
-    <input name="{{ $main_contact->id }}" value="{{ $main_contact->answer }}" type="tel" class="form-control" id="{{ $main_contact->id }}" style="height:47px;" {{ $main_contact->required ? "required" : "" }}>
-    @else
-    @if($main_contact->select_option)
-    <select style="font-size:16px;height:47px;"  class="form-control" id="{{ $main_contact->id }}" name="{{ $main_contact->id }}" {{ $main_contact->required ? "required" : "" }}>
-    	<option value=""></option>
-    	@foreach($main_contact->shoppingcart_question_options()->orderBy('order')->get() as $shoppingcart_question_option)
-    	<option value="{{ $shoppingcart_question_option->value }}" {{ $shoppingcart_question_option->answer==1 ? "selected" : "" }}>{{ $shoppingcart_question_option->label }}</option>
-        @endforeach
-    </select>
-    @else
-    <input name="{{ $main_contact->id }}" value="{{ $main_contact->answer }}" type="text" class="form-control" id="{{ $main_contact->id }}" style="height:47px;" {{ $main_contact->required ? "required" : "" }}>
-    @endif
-    @endif
+    
+    {{ $main_contact->answer }}
+   
 </div>
 	@endforeach
 <!-- ########################################### --> 
@@ -371,59 +239,18 @@ function DELETE()
     @foreach($activityBookings as $activityBooking)
     	<div class="form-group">
 		<label for="{{ $activityBooking->id }}" class="{{ $activityBooking->required ? "required" : "" }}"><strong>{{ $activityBooking->label }}</strong></label>
-    	@if($activityBooking->select_option)
-    	<select style="font-size:16px;height:47px;" class="form-control" id="{{ $activityBooking->id }}" name="{{ $activityBooking->id }}" {{ $activityBooking->required ? "required" : "" }}>
-    		<option value=""></option>
-    		@foreach($activityBooking->shoppingcart_question_options()->orderBy('order')->get() as $shoppingcart_question_option)
-    		<option value="{{ $shoppingcart_question_option->value }}" {{ $shoppingcart_question_option->answer==1 ? "selected" : "" }}>{{ $shoppingcart_question_option->label }}</option>
-    	    @endforeach
-    	</select>
-    	@else
-    	<input type="text" id="{{ $activityBooking->id }}" value="{{ $activityBooking->answer }}" style="height:47px;" name="{{ $activityBooking->id }}" class="form-control" {{ $activityBooking->required ? "required" : "" }}>
-    	@endif
-    @if(isset($activityBooking->help))
-    <small class="form-text text-muted">{{$activityBooking->help}}</small>
-    @endif
+    	
+    	{{ $activityBooking->answer }}
+    	
+   
 	</div>
     @endforeach
     @endif
     @endforeach
-<!-- ########################################### -->
-<h2>Billing Information</h2>
-<div class="form-group">
-<h3>Payment method</h3>
-<div class="form-check mb-2">
-  <input class="form-check-input" type="radio" name="payment_method" id="payment_method1" value="option1" checked>
-  <label class="form-check-label" for="payment_method1">
-    Full payment
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="payment_method" id="payment_method2" value="option2">
-  <label class="form-check-label" for="payment_method2">
-    Deposit 10%
-  </label>
-</div>
-</div> 
-<div class="form-group">
-<h3>Payment type</h3>
-<div class="form-check mb-2">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
-  <label class="form-check-label" for="exampleRadios1">
-    Paypal or credit/debit card <br />(Charge in USD, Rate : {{ $BookingHelper->get_rate($shoppingcart) }})
-  </label>
-</div>
-<div class="form-check">
-  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
-  <label class="form-check-label" for="exampleRadios2">
-    Bank transfer
-  </label>
-</div>
+<!-- ########################################### -->    
 
-</div>  
-<!-- ########################################### --> 
 
-<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay {{ $shoppingcart->shoppingcart_payment->currency }} {{ $shoppingcart->shoppingcart_payment->amount }}</strong></button>
+<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme"><i class="fas fa-lock"></i> <strong>Pay {{ $shoppingcart->shoppingcart_payment->currency }} {{ $shoppingcart->shoppingcart_payment->amount }}</strong></button>
 </form>
 
 <div id="payment-container">
@@ -435,7 +262,14 @@ function DELETE()
 
 <div id="notice">
     
-    
+    @if($shoppingcart->currency!=$shoppingcart->shoppingcart_payment->currency)
+    <i>
+    <br />
+    All payment will be made in {{ $shoppingcart->shoppingcart_payment->currency }}
+    <br />
+    Rate : {{ $BookingHelper->get_rate($shoppingcart) }}
+    </i>
+    @endif
 
 </div>
 
