@@ -394,7 +394,9 @@ function DELETE()
 <button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme"><i class="fas fa-lock"></i> <strong>Pay {{ $shoppingcart->shoppingcart_payment->currency }} {{ $shoppingcart->shoppingcart_payment->amount }}</strong></button>
 </form>
 
-<div id="payment-container"></div>
+<div id="payment-container">
+    
+</div>
 
 
 <div id="alert-payment"></div>
@@ -578,6 +580,8 @@ function STORE()
 				
 				$("#submit").slideUp("slow");
                 $('#payment-container').html('<div id="proses"><h2>Pay with</h2><div id="paypal-button-container"></div></div>');
+
+
                 $('#payment-container').fadeIn("slow");
 				$("#proses").fadeIn("slow");
                 
@@ -644,7 +648,8 @@ function STORE()
 			
   				}).render('#paypal-button-container');
 				//=========================================================
-				
+
+				//=========================================================
 			}
 			else
 			{
