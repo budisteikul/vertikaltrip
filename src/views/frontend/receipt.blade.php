@@ -27,9 +27,39 @@
 			
 			<div class="row mb-2">
 			<!-- ################################################################### --> 
-			<div class="col-lg-6 col-lg-auto mb-6 mt-4">
-            	  
-                <div class="card shadow">
+			<div class="col-lg-6 col-lg-auto mb-6">
+
+            	<div class="card shadow mt-4">
+					<div class="card-header bg-dark text-white pb-1">
+						<h4><i class="fas fa-file-invoice"></i> Payment Status</h4>
+					</div>
+                
+					<div class="card-body">
+                        <p>
+                        <h3>Status</h3>
+						@if($shoppingcart->shoppingcart_payment->payment_status==1)
+                    		<span class="badge badge-success">PAID</span>
+                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==2)
+                    		<span class="badge badge-success">PAID</span>
+                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==3)
+                    		<span class="badge badge-danger">REFUNDED</span>
+                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==4)
+                    		<span class="badge badge-warning">UNPAID</span>
+                  		@endif
+                        </p>
+					
+					<p>
+						<h2>Way to Pay</h2>
+
+						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-warning mt-4"><strong>BNI Virtual Account</strong></button>
+						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><strong>Mandiri Bill</strong></button>
+						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-danger mt-4"><strong>Permata Virtual Account</strong></button>
+						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-success mt-4"><strong>Go Pay</strong></button>
+					</p>	
+					</div>
+				</div>
+
+                <div class="card shadow mt-4">
 					<div class="card-header bg-dark text-white pb-1">
 						<h4><i class="fas fa-user-tie"></i> Customer Info</h4>
 					</div>
@@ -48,27 +78,7 @@
 					</div>
 				</div>
 
-				<div class="card shadow mt-4">
-					<div class="card-header bg-dark text-white pb-1">
-						<h4><i class="fas fa-file-invoice"></i> Payment Status</h4>
-					</div>
-                
-					<div class="card-body">
-                        <p>
-                        <h3>Status</h3>
-						@if($shoppingcart->shoppingcart_payment->payment_status==1)
-                    		<span class="badge badge-success">PAID</span>
-                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==2)
-                    		<span class="badge badge-success">PAID</span>
-                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==3)
-                    		<span class="badge badge-danger">REFUNDED</span>
-                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==4)
-                    		<span class="badge badge-warning">UNPAID</span>
-                  		@endif
-                        </p>
-						
-					</div>
-				</div>
+				
 
 				
 
@@ -87,13 +97,13 @@
 						<h3>Receipt</h3>
 						<a target="_blank" class="text-theme" href="/snippets/pdf/invoice/{{ $shoppingcart->session_id }}/Invoice-{{ $shoppingcart->confirmation_code }}.pdf"><i class="fas fa-file-invoice"></i> Invoice-{{ $shoppingcart->confirmation_code }}.pdf</a>
 
-						@if($shoppingcart->shoppingcart_payment->payment_status<=2)
+						
 						<h3>Experience tickets</h3>
                        	@foreach($shoppingcart->shoppingcart_products()->get() as $shoppingcart_product)
                         <a target="_blank" class="text-theme" href="/snippets/pdf/ticket/{{$shoppingcart->session_id}}/Ticket-{{$shoppingcart_product->product_confirmation_code}}.pdf"><i class="fas fa-ticket-alt"></i> Ticket-{{ $shoppingcart_product->product_confirmation_code }}.pdf</a>
                         <br>
                         @endforeach
-                        @endif
+                        
                         </p>
 							
 					</div>

@@ -413,17 +413,29 @@ function DELETE()
     Paypal or credit/debit card <br />(Charge in USD, Rate : {{ $BookingHelper->get_rate($shoppingcart) }})
   </label>
 </div>
-<div class="form-check">
+<div class="form-check mb-2">
   <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
   <label class="form-check-label" for="exampleRadios2">
-    Bank transfer
+    BNI Virtual Account
+  </label>
+</div>
+<div class="form-check mb-2">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+  <label class="form-check-label" for="exampleRadios2">
+    Permata Virtual Account
+  </label>
+</div>
+<div class="form-check mb-2">
+  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+  <label class="form-check-label" for="exampleRadios2">
+    Mandiri Bill
   </label>
 </div>
 
 </div>  
 <!-- ########################################### --> 
 
-<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay {{ $shoppingcart->shoppingcart_payment->currency }} {{ $shoppingcart->shoppingcart_payment->amount }}</strong></button>
+<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Checkout</strong></button>
 </form>
 
 <div id="payment-container">
