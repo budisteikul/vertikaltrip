@@ -6,6 +6,9 @@
  <script
     src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&intent=authorize&currency={{ env('PAYPAL_CURRENCY') }}"  data-csp-nonce="xyz-123">
 </script>
+<script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
 <script>
 $( document ).ready(function() {
     $('#proses').hide();
@@ -397,33 +400,24 @@ function DELETE()
 <h3>Payment provider</h3>
 
 <div class="form-check mb-4">
-  <input class="form-check-input" type="radio" name="payment_type" id="payment_paypal" value="paypal" checked>
+  <input class="form-check-input" type="radio" name="payment_provider" id="payment_paypal" value="paypal" checked>
   <label class="form-check-label ml-2" for="payment_paypal">
     PayPal <br />
     <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" height="20">
     <br />
     <small class="form-text text-muted">Charge in USD, Rate : {{ $BookingHelper->paypal_rate($shoppingcart) }}</small>
- 
   </label>
 </div>
 
 <div class="form-check mb-4">
-  <input class="form-check-input" type="radio" name="payment_type" id="payment_bni" value="bni_va">
-  <label class="form-check-label ml-2" for="payment_bni">
+  <input class="form-check-input" type="radio" name="payment_provider" id="payment_midtrans" value="midtrans">
+  <label class="form-check-label ml-2" for="payment_midtrans">
     MidTrans <br />
-    <img src="/img/bni.jpg" height="20">
- 
+    <img src="/img/bni.jpg" height="20"><img src="/img/permata.jpg" height="20">
   </label>
 </div>
 
-<div class="form-check mb-4">
-  <input class="form-check-input" type="radio" name="payment_type" id="payment_permata" value="permata_va">
-  <label class="form-check-label ml-2" for="payment_permata">
-    Trust My Travel <br />
-    <img src="/img/permata.jpg" height="20">
- 
-  </label>
-</div>
+
 
 </div>  
 <hr>
@@ -538,7 +532,7 @@ function STORE()
 		data: {
         	"_token": $("meta[name=csrf-token]").attr("content"),
             "sessionId": '{{$shoppingcart->session_id}}',
-            "payment_type": $('input[name="payment_type"]:checked').val(),
+            
 			
 				@php
     			$main_contacts = $shoppingcart->shoppingcart_questions()->where('type','mainContactDetails')->orderBy('order')->get()
@@ -574,8 +568,7 @@ function STORE()
 				$("#apply").attr("disabled", true);
 				$("#promocode").attr("disabled", true);
                 $("#payment_paypal").attr("disabled", true);
-                $("#payment_bni").attr("disabled", true);
-                $("#payment_permata").attr("disabled", true);
+                $("#payment_midtrans").attr("disabled", true);
 
 				@php
 				$bookingId_buttons = $shoppingcart->shoppingcart_products()->get();
@@ -613,20 +606,11 @@ function STORE()
 				
 				
 				
-				$("#submit").slideUp("slow");
-                $('#payment-container').html('<div id="proses"><h2>Pay with</h2><div id="paypal-button-container"></div></div>');
-
-
-                $('#payment-container').fadeIn("slow");
-				$("#proses").fadeIn("slow");
+				
                 
-                if(data.redirect!="")
+                if($('input[name="payment_provider"]:checked').val()=="paypal")
                 {
-                    window.location.href = '/booking/receipt/'+ data.redirect;
-                }
-                else
-                {
-                
+                    $('#payment-container').html('<div id="proses"><h2>Pay with</h2><div id="paypal-button-container"></div></div>');
                     //=========================================================
                     paypal.Buttons({
                     createOrder: function() {
@@ -690,8 +674,36 @@ function STORE()
                     }).render('#paypal-button-container');
                 //=========================================================
                 }
-				
+                else
+                {
+                    $('#payment-container').html('<div id="proses"><button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay</strong></button></div>');
+                    var payButton = document.getElementById('pay-button');
+                    var snapToken;
+                    
+                    $.ajax({
+                        data: {
+                            "_token": $("meta[name=csrf-token]").attr("content"),
+                            "sessionId": '{{$shoppingcart->session_id}}',
+                        },
+                        type: 'POST',
+                        url: '/snippets/payment/midtrans'
+                    }).done(function( data ) {
+                        if(data.id=="1")
+                        {
+                            snapToken = data.snapToken;
+                        }
+                    });
 
+                    
+                    payButton.addEventListener('click', function () {
+                        snap.pay(snapToken);
+                    });
+                   
+                }
+				
+                $("#submit").slideUp("slow");
+                $('#payment-container').fadeIn("slow");
+                $("#proses").fadeIn("slow");
 				//=========================================================
 			}
 			else
@@ -705,7 +717,7 @@ function STORE()
 					});
 					
 				$("#submit").attr("disabled", false);
-				$('#submit').html('<i class="fas fa-lock"></i> <strong>Pay {{ $shoppingcart->currency }} {{ $shoppingcart->total }}</strong>');
+				$('#submit').html('<i class="fas fa-lock"></i> <strong>Checkout</strong>');
 				
 			}
 		});
