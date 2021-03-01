@@ -56,7 +56,7 @@
                         </p>
 					@if($shoppingcart->shoppingcart_payment->payment_status==4)
 					<p>
-						<button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay</strong></button>
+						<button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay now</strong></button>
 						<script>
 							var payButton = document.getElementById('pay-button');
 							payButton.addEventListener('click', function () {

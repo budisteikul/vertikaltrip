@@ -676,7 +676,7 @@ function STORE()
                 }
                 else
                 {
-                    $('#payment-container').html('<div id="proses"><button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay</strong></button></div>');
+                    $('#payment-container').html('<div id="proses"><button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay now</strong></button></div>');
                     var payButton = document.getElementById('pay-button');
                     var snapToken;
                     
