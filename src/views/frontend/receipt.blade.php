@@ -1,6 +1,13 @@
 @extends('vertikaltrip::layouts.app')
 @section('title','Receipt')
 @section('content')
+@push('scripts')
+
+<script type="text/javascript"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+
+@endpush
 <section id="booking" style="background-color:#ffffff">
 <div class="container">
 	<div class="row">
@@ -47,15 +54,17 @@
                     		<span class="badge badge-warning">UNPAID</span>
                   		@endif
                         </p>
-					
+					@if($shoppingcart->shoppingcart_payment->payment_status==4)
 					<p>
-						<h2>Way to Pay</h2>
-
-						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-warning mt-4"><strong>BNI Virtual Account</strong></button>
-						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><strong>Mandiri Bill</strong></button>
-						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-danger mt-4"><strong>Permata Virtual Account</strong></button>
-						<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-success mt-4"><strong>Go Pay</strong></button>
-					</p>	
+						<button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay</strong></button>
+						<script>
+							var payButton = document.getElementById('pay-button');
+							payButton.addEventListener('click', function () {
+                        		snap.pay('{{$shoppingcart->shoppingcart_payment->snaptoken}}');
+                    		});
+						</script>
+					</p>
+					@endif	
 					</div>
 				</div>
 
