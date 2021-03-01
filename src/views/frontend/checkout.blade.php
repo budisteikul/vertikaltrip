@@ -394,7 +394,7 @@ function DELETE()
 
 <div class="form-group">
 
-<h3>Payment type</h3>
+<h3>Payment provider</h3>
 
 <div class="form-check mb-4">
   <input class="form-check-input" type="radio" name="payment_type" id="payment_paypal" value="paypal" checked>
@@ -410,7 +410,7 @@ function DELETE()
 <div class="form-check mb-4">
   <input class="form-check-input" type="radio" name="payment_type" id="payment_bni" value="bni_va">
   <label class="form-check-label ml-2" for="payment_bni">
-    BNI Virtual Account <br />
+    MidTrans <br />
     <img src="/img/bni.jpg" height="20">
  
   </label>
@@ -419,7 +419,7 @@ function DELETE()
 <div class="form-check mb-4">
   <input class="form-check-input" type="radio" name="payment_type" id="payment_permata" value="permata_va">
   <label class="form-check-label ml-2" for="payment_permata">
-    Permata Virtual Account <br />
+    Trust My Travel <br />
     <img src="/img/permata.jpg" height="20">
  
   </label>
