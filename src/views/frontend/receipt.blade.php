@@ -2,10 +2,15 @@
 @section('title','Receipt')
 @section('content')
 @push('scripts')
+@if(env('MIDTRANS_ENV')=="sandbox")
 <script type="text/javascript"
-            src="https://{{ env('MIDTRANS_URL') }}/snap/snap.js"
+            src="https://app.sandbox.midtrans.com/snap/snap.js"
             data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
-
+@else
+<script type="text/javascript"
+            src="https://app.midtrans.com/snap/snap.js"
+            data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+@endif
 @endpush
 <section id="booking" style="background-color:#ffffff">
 <div class="container">
