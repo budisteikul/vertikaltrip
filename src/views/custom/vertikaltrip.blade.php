@@ -1,5 +1,5 @@
-@inject('$BokunHelper', budisteikul\toursdk\Helpers\BokunHelper)
-@inject('$ImageHelper', budisteikul\toursdk\Helpers\ImageHelper)
+@inject('BokunHelper', 'budisteikul\toursdk\Helpers\BokunHelper')
+@inject('ImageHelper', 'budisteikul\toursdk\Helpers\ImageHelper')
 <!DOCTYPE html>
 <html lang="en">
 <head>

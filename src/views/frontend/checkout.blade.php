@@ -1,5 +1,5 @@
-@inject('ProductHelper', budisteikul\toursdk\Helpers\ProductHelper)
-@inject('BookingHelper', budisteikul\toursdk\Helpers\BookingHelper)
+@inject('ProductHelper', 'budisteikul\toursdk\Helpers\ProductHelper')
+@inject('BookingHelper', 'budisteikul\toursdk\Helpers\BookingHelper')
 @extends('vertikaltrip::layouts.app')
 @section('title','Checkout')
 @push('scripts')

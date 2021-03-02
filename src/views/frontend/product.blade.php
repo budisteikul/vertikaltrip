@@ -1,5 +1,5 @@
-@inject('ImageHelper', budisteikul\toursdk\Helpers\ImageHelper)
-@inject('ProductHelper', budisteikul\toursdk\Helpers\ProductHelper)
+@inject('ImageHelper', 'budisteikul\toursdk\Helpers\ImageHelper')
+@inject('ProductHelper', 'budisteikul\toursdk\Helpers\ProductHelper')
 @extends('vertikaltrip::layouts.app')
 @section('title',$product->name)
 @if($content->excerpt!="")

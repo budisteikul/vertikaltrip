@@ -1,4 +1,4 @@
-@inject('Category', budisteikul\toursdk\Models\Category)
+@inject('Category', 'budisteikul\toursdk\Models\Category')
 <!DOCTYPE html>
 <html lang="en">
 <head>
