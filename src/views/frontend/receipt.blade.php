@@ -2,9 +2,8 @@
 @section('title','Receipt')
 @section('content')
 @push('scripts')
-
 <script type="text/javascript"
-            src="https://app.sandbox.midtrans.com/snap/snap.js"
+            src="https://{{ env('MIDTRANS_URL') }}/snap/snap.js"
             data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
 
 @endpush
@@ -53,9 +52,8 @@
                   		@elseif($shoppingcart->shoppingcart_payment->payment_status==4)
                     		<span class="badge badge-warning">Waiting for payment</span>
                   		@endif
-                        </p>
-					@if($shoppingcart->shoppingcart_payment->payment_status==4)
-					<p>
+                  		@if($shoppingcart->shoppingcart_payment->payment_status==4)
+					
 						<button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay now</strong></button>
 						<script>
 							var payButton = document.getElementById('pay-button');
@@ -63,8 +61,10 @@
                         		snap.pay('{{$shoppingcart->shoppingcart_payment->snaptoken}}');
                     		});
 						</script>
-					</p>
-					@endif	
+					
+						@endif	
+                        </p>
+					
 					</div>
 				</div>
 

@@ -6,10 +6,6 @@
  <script
     src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&intent=authorize&currency={{ env('PAYPAL_CURRENCY') }}"  data-csp-nonce="xyz-123">
 </script>
-<script type="text/javascript"
-            src="https://app.sandbox.midtrans.com/snap/snap.js"
-            data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
-<script>
 $( document ).ready(function() {
     $('#proses').hide();
 });
@@ -676,9 +672,11 @@ function STORE()
                 }
                 else
                 {
-                    $('#payment-container').html('<div id="proses"><button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay now</strong></button></div>');
-                    var payButton = document.getElementById('pay-button');
-                    var snapToken;
+                    $('#payment-container').html('<div id="proses"></div>');
+                    $("#proses").addClass("loader");
+                    //$('#payment-container').html('<div id="proses"><button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay now</strong></button></div>');
+                    //var payButton = document.getElementById('pay-button');
+                    //var snapToken;
                     
                     $.ajax({
                         data: {
@@ -690,14 +688,15 @@ function STORE()
                     }).done(function( data ) {
                         if(data.id=="1")
                         {
-                            snapToken = data.snapToken;
+                            //snapToken = data.snapToken;
+                            window.location.href = data.redirect;
                         }
                     });
 
                     
-                    payButton.addEventListener('click', function () {
-                        snap.pay(snapToken);
-                    });
+                    //payButton.addEventListener('click', function () {
+                        //snap.pay(snapToken);
+                    //});
                    
                 }
 				
