@@ -400,7 +400,8 @@ function DELETE()
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_provider" id="payment_midtrans" value="midtrans" checked>
             <label class="form-check-label ml-2" for="payment_midtrans">
-                MidTrans <br />
+                <h5 class="mb-1">MidTrans</h5>
+                <small class="form-text text-muted mb-1">Recommended for local payment</small>
                 <img src="/img/midtrans.png" height="50">
             </label>
         </div>
@@ -412,7 +413,8 @@ function DELETE()
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_provider" id="payment_paypal" value="paypal">
             <label class="form-check-label ml-2" for="payment_paypal">
-                PayPal <br />
+                <h5 class="mb-1">PayPal</h5>
+                <small class="form-text text-muted mb-1">Recommended for international payment</small>
                 <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" height="30">
                 <br />
                 <small class="form-text text-muted">Charge in USD, Rate : {{ $BookingHelper->paypal_rate($shoppingcart) }}</small>
