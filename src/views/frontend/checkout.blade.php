@@ -396,7 +396,7 @@ function DELETE()
 <h3>Payment provider</h3>
 
 <div class="card bg-light mb-2">
-  <div class="card-body">
+  <div class="card-body pl-3">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_provider" id="payment_midtrans" value="midtrans" checked>
             <label class="form-check-label ml-2" for="payment_midtrans">
@@ -409,7 +409,7 @@ function DELETE()
 </div>
 
 <div class="card bg-light mb-2">
-  <div class="card-body">
+  <div class="card-body pl-3">
         <div class="form-check">
             <input class="form-check-input" type="radio" name="payment_provider" id="payment_paypal" value="paypal">
             <label class="form-check-label ml-2" for="payment_paypal">
