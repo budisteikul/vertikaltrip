@@ -1,3 +1,4 @@
+@inject('BookingHelper', 'budisteikul\toursdk\Helpers\BookingHelper')
 @extends('vertikaltrip::layouts.app')
 @section('title','Receipt')
 @section('content')
@@ -47,16 +48,11 @@
                 
 					<div class="card-body">
                         <p>
+                        <h3>Total</h3>
+                        {{ $shoppingcart->shoppingcart_payment->currency }} {{ $shoppingcart->shoppingcart_payment->amount }}
                         <h3>Status</h3>
-						@if($shoppingcart->shoppingcart_payment->payment_status==1)
-                    		<span class="badge badge-success">PAID</span>
-                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==2)
-                    		<span class="badge badge-success">PAID</span>
-                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==3)
-                    		<span class="badge badge-danger">REFUNDED</span>
-                  		@elseif($shoppingcart->shoppingcart_payment->payment_status==4)
-                    		<span class="badge badge-warning">Waiting for payment</span>
-                  		@endif
+                        {!! $BookingHelper->payment_status_public($shoppingcart->shoppingcart_payment->payment_status) !!}
+
                   		@if($shoppingcart->shoppingcart_payment->payment_status==4)
 					
 						<button id="pay-button" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Pay now</strong></button>
