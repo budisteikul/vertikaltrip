@@ -396,22 +396,24 @@ function DELETE()
 <h3>Payment provider</h3>
 
 <div class="form-check mb-4">
-  <input class="form-check-input" type="radio" name="payment_provider" id="payment_paypal" value="paypal" checked>
+  <input class="form-check-input" type="radio" name="payment_provider" id="payment_midtrans" value="midtrans" checked>
+  <label class="form-check-label ml-2" for="payment_midtrans">
+    MidTrans <br />
+    <img src="/img/midtrans.jpg" height="60">
+  </label>
+</div>
+
+<div class="form-check mb-4">
+  <input class="form-check-input" type="radio" name="payment_provider" id="payment_paypal" value="paypal">
   <label class="form-check-label ml-2" for="payment_paypal">
     PayPal <br />
-    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" height="20">
+    <img src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" height="30">
     <br />
     <small class="form-text text-muted">Charge in USD, Rate : {{ $BookingHelper->paypal_rate($shoppingcart) }}</small>
   </label>
 </div>
 
-<div class="form-check mb-4">
-  <input class="form-check-input" type="radio" name="payment_provider" id="payment_midtrans" value="midtrans">
-  <label class="form-check-label ml-2" for="payment_midtrans">
-    MidTrans <br />
-    <img src="/img/midtrans.jpg" height="40">
-  </label>
-</div>
+
 
 
 
