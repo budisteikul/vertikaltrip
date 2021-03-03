@@ -399,7 +399,7 @@ function DELETE()
   <input class="form-check-input" type="radio" name="payment_provider" id="payment_midtrans" value="midtrans" checked>
   <label class="form-check-label ml-2" for="payment_midtrans">
     MidTrans <br />
-    <img src="/img/midtrans.jpg" height="60">
+    <img src="/img/midtrans.jpg" height="50">
   </label>
 </div>
 
