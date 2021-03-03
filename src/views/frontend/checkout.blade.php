@@ -430,10 +430,10 @@ function DELETE()
 
 
 </div>  
-<hr>
+
 <!-- ########################################### --> 
 
-<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme mt-4"><i class="fas fa-lock"></i> <strong>Checkout</strong></button>
+<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme"><i class="fas fa-lock"></i> <strong>Checkout</strong></button>
 </form>
 
 <div id="payment-container">
