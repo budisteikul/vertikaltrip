@@ -641,7 +641,7 @@ function STORE()
                 
                 if($('input[name="payment_provider"]:checked').val()=="paypal")
                 {
-                    $('#payment-container').html('<div id="proses"><h2>Pay with</h2><div id="paypal-button-container"></div></div>');
+                    $('#payment-container').html('<div id="proses"><h2>Pay with</h2><div id="paypal-button-container"></div></div><div id="loader"></div>');
                     //=========================================================
                     paypal.Buttons({
                     createOrder: function() {
@@ -664,15 +664,17 @@ function STORE()
                     
                     },
                     onError: function (err) {
-                        $("#proses").hide();
+                        
                         $('#alert-payment').html('<div id="alert-failed" class="alert alert-danger text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Error!</h2></div>');
                         $('#alert-payment').fadeIn("slow");
                     
                     },
                     onApprove: function(data, actions) {
-                        $("#proses").addClass("loader");
+                        $("#proses").hide();
+                        $("#loader").addClass("loader");
                         actions.order.authorize().then(function(authorization) {
                             var authorizationID = authorization.purchase_units[0].payments.authorizations[0].id
+                            
                             $.ajax({
                                 data: {
                                     "_token": $("meta[name=csrf-token]").attr("content"),
@@ -686,13 +688,13 @@ function STORE()
                                 if(data.id=="1")
                                 {
                                     window.location.href = '/booking/receipt/'+ data.message;
-                                    $("#proses").hide();
+                                    $("#loader").hide();
                                     $('#alert-payment').html('<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>');
                                     $('#alert-payment').fadeIn("slow");
                                 }
                                 else
                                 {
-                                    $("#proses").hide();
+                                    $("#loader").hide();
                                     $('#alert-payment').html('<div id="alert-failed" class="alert alert-danger text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Failed!</h2></div>');
                                     $('#alert-payment').fadeIn("slow");
                                 }
