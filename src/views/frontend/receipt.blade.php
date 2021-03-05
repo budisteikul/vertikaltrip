@@ -104,8 +104,12 @@
 					<div class="card-body">
                 	 
                         <p>
+                        @if($shoppingcart->shoppingcart_payment->payment_status>0)
 						<h3>Receipt</h3>
 						<a target="_blank" class="text-theme" href="/snippets/pdf/invoice/{{ $shoppingcart->session_id }}/Invoice-{{ $shoppingcart->confirmation_code }}.pdf"><i class="fas fa-file-invoice"></i> Invoice-{{ $shoppingcart->confirmation_code }}.pdf</a>
+						@else
+						No Document
+						@endif 
 
 						@if($shoppingcart->shoppingcart_payment->payment_status==2 || $shoppingcart->shoppingcart_payment->payment_status==1)
 							<h3>Experience tickets</h3>
