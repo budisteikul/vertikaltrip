@@ -137,8 +137,10 @@ class FrontendController extends Controller
 
 	public function receipt($id,$sessionId)
 	{
-		$shoppingcart = Shoppingcart::where('id',$id)->where('session_id', $sessionId)
-                        ->where('booking_status','CONFIRMED')->firstOrFail();
+		$shoppingcart = Shoppingcart::where('id',$id)->where('session_id', $sessionId)->where(function($query){
+			return $query->where('booking_status', 'CONFIRMED')
+                         ->orWhere('booking_status', 'CANCELED');
+		})->firstOrFail();
         return view('vertikaltrip::frontend.receipt',['shoppingcart'=>$shoppingcart]);
 	}
 
