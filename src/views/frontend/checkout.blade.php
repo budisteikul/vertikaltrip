@@ -6,8 +6,11 @@
  <script
     src="https://www.paypal.com/sdk/js?client-id={{ env('PAYPAL_CLIENT_ID') }}&intent=authorize&currency={{ env('PAYPAL_CURRENCY') }}"  data-csp-nonce="xyz-123">
 </script>
-$( document ).ready(function() {
+<script>
+$(document).ready(function() {
+    
     $('#proses').hide();
+
 });
 </script>
 @endpush
@@ -205,10 +208,10 @@ function REMOVE(id)
                     @endif
                     <div class="row mb-2">
                         <div class="col-8">
-                            <b style="font-size:18px">Total ({{ $shoppingcart->currency }})</b>
+                            <b style="font-size:22px">Total ({{ $shoppingcart->currency }})</b>
                         </div>
                         <div class="col-4 text-right">
-                            <b style="font-size:18px">{{ $grand_total }}</b>
+                            <b style="font-size:22px">{{ $grand_total }}</b>
                         </div>
                     </div>
 				</div>
@@ -218,20 +221,21 @@ function REMOVE(id)
                 	<hr class="mt-0"> 
                     <div class="row mb-2 mt-0">
                 		<div class="col-8">
-                    		<b style="font-size:18px">Due now ({{ $shoppingcart->currency }})</b>
+                    		<b style="font-size:22px">Biaya booking ({{ $shoppingcart->currency }})</b>
                     	</div>
                     	<div class="col-4 text-right">
-                    	   <b style="font-size:18px">{{ $shoppingcart->due_now }}</b>
+                    	   <b style="font-size:22px">{{ $shoppingcart->due_now }}</b>
                     	</div>
                 	</div>
                     <div class="row mb-4 mt-0">
                         <div class="col-8">
-                            <span style="font-size:18px">Due on arrival ({{ $shoppingcart->currency }})</span>
+                            <span style="font-size:18px">Biaya pelunasan  ({{ $shoppingcart->currency }})</span>
                         </div>
                         <div class="col-4 text-right">
                             <span style="font-size:18px">{{ $shoppingcart->due_on_arrival }}</span>
                         </div>
                     </div>
+                    <span style="color: red">*</span> pelunasan bisa dilakukan dilokasi acara
                 </div>
                 @endif
 
@@ -445,7 +449,12 @@ function DELETE()
 
 
 
-
+<div class="form-check mt-3">
+  <input class="form-check-input" type="checkbox" value="" id="term">
+  <label class="form-check-label" for="term">
+    I agree with the terms and conditions.
+  </label>
+</div>
 
 
 
@@ -454,7 +463,7 @@ function DELETE()
 
 <!-- ########################################### --> 
 
-<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme"><i class="fas fa-lock"></i> <strong>Checkout</strong></button>
+<button id="submit" type="submit" style="height:47px;" class="btn btn-lg btn-block btn-theme" disabled="true"><i class="fas fa-lock"></i> <strong>Checkout</strong></button>
 </form>
 
 <div id="payment-container">
@@ -520,6 +529,17 @@ $questions = $shoppingcart->shoppingcart_questions()->where('required',1)->get()
 
 </script>
 <script language="javascript">
+$('#term').click(function() {
+    if($("#term").is(':checked'))
+    {
+        $("#submit").attr("disabled", false);
+    }
+    else
+    {
+        $("#submit").attr("disabled", true);
+    }
+});
+
 function STORE()
 {
 	var error = false;
