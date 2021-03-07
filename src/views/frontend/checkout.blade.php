@@ -105,7 +105,7 @@ function REMOVE(id)
                                     <br>
                                     @foreach($shoppingcart_product->shoppingcart_rates()->where('type','product')->get() as $shoppingcart_rates)
                                     	
-                                        	{{ $shoppingcart_rates->qty }} x {{ $shoppingcart_rates->unitPrice }} ({{ $shoppingcart_rates->price }})
+                                        	{{ $shoppingcart_rates->qty }} x {{ $shoppingcart_rates->unit_price }} ({{ $shoppingcart_rates->price }})
                                     	
                                         <br>
                                     @endforeach
@@ -158,11 +158,11 @@ function REMOVE(id)
                                 @foreach($extra as $shoppingcart_rates)
 									<div class="row mb-2">
                 						<div class="col-8">
-										{{ $shoppingcart_rates->title }}
+										&#9642; {{ $shoppingcart_rates->qty }} {{ $shoppingcart_rates->unit_price }}
                     					</div>
                     					<div class="col-4 text-right">
-                                        	@if($shopppingcart_rates->discount > 0)
-                                            	<strike class="text-muted">{{ $shopppingcart_rates->subtotal }}</strike><br><b>{{ $shopppingcart_rates->total }}</b>
+                                        	@if($shoppingcart_rates->discount > 0)
+                                            	<strike class="text-muted">{{ $shopppingcart_rates->subtotal }}</strike><br><b>{{ $shoppingcart_rates->total }}</b>
                                             @else
                     							<b>{{ $shoppingcart_rates->subtotal }}</b>
                                             @endif
