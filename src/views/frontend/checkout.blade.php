@@ -236,7 +236,7 @@ function REMOVE(id)
                             <span style="font-size:18px">{{ $GeneralHelper->numberFormat($shoppingcart->due_on_arrival) }}</span>
                         </div>
                     </div>
-                    <span style="color: red">*</span> pelunasan bisa dilakukan dilokasi acara
+                    <span style="color: red">*</span> biaya pelunasan bisa dilakukan dilokasi acara
                 </div>
                 @endif
 
