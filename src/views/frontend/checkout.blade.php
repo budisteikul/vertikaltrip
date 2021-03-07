@@ -1,5 +1,6 @@
 @inject('ProductHelper', 'budisteikul\toursdk\Helpers\ProductHelper')
 @inject('BookingHelper', 'budisteikul\toursdk\Helpers\BookingHelper')
+@inject('GeneralHelper', 'budisteikul\coresdk\Helpers\GeneralHelper')
 @extends('vertikaltrip::layouts.app')
 @section('title','Checkout')
 @push('scripts')
@@ -87,9 +88,9 @@ function REMOVE(id)
 									}
 									?>
                                     @if($product_discount>0)
-                                    	<strike class="text-muted">{{ $product_subtotal }}</strike><br><b>{{ $product_total }}</b>
+                                    	<strike class="text-muted">{{ $GeneralHelper->numberFormat($product_subtotal) }}</strike><br><b>{{ $GeneralHelper->numberFormat($product_total) }}</b>
                                     @else
-                    					<b>{{ $product_total }}</b>
+                    					<b>{{ $GeneralHelper->numberFormat($product_total) }}</b>
                     				@endif
                                 </div>
                 			 </div>
@@ -108,7 +109,7 @@ function REMOVE(id)
                                     <br>
                                     @foreach($shoppingcart_product->shoppingcart_rates()->where('type','product')->get() as $shoppingcart_rates)
                                     	
-                                        	{{ $shoppingcart_rates->qty }} x {{ $shoppingcart_rates->unit_price }} ({{ $shoppingcart_rates->price }})
+                                        	{{ $shoppingcart_rates->qty }} x {{ $shoppingcart_rates->unit_price }} ({{ $GeneralHelper->numberFormat($shoppingcart_rates->price) }})
                                     	
                                         <br>
                                     @endforeach
@@ -135,9 +136,9 @@ function REMOVE(id)
                     					</div>
                     					<div class="col-4 text-right">
                     						@if($shopppingcart_rates->discount > 0)
-                                            	<strike class="text-muted">{{ $shopppingcart_rates->subtotal }}</strike><br><b>{{ $shopppingcart_rates->total }}</b>
+                                            	<strike class="text-muted">{{ $GeneralHelper->numberFormat($shopppingcart_rates->subtotal) }}</strike><br><b>{{ $GeneralHelper->numberFormat($shopppingcart_rates->total) }}</b>
                                             @else
-                                            	<b>{{ $shopppingcart_rates->subtotal }}</b>
+                                            	<b>{{ $GeneralHelper->numberFormat($shopppingcart_rates->subtotal) }}</b>
                     						@endif
                                         </div>
                 					</div>
@@ -165,9 +166,9 @@ function REMOVE(id)
                     					</div>
                     					<div class="col-4 text-right">
                                         	@if($shoppingcart_rates->discount > 0)
-                                            	<strike class="text-muted">{{ $shoppingcart_rates->subtotal }}</strike><br><b>{{ $shoppingcart_rates->total }}</b>
+                                            	<strike class="text-muted">{{ $GeneralHelper->numberFormat($shoppingcart_rates->subtotal) }}</strike><br><b>{{ $GeneralHelper->numberFormat($shoppingcart_rates->total) }}</b>
                                             @else
-                    							<b>{{ $shoppingcart_rates->subtotal }}</b>
+                    							<b>{{ $GeneralHelper->numberFormat($shoppingcart_rates->subtotal) }}</b>
                                             @endif
                     					</div>
                 					</div>
@@ -193,7 +194,7 @@ function REMOVE(id)
                     		<span style="font-size:18px">Items</span>
                     	</div>
                     	<div class="col-4 text-right">
-                    		<span style="font-size:18px">{{ $grand_subtotal }}</span>
+                    		<span style="font-size:18px">{{ $GeneralHelper->numberFormat($grand_subtotal) }}</span>
                     	</div>
                 	</div>
                     @if($grand_discount>0)
@@ -202,7 +203,7 @@ function REMOVE(id)
                     		<span style="font-size:18px">Discount</span>
                     	</div>
                     	<div class="col-4 text-right">
-                    		<span style="font-size:18px">{{ $grand_discount }}</span>
+                    		<span style="font-size:18px">{{ $GeneralHelper->numberFormat($grand_discount) }}</span>
                     	</div>
                 	</div>
                     @endif
@@ -211,7 +212,7 @@ function REMOVE(id)
                             <b style="font-size:22px">Total ({{ $shoppingcart->currency }})</b>
                         </div>
                         <div class="col-4 text-right">
-                            <b style="font-size:22px">{{ $grand_total }}</b>
+                            <b style="font-size:22px">{{ $GeneralHelper->numberFormat($grand_total) }}</b>
                         </div>
                     </div>
 				</div>
@@ -224,7 +225,7 @@ function REMOVE(id)
                     		<b style="font-size:22px">Biaya booking ({{ $shoppingcart->currency }})</b>
                     	</div>
                     	<div class="col-4 text-right">
-                    	   <b style="font-size:22px">{{ $shoppingcart->due_now }}</b>
+                    	   <b style="font-size:22px">{{ $GeneralHelper->numberFormat($shoppingcart->due_now) }}</b>
                     	</div>
                 	</div>
                     <div class="row mb-4 mt-0">
@@ -232,7 +233,7 @@ function REMOVE(id)
                             <span style="font-size:18px">Biaya pelunasan  ({{ $shoppingcart->currency }})</span>
                         </div>
                         <div class="col-4 text-right">
-                            <span style="font-size:18px">{{ $shoppingcart->due_on_arrival }}</span>
+                            <span style="font-size:18px">{{ $GeneralHelper->numberFormat($shoppingcart->due_on_arrival) }}</span>
                         </div>
                     </div>
                     <span style="color: red">*</span> pelunasan bisa dilakukan dilokasi acara
@@ -616,6 +617,7 @@ function STORE()
 			
 			if(data.id=="1")
 			{
+                $("#term").attr("disabled", true);
 				$("#apply").attr("disabled", true);
 				$("#promocode").attr("disabled", true);
                 $("#payment_paypal").attr("disabled", true);

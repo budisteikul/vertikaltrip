@@ -1,5 +1,6 @@
 @inject('BokunHelper', 'budisteikul\toursdk\Helpers\BokunHelper')
 @inject('ImageHelper', 'budisteikul\toursdk\Helpers\ImageHelper')
+@inject('GeneralHelper', 'budisteikul\coresdk\Helpers\GeneralHelper')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,7 +161,10 @@
                                         <span class="text-muted">Price from</span>
                                       </div>
                                       <div>
-                                        <b style="font-size: 24px;">{{$content->nextDefaultPriceAsText}}</b>
+                                        <b style="font-size: 24px;">
+                                          {{$content->nextDefaultPriceMoney->currency}}
+                                          {{ $GeneralHelper->numberFormat($content->nextDefaultPriceMoney->amount)}}
+                                        </b>
                                       </div>
                                     </div>
                     <div class="ml-auto p-0">
