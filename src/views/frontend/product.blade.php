@@ -148,10 +148,7 @@
   				<div class="card-body">
 				<h3>{!! $ProductHelper->lang('type',$content->productCategory)!!} Details</h3>							
 				<br>
-											@if($content->bookingCutoffHours!="")
-											<i class="far fa-calendar-alt text-secondary mb-4" style="width:20px;"></i> Booking Cut off: {!!$content->bookingCutoffHours!!} hours
-                                            <br>
-            								@endif
+											
 				
 											@if($content->durationText!="")
               								<i class="far fa-clock text-secondary mb-4" style="width:20px;"></i> Duration: 
@@ -179,15 +176,7 @@
   			<div class="card-header">
             			<h3><i class="fa fa-ticket-alt"></i> Book {{ $content->title }}</h3>
                 		Secure booking — only takes 2 minutes!
-						<br><br>
-                    	<i class="fa fa-bolt text-secondary mb-4" style="width:20px;"></i> Instant Confirmation
-						<br>
-						<i class="fa fa-phone-alt text-secondary mb-4" style="width:20px;"></i> 24/7 Support
-						<br>
-                    	<i class="fa fa-history text-secondary mb-4" style="width:20px;"></i> Free Cancellation
-						<br>
-						<i class="fab fa-paypal text-secondary mb-4" style="width:20px;"></i> Secure Payments
-                        <br>
+						
             </div>
             
  			<div id="bookingframe" class="card-body" style="padding-left:1px;padding-right:1px;padding-top:20px;padding-bottom:15px;">
