@@ -209,10 +209,10 @@ function REMOVE(id)
                     @endif
                     <div class="row mb-2">
                         <div class="col-8">
-                            <b style="font-size:18px">Total ({{ $shoppingcart->currency }})</b>
+                            <b style="font-size:16px">Total ({{ $shoppingcart->currency }})</b>
                         </div>
                         <div class="col-4 text-right">
-                            <b style="font-size:18px">{{ $GeneralHelper->numberFormat($grand_total) }}</b>
+                            <b style="font-size:16px">{{ $GeneralHelper->numberFormat($grand_total) }}</b>
                         </div>
                     </div>
 				</div>
@@ -222,10 +222,10 @@ function REMOVE(id)
                 	<hr class="mt-0"> 
                     <div class="row mb-2 mt-0">
                 		<div class="col-8">
-                    		<b style="font-size:18px">Biaya booking ({{ $shoppingcart->currency }})</b>
+                    		<b style="font-size:16px">Biaya booking ({{ $shoppingcart->currency }})</b>
                     	</div>
                     	<div class="col-4 text-right">
-                    	   <b style="font-size:18px">{{ $GeneralHelper->numberFormat($shoppingcart->due_now) }}</b>
+                    	   <b style="font-size:16px">{{ $GeneralHelper->numberFormat($shoppingcart->due_now) }}</b>
                     	</div>
                 	</div>
                     <div class="row mb-4 mt-0">
