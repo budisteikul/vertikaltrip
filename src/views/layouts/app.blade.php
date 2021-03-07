@@ -134,6 +134,8 @@
                     	<br>
 						<img class="mb-2 mt-2" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Credit Card Badges">
                         <br>
+                        <img class="mb-2 mt-2" src="/img/midtrans.png">
+                        <br>
                         <small style="font-size:11px;"> 2021 &copy; VERTIKAL TRIP</small>
 					</p>
                 </div>
