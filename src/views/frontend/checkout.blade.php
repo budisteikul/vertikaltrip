@@ -162,7 +162,7 @@ function REMOVE(id)
                     					</div>
                     					<div class="col-4 text-right">
                                         	@if($shoppingcart_rates->discount > 0)
-                                            	<strike class="text-muted">{{ $shopppingcart_rates->subtotal }}</strike><br><b>{{ $shoppingcart_rates->total }}</b>
+                                            	<strike class="text-muted">{{ $shoppingcart_rates->subtotal }}</strike><br><b>{{ $shoppingcart_rates->total }}</b>
                                             @else
                     							<b>{{ $shoppingcart_rates->subtotal }}</b>
                                             @endif
