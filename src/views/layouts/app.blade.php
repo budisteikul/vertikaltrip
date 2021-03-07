@@ -115,8 +115,6 @@
                     	<br>
 						<a target="_blank" class="text-theme" href="/page/terms-and-conditions" style="margin-top:10px;">Terms and Conditions</a>
                         <br>
-                        <a target="_blank" class="text-theme" href="/page/privacy-policy">Privacy Policy</a>
-                        <br>
 					</p>
                     <p class="mt-4 text-left text-dark">
                     <div style="margin-bottom:5px;">
@@ -136,11 +134,7 @@
                     	<br>
 						<img class="mb-2 mt-2" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Credit Card Badges">
                         <br>
-                        @if(str_ireplace("www.","",$_SERVER['HTTP_HOST'])=="jogjafoodtour.com")
-                        <small style="font-size:11px;"> 2020 &copy; JOGJA FOOD TOUR is part of VERTIKAL TRIP</small>
-                        @else
-                        <small style="font-size:11px;"> 2020 &copy; VERTIKAL TRIP</small>
-                        @endif
+                        <small style="font-size:11px;"> 2021 &copy; VERTIKAL TRIP</small>
 					</p>
                 </div>
         </div>
