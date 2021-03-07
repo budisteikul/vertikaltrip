@@ -191,28 +191,28 @@ function REMOVE(id)
                 	<hr>
                 	<div class="row mb-2">
                 		<div class="col-8">
-                    		<span style="font-size:18px">Items</span>
+                    		<span style="font-size:16px">Items</span>
                     	</div>
                     	<div class="col-4 text-right">
-                    		<span style="font-size:18px">{{ $GeneralHelper->numberFormat($grand_subtotal) }}</span>
+                    		<span style="font-size:16px">{{ $GeneralHelper->numberFormat($grand_subtotal) }}</span>
                     	</div>
                 	</div>
                     @if($grand_discount>0)
                     <div class="row mb-2">
                 		<div class="col-8">
-                    		<span style="font-size:18px">Discount</span>
+                    		<span style="font-size:16px">Discount</span>
                     	</div>
                     	<div class="col-4 text-right">
-                    		<span style="font-size:18px">{{ $GeneralHelper->numberFormat($grand_discount) }}</span>
+                    		<span style="font-size:16px">{{ $GeneralHelper->numberFormat($grand_discount) }}</span>
                     	</div>
                 	</div>
                     @endif
                     <div class="row mb-2">
                         <div class="col-8">
-                            <b style="font-size:22px">Total ({{ $shoppingcart->currency }})</b>
+                            <b style="font-size:18px">Total ({{ $shoppingcart->currency }})</b>
                         </div>
                         <div class="col-4 text-right">
-                            <b style="font-size:22px">{{ $GeneralHelper->numberFormat($grand_total) }}</b>
+                            <b style="font-size:18px">{{ $GeneralHelper->numberFormat($grand_total) }}</b>
                         </div>
                     </div>
 				</div>
@@ -222,18 +222,18 @@ function REMOVE(id)
                 	<hr class="mt-0"> 
                     <div class="row mb-2 mt-0">
                 		<div class="col-8">
-                    		<b style="font-size:22px">Biaya booking ({{ $shoppingcart->currency }})</b>
+                    		<b style="font-size:18px">Biaya booking ({{ $shoppingcart->currency }})</b>
                     	</div>
                     	<div class="col-4 text-right">
-                    	   <b style="font-size:22px">{{ $GeneralHelper->numberFormat($shoppingcart->due_now) }}</b>
+                    	   <b style="font-size:18px">{{ $GeneralHelper->numberFormat($shoppingcart->due_now) }}</b>
                     	</div>
                 	</div>
                     <div class="row mb-4 mt-0">
                         <div class="col-8">
-                            <span style="font-size:18px">Biaya pelunasan  ({{ $shoppingcart->currency }})</span>
+                            <span style="font-size:16px">Biaya pelunasan  ({{ $shoppingcart->currency }})</span>
                         </div>
                         <div class="col-4 text-right">
-                            <span style="font-size:18px">{{ $GeneralHelper->numberFormat($shoppingcart->due_on_arrival) }}</span>
+                            <span style="font-size:16px">{{ $GeneralHelper->numberFormat($shoppingcart->due_on_arrival) }}</span>
                         </div>
                     </div>
                     <span style="color: red">*</span> biaya pelunasan bisa dilakukan dilokasi acara
