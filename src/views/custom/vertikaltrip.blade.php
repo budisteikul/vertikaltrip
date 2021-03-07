@@ -363,7 +363,7 @@ var table = $('#dataTables-example').DataTable(
                         <br>
                         <img class="mb-2 mt-2" src="/img/midtrans.png">
                         <br>
-                        <small style="font-size:11px;"> 2020 &copy; VERTIKAL TRIP</small>
+                        <small style="font-size:11px;"> 2021 &copy; VERTIKAL TRIP</small>
           </p>
                 </div>
         </div>
