@@ -143,7 +143,7 @@
 </footer>
 
 </body>
-<script src="/assets/javascripts/apps/build/App-3.1.0.js"></script>
+<script src="/assets/javascripts/apps/build/App-3.1.1.js"></script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
