@@ -69,7 +69,7 @@
     						</div>
 							@endforeach
 					</div>
-					<div style="height:25px;"></div>		
+					<div style="height:40px;"></div>		
 				</div>
 			</div>
 		</div>
