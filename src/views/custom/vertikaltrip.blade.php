@@ -109,7 +109,7 @@
 </section -->
 
 
-@foreach($categories as $category)
+@foreach($categories->has('products') as $category)
 <section id="tour" style="background-color:#ffffff">
 <div class="container">
   <div class="row">
