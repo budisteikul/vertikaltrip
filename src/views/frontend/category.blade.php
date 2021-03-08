@@ -16,7 +16,7 @@
                     <div style="height:30px;"></div>
                 </div>
             </div>
-			<div class="row" style="padding-bottom:0px;">
+			<div class="row" style="padding-bottom:0px; min-height: 500px;">
 				<div class="col-lg-12 text-center">	
         			<div class="row">
         				@foreach($category->products as $product)
