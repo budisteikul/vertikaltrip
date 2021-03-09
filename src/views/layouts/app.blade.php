@@ -115,6 +115,8 @@
                     	<br>
 						<a target="_blank" class="text-theme" href="/page/terms-and-conditions" style="margin-top:10px;">Terms and Conditions</a>
                         <br>
+                        <a target="_blank" class="text-theme" href="/page/privacy-policy" style="margin-top:10px;">Privacy Policy</a>
+                        <br>
 					</p>
                     <p class="mt-4 text-left text-dark">
                     <div style="margin-bottom:5px;">
