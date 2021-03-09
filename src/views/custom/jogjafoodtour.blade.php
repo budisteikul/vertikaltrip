@@ -709,6 +709,8 @@ Yogyakarta is also the unofficial culinary capital of Indonesia
                       <br>
             <img class="mb-2 mt-2" src="https://www.paypalobjects.com/webstatic/en_US/i/buttons/cc-badges-ppmcvdam.png" alt="Credit Card Badges">
                         <br>
+                        <img class="mb-2 mt-2" src="/img/midtrans.png">
+                        <br>
                         <small style="font-size:11px;"> 2020 &copy; JOGJA FOOD TOUR is part of VERTIKAL TRIP</small>
           </p>
                 </div>
@@ -718,7 +720,7 @@ Yogyakarta is also the unofficial culinary capital of Indonesia
 </footer>
 
 </body>
-<script src="/assets/javascripts/apps/build/App-3.1.0.js"></script>
+<script src="/assets/javascripts/apps/build/App-3.1.1.js"></script>
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
