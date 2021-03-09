@@ -71,7 +71,7 @@
 </header>
 
 
-<!-- section class="page-section bg-light" id="services">
+<section class="page-section bg-light" id="services">
     <div class="container">
       <div style="height:25px;"></div>
         <div class="row">
@@ -106,7 +106,7 @@
         </div>
         <div style="height:45px;"></div>  
   </div>
-</section -->
+</section>
 
 
 @foreach($categories as $category)
@@ -188,7 +188,7 @@
 
 
 <script type="text/javascript">
-/*
+
 jQuery(document).ready(function($) {  
 var table = $('#dataTables-example').DataTable(
 {
@@ -249,11 +249,11 @@ var table = $('#dataTables-example').DataTable(
   });
       
       });
-*/   
+  
 </script>
 
 
-<!-- section id="review" style="background-color:#ffffff">
+<section id="review" style="background-color:#ffffff">
 <div class="container mb-6">
   <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
@@ -276,7 +276,7 @@ var table = $('#dataTables-example').DataTable(
     </div>
 </div>
 <div style="height:50px;"></div>
-</section -->
+</section>
 
 
 <script>
