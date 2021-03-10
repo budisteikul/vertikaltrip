@@ -453,7 +453,7 @@ function DELETE()
 <div class="form-check mt-3">
   <input class="form-check-input" type="checkbox" value="" id="term">
   <label class="form-check-label" for="term">
-    I agree with the <a href="/page/terms-and-conditions" target="_blank">terms and conditions</a>.
+    I agree with the <a class="text-theme" href="/page/terms-and-conditions" target="_blank">terms and conditions</a>.
   </label>
 </div>
 

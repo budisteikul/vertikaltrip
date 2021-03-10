@@ -1,3 +1,4 @@
+@inject('BookingHelper', 'budisteikul\toursdk\Helpers\BookingHelper')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -712,6 +713,8 @@ Yogyakarta is also the unofficial culinary capital of Indonesia
                         <img class="mb-2 mt-2" src="/img/midtrans.png">
                         <br>
                         <a target="_blank" class="text-theme" href="/page/privacy-policy" style="margin-top:10px;">Privacy Policy</a>
+                        <br>
+                        <small style="font-size:13px;"> Open Exchange Rates : 1 USD = {{ $BookingHelper->convert_currency(1,"USD","IDR") }} IDR</small>
                         <br>
                         <small style="font-size:11px;"> 2020 &copy; JOGJA FOOD TOUR is part of VERTIKAL TRIP</small>
           </p>
