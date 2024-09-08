@@ -37,11 +37,9 @@
         "laravel": {
             "providers": [
                 "budisteikul\\vertikaltrip\\VertikaltripServiceProvider",
-                "Barryvdh\\DomPDF\\ServiceProvider",
                 "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
             ],
             "aliases": {
-                "PDF": "Barryvdh\\DomPDF\\Facade",
                 "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
             }
         }
