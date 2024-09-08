@@ -848,7 +848,7 @@ class APIController extends Controller
                         $from_text = '<br /><small>Collected by <b>'.$channel_name.'</b></small>';
                     }
 
-                    $date = Carbon::parse($resource->date)->formatLocalized('%b, %Y');
+                    $date = Carbon::parse($resource->date)->format('M, Y');
                     $user = '<b>'. $resource->user .'</b> <small><span class="text-muted">Reviewed on '.$date.'</span></small><br />';
                     $rating = '<span class="text-warning">'. $star .'</span>';
                     $text =  nl2br($resource->text) .'<br />';

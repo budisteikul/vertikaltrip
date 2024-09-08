@@ -270,14 +270,14 @@ footer {
 
                 @if($ChannelHelper->getTypeOfInvoice($shoppingcart)==2)
                   <div class="date" style=" line-height: 18px; font-size:14px;">
-                Date of Invoice : {{ Carbon\Carbon::parse($BookingHelper->due_date($shoppingcart,"database"))->formatLocalized('%d %b %Y  %H:%M') }}</div>
+                Date of Invoice : {{ Carbon\Carbon::parse($BookingHelper->due_date($shoppingcart,"database"))->format('d F Y  H:i') }}</div>
               
-                  <div class="date" style=" line-height: 18px; font-size:14px;">Due Date : {{ Carbon\Carbon::parse($BookingHelper->due_date($shoppingcart,"database"))->addDays(7)->formatLocalized('%d %b %Y  %H:%M') }}</div>
+                  <div class="date" style=" line-height: 18px; font-size:14px;">Due Date : {{ Carbon\Carbon::parse($BookingHelper->due_date($shoppingcart,"database"))->addDays(7)->format('d F Y  H:i') }}</div>
                 @else
                   <div class="date" style=" line-height: 18px; font-size:14px;">
-                Date of Invoice : {{ Carbon\Carbon::parse($shoppingcart->created_at)->formatLocalized('%d %b %Y  %H:%M') }}</div>
+                Date of Invoice : {{ Carbon\Carbon::parse($shoppingcart->created_at)->format('d F Y  H:i') }}</div>
               
-                  <div class="date" style=" line-height: 18px; font-size:14px;">Due Date : {{ Carbon\Carbon::parse($BookingHelper->due_date($shoppingcart,"database"))->formatLocalized('%d %b %Y  %H:%M') }}</div>
+                  <div class="date" style=" line-height: 18px; font-size:14px;">Due Date : {{ Carbon\Carbon::parse($BookingHelper->due_date($shoppingcart,"database"))->format('d F Y  H:i') }}</div>
                 @endif
           </div>           
            </td>

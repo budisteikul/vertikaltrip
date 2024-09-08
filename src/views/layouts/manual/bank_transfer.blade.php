@@ -45,7 +45,7 @@ html,body {
 	<img src="{{ config('site.assets') }}/img/pdf/logo-blue.jpg" height="30" />
 </div>
 <div style="position:absolute;left:200.59px;top:66.52px" class="cls_004">
-	<span class="cls_004">{{ Carbon\Carbon::parse($shoppingcart->shoppingcart_payment->updated_at)->formatLocalized('%d %b %Y %H:%M') }}</span>
+	<span class="cls_004">{{ Carbon\Carbon::parse($shoppingcart->shoppingcart_payment->updated_at)->format('d MMMM Y H:i') }}</span>
 </div>
 <div style="position:absolute;left:66.13px;top:67.25px" class="cls_002">
 	<span class="cls_002">Transaction Time</span>
@@ -66,7 +66,7 @@ html,body {
 	<span class="cls_005">Batas Pembayaran :</span>
 </div>
 <div style="position:absolute;left:200.59px;top:132.39px" class="cls_014">
-	<span class="cls_014">{{ Carbon\Carbon::parse($shoppingcart->shoppingcart_payment->updated_at)->addDays(1)->formatLocalized('%d %b %Y %H:%M') }}</span>
+	<span class="cls_014">{{ Carbon\Carbon::parse($shoppingcart->shoppingcart_payment->updated_at)->addDays(1)->format('d MMMM Y H:i') }}</span>
 </div>
 <div style="position:absolute;left:66.13px;top:150.67px" class="cls_005">
 	<span class="cls_005">Total Pembayaran</span>

@@ -2359,7 +2359,7 @@ class BookingHelper {
 		$value = ($amount * $rate);
 		
 		//======================
-		if(config('site.currency')=="IDR")
+		if($to=="USD")
 		{
 			if($value>0)
 			{

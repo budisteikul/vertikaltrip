@@ -298,8 +298,8 @@ class PaymentHelper {
         $date2 = Carbon::parse($due_date);
         $second_expired = $date2->diffInSeconds($date1, true);
         $mins_expired  = $date2->diffInMinutes($date1, true);
-        $date_expired = Carbon::parse($due_date)->formatLocalized('%Y-%m-%d %H:%M:%S');
-        $date_now = Carbon::parse($date1)->formatLocalized('%Y-%m-%d %H:%M:%S +0700');
+        $date_expired = Carbon::parse($due_date)->format('Y-m-d H:i:s');
+        $date_now = Carbon::parse($date1)->format('Y-m-d H:i:s');
 
         $response = NULL;
         $payment_type = NULL;
