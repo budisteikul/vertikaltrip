@@ -19,7 +19,8 @@
         "predis/predis": "^2.2",
         "propaganistas/laravel-phone": "^5.3",
         "spatie/laravel-google-cloud-storage": "^2.3",
-        "yajra/laravel-datatables-oracle": "^11.1"
+        "yajra/laravel-datatables-oracle": "^11.1",
+        "stripe/stripe-php": "^15.8"
     },
     "autoload": {
         "psr-0": {
@@ -29,8 +30,7 @@
         "psr-4": {
             "budisteikul\\vertikaltrip\\": "src/",
             "PayPalCheckoutSdk\\": "src/Libs/PayPalCheckoutSdk/",
-            "PayPalHttp\\": "src/Libs/PayPalHttp/",
-            "Stripe\\": "src/Libs/StripePHP/lib/"
+            "PayPalHttp\\": "src/Libs/PayPalHttp/"
         }
     },
     "extra": {
