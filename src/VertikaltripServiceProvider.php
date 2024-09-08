@@ -76,7 +76,7 @@ class VertikaltripServiceProvider extends ServiceProvider
             'scheme' => 'https',
         ];
 
-        app()->config["mail.mailers"] = [
+        app()->config["mail.mailers.mailgun"] = [
             'transport' => 'mailgun',
         ];
     }
