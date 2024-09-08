@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
-use \PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use View;
 use Illuminate\Support\Facades\Storage;
@@ -2536,7 +2536,7 @@ class BookingHelper {
 	public static function create_invoice_pdf($shoppingcart)
 	{
 		$path = config('site.assets') .'/img/pdf/qrcode-logo.png';
-		$qrcode = base64_encode(QrCode::errorCorrection('H')->format('png')->merge($path,1,true)->generate(env('APP_API_URL') .'/pdf/invoice/'.$shoppingcart->session_id.'/Invoice-'.$shoppingcart->confirmation_code.'.pdf'  ));
+		$qrcode = base64_encode(QrCode::errorCorrection('H')->format('png')->generate(env('APP_API_URL') .'/pdf/invoice/'.$shoppingcart->session_id.'/Invoice-'.$shoppingcart->confirmation_code.'.pdf'  ));
 		$main_contact = self::get_answer_contact($shoppingcart);
         $pdf = PDF::setOptions(['tempDir' =>  storage_path(),'fontDir' => storage_path(),'fontCache' => storage_path(),'isRemoteEnabled' => true])->loadView('vertikaltrip::layouts.pdf.invoice', compact('shoppingcart','qrcode'))->setPaper('a4', 'portrait');
         if($shoppingcart->booking_channel=="WEBSITE")

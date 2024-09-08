@@ -22,7 +22,8 @@
     },
     "autoload": {
         "psr-0": {
-            "SimpleSoftwareIO\\QrCode\\": "src/Libs/"
+            "SimpleSoftwareIO\\QrCode\\": "src/Libs/",
+            "BaconQrCode": "src/Libs/"
         },
         "psr-4": {
             "budisteikul\\vertikaltrip\\": "src/"
