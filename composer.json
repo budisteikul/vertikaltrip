@@ -9,6 +9,9 @@
     ],
     "require": {
         "ext-gd": "*",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
         "barryvdh/laravel-dompdf": "^3.0",
         "google/cloud-tasks": "^1.14",
         "html2text/html2text": "^4.3",
@@ -16,7 +19,6 @@
         "predis/predis": "^2.2",
         "propaganistas/laravel-phone": "^5.3",
         "spatie/laravel-google-cloud-storage": "^2.3",
-        "stripe/stripe-php": "^15.8",
         "yajra/laravel-datatables-oracle": "^11.1"
     },
     "autoload": {
@@ -26,8 +28,9 @@
         },
         "psr-4": {
             "budisteikul\\vertikaltrip\\": "src/",
-            "PayPalCheckoutSdk\\": "src/Libs/PayPalCheckoutSdk",
-            "PayPalHttp\\": "src/Libs/PayPalHttp"
+            "PayPalCheckoutSdk\\": "src/Libs/PayPalCheckoutSdk/",
+            "PayPalHttp\\": "src/Libs/PayPalHttp/",
+            "Stripe\\": "src/Libs/StripePHP/lib/"
         }
     },
     "extra": {
