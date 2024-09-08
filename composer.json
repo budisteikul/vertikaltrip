@@ -18,10 +18,12 @@
         "propaganistas/laravel-phone": "^5.3",
         "spatie/laravel-google-cloud-storage": "^2.3",
         "stripe/stripe-php": "^15.8",
-        "yajra/laravel-datatables-oracle": "^11.1",
-        "simplesoftwareio/simple-qrcode": "~1"
+        "yajra/laravel-datatables-oracle": "^11.1"
     },
     "autoload": {
+        "psr-0": {
+            "SimpleSoftwareIO\\QrCode\\": "src/Libs/"
+        },
         "psr-4": {
             "budisteikul\\vertikaltrip\\": "src/"
         }
@@ -30,10 +32,12 @@
         "laravel": {
             "providers": [
                 "budisteikul\\vertikaltrip\\VertikaltripServiceProvider",
-                "Barryvdh\\DomPDF\\ServiceProvider"
+                "Barryvdh\\DomPDF\\ServiceProvider",
+                "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
             ],
             "aliases": {
-                "PDF": "Barryvdh\\DomPDF\\Facade"
+                "PDF": "Barryvdh\\DomPDF\\Facade",
+                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
             }
         }
     }
