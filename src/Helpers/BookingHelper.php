@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Validator;
 use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Facades\Cache;
 use Carbon\Carbon;
-use \PDF;
+use Barryvdh\DomPDF\Facade as PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use View;
 use Illuminate\Support\Facades\Storage;
