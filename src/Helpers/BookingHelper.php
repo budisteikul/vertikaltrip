@@ -2535,7 +2535,8 @@ class BookingHelper {
 
 	public static function create_invoice_pdf($shoppingcart)
 	{
-		$qrcode = base64_encode(QrCode::errorCorrection('H')->format('png')->generate(env('APP_API_URL') .'/pdf/invoice/'.$shoppingcart->session_id.'/Invoice-'.$shoppingcart->confirmation_code.'.pdf'  ));
+		$path = config('site.assets') .'/img/pdf/qrcode-logo.png';
+		$qrcode = base64_encode(QrCode::errorCorrection('H')->format('png')->merge($path,1,false)->size(1024)->margin(0)->generate(env('APP_API_URL') .'/pdf/invoice/'.$shoppingcart->session_id.'/Invoice-'.$shoppingcart->confirmation_code.'.pdf'  ));
 		$main_contact = self::get_answer_contact($shoppingcart);
         $pdf = PDF::setOptions(['tempDir' =>  storage_path(),'fontDir' => storage_path(),'fontCache' => storage_path(),'isRemoteEnabled' => true])->loadView('vertikaltrip::layouts.pdf.invoice', compact('shoppingcart','qrcode'))->setPaper('a4', 'portrait');
         if($shoppingcart->booking_channel=="WEBSITE")
@@ -2559,7 +2560,8 @@ class BookingHelper {
 	public static function create_ticket_pdf($shoppingcart_product)
 	{
 		$customPaper = array(0,0,300,540);
-		$qrcode = base64_encode(QrCode::errorCorrection('H')->format('png')->size(1024)->margin(0)->generate($shoppingcart_product->shoppingcart->url .'/booking/receipt/'.$shoppingcart_product->shoppingcart->session_id.'/'.$shoppingcart_product->shoppingcart->confirmation_code  ));
+		$path = config('site.assets') .'/img/pdf/qrcode-logo.png';
+        $qrcode = base64_encode(QrCode::errorCorrection('H')->format('png')->merge($path,1,false)->size(1024)->margin(0)->generate($shoppingcart_product->shoppingcart->url .'/booking/receipt/'.$shoppingcart_product->shoppingcart->session_id.'/'.$shoppingcart_product->shoppingcart->confirmation_code  ));
         $pdf = PDF::setOptions(['tempDir' => storage_path(),'fontDir' => storage_path(),'fontCache' => storage_path(),'isRemoteEnabled' => true])->loadView('vertikaltrip::layouts.pdf.ticket', compact('shoppingcart_product','qrcode'))->setPaper($customPaper);
         return $pdf;
 	}
