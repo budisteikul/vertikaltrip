@@ -42,7 +42,7 @@
             ],
             "aliases": {
                 "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode",
-                "PDF": "Barryvdh\\DomPDF\\Facade"
+                "PDF": "Barryvdh\\DomPDF\\Facade\\Pdf"
             }
         }
     }
