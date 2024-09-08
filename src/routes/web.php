@@ -115,4 +115,4 @@
     	return redirect()->to('https://linktr.ee/foodtour');
 	});
 
-	Route::get('/test', 'budisteikul\vertikaltrip\Controllers\ApiController@test')->middleware(['SettingMiddleware']);
+	Route::get('/test', 'budisteikul\vertikaltrip\Controllers\APIController@test')->middleware(['SettingMiddleware']);
