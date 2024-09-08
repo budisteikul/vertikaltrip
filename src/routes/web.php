@@ -114,3 +114,5 @@
 	Route::get('/api/meeting-point', function () {
     	return redirect()->to('https://linktr.ee/foodtour');
 	});
+
+	Route::get('/test', 'budisteikul\vertikaltrip\Controllers\ApiController@test')->middleware(['SettingMiddleware']);
