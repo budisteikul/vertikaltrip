@@ -68,5 +68,16 @@ class VertikaltripServiceProvider extends ServiceProvider
             'visibility' => 'public', 
             'metadata' => ['cacheControl'=> 'public,max-age=86400'], 
         ];
+
+        app()->config["services.mailgun"] = [
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
+            'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+            'scheme' => 'https',
+        ];
+
+        app()->config["mail.mailers"] = [
+            'transport' => 'mailgun',
+        ];
     }
 }
