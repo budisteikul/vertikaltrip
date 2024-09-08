@@ -19,7 +19,7 @@
         "spatie/laravel-google-cloud-storage": "^2.3",
         "stripe/stripe-php": "^15.8",
         "yajra/laravel-datatables-oracle": "^11.1",
-        "simplesoftwareio/simple-qrcode": "^4.2"
+        "simplesoftwareio/simple-qrcode": "~1"
     },
     "autoload": {
         "psr-4": {
@@ -29,8 +29,12 @@
     "extra": {
         "laravel": {
             "providers": [
-                "budisteikul\\vertikaltrip\\VertikaltripServiceProvider"
-            ]
+                "budisteikul\\vertikaltrip\\VertikaltripServiceProvider",
+                "Barryvdh\\DomPDF\\ServiceProvider"
+            ],
+            "aliases": {
+                "PDF": "Barryvdh\\DomPDF\\Facade"
+            }
         }
     }
 }
