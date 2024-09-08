@@ -45,14 +45,7 @@ class APIController extends Controller
 
     public function test(Request $request)
     {
-        $shoppingcart = Shoppingcart::where('session_id','1b3fb63-1c0-f550-c20e-cdcedaa645b7')->where('confirmation_code','XDT240909009')->first();
-        print_r($shoppingcart);
-            $email = $shoppingcart->shoppingcart_questions()->select('answer')->where('type','mainContactDetails')->where('question_id','email')->first()->answer;
-            if($email!="")
-            {
-                Mail::to($email)->cc([env("MAIL_FROM_ADDRESS")])->send(new BookingConfirmedMail($shoppingcart));
-            }
-            return response('OK1', 200)->header('Content-Type', 'text/plain');
+        
     }
 
     public function cancellation($sessionId,$confirmationCode)
