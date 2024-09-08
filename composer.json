@@ -9,38 +9,28 @@
     ],
     "require": {
         "ext-gd": "*",
-        "paypal/paypal-checkout-sdk": "^1.0",
-        "yajra/laravel-datatables-oracle": "^10.2",
-        "spatie/laravel-google-cloud-storage": "^2.0",
-        "bacon/bacon-qr-code": "1.0.*",
-        "illuminate/support": ">=5.0.0",
-        "stripe/stripe-php": "^7.124",
-        "intervention/image": "^2.7",
-        "predis/predis": "^1.1",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "google/cloud-tasks": "^1.14",
         "html2text/html2text": "^4.3",
-        "google/cloud-tasks": "^1.11",
-        "milon/barcode": "^9.0",
-        "propaganistas/laravel-phone": "^4.4",
-        "barryvdh/laravel-dompdf": "^1.0"
+        "intervention/image": "^3.8",
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "predis/predis": "^2.2",
+        "propaganistas/laravel-phone": "^5.3",
+        "spatie/laravel-google-cloud-storage": "^2.3",
+        "stripe/stripe-php": "^15.8",
+        "yajra/laravel-datatables-oracle": "^11.1",
+        "simplesoftwareio/simple-qrcode": "^4.2"
     },
     "autoload": {
-        "psr-0": {
-            "SimpleSoftwareIO\\QrCode\\": "src/Libs/"
-        },
         "psr-4": {
-            "budisteikul\\vertikaltrip\\": "src/",
-            "Zxing\\": "src/Libs/Zxing/"
+            "budisteikul\\vertikaltrip\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "budisteikul\\vertikaltrip\\vertikaltripServiceProvider",
-                "SimpleSoftwareIO\\QrCode\\QrCodeServiceProvider"
-            ],
-            "aliases": {
-                "QrCode": "SimpleSoftwareIO\\QrCode\\Facades\\QrCode"
-            }
+                "budisteikul\\vertikaltrip\\VertikaltripServiceProvider"
+            ]
         }
     }
 }

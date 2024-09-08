@@ -4,7 +4,7 @@ namespace budisteikul\vertikaltrip;
 
 use Illuminate\Support\ServiceProvider;
 
-class vertikaltripServiceProvider extends ServiceProvider
+class VertikaltripServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
