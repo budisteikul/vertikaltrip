@@ -125,17 +125,16 @@ class APIController extends Controller
             ];
         
             
-            
+            $services[] = [
+                'icon' => '<i class="fa fa-4x fa-bolt text-theme mb-2"></i>',
+                'name' => 'Instant Confirmation',
+                'description' => 'To secure your spot while keeping your plans flexible. Your booking are confirmed automatically!',
+            ];
+
             $services[] = [
                 'icon' => '<i class="fas fa-4x fa-thumbs-up text-theme mb-2"></i>',
                 'name' => 'Great Local Food',
                 'description' => 'Too many options and afraid of tourist traps? We only take you to great places where locals go!',
-            ];
-
-            $services[] = [
-                'icon' => '<i class="fas fa-4x fa-user-tag text-theme mb-2"></i>',
-                'name' => 'Real Foodie Guide',
-                'description' => 'Local foodie guides who are experts in gastronomy. Not just a local person/driver who can speak English!',
             ];
 
             $services[] = [
