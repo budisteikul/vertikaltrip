@@ -301,7 +301,7 @@ class ContentHelper {
         {
             $currency = 'IDR';
             $total = GeneralHelper::numberFormat(BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,$currency),$currency);
-            $rate = '';
+            $rate = '<small><strong>Charge in '.$currency.'</strong></small>';
             if($shoppingcart->currency!=$currency)
             {
                 $rate = '<small><strong>Charge in '.$currency.'</strong>, '. BookingHelper::text_rate($shoppingcart,$currency).'</small>';
