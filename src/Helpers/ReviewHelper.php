@@ -39,8 +39,14 @@ class ReviewHelper {
             $rate = number_format((float)$rate, 2, '.', '');
         }
 
+        $rate = strval(round($rate, 2));
+        if(strlen($rate)==4)
+        {
+            $rate = substr($rate, 0,3);
+        }
+
         $data = [
-        	'rate' => round($rate, 2),
+        	'rate' => (float)$rate,
             'count' => $count,
         	'star' => self::star($rate)
         ];
