@@ -99,20 +99,4 @@
 	Route::post('/api/tool/billing/{sessionId}', 'budisteikul\vertikaltrip\Controllers\ToolController@billing')->middleware(['SettingMiddleware']);
 	Route::post('/api/tool/bin', 'budisteikul\vertikaltrip\Controllers\ToolController@bin')->middleware(['SettingMiddleware']);
 
-	Route::get('/contact-us', function () {
-    	return redirect()->to('https://wa.me/6289530000030');
-	});
-
-	Route::get('/meeting-point', function () {
-    	return redirect()->to('https://linktr.ee/foodtour');
-	});
-
-	Route::get('/api/contact-us', function () {
-    	return redirect()->to('https://wa.me/6289530000030');
-	});
-
-	Route::get('/api/meeting-point', function () {
-    	return redirect()->to('https://linktr.ee/foodtour');
-	});
-
-	Route::get('/test', 'budisteikul\vertikaltrip\Controllers\APIController@test')->middleware(['SettingMiddleware']);
+	
