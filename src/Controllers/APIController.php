@@ -161,6 +161,12 @@ class APIController extends Controller
                 'link' => 'https://map.jogjafoodtour.com',
                 'type' => 'outsite'
             ];
+
+            $usefullLink[] = [
+                'title' => 'Careers',
+                'link' => '/page/careers',
+                'type' => 'insite'
+            ];
         }
         else
         {
@@ -266,6 +272,12 @@ class APIController extends Controller
                 'title' => 'Meeting Point',
                 'link' => 'https://map.vertikaltrip.com',
                 'type' => 'outsite'
+            ];
+
+            $usefullLink[] = [
+                'title' => 'Careers',
+                'link' => '/page/careers',
+                'type' => 'insite'
             ];
             
         }
