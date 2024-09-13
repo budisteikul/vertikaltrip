@@ -1,5 +1,9 @@
 <?php
 
+	Route::get('/', function () {
+    return view('welcome');
+	})->middleware(['auth:sanctum']);
+
 	//Auth
 	Route::post('/api/auth', 'budisteikul\vertikaltrip\Controllers\AdminController@auth');
 
