@@ -576,15 +576,7 @@ class APIController extends Controller
         ->toJson();
     }
 
-    public function product_add(Request $request)
-    {
-        $data = json_decode($request->getContent(), true);
-        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$data);
-        BokunHelper::get_product($data);
-        return response()->json([
-                'message' => 'success'
-            ], 200);
-    }
+    
 
     public function downloadQrcode($sessionId,$id)
     {
@@ -927,19 +919,7 @@ class APIController extends Controller
         ], 200);
     }
     
-    public function product_remove(Request $request)
-    {
-        $data = json_decode($request->getContent(), true);
-        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$data);
-
-        $sessionId = $data['sessionId'];
-        
-        FirebaseHelper::shoppingcart($sessionId);
-
-        return response()->json([
-                'message' => 'success'
-            ], 200);
-    }
+    
 
     public function removebookingid(Request $request)
     {
