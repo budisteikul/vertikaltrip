@@ -19,7 +19,7 @@ class AdminController extends Controller
         
     }
     
-    public function auth(Request $request)
+    public function createToken(Request $request)
     {
         $request->validate([
             'email' => 'required|email',
