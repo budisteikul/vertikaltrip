@@ -26,6 +26,7 @@ class VertikaltripServiceProvider extends ServiceProvider
     {
         
         $this->app['router']->aliasMiddleware('SettingMiddleware', \budisteikul\vertikaltrip\Middleware\SettingMiddleware::class);
+
         $this->registerConfig();
         $this->loadViewsFrom(__DIR__.'/views', 'vertikaltrip');
         $this->loadMigrationsFrom(__DIR__.'/migrations/2020_11_17_133006_create_categories_table.php');
@@ -52,6 +53,7 @@ class VertikaltripServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/migrations/2024_05_19_011530_create_slugs_table.php');
         
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/routes/admin.php');
     }
 
     protected function registerConfig()

@@ -23,13 +23,8 @@
     Route::get('/api/category/{slug}', 'budisteikul\vertikaltrip\Controllers\APIController@category')->middleware(['SettingMiddleware']);
 
     //Product
-    Route::post('/api/product/add', 'budisteikul\vertikaltrip\Controllers\APIController@product_add')->middleware(['SettingMiddleware']);
-    Route::post('/api/product/remove', 'budisteikul\vertikaltrip\Controllers\APIController@product_remove')->middleware(['SettingMiddleware']);
     Route::get('/api/product/{slug}', 'budisteikul\vertikaltrip\Controllers\APIController@product')->middleware(['SettingMiddleware']);
 	Route::get('/api/product/{slug}/{sessionId}/product_jscript', 'budisteikul\vertikaltrip\Controllers\APIController@product_jscript')->middleware(['SettingMiddleware']);
-
-
-
 
 
 	//Create Payment
@@ -73,6 +68,10 @@
 	Route::post('/api/payment/paypal/confirm', 'budisteikul\vertikaltrip\Controllers\CallbackController@confirmpaymentpaypal')->middleware(['SettingMiddleware']);
 	Route::post('/api/payment/xendit/confirm', 'budisteikul\vertikaltrip\Controllers\CallbackController@confirmpaymentxendit')->middleware(['SettingMiddleware']);
 	
+	//Billing Tools
+	Route::post('/api/tool/billing/{sessionId}', 'budisteikul\vertikaltrip\Controllers\ToolController@billing')->middleware(['SettingMiddleware']);
+	Route::post('/api/tool/bin', 'budisteikul\vertikaltrip\Controllers\ToolController@bin')->middleware(['SettingMiddleware']);
+
 	//PDF
 	Route::get('/api/pdf/manual/{sessionId}/Manual-{id}.pdf', 'budisteikul\vertikaltrip\Controllers\APIController@manual')->middleware(['SettingMiddleware']);
 	Route::get('/api/pdf/invoice/{sessionId}/Invoice-{id}.pdf', 'budisteikul\vertikaltrip\Controllers\APIController@invoice')->middleware(['SettingMiddleware']);
@@ -95,8 +94,6 @@
 	//LOG
 	Route::post('/logger/{identifier}', 'budisteikul\vertikaltrip\Controllers\LogController@log')->middleware(['SettingMiddleware']);
 
-	//Billing Tools
-	Route::post('/api/tool/billing/{sessionId}', 'budisteikul\vertikaltrip\Controllers\ToolController@billing')->middleware(['SettingMiddleware']);
-	Route::post('/api/tool/bin', 'budisteikul\vertikaltrip\Controllers\ToolController@bin')->middleware(['SettingMiddleware']);
+	
 
 	
