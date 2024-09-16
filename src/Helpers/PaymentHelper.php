@@ -209,19 +209,22 @@ class PaymentHelper {
                                 <span class="badge badge-info invoice-color-info" style="font-size:18px; ">
                                 Waiting for payment <br /><b id="payment_timer" class="text-white"  style="font-size:12px; font-weight: lighter;"><i class="fa fa-spinner fa-spin fa-fw"></i></b></span>
                                 </div>
-                                <div class="card mb-1 img-fluid invoice-hilang"  style="min-height:200px; ">
+                                <div class="card mb-1 img-fluid invoice-hilang"  style="min-height:250px; ">
                                 
                                 <div class="card-img-overlay">
                                     <div class="row h-100">
                                         <div class="col-12 text-center">
                                             
                                             <div>
-                                            Click the button below and pay with correct amount
+                                            We need to add small amount to identify transaction.
                                             <br />
-                                             Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'USD') .'</b>
-                                             &nbsp;<button id="va_number_button" onclick="copyToClipboard(\'#total\')" title="Copied" data-toggle="tooltip" data-placement="right" data-trigger="click" class="btn btn-light btn-sm invoice-hilang"><i class="far fa-copy"></i></button>
+                                            Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'IDR') .'</b>
+                                            
                                             <br />
-                                            <input type="hidden" id="total" value="'. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'USD') .'">
+                                             Click the button below and pay with correct amount
+                                             
+                                            <br />
+                                            
 
                                             <br />
                                             <a href="https://wise.com/pay/business/vertikaltripllc"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
@@ -421,8 +424,11 @@ class PaymentHelper {
             break;
             case "wise":
                 $payment_provider = 'wise';
-                $currency = 'USD';
-                $amount = BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,$currency);
+                $currency = 'IDR';
+
+                $smallamount = substr($shoppingcart->confirmation_code,9,3);
+
+                $amount = BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,$currency)+(float)$smallamount;
                 $rate = number_format((float)$shoppingcart->due_now / $amount, 2, '.', '');
                 $rate_from = $shoppingcart->currency;
                 $rate_to = $currency;

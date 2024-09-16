@@ -37,9 +37,8 @@ class WiseHelper {
         $status_json = new \stdClass();
         $response_json = new \stdClass();
 
-        $response->data->currency = 'USD';
+        $response->data->currency = 'IDR';
         $response->data->amount = $data->transaction->amount;
-
 
         $response_json->status = $status_json;
         $response_json->data = $data_json;
