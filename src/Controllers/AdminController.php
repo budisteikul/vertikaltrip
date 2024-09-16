@@ -35,7 +35,6 @@ class AdminController extends Controller
                 ], 404);
             }
             
-            $user->tokens()->delete();
             $token = $user->createToken('VertikalTripToken')->plainTextToken;
         
             $response = [
@@ -62,8 +61,6 @@ class AdminController extends Controller
     {
         $data = json_decode($request->getContent(), true);
         Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$data);
-        $sessionId = $data['sessionId'];
-        FirebaseHelper::shoppingcart($sessionId);
         return response()->json([
                 'message' => 'success'
             ], 200);
