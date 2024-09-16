@@ -245,17 +245,20 @@ class WebhookController extends Controller
 
                     if($count>0)
                     {
-                        $shoppingcart = Shoppingcart::where('confirmation_code',$confirmation_code)->where('booking_status','CONFIRMED')->first();
-                        $shoppingcart->booking_status = "CANCELED";
-                        $shoppingcart->save();
+                        //$shoppingcart = Shoppingcart::where('confirmation_code',$confirmation_code)->where('booking_status','CONFIRMED')->first();
+                        //$shoppingcart->booking_status = "CANCELED";
+                        //$shoppingcart->save();
                         
+                        //BookingHelper::shoppingcart_notif($shoppingcart);
+                    }
+                    else
+                    {
+                        $shoppingcart = BookingHelper::webhook_bokun($data);
+                        $shoppingcart->booking_status = "CONFIRMED";
+                        $shoppingcart->save();
                         BookingHelper::shoppingcart_notif($shoppingcart);
                     }
-
-                    $shoppingcart = BookingHelper::webhook_bokun($data);
-                    $shoppingcart->booking_status = "CONFIRMED";
-                    $shoppingcart->save();
-                    BookingHelper::shoppingcart_notif($shoppingcart);
+                    
                     
                     return response('CONFIRMED OK', 200)->header('Content-Type', 'text/plain');
                 break;
