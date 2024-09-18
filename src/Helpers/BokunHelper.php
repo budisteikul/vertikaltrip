@@ -267,13 +267,10 @@ class BokunHelper {
 
         if($year=="") $year = date('Y');
         if($month=="") $month = date('m');
-        
-        
+      
         $value = Cache::remember('_bokunCalendar_'. $currency .'_'. $lang .'_'. $year .'_'. $month .'_'. $activityId ,60, function() use ($activityId,$currency,$lang,$year,$month) {
     		return self::bokunWidget_connect('/snippets/activity/'.$activityId.'/calendar/json/'.$year.'/'.$month .'?lang='.$lang.'&currency='.$currency);
 		});
-		
-		//$value = self::bokunWidget_connect('/snippets/activity/'.$activityId.'/calendar/json/'.$year.'/'.$month .'?lang='.$lang.'&currency='.$currency);
 
 		$value = json_decode($value);
 		return $value;
@@ -284,8 +281,8 @@ class BokunHelper {
 		$currency = self::env_bokunCurrency();
 		$lang = self::env_bokunLang();
 		$bookingChannel = self::env_bokunBookingChannel();
-		$value = Cache::remember('_bokunProductById_'. $currency .'_'. $lang .'_'.$activityId,7200, function() use ($activityId,$currency,$lang,$bookingChannel) {
-    		return self::bokunWidget_connect('/widgets/'.$bookingChannel.'/activity/'.$activityId.'?lang='.$lang.'&currency='.$currency);
+		$value = Cache::remember('_bokunProductById_'. $lang .'_'.$activityId,7200, function() use ($activityId,$lang,$bookingChannel) {
+    		return self::bokunWidget_connect('/widgets/'.$bookingChannel.'/activity/'.$activityId.'?lang='.$lang);
 		});
 		$value = json_decode($value);
 		return $value->activity;
@@ -297,7 +294,7 @@ class BokunHelper {
         $lang = self::env_bokunLang();
         $bookingChannel = self::env_bokunBookingChannel();
 
-		$value = Cache::remember('_bokunProductPickup_'. $currency .'_'. $lang .'_'. $activityId,7200, function() use ($activityId,$lang,$bookingChannel) {
+		$value = Cache::remember('_bokunProductPickup_'. $lang .'_'. $activityId,7200, function() use ($activityId,$lang,$bookingChannel) {
     		return self::bokunWidget_connect('/widgets/'.$bookingChannel.'/activity/'.$activityId.'/pickupPlaces?selectedLang='.$lang);
 		});
 
