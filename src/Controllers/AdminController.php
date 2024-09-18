@@ -50,9 +50,9 @@ class AdminController extends Controller
     public function product_sync(Request $request)
     {
         $request->validate([
-            'bokun_id' => 'required'
+            'activityId' => 'required'
         ]);
-        $activityId = $request->bokun_id;
+        $activityId = $request->activityId;
         Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$activityId);
         BokunHelper::get_product($activityId);
         return response()->json([
