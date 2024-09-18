@@ -47,7 +47,7 @@ class AdminController extends Controller
 
     
 
-    public function product_add(Request $request)
+    public function product_sync(Request $request)
     {
         $request->validate([
             'bokun_id' => 'required'
@@ -60,17 +60,6 @@ class AdminController extends Controller
             ], 200);
     }
 
-    public function product_remove(Request $request)
-    {
-        $request->validate([
-            'bokun_id' => 'required'
-        ]);
-        $activityId = $request->bokun_id;
-        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$activityId);
-        BokunHelper::get_product($activityId);
-        return response()->json([
-                'message' => 'success'
-            ], 200);
-    }
+    
 
 }

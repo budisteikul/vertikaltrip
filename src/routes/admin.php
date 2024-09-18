@@ -6,8 +6,7 @@
 
 	
     //Product
-    Route::post('/api/product/add', 'budisteikul\vertikaltrip\Controllers\AdminController@product_add')->middleware(['SettingMiddleware','auth:sanctum']);
-    Route::post('/api/product/remove', 'budisteikul\vertikaltrip\Controllers\AdminController@product_remove')->middleware(['SettingMiddleware','auth:sanctum']);
+    Route::post('/api/product/sync', 'budisteikul\vertikaltrip\Controllers\AdminController@product_sync')->middleware(['SettingMiddleware','auth:sanctum']);
 
     
 
