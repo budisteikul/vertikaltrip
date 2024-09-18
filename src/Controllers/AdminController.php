@@ -53,7 +53,7 @@ class AdminController extends Controller
             'activityId' => 'required'
         ]);
         $activityId = $request->activityId;
-        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$activityId);
+        Cache::forget('_bokunProductById_'. env("BOKUN_LANG") .'_'.$activityId);
         BokunHelper::get_product($activityId);
         return response()->json([
                 'message' => 'success'
