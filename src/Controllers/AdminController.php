@@ -49,9 +49,12 @@ class AdminController extends Controller
 
     public function product_add(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$data->bokun_id);
-        BokunHelper::get_product($data);
+        $request->validate([
+            'bokun_id' => 'required'
+        ]);
+        $activityId = $request->bokun_id;
+        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$activityId);
+        BokunHelper::get_product($activityId);
         return response()->json([
                 'message' => 'success'
             ], 200);
@@ -59,8 +62,12 @@ class AdminController extends Controller
 
     public function product_remove(Request $request)
     {
-        $data = json_decode($request->getContent(), true);
-        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$data->bokun_id);
+        $request->validate([
+            'bokun_id' => 'required'
+        ]);
+        $activityId = $request->bokun_id;
+        Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$activityId);
+        BokunHelper::get_product($activityId);
         return response()->json([
                 'message' => 'success'
             ], 200);
