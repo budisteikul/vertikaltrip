@@ -209,14 +209,14 @@ class PaymentHelper {
                                 <span class="badge badge-info invoice-color-info" style="font-size:18px; ">
                                 Waiting for payment <br /><b id="payment_timer" class="text-white"  style="font-size:12px; font-weight: lighter;"><i class="fa fa-spinner fa-spin fa-fw"></i></b></span>
                                 </div>
-                                <div class="card mb-1 img-fluid invoice-hilang"  style="min-height:250px; ">
+                                <div class="card mb-2 pb-2 invoice-hilang"  style="min-height:270px; ">
                                 
                                 <div class="card-img-overlay">
                                     <div class="row h-100">
                                         <div class="col-12 text-center">
                                             
                                             <div>
-                                            We add a small amount to identify transaction
+
                                             <br />
                                             Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'IDR') .'</b>
                                             <br />
@@ -225,9 +225,10 @@ class PaymentHelper {
                                             <br />
                                             <a href="https://wise.com/pay/business/vertikaltripllc"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
 
+                                            <br /><br />
+                                            <i>We add a small amount to identify transaction</i>
                                             <br />
-                                            <br />
-                                           
+                                            
                                             </div>
                                             
                                         </div>
