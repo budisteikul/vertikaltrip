@@ -281,8 +281,8 @@ class BokunHelper {
 		$currency = self::env_bokunCurrency();
 		$lang = self::env_bokunLang();
 		$bookingChannel = self::env_bokunBookingChannel();
-		$value = Cache::remember('_bokunProductById_'. $lang .'_'.$activityId,7200, function() use ($activityId,$lang,$bookingChannel) {
-    		return self::bokunWidget_connect('/widgets/'.$bookingChannel.'/activity/'.$activityId.'?lang='.$lang);
+		$value = Cache::remember('_bokunProductById_'. $currency .'_'. $lang .'_'.$activityId,7200, function() use ($activityId,$lang,$currency,$bookingChannel) {
+    		return self::bokunWidget_connect('/widgets/'.$bookingChannel.'/activity/'.$activityId.'?lang='.$lang.'&currency='. $currency);
 		});
 		$value = json_decode($value);
 		return $value->activity;
