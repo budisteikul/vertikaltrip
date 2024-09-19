@@ -216,15 +216,12 @@ class PaymentHelper {
                                         <div class="col-12 text-center">
                                             
                                             <div>
+                                            We add a small amount to identify transaction
                                             <br />
                                             Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'IDR') .'</b>
-                                            
                                             <br />
                                              Click the button below and pay with correct amount
-                                             
                                             <br />
-                                            
-
                                             <br />
                                             <a href="https://wise.com/pay/business/vertikaltripllc"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
 
