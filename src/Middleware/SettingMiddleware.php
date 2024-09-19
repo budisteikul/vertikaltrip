@@ -33,15 +33,13 @@ class SettingMiddleware
         }
         else if(str_contains(GeneralHelper::url(), 'localhost'))
         {
-            //config(['site.currency'=>'IDR']);
-            //config(['site.payment_enable'=>'xendit,stripe,paypal']);
-            //config(['site.payment_default'=>'xendit']);
+            
         }
         else
         {
-            config(['site.currency'=>'USD']);
-            config(['site.payment_enable'=>'stripe,paypal']);
-            config(['site.payment_default'=>'stripe']);
+            config(['site.currency'=>'IDR']);
+            config(['site.payment_enable'=>'wise,stripe,paypal']);
+            config(['site.payment_default'=>'wise']);
         }
         
         return $next($request);
