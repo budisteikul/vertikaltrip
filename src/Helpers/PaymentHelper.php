@@ -216,7 +216,6 @@ class PaymentHelper {
                                         <div class="col-12 text-center">
                                             
                                             <div>
-                                            We need to add small amount to identify transaction.
                                             <br />
                                             Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'IDR') .'</b>
                                             
