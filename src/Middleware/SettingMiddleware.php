@@ -28,8 +28,8 @@ class SettingMiddleware
         if(str_contains(GeneralHelper::url(), 'jogjafoodtour'))
         {
             config(['site.currency'=>'IDR']);
-            config(['site.payment_enable'=>'xendit,stripe,paypal']);
-            config(['site.payment_default'=>'xendit']);
+            config(['site.payment_enable'=>'wise,stripe,paypal']);
+            config(['site.payment_default'=>'wise']);
         }
         else if(str_contains(GeneralHelper::url(), 'localhost'))
         {
