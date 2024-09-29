@@ -209,7 +209,7 @@ class PaymentHelper {
                                 <span class="badge badge-info invoice-color-info" style="font-size:18px; ">
                                 Waiting for payment <br /><b id="payment_timer" class="text-white"  style="font-size:12px; font-weight: lighter;"><i class="fa fa-spinner fa-spin fa-fw"></i></b></span>
                                 </div>
-                                <div class="card mb-2 pb-2 invoice-hilang"  style="min-height:270px; ">
+                                <div class="card mb-2 pb-2 invoice-hilang"  style="min-height:290px; ">
                                 
                                 <div class="card-img-overlay">
                                     <div class="row h-100">
