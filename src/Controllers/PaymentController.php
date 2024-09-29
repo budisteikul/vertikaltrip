@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use budisteikul\vertikaltrip\Helpers\BookingHelper;
 use budisteikul\vertikaltrip\Helpers\PaymentHelper;
 use budisteikul\vertikaltrip\Helpers\XenditHelper;
+use budisteikul\vertikaltrip\Models\Shoppingcart;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
@@ -20,6 +21,26 @@ class PaymentController extends Controller
         
     }
     
+    public function change($sessionId,$confirmationCode)
+    {
+
+            $shoppingcart = Shoppingcart::where('session_id',$sessionId)->where('confirmation_code',$confirmationCode)->where('booking_status','PENDING')->first();
+            if($shoppingcart)
+            {
+                $url = $shoppingcart->url;
+                $shoppingcart_json = BookingHelper::shoppingcart_dbtojson($shoppingcart->id);
+                $shoppingcart_json = BookingHelper::save_shoppingcart($shoppingcart->session_id,$shoppingcart_json);
+                $shoppingcart->delete();
+                return redirect()->away($url.'/booking/checkout');
+            }
+
+            return response()->json([
+                        'id' => "0",
+                        'message' => "error",
+                    ]);
+            
+    }
+
     public function checkout(Request $request)
     {
             $validator = Validator::make(json_decode($request->getContent(), true), [

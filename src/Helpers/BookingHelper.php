@@ -1950,6 +1950,7 @@ class BookingHelper {
                 'expiration_date' => $shoppingcart->shoppingcart_payment->expiration_date,
                 'payment_status' => $shoppingcart->shoppingcart_payment->payment_status
         );
+        
         $shoppingcart_json->payment = $ShoppingcartPayment;
         
 

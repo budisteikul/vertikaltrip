@@ -218,6 +218,8 @@ class PaymentHelper {
                                             <div>
 
                                             <br />
+                                            <i>We add a small amount to identify transaction</i>
+                                            <br />
                                             Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'IDR') .'</b>
                                             <br />
                                              Click the button below and pay with correct amount
@@ -226,9 +228,9 @@ class PaymentHelper {
                                             <a href="https://wise.com/pay/business/vertikaltripllc"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
 
                                             <br /><br />
-                                            <i>We add a small amount to identify transaction</i>
-                                            <br />
+                                            <small><a href="'.  env('APP_API_URL') .'/payment/change/'.$shoppingcart->session_id.'/'.$shoppingcart->confirmation_code.'" class="text-theme">Click here</a> to change payment method</small>
                                             
+                                            <br />
                                             </div>
                                             
                                         </div>
