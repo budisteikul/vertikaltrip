@@ -24,6 +24,11 @@ class PaymentController extends Controller
     public function change($sessionId,$confirmationCode)
     {
 
+            return response()->json([
+                        'id' => "1",
+                        'message' => "success",
+                    ]);
+
             $shoppingcart = Shoppingcart::where('session_id',$sessionId)->where('confirmation_code',$confirmationCode)->where('booking_status','PENDING')->first();
             if($shoppingcart)
             {
