@@ -2612,6 +2612,10 @@ class BookingHelper {
             //print_r("<br />");
         }
 
+        if($text=="")
+        {
+        	$text = "There is no participant for today";
+        }
         return $text;
 	}
 
