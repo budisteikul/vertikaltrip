@@ -2605,7 +2605,7 @@ class BookingHelper {
                 {
                     $people += $shoppingcart_product_detail->people;
                 }
-                $text .= "-". $question->firstName ." _(".$people." people)_ \n";
+                $text .= "- ". $question->firstName ." _(".$people." people)_ \n";
                 //print_r("-". $question->firstName ." (".$people." people) <br />");
             }
             $text .= "\n";
