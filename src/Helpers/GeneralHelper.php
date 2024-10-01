@@ -216,7 +216,7 @@ class GeneralHelper {
 
     public static function mask_name($name)
     {
-        $name = self::mask($name, 1, 1);
+        $name = self::mask($name, 3, 0);
         return $name;
     }
 
