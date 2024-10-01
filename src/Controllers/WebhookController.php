@@ -132,6 +132,17 @@ class WebhookController extends Controller
                 }
                     
                 
+                //==================================================
+                switch(strtolower($message))
+                {
+                    case "#schedulenow":
+                        $message = BookingHelper::schedule_bydate(date('Y-m-d'));
+                        $whatsapp->sendText($from,$message);
+                    break;
+                    default:
+                }
+                //==================================================
+
                 return response('OK', 200)->header('Content-Type', 'text/plain');
             }
             else

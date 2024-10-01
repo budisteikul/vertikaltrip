@@ -31,9 +31,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
-use Illuminate\Support\Facades\Mail;
-use budisteikul\vertikaltrip\Mail\BookingConfirmedMail;
-use budisteikul\vertikaltrip\Helpers\TaskHelper;
+
+use budisteikul\vertikaltrip\Helpers\ProductHelper;
 
 class APIController extends Controller
 {
@@ -45,7 +44,28 @@ class APIController extends Controller
 
     public function test(Request $request)
     {
-        
+        $aaa = BookingHelper::schedule_bydate(date('Y-m-d'));
+        print_r($aaa);
+        /*
+        $schedule = ShoppingcartProduct::with(['shoppingcart' => function ($query) {
+                    return $query->with(['shoppingcart_questions' => function ($query) {
+                        return $query->where('question_id','firstName')->orWhere('question_id','lastName');
+                    }]);
+                }])
+                 ->whereHas('shoppingcart', function ($query) {
+                    return $query->where('booking_status','CONFIRMED');
+                 })->whereDate('date', '=', "2024-10-05")->whereNotNull('date')->get();
+        foreach($schedule as $id)
+        {
+            $question = BookingHelper::get_answer_contact($id->shoppingcart);
+            $people = 0;
+            foreach($id->shoppingcart_product_details as $shoppingcart_product_detail)
+            {
+                $people += $shoppingcart_product_detail->people;
+            }
+            print_r("-". $question->firstName ." (".$people." people) ". $id->product_id ."<br />");
+        }
+        */
     }
 
     public function cancellation($sessionId,$confirmationCode)

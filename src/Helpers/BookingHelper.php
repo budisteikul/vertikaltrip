@@ -2577,5 +2577,43 @@ class BookingHelper {
 		BookingHelper::save_shoppingcart($sessionId, $shoppingcart);
 	}
 
+	public static function schedule_bydate($date)
+	{
+		$text = "";
+
+		$products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
+                    return $query->where('booking_status','CONFIRMED');
+                 })->whereDate('date', '=', $date)->whereNotNull('date')->groupBy('product_id')->select(['product_id'])->get();
+        foreach($products as $product)
+        {
+            $product_name = ProductHelper::product_name_by_bokun_id($product->product_id);
+            $text .= "*". $product_name ."* \n";
+            //print_r($product_name ."<br />");
+            $schedule = ShoppingcartProduct::with(['shoppingcart' => function ($query) {
+                    return $query->with(['shoppingcart_questions' => function ($query) {
+                        return $query->where('question_id','firstName')->orWhere('question_id','lastName');
+                    }]);
+                }])
+                 ->whereHas('shoppingcart', function ($query) {
+                    return $query->where('booking_status','CONFIRMED');
+                 })->whereDate('date', '=', $date)->where('product_id',$product->product_id)->whereNotNull('date')->get();
+            foreach($schedule as $id)
+            {
+                $question = BookingHelper::get_answer_contact($id->shoppingcart);
+                $people = 0;
+                foreach($id->shoppingcart_product_details as $shoppingcart_product_detail)
+                {
+                    $people += $shoppingcart_product_detail->people;
+                }
+                $text .= "-". $question->firstName ." _(".$people." people)_ \n";
+                //print_r("-". $question->firstName ." (".$people." people) <br />");
+            }
+            $text .= "\n";
+            //print_r("<br />");
+        }
+
+        return $text;
+	}
+
 }
 ?>
