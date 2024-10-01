@@ -2584,6 +2584,7 @@ class BookingHelper {
 		$products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
                     return $query->where('booking_status','CONFIRMED');
                  })->whereDate('date', '=', $date)->whereNotNull('date')->groupBy('product_id')->select(['product_id'])->get();
+		$total = 0;
         foreach($products as $product)
         {
             $product_name = ProductHelper::product_name_by_bokun_id($product->product_id);
@@ -2604,6 +2605,7 @@ class BookingHelper {
                 foreach($id->shoppingcart_product_details as $shoppingcart_product_detail)
                 {
                     $people += $shoppingcart_product_detail->people;
+                    $total += $people;
                 }
                 $text .= "- ". $question->firstName ." _(".$people." people)_ \n";
                 //print_r("-". $question->firstName ." (".$people." people) <br />");
@@ -2612,7 +2614,7 @@ class BookingHelper {
             //print_r("<br />");
         }
 
-        if($text=="")
+        if($total==0)
         {
         	$text = "There is no participant for today";
         }
