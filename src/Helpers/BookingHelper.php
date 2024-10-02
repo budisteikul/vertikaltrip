@@ -2579,7 +2579,7 @@ class BookingHelper {
 
 	public static function schedule_bydate($date)
 	{
-		$text = "Who is participating in today's tour? \n\n";
+		$text = "Schedule for Today \n\n";
 
 		$products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
                     return $query->where('booking_status','CONFIRMED');
