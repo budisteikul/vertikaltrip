@@ -139,7 +139,7 @@ class WebhookController extends Controller
                         $message = BookingHelper::schedule_bydate(date('Y-m-d'));
                         $whatsapp->sendText($from,$message);
                     break;
-                    case "who is participating in today's tour?":
+                    case "who are the tour participants today?":
                         $message = BookingHelper::schedule_bydate(date('Y-m-d'));
                         $whatsapp->sendText($from,$message);
                     break;
