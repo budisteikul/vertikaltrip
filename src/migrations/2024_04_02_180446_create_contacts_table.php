@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('wa_id')->nullable();
             $table->string('name')->nullable();
+            $table->integer('shoppingcart_id')->nullable();
             $table->tinyInteger('is_blocked')->default(0);
             $table->timestamps(6);
         });
