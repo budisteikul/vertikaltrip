@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 use budisteikul\vertikaltrip\Models\Contact;
 use budisteikul\vertikaltrip\Models\Message;
+use budisteikul\vertikaltrip\Helpers\GeneralHelper;
 use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
 
 class WhatsappHelper {
 
     public function contact($wa_id,$name=null)
     {
+        $wa_id = GeneralHelper::phoneNumber($wa_id);
         $contact = Contact::where('wa_id',$wa_id)->first();
         if($contact)
         {

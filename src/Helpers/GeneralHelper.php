@@ -222,6 +222,7 @@ class GeneralHelper {
 
     public static function phoneNumber($phoneNumber,$pre="")
     {
+        
         $number = $phoneNumber;
         $number_array = explode(" ",$number);
         if(isset($number_array[1]))

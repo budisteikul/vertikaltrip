@@ -44,7 +44,7 @@ class APIController extends Controller
 
     public function test(Request $request)
     {
-        $aaa = BookingHelper::schedule_bydate(date('Y-m-d'));
+        $aaa = GeneralHelper::phoneNumber("US+62 6285743112112","+");
         print_r($aaa);
         /*
         $schedule = ShoppingcartProduct::with(['shoppingcart' => function ($query) {
