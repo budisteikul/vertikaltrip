@@ -71,41 +71,56 @@ class BookingHelper {
 			$shoppingcart->save();
 			
 			// main contact questions
-			$shoppingcart_question = new ShoppingcartQuestion();
-			$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
-			$shoppingcart_question->type = 'mainContactDetails';
-			$shoppingcart_question->question_id = 'firstName';
-			$shoppingcart_question->label = 'First name';
-			$shoppingcart_question->order = 1;
-			$shoppingcart_question->answer = $data['customer']['firstName'];
-			$shoppingcart_question->save();
+			if(isset($data['customer']['firstName']))
+			{
+				$shoppingcart_question = new ShoppingcartQuestion();
+				$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+				$shoppingcart_question->type = 'mainContactDetails';
+				$shoppingcart_question->question_id = 'firstName';
+				$shoppingcart_question->label = 'First name';
+				$shoppingcart_question->order = 1;
+				$shoppingcart_question->answer = $data['customer']['firstName'];
+				$shoppingcart_question->save();
+			}
 			
-			$shoppingcart_question = new ShoppingcartQuestion();
-			$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
-			$shoppingcart_question->type = 'mainContactDetails';
-			$shoppingcart_question->question_id = 'lastName';
-			$shoppingcart_question->label = 'Last name';
-			$shoppingcart_question->order = 2;
-			$shoppingcart_question->answer = $data['customer']['lastName'];
-			$shoppingcart_question->save();
 			
-			$shoppingcart_question = new ShoppingcartQuestion();
-			$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
-			$shoppingcart_question->type = 'mainContactDetails';
-			$shoppingcart_question->question_id = 'email';
-			$shoppingcart_question->label = 'Your email address';
-			$shoppingcart_question->order = 3;
-			$shoppingcart_question->answer = $data['customer']['email'];
-			$shoppingcart_question->save();
+			if(isset($data['customer']['lastName']))
+			{
+				$shoppingcart_question = new ShoppingcartQuestion();
+				$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+				$shoppingcart_question->type = 'mainContactDetails';
+				$shoppingcart_question->question_id = 'lastName';
+				$shoppingcart_question->label = 'Last name';
+				$shoppingcart_question->order = 2;
+				$shoppingcart_question->answer = $data['customer']['lastName'];
+				$shoppingcart_question->save();
+			}
 			
-			$shoppingcart_question = new ShoppingcartQuestion();
-			$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
-			$shoppingcart_question->type = 'mainContactDetails';
-			$shoppingcart_question->question_id = 'phoneNumber';
-			$shoppingcart_question->label = 'Phone number';
-			$shoppingcart_question->order = 4;
-			$shoppingcart_question->answer = $data['customer']['phoneNumber'];
-			$shoppingcart_question->save();
+			
+			if(isset($data['customer']['email']))
+			{
+				$shoppingcart_question = new ShoppingcartQuestion();
+				$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+				$shoppingcart_question->type = 'mainContactDetails';
+				$shoppingcart_question->question_id = 'email';
+				$shoppingcart_question->label = 'Your email address';
+				$shoppingcart_question->order = 3;
+				$shoppingcart_question->answer = $data['customer']['email'];
+				$shoppingcart_question->save();
+			}
+
+			if(isset($data['customer']['phoneNumber']))
+			{
+				$shoppingcart_question = new ShoppingcartQuestion();
+				$shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+				$shoppingcart_question->type = 'mainContactDetails';
+				$shoppingcart_question->question_id = 'phoneNumber';
+				$shoppingcart_question->label = 'Phone number';
+				$shoppingcart_question->order = 4;
+				$shoppingcart_question->answer = GeneralHelper::phoneNumber($data['customer']['phoneNumber'],"+");
+				$shoppingcart_question->save();
+			}
+			
 			
 			// product
 			$grand_total = 0;
