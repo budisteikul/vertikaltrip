@@ -93,13 +93,13 @@ class WhatsappHelper {
         $message = Message::where('message_id',$wa_id)->first();
         if($message)
         {
-            if($message->status=="sent" && $status=="delivered")
+            if($message->status!="read" && $status=="delivered")
             {
                 $message->status = $status;
                 $message->save();
             }
             
-            if($message->status=="delivered" && $status=="read")
+            if($status=="read")
             {
                 $message->status = $status;
                 $message->save();
