@@ -120,7 +120,20 @@ class WebhookController extends Controller
                     curl_exec($ch);
                     curl_close($ch);
                     
-
+                    //==================================================
+                    switch(strtolower($message))
+                    {
+                        case "/participant":
+                            $message = BookingHelper::schedule_bydate(date('Y-m-d'));
+                            $whatsapp->sendText($from,$message);
+                        break;
+                        case "who are the participants today?":
+                            $message = BookingHelper::schedule_bydate(date('Y-m-d'));
+                            $whatsapp->sendText($from,$message);
+                        break;
+                        default:
+                    }
+                    //==================================================
                 }
 
                     
@@ -132,20 +145,7 @@ class WebhookController extends Controller
                 }
                     
                 
-                //==================================================
-                switch(strtolower($message))
-                {
-                    case "/participant":
-                        $message = BookingHelper::schedule_bydate(date('Y-m-d'));
-                        $whatsapp->sendText($from,$message);
-                    break;
-                    case "who are the participants today?":
-                        $message = BookingHelper::schedule_bydate(date('Y-m-d'));
-                        $whatsapp->sendText($from,$message);
-                    break;
-                    default:
-                }
-                //==================================================
+                
 
                 return response('OK', 200)->header('Content-Type', 'text/plain');
             }
