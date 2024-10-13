@@ -91,7 +91,7 @@ class APIController extends Controller
         
         $analytic = LogHelper::analytic();
 
-        if(str_contains(GeneralHelper::url(), 'jogjafoodtour') str_contains(GeneralHelper::url(), 'vertikaltrip'))
+        if(str_contains(GeneralHelper::url(), 'jogjafoodtour') || str_contains(GeneralHelper::url(), 'vertikaltrip'))
         {
 
             
