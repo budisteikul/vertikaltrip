@@ -411,7 +411,7 @@ class APIController extends Controller
     public function navbar($sessionId)
     {
         
-        if(str_contains(GeneralHelper::url(), 'jogjafoodtour'))
+        if(str_contains(GeneralHelper::url(), 'jogjafoodtour') || str_contains(GeneralHelper::url(), 'vertikaltrip'))
         {
             $slug = Slug::where('type','category')->where('slug','yogyakarta')->latest('id')->firstOrFail();
             $categories = Category::where('parent_id',0)->where('id',$slug->link_id)->get();
@@ -648,7 +648,7 @@ class APIController extends Controller
     public function categories()
     {
         
-        if(str_contains(GeneralHelper::url(), 'jogjafoodtour'))
+        if(str_contains(GeneralHelper::url(), 'jogjafoodtour') || str_contains(GeneralHelper::url(), 'vertikaltrip'))
         {
             $slug = Slug::where('type','category')->where('slug','yogyakarta')->latest('id')->firstOrFail();
             $category = Category::where('id',$slug->link_id)->firstOrFail();
