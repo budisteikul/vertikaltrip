@@ -777,6 +777,14 @@ class ContentHelper {
                 <li>Bookings are fully refundable up to the time of the event</li>
             </div>';
         }
+        else if($content->cancellationPolicy->simpleCutoffHours==0)
+        {
+            $cancellationPolicy = '
+            <div class="mb-4">
+                <h3 class="mb-3">Cancellation Policy</h3>
+                <li>Bookings are Non-refundable</li>
+            </div>';
+        }
         else
         {
             $cancellationPolicy = '
