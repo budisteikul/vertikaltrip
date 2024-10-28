@@ -135,9 +135,11 @@ class ProductHelper {
     }
     
     public static function datetotext($str){
-        if($str==null) return null;
+        if($str==null) return "";
         $date = date("Y-m-d H:i:s", strtotime(trim($str)));
         $date = Carbon::createFromFormat('Y-m-d H:i:s', $date);
+        
+
         if($date->format('H:i')=="00:00")
         {
             return $date->format('D d.M Y');
