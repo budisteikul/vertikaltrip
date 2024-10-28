@@ -290,7 +290,7 @@ footer {
           <tr>
             <th class="no">#</th>
             <th class="desc" width="50%"><strong>DESCRIPTION</strong></th>
-            <th class="unit"><strong>UNIT PRICE</strong></th>
+            <th class="unit"><strong>PRICE</strong></th>
             <th class="qty"><strong>QUANTITY</strong></th>
             <th class="total">TOTAL</th>
           </tr>
@@ -315,8 +315,9 @@ footer {
                         @if($shoppingcart_product_detail->type=="product")
                         <h3>{{ $ProductHelper->datetotext($shoppingcart_product->date) }}</h3>
                         @endif
+                        @if($shoppingcart_product_detail->type!="pickup")
                         {{ $shoppingcart_product_detail->unit_price }}
-
+                        @endif
                     </td>
                     <td class="unit">{{ $GeneralHelper->numberFormat($shoppingcart_product_detail->price) }}</td>
                     <td class="qty">{{ $shoppingcart_product_detail->qty }}</td>
