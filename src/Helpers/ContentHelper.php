@@ -81,7 +81,8 @@ class ContentHelper {
                     $dataPickup[] = array(
                         'title' => 'Pick-up and drop-off services',
                         'price' => $pickup_price_asText,
-                        'unit_price' => $product_detail->unit_price,
+                        //'unit_price' => $product_detail->unit_price,
+                        'unit_price' => "",
                     );
 
                 }
@@ -896,9 +897,10 @@ class ContentHelper {
 					}
                                 
 				}
-				elseif($shoppingcart_product_detail->type=="pickup")
+				else if($shoppingcart_product_detail->type=="pickup")
 				{
 					$product .= $shoppingcart_product_detail->title .'<br>';
+                    //$product .= $shoppingcart_product_detail->title .' aaa<br>';
 				}
 			}
 
