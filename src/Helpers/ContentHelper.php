@@ -553,7 +553,8 @@ class ContentHelper {
                     }
                     else
                     {
-                        $rating = '<div class="badge badge-info font-weight-bold mb-1" style="font-size:12px">New activity</div>';
+                        //$rating = '<div class="badge badge-info font-weight-bold mb-1" style="font-size:12px">New activity</div>';
+                        $rating = '';
                     }
                 }
                 
@@ -607,7 +608,8 @@ class ContentHelper {
                 }
                 else
                 {
-                    $rating = '<div class="badge badge-info font-weight-bold mb-1" style="font-size:12px">New activity</div>';
+                    //$rating = '<div class="badge badge-info font-weight-bold mb-1" style="font-size:12px">New activity</div>';
+                    $rating = '';
                 }
             }
 
