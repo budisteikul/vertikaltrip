@@ -146,25 +146,25 @@ class APIController extends Controller
         
             
             $services[] = [
-                'icon' => '<i class="fa fa-4x fa-bolt text-theme mb-2"></i>',
+                'icon' => '<i class="fa fa-4x fa-bolt mb-2" style="color: #c53c46"></i>',
                 'name' => 'Instant Confirmation',
                 'description' => 'To secure your spot while keeping your plans flexible. Your booking are confirmed automatically!',
             ];
 
             $services[] = [
-                'icon' => '<i class="fas fa-4x fa-thumbs-up text-theme mb-2"></i>',
+                'icon' => '<i class="fas fa-4x fa-thumbs-up mb-2" style="color: #c53c46"></i>',
                 'name' => 'Great Local Food',
                 'description' => 'Too many options and afraid of tourist traps? We only take you to great places where locals go!',
             ];
 
             $services[] = [
-                'icon' => '<i class="fa fa-4x fa-utensils text-theme mb-2"></i>',
+                'icon' => '<i class="fa fa-4x fa-utensils mb-2" style="color: #c53c46"></i>',
                 'name' => 'Customizable',
                 'description' => 'We can accommodate many food restrictions — Just fill it on the booking form!',
             ];
 
             $services[] = [
-                'icon' => '<i class="fas fa-4x fa-history text-theme mb-2"></i>',
+                'icon' => '<i class="fas fa-4x fa-history mb-2" style="color: #c53c46"></i>',
                 'name' => 'Full Refund',
                 'description' => 'Have your plans changed? No worries! You can cancel the booking anytime!',
             ];
@@ -263,25 +263,25 @@ class APIController extends Controller
             ];
 
             $services[] = [
-                'icon' => '<i class="fa fa-4x fa-bolt text-theme mb-2"></i>',
+                'icon' => '<i class="fa fa-4x fa-bolt mb-2" style="color: #c53c46"></i>',
                 'name' => 'Instant Confirmation',
                 'description' => 'To secure your spot while keeping your plans flexible. Your booking are confirmed automatically!',
             ];
 
             $services[] = [
-                'icon' => '<i class="fas fa-4x fa-phone-alt text-theme mb-2"></i>',
+                'icon' => '<i class="fas fa-4x fa-phone-alt mb-2" style="color: #c53c46"></i>',
                 'name' => '24/7 Support',
                 'description' => 'Stay Connected with us! With 24/7 Support.',
             ];
 
             $services[] = [
-                'icon' => '<i class="fas fa-4x fa-history text-theme mb-2"></i>',
+                'icon' => '<i class="fas fa-4x fa-history mb-2" style="color: #c53c46"></i>',
                 'name' => 'Full Refund',
                 'description' => 'Have your plans changed? No worries! You can cancel the booking anytime!',
             ];
 
             $services[] = [
-                'icon' => '<i class="fas fa-4x fa-thumbs-up text-theme mb-2"></i>',
+                'icon' => '<i class="fas fa-4x fa-thumbs-up mb-2" style="color: #c53c46"></i>',
                 'name' => 'Great Local Food',
                 'description' => 'Too many options and afraid of tourist traps? We only take you to great places where locals go!',
             ];
