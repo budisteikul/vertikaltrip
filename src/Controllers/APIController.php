@@ -201,7 +201,7 @@ class APIController extends Controller
             
 
             $headerBox = '
-            <img src="'.config('site.assets').'/img/header/vertikaltrip.svg" alt="Vertikal Trip" width="250" />
+            <img src="'.config('site.assets').'/img/header/vertikaltrip.png" alt="Vertikal Trip" width="250" />
             <hr class="hr-theme" />
             
             <h3 class="text-white" style="line-height:1.5">MUST TRY THE COMBINATION CULTURE AND GASTRONOMY ACTIVIES IN INDONESIA</h3>
@@ -422,12 +422,12 @@ class APIController extends Controller
         {
             $slug = Slug::where('type','category')->where('slug','bali')->latest('id')->firstOrFail();
             $categories = Category::where('parent_id',0)->where('id',$slug->link_id)->get();
-            $logo = config('site.assets').'/img/header/vertikaltrip.svg';
+            $logo = config('site.assets').'/img/header/vertikaltrip.png';
         }
         else
         {
             $categories = Category::where('parent_id',0)->select(['name','slug'])->get();
-            $logo = config('site.assets').'/img/header/vertikaltrip.svg';
+            $logo = config('site.assets').'/img/header/vertikaltrip.png';
         }
 
 
