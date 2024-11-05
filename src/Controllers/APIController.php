@@ -1269,7 +1269,7 @@ class APIController extends Controller
         $jscript = '
         
         
-        $("head").append("<style>.fixed-bottom{visibility:hidden}@media (orientation:portrait) and (height:" + $(window).height() + "px){.fixed-bottom{visibility:visible}}@media (orientation:portrait) and (height:" + $(window).width() + "px){.fixed-bottom{visibility:visible}}@media (orientation:landscape) and (height:" + $(window).width() + "px){.fixed-bottom{visibility:visible}}@media (orientation:landscape) and (height:" + $(window).height() + "px){.fixed-bottom{visibility:visible}}</style>")
+   
 
         var submit_text;
 
