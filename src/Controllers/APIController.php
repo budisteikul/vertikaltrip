@@ -169,7 +169,7 @@ class APIController extends Controller
                 'description' => 'Have your plans changed? No worries! You can cancel the booking anytime!',
             ];
 
-            $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br />Email : guide@vertikaltrip.com<br />WhatsApp : +62 895 3000 0030';
+            $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br /><i class="fas fa-envelope"></i> Email : guide@vertikaltrip.com<br /><i class="fab fa-whatsapp-square"></i> WhatsApp : +62 895 3000 0030';
             $footerTitle = '<span style="font-size:12px;">© 2018 - 2024 Jogja Food Tour (Vertikal Trip). All Rights Reserved</span>';
 
             /*
@@ -286,7 +286,7 @@ class APIController extends Controller
                 'description' => 'Too many options and afraid of tourist traps? We only take you to great places where locals go!',
             ];
 
-            $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br />Email : guide@vertikaltrip.com<br />WhatsApp : +62 895 3000 0030';
+            $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br /><i class="fas fa-envelope"></i> Email : guide@vertikaltrip.com<br /><i class="fab fa-whatsapp-square"></i> WhatsApp : +62 895 3000 0030';
             $footerTitle = '<span style="font-size:12px;">© 2018 - 2024 VERTIKAL TRIP. All Rights Reserved</span>';
 
             $footerPaymentChannels = [
