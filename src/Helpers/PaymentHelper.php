@@ -225,7 +225,7 @@ class PaymentHelper {
                                              Click the button below and pay with correct amount
                                             <br />
                                             <br />
-                                            <a href="https://wise.com/pay/business/vertikaltripllc"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
+                                            <a target="_blank" href="https://wise.com/pay/business/vertikaltripllc?amount='. $shoppingcart->shoppingcart_payment->amount .'&currency='. $shoppingcart->shoppingcart_payment->currency .'"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
 
                                             <br /><br />
                                             <small><a href="'.  env('APP_API_URL') .'/payment/change/'.$shoppingcart->session_id.'/'.$shoppingcart->confirmation_code.'" class="text-theme">Click here</a> to change payment method</small>
