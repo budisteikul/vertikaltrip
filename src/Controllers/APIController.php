@@ -42,31 +42,7 @@ class APIController extends Controller
         
     }
 
-    public function test(Request $request)
-    {
-        $aaa = GeneralHelper::phoneNumber("US+62 6285743112112","+");
-        print_r($aaa);
-        /*
-        $schedule = ShoppingcartProduct::with(['shoppingcart' => function ($query) {
-                    return $query->with(['shoppingcart_questions' => function ($query) {
-                        return $query->where('question_id','firstName')->orWhere('question_id','lastName');
-                    }]);
-                }])
-                 ->whereHas('shoppingcart', function ($query) {
-                    return $query->where('booking_status','CONFIRMED');
-                 })->whereDate('date', '=', "2024-10-05")->whereNotNull('date')->get();
-        foreach($schedule as $id)
-        {
-            $question = BookingHelper::get_answer_contact($id->shoppingcart);
-            $people = 0;
-            foreach($id->shoppingcart_product_details as $shoppingcart_product_detail)
-            {
-                $people += $shoppingcart_product_detail->people;
-            }
-            print_r("-". $question->firstName ." (".$people." people) ". $id->product_id ."<br />");
-        }
-        */
-    }
+    
 
     public function cancellation($sessionId,$confirmationCode)
     {
