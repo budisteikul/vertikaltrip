@@ -339,20 +339,22 @@ footer {
           <tr>
             <td colspan="2"></td>
             <td colspan="2">DISCOUNT</td>
-            <td>{{ $GeneralHelper->numberFormat($discount) }}</td>
+            <td>({{ $GeneralHelper->numberFormat($discount) }})</td>
           </tr>
           @endif
-          @if($shoppingcart->fee != 0)
+
+          @if($shoppingcart->shoppingcart_payment->payment_provider=="wise")
           <tr>
             <td colspan="2"></td>
             <td colspan="2">FEE</td>
             @php
-              $fee = $shoppingcart->fee;
-              if($fee<0) $fee = $fee * -1;
+              $unique_fee = $shoppingcart->shoppingcart_payment->amount - $total;
+              $total = $total + $unique_fee;
             @endphp
-            <td>{{ $GeneralHelper->numberFormat($fee) }}</td>
+            <td>{{ $GeneralHelper->numberFormat($unique_fee) }}</td>
           </tr>
           @endif
+          
           <tr>
             <td colspan="2"></td>
             <td colspan="2">TOTAL</td>
@@ -368,7 +370,7 @@ footer {
           <tr>
             <td colspan="2"></td>
             <td colspan="2">DUE NOW ({{$shoppingcart->currency}})</td>
-            <td>{{ $GeneralHelper->numberFormat($shoppingcart->due_now) }}</td>
+            <td>{{ $GeneralHelper->numberFormat($total) }}</td>
           </tr>
           
           
