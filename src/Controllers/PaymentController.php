@@ -30,9 +30,17 @@ class PaymentController extends Controller
             if($shoppingcart)
             {
                 $url = $shoppingcart->url;
+                
                 $shoppingcart_json = BookingHelper::shoppingcart_dbtojson($shoppingcart->id);
                 $shoppingcart_json = BookingHelper::save_shoppingcart($shoppingcart->session_id,$shoppingcart_json);
-                $shoppingcart->delete();
+
+
+                $shoppingcart->booking_status = 'CANCELED';
+                $shoppingcart->save();
+                $shoppingcart->shoppingcart_payment->payment_status = 3;
+                $shoppingcart->shoppingcart_payment->save();
+
+                //$shoppingcart->delete();
                 return redirect()->away($url.'/booking/checkout');
             }
 
