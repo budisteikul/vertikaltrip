@@ -209,33 +209,33 @@ class PaymentHelper {
                                 <span class="badge badge-info invoice-color-info" style="font-size:18px; ">
                                 Waiting for payment <br /><b id="payment_timer" class="text-white"  style="font-size:12px; font-weight: lighter;"><i class="fa fa-spinner fa-spin fa-fw"></i></b></span>
                                 </div>
-                                <div class="card mb-2 pb-2 invoice-hilang"  style="min-height:290px; ">
+                                <div class="card mb-2 pb-2 invoice-hilang" >
                                 
-                                <div class="card-img-overlay">
-                                    <div class="row h-100">
-                                        <div class="col-12 text-center">
+                                
+                                    <div class="row mt-4 ml-2 mb-4 mr-2">
+                                        <div class="col-12 text-left">
                                             
                                             <div>
 
-                                            <br />
-                                            <i>We add a small amount to identify transaction</i>
+                                            
+                                            <i class="text-info">We add a small amount (IDR '.$shoppingcart->shoppingcart_payment->amount - $shoppingcart->due_now.') to identify transaction</i>
                                             <br />
                                             Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'IDR') .'</b>
                                             <br />
                                              Click the button below and pay with correct amount
                                             <br />
                                             <br />
+                                            <div class="col-12 text-center">
                                             <a href="https://wise.com/pay/business/vertikaltripllc?amount='. $shoppingcart->shoppingcart_payment->amount .'&currency='. $shoppingcart->shoppingcart_payment->currency .'"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
-
-                                            <!-- br /><br />
-                                            <small><a href="'.  env('APP_API_URL') .'/payment/change/'.$shoppingcart->session_id.'/'.$shoppingcart->confirmation_code.'" class="text-theme">Click here</a> to change payment method</small -->
+                                            </div>
                                             
-                                            <br />
+                                            
+                                           
                                             </div>
                                             
                                         </div>
                                     </div>
-                                </div>
+                                
                                 </div>
                         ';
                     }
