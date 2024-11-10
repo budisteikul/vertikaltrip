@@ -24,7 +24,7 @@ class SettingMiddleware
             config(['site.'.$setting->name => $setting->value]);
         }
         
-        
+        /*
         if(str_contains(GeneralHelper::url(), 'jogjafoodtour'))
         {
             config(['site.currency'=>'IDR']);
@@ -43,6 +43,7 @@ class SettingMiddleware
             config(['site.payment_enable'=>'wise,stripe,paypal']);
             config(['site.payment_default'=>'wise']);
         }
+        */
         
         return $next($request);
     }
