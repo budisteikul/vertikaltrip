@@ -732,58 +732,6 @@ class APIController extends Controller
     {
         $jscript = '
         jQuery(document).ready(function($) {
-            $.fn.dataTable.ext.errMode = \'none\';
-            var table = $("#dataTables-example").DataTable(
-            {
-                "processing": true,
-                "serverSide": true,
-                "ajax": 
-                {
-                    "url": "'.url('/api').'/review",
-                    "type": "POST",
-                },
-                "scrollX": true,
-                "language": 
-                {
-                    "paginate": 
-                    {
-                        "previous": "<i class=\"fa fa-step-backward\"></i>",
-                        "next": "<i class=\"fa fa-step-forward\"></i>",
-                        "first": "<i class=\"fa fa-fast-backward\"></i>",
-                        "last": "<i class=\"fa fa-fast-forward\"></i>"
-                    },
-                    "aria": 
-                    {
-                        "paginate": 
-                        {
-                            "first":    "First",
-                            "previous": "Previous",
-                            "next":     "Next",
-                            "last":     "Last"
-                        }
-                    }
-                },
-                "pageLength": 5,
-                "order": [[ 0, "desc" ]],
-                "columns": [
-                    {data: "date", name: "date", orderable: true, searchable: false, visible: false},
-                    {data: "style", name: "style", className: "auto", orderable: false},
-                ],
-                "dom": "tp",
-                "pagingType": "full_numbers",
-                "fnDrawCallback": function () {
-                    
-                    try {
-                        document.getElementById("loadingReviews").style.display = "none";
-                        document.getElementById("dataTables-example").style.display = "block";
-                    }
-                    catch(err) {
-  
-                    }
-                    
-                }
-            });
-            
             
             
       
