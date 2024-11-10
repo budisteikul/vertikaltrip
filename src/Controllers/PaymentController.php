@@ -566,7 +566,7 @@ class PaymentController extends Controller
         
 
         $jscript = '
-        jQuery(document).ready(function($) {
+        $(document).ready(function() {
 
             $("#submitCheckout").slideUp("slow");  
             $("#paymentContainer").html(\''. str_replace(array("\r", "\n"), '', $payment_container) .'\');

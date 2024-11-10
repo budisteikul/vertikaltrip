@@ -504,7 +504,7 @@ class APIController extends Controller
     public function schedule_jscript()
     {
         $jscript = '
-        jQuery(document).ready(function($) {
+        $(document).ready(function() {
             $.fn.dataTableExt.sErrMode = \'throw\';
             var table = $("#dataTables-example").DataTable(
             {
@@ -731,7 +731,7 @@ class APIController extends Controller
     public function review_jscript()
     {
         $jscript = '
-        jQuery(document).ready(function($) {
+        $(document).ready(function() {
             $.fn.dataTable.ext.errMode = \'none\';
             var table = $("#dataTables-example").DataTable(
             {
