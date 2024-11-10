@@ -360,7 +360,7 @@ class APIController extends Controller
             'tourGuide_description' => $tourGuide_description,
 
             'footerPartnersTitle' => '<b style="font-size:16px">Also available on</b>',
-            'footerPaymentChannelsTitle' => '<b style="font-size:16px">Ways you can pay</b>',
+            'footerPaymentChannelsTitle' => '<b style="font-size:16px">Online payments</b>',
             'footerUsefullLinksTitle' => '<b style="font-size:16px">Useful Links</b>',
             'footerPrivacytermsTitle' => '<b style="font-size:16px">Privacy & Terms</b>',
             'footerWhatsappTitle' => '<b style="font-size:16px">Looking for the info?</b>',
