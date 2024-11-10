@@ -428,6 +428,7 @@ class PaymentHelper {
                 $smallamount = substr($shoppingcart->confirmation_code,9,3);
 
                 $amount = BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,$currency)+(float)$smallamount;
+                
                 $rate = number_format((float)$shoppingcart->due_now / $amount, 2, '.', '');
                 $rate_from = $shoppingcart->currency;
                 $rate_to = $currency;
