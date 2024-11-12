@@ -4,6 +4,7 @@ use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\Exception\UnsatisfiedDependencyException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Cache;
+use budisteikul\vertikaltrip\Models\ShoppingcartPayment;
 
 class WiseHelper {
 
@@ -43,6 +44,22 @@ class WiseHelper {
         $response_json->status = $status_json;
         $response_json->data = $data_json;
         return $response_json;
+    }
+
+    public static function createUniqueID($amount,$currency)
+    {
+        $i = 1;
+        $uniqueID = $amount + $i;
+        $check = ShoppingcartPayment::where('currency',$currency)->where('amount',$uniqueID)->where('payment_status',4)->first();
+        
+        while($check)
+        {
+            $i += 1;
+            $uniqueID = $amount + $i;
+            $check = ShoppingcartPayment::where('currency',$currency)->where('amount',$uniqueID)->where('payment_status',4)->first();
+        }
+
+        return $uniqueID;
     }
 
     public function getBank()
