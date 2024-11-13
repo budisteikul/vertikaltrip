@@ -10,6 +10,7 @@ use Ramsey\Uuid\Uuid;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Cache;
+use budisteikul\vertikaltrip\Models\ShoppingcartPayment;
 
 class PaymentHelper {
     
@@ -55,6 +56,22 @@ class PaymentHelper {
             $status = true;
         }
         return $status;
+    }
+
+    public static function createUniqueID($amount,$currency)
+    {
+        $i = 1;
+        $uniqueID = $amount + $i;
+        $check = ShoppingcartPayment::where('currency',$currency)->where('amount',$uniqueID)->where('payment_status',4)->first();
+        
+        while($check)
+        {
+            $i += 1;
+            $uniqueID = $amount + $i;
+            $check = ShoppingcartPayment::where('currency',$currency)->where('amount',$uniqueID)->where('payment_status',4)->first();
+        }
+
+        return $uniqueID;
     }
 
     public static function get_paymentStatus($shoppingcart)
@@ -429,7 +446,7 @@ class PaymentHelper {
 
                 //$amount = BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,$currency)+(float)$smallamount;
                 
-                $amount = WiseHelper::createUniqueID($shoppingcart->due_now,$currency);
+                $amount = self::createUniqueID($shoppingcart->due_now,$currency);
 
                 $rate = number_format((float)$shoppingcart->due_now / $amount, 2, '.', '');
                 $rate_from = $shoppingcart->currency;
