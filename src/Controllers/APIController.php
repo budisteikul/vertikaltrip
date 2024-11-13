@@ -39,11 +39,9 @@ class APIController extends Controller
     
     public function __construct(Request $request)
     {
-        
+        BookingHelper::get_booking_expired();
     }
-
     
-
     public function cancellation($sessionId,$confirmationCode)
     {
         $shoppingcart = Shoppingcart::where('session_id',$sessionId)->where('confirmation_code',$confirmationCode)->first();
@@ -1223,6 +1221,7 @@ class APIController extends Controller
         }
         
         BookingHelper::booking_expired($shoppingcart);
+        
 
         $dataObj = ContentHelper::view_receipt($shoppingcart);
 

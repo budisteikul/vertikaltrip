@@ -2205,20 +2205,7 @@ class BookingHelper {
 
 	
 
-	public static function booking_expired($shoppingcart)
-	{
-		if($shoppingcart->booking_status=="PENDING")
-        {
-            $due_date = self::due_date($shoppingcart,"database");
-            if(Carbon::parse($due_date)->isPast())
-            {
-                $shoppingcart->booking_status = "CANCELED";
-                $shoppingcart->save();
-                $shoppingcart->shoppingcart_payment->payment_status = 3;
-                $shoppingcart->shoppingcart_payment->save();
-            }
-        }
-	}
+	
 
 	public static function due_date($shoppingcart, $data_type = "json")
 	{
@@ -2594,6 +2581,30 @@ class BookingHelper {
 		$shoppingcart = BookingHelper::read_shoppingcart($sessionId);
 		$shoppingcart->referer = $trackingCode;
 		BookingHelper::save_shoppingcart($sessionId, $shoppingcart);
+	}
+
+	public static function get_booking_expired()
+	{
+		$shoppingcarts = Shoppingcart::where('booking_status','PENDING')->get();
+        foreach($shoppingcarts as $shoppingcart)
+        {
+        	BookingHelper::booking_expired($shoppingcart);
+        }
+	}
+
+	public static function booking_expired($shoppingcart)
+	{
+		if($shoppingcart->booking_status=="PENDING")
+        {
+            $due_date = self::due_date($shoppingcart,"database");
+            if(Carbon::parse($due_date)->isPast())
+            {
+                $shoppingcart->booking_status = "CANCELED";
+                $shoppingcart->save();
+                $shoppingcart->shoppingcart_payment->payment_status = 3;
+                $shoppingcart->shoppingcart_payment->save();
+            }
+        }
 	}
 
 	public static function schedule_bydate($date)

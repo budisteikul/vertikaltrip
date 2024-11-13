@@ -437,7 +437,7 @@ class PaymentHelper {
                 $payment_type = 'link';
                 $bank_name = 'wise';
                 $payment_status = 4;
-                $expiration_date = Carbon::parse($date_now)->addMinutes(30);
+                $expiration_date = Carbon::parse($date_now)->addMinutes(1);
 
                 $response = new \stdClass();
                 $status_json = new \stdClass();
