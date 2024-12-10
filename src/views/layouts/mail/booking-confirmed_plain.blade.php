@@ -28,7 +28,5 @@ The {{env('APP_NAME')}} team
 Whatsapp : +62 895 3000 0030
 Email : guide@vertikaltrip.com
 
-VERTIKAL TRIP YOGYAKARTA
+VERTIKAL TRIP INDONESIA
 www.jogjafoodtour.com
-VERTIKALTRIP BALI
-www.ubudfoodtour.com
