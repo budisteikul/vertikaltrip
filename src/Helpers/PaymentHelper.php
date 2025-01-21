@@ -60,7 +60,7 @@ class PaymentHelper {
 
     public static function createUniqueID($amount,$currency)
     {
-        $i = 1;
+        $i = 0;
         $uniqueID = $amount + $i;
         $check = ShoppingcartPayment::where('currency',$currency)->where('amount',$uniqueID)->where('payment_status',4)->first();
         
@@ -221,6 +221,10 @@ class PaymentHelper {
 
                     if($shoppingcart->shoppingcart_payment->payment_type=="link")
                     {
+                        $total = $shoppingcart->due_now;
+                        $booking_fee = $shoppingcart->shoppingcart_payment->amount - $shoppingcart->due_now;
+                        $amount = $shoppingcart->shoppingcart_payment->amount;
+                        $currency = $shoppingcart->shoppingcart_payment->currency;
                         return '
                             <div class="card mb-1">
                                 <span class="badge badge-info invoice-color-info" style="font-size:18px; ">
@@ -235,9 +239,13 @@ class PaymentHelper {
                                             <div>
 
                                             
-                                            <i class="text-info">We add a small amount (IDR '.$shoppingcart->shoppingcart_payment->amount - $shoppingcart->due_now.') to identify transaction</i>
+                                            <!-- 
+                                            Total : <b>'. $currency .' '. GeneralHelper::numberFormat($total,$currency) .'</b>
                                             <br />
-                                            Amount to pay : <b>'. $shoppingcart->shoppingcart_payment->currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,'IDR') .'</b>
+                                            Booking fee : <b>'. $currency .' '. GeneralHelper::numberFormat($booking_fee,$currency) .'</b>
+                                            <br />
+                                            -->
+                                            Amount to pay : <b>'. $currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,$currency) .'</b>
                                             <br />
                                              Click the button below and pay with correct amount
                                             <br />
