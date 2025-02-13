@@ -7,8 +7,10 @@
 	Route::get('/api/tawkto/{id}', 'budisteikul\vertikaltrip\Controllers\APIController@tawkto')->middleware(['SettingMiddleware']);
 
 	//Review
+	Route::post('/api/review/{slug}', 'budisteikul\vertikaltrip\Controllers\APIController@review')->middleware(['SettingMiddleware']);
 	Route::post('/api/review', 'budisteikul\vertikaltrip\Controllers\APIController@review')->middleware(['SettingMiddleware']);
 	Route::get('/api/review/count', 'budisteikul\vertikaltrip\Controllers\APIController@review_count')->middleware(['SettingMiddleware']);
+	Route::get('/api/review/jscript/{slug}', 'budisteikul\vertikaltrip\Controllers\APIController@review_jscript')->middleware(['SettingMiddleware']);
 	Route::get('/api/review/jscript', 'budisteikul\vertikaltrip\Controllers\APIController@review_jscript')->middleware(['SettingMiddleware']);
 
 	//Schedule

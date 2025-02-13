@@ -726,12 +726,12 @@ class APIController extends Controller
 
     }
 
-    public function review_jscript(Request $request)
+    public function review_jscript($slug=null)
     {
-        $slug = $request->input('slug');
+        //$slug = $request->input('slug');
         $product = Slug::where('type','product')->where('slug',$slug)->latest('id')->first();
         $parameter = "";
-        if($product) $parameter = "?product_id=". $product->link_id; 
+        if($product) $parameter = "/". $product->slug; 
         $jscript = '
         $(document).ready(function() {
             $.fn.dataTable.ext.errMode = \'none\';
@@ -807,9 +807,9 @@ class APIController extends Controller
 
     
 
-    public function review(Request $request)
+    public function review(Request $request,$slug=null)
     {
-            $slug = $request->input('slug');
+            
             $product = Slug::where('type','product')->where('slug',$slug)->latest('id')->first();
             
             if($product)
