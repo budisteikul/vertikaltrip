@@ -726,8 +726,11 @@ class APIController extends Controller
 
     }
 
-    public function review_jscript()
+    public function review_jscript(Request $request)
     {
+        $product_id = $request->input('product_id');
+        $parameter = "";
+        if($product_id!="") $parameter = "?product_id=". $product_id; 
         $jscript = '
         $(document).ready(function() {
             $.fn.dataTable.ext.errMode = \'none\';
@@ -737,7 +740,7 @@ class APIController extends Controller
                 "serverSide": true,
                 "ajax": 
                 {
-                    "url": "'.url('/api').'/review",
+                    "url": "'.url('/api').'/review'.$parameter.'",
                     "type": "POST",
                 },
                 "scrollX": true,
@@ -805,7 +808,16 @@ class APIController extends Controller
 
     public function review(Request $request)
     {
-            $resources = Review::query();
+            $product_id = $request->input('product_id');
+            if($product_id!="")
+            {
+                $resources = Review::where('product_id',$product_id)->newQuery();
+            }
+            else
+            {
+                $resources = Review::query();
+            }
+            
             return Datatables::eloquent($resources)
                 ->addColumn('style', function ($resource) {
                     $rating = $resource->rating;
