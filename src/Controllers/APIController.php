@@ -747,6 +747,7 @@ class APIController extends Controller
                 "scrollX": true,
                 "language": 
                 {
+                    "zeroRecords": " ",
                     "paginate": 
                     {
                         "previous": "<i class=\"fa fa-step-backward\"></i>",
