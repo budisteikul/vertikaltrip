@@ -794,9 +794,9 @@ class BookingHelper {
 
 		$shoppingcart->session_id = $id;
 
+		
 		$shoppingcart->currency = $contents->customerInvoice->currency;
-
-
+		
 		unset($shoppingcart->products);
 		
 		$grand_total = 0;
@@ -2266,9 +2266,9 @@ class BookingHelper {
 
 	public static function remove_activity($sessionId,$bookingId)
 	{
-
-		$contents = BokunHelper::get_removeactivity($sessionId,$bookingId);
-		self::get_shoppingcart($sessionId,"update",$contents);
+		BokunHelper::get_removeactivity($sessionId,$bookingId);
+		$contents = BokunHelper::get_shoppingcart($sessionId);
+		BookingHelper::get_shoppingcart($sessionId,"update",$contents);
 		return $sessionId;
 	}
 
