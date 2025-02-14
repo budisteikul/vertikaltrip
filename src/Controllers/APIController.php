@@ -823,7 +823,7 @@ class APIController extends Controller
             }
             
             return Datatables::eloquent($resources)
-                ->addColumn('style', function ($resource) {
+                ->addColumn('style', function ($resource) use ($product) {
                     $rating = $resource->rating;
                     switch($rating)
                     {
@@ -876,16 +876,30 @@ class APIController extends Controller
                     $date = Carbon::parse($resource->date)->format('M, Y');
                     $user = '<b>'. $resource->user .'</b> <small><span class="text-muted">Reviewed on '.$date.'</span></small><br />';
                     $rating = '<span class="text-warning">'. $star .'</span>';
-                    $text =  nl2br($resource->text) .'<br />';
-                    $product = Product::findOrFail($resource->product_id);
-                    $post_title = 'Review of '. $product->name.'<br />';
+                    $text =  $resource->text .'<br />';
+                    
+                    //$post_title = "";
+                    //if(!$product)
+                    //{
+                        $product_name = Product::findOrFail($resource->product_id);
+                        $post_title = 'Review of '. $product_name->name.' <br />';
+                    //}
+                    
+                    
+                    if($product)
+                    {
+                        $output = $user.$rating.' '.$star_text.'<br />'.$title.$text.$from_text;
+                    }
+                    else
+                    {
+                        $output = $user.$rating.' '.$star_text.'<br /><small>'.$post_title.'</small><br />'.$title.$text.$from_text;
+                    }
                     
 
-                    $output = $user.$rating.' '.$star_text.'<br /><small>'.$post_title.'</small><br />'.$title.$text.$from_text;
                     //$output = $user.$post_title.$rating.$title.$text;
                     //$output = $user.$post_title.$title.$text;
                     
-                    return '<div class="bd-callout bd-callout-theme shadow-sm rounded" style="margin-top:5px;margin-bottom:5px;" >'. $output .'</div>';
+                    return '<div class="bd-callout bd-callout-theme shadow-sm rounded ml-0 mr-0" style="margin-top:5px;margin-bottom:5px;" >'. $output .'</div>';
                 })
                 ->only(['style'])
                 ->rawColumns(['style'])
