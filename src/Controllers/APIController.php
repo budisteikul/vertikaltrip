@@ -144,7 +144,7 @@ class APIController extends Controller
             ];
 
             $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br /><i class="fas fa-envelope"></i> Email : guide@vertikaltrip.com<br /><i class="fab fa-whatsapp-square"></i> WhatsApp : +62 895 3000 0030';
-            $footerTitle = '<span style="font-size:12px;">© 2018 - 2024 Jogja Food Tour (Vertikal Trip). All Rights Reserved</span>';
+            $footerTitle = '<span style="font-size:12px;">© 2018 - 2025 Jogja Food Tour (Vertikal Trip). All Rights Reserved</span>';
 
             /*
             $footerPaymentChannels = [
@@ -261,7 +261,7 @@ class APIController extends Controller
             ];
 
             $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br /><i class="fas fa-envelope"></i> Email : guide@vertikaltrip.com<br /><i class="fab fa-whatsapp-square"></i> WhatsApp : +62 895 3000 0030';
-            $footerTitle = '<span style="font-size:12px;">© 2018 - 2024 VERTIKAL TRIP. All Rights Reserved</span>';
+            $footerTitle = '<span style="font-size:12px;">© 2018 - 2025 VERTIKAL TRIP. All Rights Reserved</span>';
 
             $footerPaymentChannels = [
                 '<img height="30" class="mt-2" src="'.config('site.assets').'/img/footer/line-1.png" alt="Payment Channels" /><br />',
