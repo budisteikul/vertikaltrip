@@ -238,7 +238,7 @@ class WebhookController extends Controller
             }
 
             $confirmation_code = '';
-            if(isset($data['externalBookingReference']))
+            if(isset($data['externalBookingReference']) && $data['externalBookingReference']!="")
             {
                 $confirmation_code = $data['externalBookingReference'];
             }
