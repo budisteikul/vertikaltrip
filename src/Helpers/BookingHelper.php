@@ -180,7 +180,7 @@ class BookingHelper {
 						$shoppingcart_product_detail = new ShoppingcartProductDetail();
 						$shoppingcart_product_detail->shoppingcart_product_id = $shoppingcart_product->id;
 						$shoppingcart_product_detail->type = 'product';
-						$shoppingcart_product_detail->title = $lineitems[$j]['title'];
+						$shoppingcart_product_detail->title = $shoppingcart_product->title;
 						$shoppingcart_product_detail->people = $data['activityBookings'][$i]['totalParticipants'];
 						$shoppingcart_product_detail->qty = $s_quantity;
 						$shoppingcart_product_detail->price = $s_price;
@@ -224,7 +224,7 @@ class BookingHelper {
 						$shoppingcart_product_detail = new ShoppingcartProductDetail();
 						$shoppingcart_product_detail->shoppingcart_product_id = $shoppingcart_product->id;
 						$shoppingcart_product_detail->type = 'product';
-						$shoppingcart_product_detail->title = $customlineitems[$j]['title'];
+						$shoppingcart_product_detail->title = $shoppingcart_product->title;
 						$shoppingcart_product_detail->people = $data['activityBookings'][$i]['totalParticipants'];
 						$shoppingcart_product_detail->qty = $s_quantity;
 						$shoppingcart_product_detail->price = $s_price;
