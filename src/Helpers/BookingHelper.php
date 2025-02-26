@@ -51,15 +51,8 @@ class BookingHelper {
 			$bookingChannel = str_replace(".com", "", $bookingChannel);
 			$shoppingcart->booking_channel = $bookingChannel;
 
-			$confirmation_code = '';
-            if(isset($data['externalBookingReference']))
-            {
-                $confirmation_code = $data['externalBookingReference'];
-            }
-            else
-            {
-                $confirmation_code = $data['confirmationCode'];
-            }
+			$confirmation_code = $data['confirmationCode'];
+            
 			if($bookingChannel=="Viator") $confirmation_code = 'BR-'. $data['externalBookingReference'];
 			if($confirmation_code=="")
 			{
