@@ -163,9 +163,10 @@ class BookingHelper {
 				}
 				
 				
-
-				for($j=0;$j<count($lineitems);$j++)
+				if(isset($lineitems))
 				{
+					for($j=0;$j<count($lineitems);$j++)
+					{
 
 						$s_quantity = $lineitems[$j]['quantity'];
 						$s_price = $lineitems[$j]['unitPrice'];
@@ -203,10 +204,13 @@ class BookingHelper {
 						$subtotal_product += $subtotal;
 						$total_discount += $discount;
 						$total_product += $total;
+					}
 				}
 
-				for($j=0;$j<count($customlineitems);$j++)
+				if(isset($customlineitems))
 				{
+					for($j=0;$j<count($customlineitems);$j++)
+					{
 
 						$s_quantity = $customlineitems[$j]['quantity'];
 						$s_price = $customlineitems[$j]['unitPrice'];
@@ -244,6 +248,7 @@ class BookingHelper {
 						$subtotal_product += $subtotal;
 						$total_discount += $discount;
 						$total_product += $total;
+					}
 				}
 				//==============================================================================
 
