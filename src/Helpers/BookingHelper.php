@@ -43,6 +43,10 @@ class BookingHelper {
 			{
 				$bookingChannel = $data['affiliate']['title'];
 			}
+			else if(isset($data['activityBookings'][0]['activity']['bookingLabels'][0]['title']))
+			{
+				$bookingChannel = $data['activityBookings'][0]['activity']['bookingLabels'][0]['title'];
+			}
 			else
 			{
 				$bookingChannel = $data['seller']['title'];
