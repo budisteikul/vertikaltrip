@@ -158,14 +158,15 @@ class BookingHelper {
 				//==============================================================================
 				if($bookingChannel=="Viator")
 				{
-					$lineitems = $data['activityBookings'][$i]['sellerInvoice']['customLineItems'];
+					$lineitems = $data['activityBookings'][$i]['sellerInvoice']['lineItems'];
+					$customlineitems = $data['activityBookings'][$i]['sellerInvoice']['customLineItems'];
 					$currency = $data['activityBookings'][$i]['sellerInvoice']['currency'];
 				}
 				else
 				{
 					$lineitems = $data['activityBookings'][$i]['invoice']['lineItems'];
+					$customlineitems = $data['activityBookings'][$i]['invoice']['customLineItems'];
 					$currency = $data['activityBookings'][$i]['invoice']['currency'];
-					
 				}
 				
 				
@@ -193,6 +194,47 @@ class BookingHelper {
 						else
 						{
 							$shoppingcart_product_detail->unit_price = $lineitems[$j]['title'];
+						}
+						
+
+						$subtotal = $s_price * $s_quantity;
+						$discount = $s_discount * $s_quantity;
+						$total = $subtotal - $discount;
+
+						$shoppingcart_product_detail->currency = $currency;
+						$shoppingcart_product_detail->discount = $discount;
+						$shoppingcart_product_detail->subtotal = $subtotal;
+						$shoppingcart_product_detail->total = $total;
+						$shoppingcart_product_detail->save();
+						
+						$subtotal_product += $subtotal;
+						$total_discount += $discount;
+						$total_product += $total;
+				}
+
+				for($j=0;$j<count($customlineitems);$j++)
+				{
+
+						$s_quantity = $customlineitems[$j]['quantity'];
+						$s_price = $customlineitems[$j]['unitPrice'];
+						$s_discount = $customlineitems[$j]['discount'];
+
+
+						$shoppingcart_product_detail = new ShoppingcartProductDetail();
+						$shoppingcart_product_detail->shoppingcart_product_id = $shoppingcart_product->id;
+						$shoppingcart_product_detail->type = 'product';
+						$shoppingcart_product_detail->title = $customlineitems[$j]['title'];
+						$shoppingcart_product_detail->people = $data['activityBookings'][$i]['totalParticipants'];
+						$shoppingcart_product_detail->qty = $s_quantity;
+						$shoppingcart_product_detail->price = $s_price;
+
+						if($bookingChannel=="Viator")
+						{
+							$shoppingcart_product_detail->unit_price = 'Price per booking';
+						}
+						else
+						{
+							$shoppingcart_product_detail->unit_price = $customlineitems[$j]['title'];
 						}
 						
 
