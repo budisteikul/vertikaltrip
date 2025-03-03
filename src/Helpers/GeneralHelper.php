@@ -235,7 +235,15 @@ class GeneralHelper {
         {
             $nomor .= preg_replace("/[^0-9]/","",$no);
         }
-        return $pre.$nomor;
+
+        if($nomor=="") 
+        {
+            return "";
+        }
+        else
+        {
+            return $pre.$nomor;
+        }
     }
 }
 ?>
