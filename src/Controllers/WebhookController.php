@@ -251,8 +251,11 @@ class WebhookController extends Controller
                     $notification = false;
                     $shoppingcart = Shoppingcart::where('confirmation_code',$confirmation_code)->where('booking_status','CONFIRMED')->first();
 
+                    $created_at = date('Y-m-d H:i:s');
+
                     if($shoppingcart)
                     {
+                        $created_at = $shoppingcart->created_at;
                         $shoppingcart->delete();
                     }
                     else
@@ -262,6 +265,7 @@ class WebhookController extends Controller
                     
                     $shoppingcart = BookingHelper::webhook_bokun($data);
                     $shoppingcart->booking_status = "CONFIRMED";
+                    $shoppingcart->created_at = $created_at;
                     $shoppingcart->save();
 
                     if($notification)
