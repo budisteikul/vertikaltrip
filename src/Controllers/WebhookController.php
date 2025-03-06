@@ -33,7 +33,8 @@ class WebhookController extends Controller
                 $json = $request->getContent();
                 $data = json_decode($json);
                
-                
+                //$message = BookingHelper::schedule_bydate(date('Y-m-d'));
+
                 if(isset($data->entry[0]->changes[0]->value->messages[0]))
                 {
                     $type = $data->entry[0]->changes[0]->value->messages[0]->type;
