@@ -2678,15 +2678,15 @@ class BookingHelper {
                     $total += $people;
                 }
                 
-                $product_questions = "";
-                $questions = ShoppingcartQuestion::where('booking_id',$id->booking_id)->get();
-                foreach($questions as $question)
+                $product_questions2 = "";
+                $questions2 = ShoppingcartQuestion::where('booking_id',$id->booking_id)->get();
+                foreach($questions2 as $question2)
                 {
-                	$product_questions .= $question->answer;
+                	$product_questions2 .= $question2->answer;
                 }
                 
 				//$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n";
-				$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions ." \n";
+				$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions2 ." \n";
             }
 
             $text .= "\n";
