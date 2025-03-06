@@ -2677,7 +2677,8 @@ class BookingHelper {
                     $people += $shoppingcart_product_detail->people;
                     $total += $people;
                 }
-                $text .= "- ". GeneralHelper::mask_name($question->firstName) ." _(".$people." pax)_ \n";
+                //$text .= "- ". GeneralHelper::mask_name($question->firstName) ." _(".$people." pax)_ \n";
+		$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n";
                 //print_r("-". $question->firstName ." (".$people." people) <br />");
             }
             $text .= "\n";
