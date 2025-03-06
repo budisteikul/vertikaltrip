@@ -2649,7 +2649,7 @@ class BookingHelper {
 
 	public static function schedule_bydate($date)
 	{
-		$text = "Today's Participant \n\n";
+		$text = "";
 
 		$products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
                     return $query->where('booking_status','CONFIRMED');
@@ -2677,12 +2677,18 @@ class BookingHelper {
                     $people += $shoppingcart_product_detail->people;
                     $total += $people;
                 }
-                //$text .= "- ". GeneralHelper::mask_name($question->firstName) ." _(".$people." pax)_ \n";
-		$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n";
-                //print_r("-". $question->firstName ." (".$people." people) <br />");
+                
+                $product_questions = "";
+                $questions = ShoppingcartQuestions::where('booking_id',$product->booking_id)->get();
+                foreach($questions as $question)
+                {
+                	$product_questions .= $question->answer;
+                }
+                
+				$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions ." \n";
             }
+
             $text .= "\n";
-            //print_r("<br />");
         }
 
         if($total==0)
