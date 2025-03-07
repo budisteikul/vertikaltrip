@@ -128,22 +128,27 @@ class WebhookController extends Controller
                     switch(strtolower($varmessage[0]))
                     {
                         case "kontak":
+
                             if(isset($varmessage[1]))
                             {
                                 if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$varmessage[1])) {
                                     $date = $varmessage[1];
-                                } else {
+                                } 
+                                else 
+                                {
                                     $date = date('Y-m-d');
                                 }
-                                
                             }
                             else
                             {
                                 $date = date('Y-m-d');
                             }
+
                             $message = BookingHelper::schedule_bydate($date);
                             $whatsapp->sendText($from,$message);
+                            
                             BookingHelper::contact_bydate($from,$date);
+                        
                         break;
                         default:
                     }
@@ -194,7 +199,7 @@ class WebhookController extends Controller
         if($webhook_app=="wise")
         {
             
-            LogHelper::log(json_decode($request->getContent(), true),$webhook_app);
+            //LogHelper::log(json_decode($request->getContent(), true),$webhook_app);
 
             
             $is_test = $request->header('X-Test-Notification');

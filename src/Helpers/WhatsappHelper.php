@@ -304,8 +304,6 @@ class WhatsappHelper {
             ]]
         ];
 
-       
-
         $whatsapp = json_decode($this->POST('/'.env("META_BUSINESS_ID").'/messages',$data));
         
         if(isset($whatsapp->messages[0]->id))
@@ -450,8 +448,9 @@ class WhatsappHelper {
         $response = curl_exec($ch);
         
         if($response === false){
-            echo 'Curl error: ' . curl_error($ch);
+            //echo 'Curl error: ' . curl_error($ch);
         }
+
         curl_close ($ch);
         return  $response;
     }
