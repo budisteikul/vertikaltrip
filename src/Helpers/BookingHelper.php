@@ -2690,8 +2690,6 @@ class BookingHelper {
             }
 
             $text .= "\n";
-            //print_r($text);
-            //exit();
         }
 
         if($total==0)
