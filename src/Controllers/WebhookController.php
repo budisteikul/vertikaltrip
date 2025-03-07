@@ -122,10 +122,24 @@ class WebhookController extends Controller
                     curl_close($ch);
                     
                     //==================================================
-                    switch(strtolower($message))
+                    $varmessage = explode(" ",$message)
+                    switch(strtolower($varmessage[0]))
                     {
                         case "kontak":
-                            $message = BookingHelper::schedule_bydate(date('Y-m-d'));
+                            if(isset($varmessage[1]))
+                            {
+                                if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$varmessage[1])) {
+                                    $message = BookingHelper::schedule_bydate($varmessage[1]);
+                                } else {
+                                    $message = BookingHelper::schedule_bydate(date('Y-m-d'));
+                                }
+                                
+                            }
+                            else
+                            {
+                                $message = BookingHelper::schedule_bydate(date('Y-m-d'));
+                            }
+                            
                             $whatsapp->sendText($from,$message);
                         break;
                         default:
