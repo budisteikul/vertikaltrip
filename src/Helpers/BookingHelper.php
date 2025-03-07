@@ -2686,7 +2686,7 @@ class BookingHelper {
                 }
                 
 				//$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n";
-				$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions2 ." \n \n";
+				$text .= "- ". $question->firstName ." ". $question->lastName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions2 ." \n \n";
             }
 
             $text .= "\n";
