@@ -2686,7 +2686,7 @@ class BookingHelper {
                 }
                 
 				//$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n";
-				$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ (". $product_questions2 .") \n";
+				$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ (". $product_questions2 .") \n https://admin.jogjafoodtour.com/cms/vcard/download/". $id->shoppingcart->id ."  \n";
             }
 
             $text .= "\n";
