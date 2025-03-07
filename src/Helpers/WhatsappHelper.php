@@ -292,7 +292,7 @@ class WhatsappHelper {
             "to" => $to,
             "type" => "contacts",
             "contacts" => (object)[
-                "name" => [
+                "name" => (object)[
                     "formatted_name" => $firstName .' '. $lastName .' '. date('ymd'),
                     "first_name" => $firstName,
                     "last_name" => $lastName
