@@ -287,24 +287,24 @@ class WhatsappHelper {
 
     public function sendContact($to,$firstName,$lastName,$phone)
     {
-        $data = (object)[
+        $data = [
             "messaging_product" => "whatsapp",
             "to" => $to,
             "type" => "contacts",
-            "contacts" => (object)[
-                "name" => (object)[
+            "contacts" => [[
+                "name" => [
                     "formatted_name" => $firstName .' '. $lastName .' '. date('ymd'),
                     "first_name" => $firstName,
                     "last_name" => $lastName
                 ],
-                "phones" => (object)[
+                "phones" => [[
                     "phone" => "+".$phone,
                     "wa_id" => $phone
-                ]
-            ]
+                ]]
+            ]]
         ];
 
-        
+       
 
         $whatsapp = json_decode($this->POST('/'.env("META_BUSINESS_ID").'/messages',$data));
         
