@@ -2649,8 +2649,9 @@ class BookingHelper {
 
 	public static function schedule_bydate($date)
 	{
-		$text = "";
+		$data_json = new \stdClass();
 
+		$text = "";
 		$products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
                     return $query->where('booking_status','CONFIRMED');
                  })->whereDate('date', '=', $date)->whereNotNull('date')->groupBy('product_id')->select(['product_id'])->get();
@@ -2669,6 +2670,8 @@ class BookingHelper {
                  ->whereHas('shoppingcart', function ($query) {
                     return $query->where('booking_status','CONFIRMED');
                  })->whereDate('date', '=', $date)->where('product_id',$product->product_id)->whereNotNull('date')->get();
+
+            $kontak = array();
             foreach($schedule as $id)
             {
                 $question = BookingHelper::get_answer_contact($id->shoppingcart);
@@ -2696,7 +2699,11 @@ class BookingHelper {
         {
         	$text = "There is no participant ". $date;
         }
-        return $text;
+
+        $data_json->text = $text;
+        $data_json->kontak = $kontak;
+
+        return $data_json;
 	}
 
 	public static function contact_bydate($to,$date)

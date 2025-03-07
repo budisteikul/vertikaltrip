@@ -27,8 +27,8 @@ class WebhookController extends Controller
     {
         if($webhook_app=="whatsapp")
         {
-            //BookingHelper::contact_bydate("6285743112112",date('Y-m-d'));
-            //exit();
+
+
             $whatsapp = new WhatsappHelper;
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -145,9 +145,9 @@ class WebhookController extends Controller
                             }
 
                             $message = BookingHelper::schedule_bydate($date);
-                            $whatsapp->sendText($from,$message);
+                            $whatsapp->sendText($from,$message->text);
                             
-                            BookingHelper::contact_bydate($from,$date);
+                            //BookingHelper::contact_bydate($from,$date);
                         
                         break;
                         default:
