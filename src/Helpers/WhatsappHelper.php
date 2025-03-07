@@ -285,6 +285,35 @@ class WhatsappHelper {
         return '';
     }
 
+    public function sendContact($to,$firstName,$lastName,$phone)
+    {
+        $data = (object)[
+            "messaging_product" => "whatsapp",
+            "to" => $to,
+            "type" => "contacts",
+            "contacts" => (object)[
+                "name" => [
+                    "formatted_name" => $firstName .' '. $lastName .' '. date('Ymd'),
+                    "first_name" => $firstName,
+                    "last_name" => $lastName
+                ],
+                "phones" => (object)[
+                    "wa_id" => $phone
+                ]
+            ]
+        ];
+
+        $whatsapp = json_decode($this->POST('/'.env("META_BUSINESS_ID").'/messages',$data));
+        
+        if(isset($whatsapp->messages[0]->id))
+        {
+            $data->id = $whatsapp->messages[0]->id;
+            self::saveOutboundMessage($data);
+            return $whatsapp;
+        } 
+        return '';
+    }
+
     public function sendImage($to,$image_url,$caption)
     {
         $data = (object)[

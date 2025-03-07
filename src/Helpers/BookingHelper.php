@@ -10,7 +10,7 @@ use budisteikul\vertikaltrip\Helpers\VoucherHelper;
 use budisteikul\vertikaltrip\Helpers\TaskHelper;
 use budisteikul\vertikaltrip\Helpers\PaymentHelper;
 use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
-
+use budisteikul\vertikaltrip\Helpers\WhatsappHelper;
 
 use budisteikul\vertikaltrip\Models\Product;
 use budisteikul\vertikaltrip\Models\Shoppingcart;
@@ -2699,6 +2699,62 @@ class BookingHelper {
         	$text = "There is no participant ". $date;
         }
         return $text;
+	}
+
+	public static function contact_bydate($to,$date)
+	{
+		$text = "";
+
+		$products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
+                    return $query->where('booking_status','CONFIRMED');
+                 })->whereDate('date', '=', $date)->whereNotNull('date')->groupBy('product_id')->select(['product_id'])->get();
+		$total = 0;
+        foreach($products as $product)
+        {
+            $product_name = ProductHelper::product_name_by_bokun_id($product->product_id);
+            $text .= "*". $product_name ."* \n";
+            //print_r($product_name ."<br />");
+            $schedule = ShoppingcartProduct::with(['shoppingcart' => function ($query) {
+                    return $query->with(['shoppingcart_questions' => function ($query) {
+                        return $query->where('question_id','firstName')->orWhere('question_id','lastName');
+                    }]);
+                }])
+                 ->whereHas('shoppingcart', function ($query) {
+                    return $query->where('booking_status','CONFIRMED');
+                 })->whereDate('date', '=', $date)->where('product_id',$product->product_id)->whereNotNull('date')->get();
+            foreach($schedule as $id)
+            {
+                $question = BookingHelper::get_answer_contact($id->shoppingcart);
+                $people = 0;
+                foreach($id->shoppingcart_product_details as $shoppingcart_product_detail)
+                {
+                    $people += $shoppingcart_product_detail->people;
+                    $total += $people;
+                }
+                
+                $product_questions2 = "";
+                $questions2 = ShoppingcartQuestion::where('booking_id',$id->booking_id)->get();
+                foreach($questions2 as $question2)
+                {
+                	$product_questions2 .= $question2->answer;
+                }
+                
+				//$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n";
+				$text .= "- ". $question->firstName ." ". $question->lastName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions2 ." \n \n";
+				$nomor = GeneralHelper::phoneNumber($question->phoneNumber);
+				$whatsapp = new WhatsappHelper;
+				$whatsapp->sendContact($to,$question->firstName,$question->lastName,$nomor);
+
+            }
+
+           
+        }
+
+        if($total==0)
+        {
+        	$text = "There is no participant ". $date;
+        }
+        return '';
 	}
 
 }
