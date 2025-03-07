@@ -2696,7 +2696,7 @@ class BookingHelper {
 
         if($total==0)
         {
-        	$text = "There is no participant for today";
+        	$text = "There is no participant ". $date;
         }
         return $text;
 	}
