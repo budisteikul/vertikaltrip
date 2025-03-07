@@ -122,7 +122,7 @@ class WebhookController extends Controller
                     curl_close($ch);
                     
                     //==================================================
-                    $varmessage = explode(" ",$message)
+                    $varmessage = explode(" ",$message);
                     switch(strtolower($varmessage[0]))
                     {
                         case "kontak":
