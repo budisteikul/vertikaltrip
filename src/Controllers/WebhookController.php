@@ -143,7 +143,7 @@ class WebhookController extends Controller
                             }
                             $message = BookingHelper::schedule_bydate($date);
                             $whatsapp->sendText($from,$message);
-                            //BookingHelper::contact_bydate($from,$date);
+                            BookingHelper::contact_bydate($from,$date);
                         break;
                         default:
                     }
