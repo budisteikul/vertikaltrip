@@ -115,7 +115,7 @@ class WebhookController extends Controller
                     $varmessage = explode(" ",$message);
                     switch(strtolower($varmessage[0]))
                     {
-                        case "kontak":
+                        case "participants":
 
                             if(isset($varmessage[1]))
                             {
