@@ -151,7 +151,7 @@ class WebhookController extends Controller
                             {
                                 foreach($message->contact as $contact)
                                 {
-                                    $whatsapp->sendContact($from,$contact['firstName'],$contact['lastName'],$contact['phone']);
+                                    //$whatsapp->sendContact($from,$contact['firstName'],$contact['lastName'],$contact['phone']);
                                 }
                             }
                         
