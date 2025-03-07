@@ -293,15 +293,18 @@ class WhatsappHelper {
             "type" => "contacts",
             "contacts" => (object)[
                 "name" => [
-                    "formatted_name" => $firstName .' '. $lastName .' '. date('Ymd'),
+                    "formatted_name" => $firstName .' '. $lastName .' '. date('ymd'),
                     "first_name" => $firstName,
                     "last_name" => $lastName
                 ],
                 "phones" => (object)[
+                    "phone" => "+".$phone,
                     "wa_id" => $phone
                 ]
             ]
         ];
+
+        
 
         $whatsapp = json_decode($this->POST('/'.env("META_BUSINESS_ID").'/messages',$data));
         

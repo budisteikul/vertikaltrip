@@ -2742,9 +2742,9 @@ class BookingHelper {
 				//$text .= "- ". $question->firstName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n";
 				$text .= "- ". $question->firstName ." ". $question->lastName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions2 ." \n \n";
 				$nomor = GeneralHelper::phoneNumber($question->phoneNumber);
-				print_r($nomor);
-				//$whatsapp = new WhatsappHelper;
-				//$whatsapp->sendContact($to,$question->firstName,$question->lastName,$nomor);
+				
+				$whatsapp = new WhatsappHelper;
+				$whatsapp->sendContact($to,$question->firstName,$question->lastName,$nomor);
 
             }
 
