@@ -44,9 +44,9 @@ class WebhookController extends Controller
                     $whatsapp->setStatusMessage($message_id,$status);
                 }
 
-                if(isset($data->entry[0]->changes[0]->value->statuses[0]->id))
+                if(isset($data->entry[0]->changes[0]->value->messages[0]->id))
                 {
-                    $check = $whatsapp->check_wa_id($data->entry[0]->changes[0]->value->statuses[0]->id);
+                    $check = $whatsapp->check_wa_id($data->entry[0]->changes[0]->value->messages[0]->id);
                     if($check)
                     {
                         return response('OK', 200)->header('Content-Type', 'text/plain');
