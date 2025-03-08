@@ -35,6 +35,19 @@ class WhatsappHelper {
         }
     }
 
+    public function check_wa_id($message_id)
+    {
+        $message_id = Message::where('message_id',$message_id)->first();
+        if($message_id)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public function messages($id)
     {
         $contact = Contact::where('id',$id)->firstOrFail();

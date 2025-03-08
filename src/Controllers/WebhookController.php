@@ -29,13 +29,29 @@ class WebhookController extends Controller
         {
             
 
-            $whatsapp = new WhatsappHelper;
+            
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 $json = $request->getContent();
                 $data = json_decode($json);
-               
-                //$message = BookingHelper::schedule_bydate(date('Y-m-d'));
+
+                $whatsapp = new WhatsappHelper;
+                
+                if(isset($data->entry[0]->changes[0]->value->statuses[0]))
+                {
+                    $message_id = $data->entry[0]->changes[0]->value->statuses[0]->id;
+                    $status = $data->entry[0]->changes[0]->value->statuses[0]->status;
+                    $whatsapp->setStatusMessage($message_id,$status);
+                }
+
+                if(isset($data->entry[0]->changes[0]->value->statuses[0]->id))
+                {
+                    $check = $whatsapp->check_wa_id($data->entry[0]->changes[0]->value->statuses[0]->id);
+                    if($check)
+                    {
+                        return response('OK', 200)->header('Content-Type', 'text/plain');
+                    }
+                }
 
                 if(isset($data->entry[0]->changes[0]->value->messages[0]))
                 {
@@ -150,12 +166,7 @@ class WebhookController extends Controller
                 }
 
                     
-                if(isset($data->entry[0]->changes[0]->value->statuses[0]))
-                {
-                    $message_id = $data->entry[0]->changes[0]->value->statuses[0]->id;
-                    $status = $data->entry[0]->changes[0]->value->statuses[0]->status;
-                    $whatsapp->setStatusMessage($message_id,$status);
-                }
+                
                     
                 
                 curl_setopt_array($ch = curl_init(), array(
