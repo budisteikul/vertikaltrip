@@ -37,13 +37,6 @@ class WebhookController extends Controller
 
                 $whatsapp = new WhatsappHelper;
                 
-                if(isset($data->entry[0]->changes[0]->value->statuses[0]))
-                {
-                    $message_id = $data->entry[0]->changes[0]->value->statuses[0]->id;
-                    $status = $data->entry[0]->changes[0]->value->statuses[0]->status;
-                    $whatsapp->setStatusMessage($message_id,$status);
-                }
-
                 if(isset($data->entry[0]->changes[0]->value->messages[0]->id))
                 {
                     $check = $whatsapp->check_wa_id($data->entry[0]->changes[0]->value->messages[0]->id);
@@ -52,6 +45,15 @@ class WebhookController extends Controller
                         return response('OK', 200)->header('Content-Type', 'text/plain');
                     }
                 }
+
+                if(isset($data->entry[0]->changes[0]->value->statuses[0]))
+                {
+                    $message_id = $data->entry[0]->changes[0]->value->statuses[0]->id;
+                    $status = $data->entry[0]->changes[0]->value->statuses[0]->status;
+                    $whatsapp->setStatusMessage($message_id,$status);
+                }
+
+
 
                 if(isset($data->entry[0]->changes[0]->value->messages[0]))
                 {
@@ -155,7 +157,7 @@ class WebhookController extends Controller
                             {
                                 foreach($message->contact as $contact)
                                 {
-                                    //$whatsapp->sendContact($from,$contact['firstName'],$contact['lastName'],$contact['phone']);
+                                    $whatsapp->sendContact($from,$contact['firstName'],$contact['lastName'],$contact['phone']);
                                 }
                             }
                         
