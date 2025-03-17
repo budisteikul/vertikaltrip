@@ -2695,7 +2695,7 @@ class BookingHelper {
 				$phone = GeneralHelper::phoneNumber($question->phoneNumber);
 				$contacts[] = [
 					"name" => [
-                    	"formatted_name" => $question->firstName .' '. $question->lastName .' '. date('ymd'),
+                    	"formatted_name" => $question->firstName .' '. $question->lastName,
                     	"first_name" => $question->firstName,
                     	"last_name" => $question->lastName
                 	],
