@@ -2656,7 +2656,7 @@ class BookingHelper {
                     return $query->where('booking_status','CONFIRMED');
                  })->whereDate('date', '=', $date)->whereNotNull('date')->groupBy('product_id')->select(['product_id'])->get();
 		$total = 0;
-		$contact = array();
+		$contacts = array();
         foreach($products as $product)
         {
             $product_name = ProductHelper::product_name_by_bokun_id($product->product_id);
@@ -2692,11 +2692,26 @@ class BookingHelper {
                 
 				$text .= "- ". $question->firstName ." ". $question->lastName ." - ". $id->shoppingcart->booking_channel ." - _".$people." pax_ \n ". $product_questions2 ." \n \n";
 
+				$phone = GeneralHelper::phoneNumber($question->phoneNumber);
+				$contacts[] = [
+					"name" => [
+                    	"formatted_name" => $question->firstName .' '. $question->lastName .' '. date('ymd'),
+                    	"first_name" => $question->firstName,
+                    	"last_name" => $question->lastName
+                	],
+                	"phones" => [[
+                    	"phone" => "+".$phone,
+                    	"wa_id" => $phone
+                	]]
+				];
+				/*
 				$contact[] = [
 					"firstName" => $question->firstName,
 					"lastName" => $question->lastName,
 					"phone" => GeneralHelper::phoneNumber($question->phoneNumber)
 				];
+				*/
+
             }
 
             $text .= "\n";
@@ -2708,7 +2723,7 @@ class BookingHelper {
         }
 
         $data_json->text = $text;
-        $data_json->contact = $contact;
+        $data_json->contacts = $contacts;
 
         return $data_json;
 	}

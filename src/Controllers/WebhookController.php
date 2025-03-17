@@ -35,7 +35,9 @@ class WebhookController extends Controller
                 $json = $request->getContent();
                 $data = json_decode($json);
 
+               
                 $whatsapp = new WhatsappHelper;
+
                 
                 if(isset($data->entry[0]->changes[0]->value->messages[0]->id))
                 {
@@ -151,14 +153,11 @@ class WebhookController extends Controller
                             }
 
                             $message = BookingHelper::schedule_bydate($date);
-                            $whatsapp->sendText($from,$message->text);
+                            //$whatsapp->sendText($from,$message->text);
 
-                            if(!empty($message->contact))
+                            if(!empty($message->contacts))
                             {
-                                foreach($message->contact as $contact)
-                                {
-                                    $whatsapp->sendContact($from,$contact['firstName'],$contact['lastName'],$contact['phone']);
-                                }
+                                $whatsapp->sendContact($from,$message->contacts);
                             }
                         
                         break;

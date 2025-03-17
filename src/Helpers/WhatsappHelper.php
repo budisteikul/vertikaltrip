@@ -298,25 +298,17 @@ class WhatsappHelper {
         return '';
     }
 
-    public function sendContact($to,$firstName,$lastName,$phone)
+    public function sendContact($to,$json)
     {
         $data = [
             "messaging_product" => "whatsapp",
             "to" => $to,
             "type" => "contacts",
-            "contacts" => [[
-                "name" => [
-                    "formatted_name" => $firstName .' '. $lastName .' '. date('ymd'),
-                    "first_name" => $firstName,
-                    "last_name" => $lastName
-                ],
-                "phones" => [[
-                    "phone" => "+".$phone,
-                    "wa_id" => $phone
-                ]]
-            ]]
+            "contacts" => $json
         ];
 
+        print_r($data);
+        exit()
         $whatsapp = json_decode($this->POST('/'.env("META_BUSINESS_ID").'/messages',$data));
         
         if(isset($whatsapp->messages[0]->id))
