@@ -161,6 +161,34 @@ class WebhookController extends Controller
                             }
                         
                         break;
+                        case "/contacts":
+                            if(isset($varmessage[1]))
+                            {
+                                if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$varmessage[1])) {
+                                    $date = $varmessage[1];
+                                } 
+                                else 
+                                {
+                                    $date = date('Y-m-d');
+                                }
+                            }
+                            else
+                            {
+                                $date = date('Y-m-d');
+                            }
+
+                            $message = BookingHelper::schedule_bydate($date);
+                            
+
+                            if(!empty($message->contacts))
+                            {
+                                $whatsapp->sendContact($from,$message->contacts);
+                            }
+                            else
+                            {
+                                $whatsapp->sendText($from,"There is no participant ". $date);
+                            }
+                        break;
                         default:
                     }
                     //==================================================
