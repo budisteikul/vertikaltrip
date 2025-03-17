@@ -2690,7 +2690,7 @@ class BookingHelper {
                 	$product_questions2 .= $question2->answer;
                 }
                 
-				$text .= "- ". $question->firstName ." ". $question->lastName ." \n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
+				$text .= "- ". $question->firstName ." ". $question->lastName ." \n > _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
 
 				$phone = GeneralHelper::phoneNumber($question->phoneNumber);
 				$contacts[] = [
