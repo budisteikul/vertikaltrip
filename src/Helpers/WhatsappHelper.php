@@ -307,8 +307,7 @@ class WhatsappHelper {
             "contacts" => $json
         ];
 
-        print_r($data);
-        exit()
+       
         $whatsapp = json_decode($this->POST('/'.env("META_BUSINESS_ID").'/messages',$data));
         
         if(isset($whatsapp->messages[0]->id))

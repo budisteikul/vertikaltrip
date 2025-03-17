@@ -157,7 +157,7 @@ class WebhookController extends Controller
 
                             if(!empty($message->contacts))
                             {
-                                //$whatsapp->sendContact($from,$message->contacts);
+                                $whatsapp->sendContact($from,$message->contacts);
                             }
                         
                         break;
