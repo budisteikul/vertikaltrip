@@ -42,6 +42,11 @@ class APIController extends Controller
         BookingHelper::get_booking_expired();
     }
     
+    public function test(Request $request)
+    {
+        print_r("Hello");
+    }
+
     public function cancellation($sessionId,$confirmationCode)
     {
         $shoppingcart = Shoppingcart::where('session_id',$sessionId)->where('confirmation_code',$confirmationCode)->first();
