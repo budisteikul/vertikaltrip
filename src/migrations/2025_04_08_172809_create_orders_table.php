@@ -16,6 +16,7 @@ return new class extends Migration
             $table->date('date')->nullable();
             $table->json('transactions')->nullable();
             $table->text('note')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps(6);
         });
     }
