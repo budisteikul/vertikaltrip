@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->date('date')->nullable();
+            $table->string('tour')->nullable();
+            $table->float('pax', precision: 53)->default(0);
+            $table->float('total', precision: 53)->default(0);
             $table->json('transactions')->nullable();
             $table->text('note')->nullable();
             $table->string('type')->nullable();
