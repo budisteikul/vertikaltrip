@@ -27,7 +27,7 @@ class CreateFinTransactionsTable extends Migration
       			->onDelete('cascade')->onUpdate('cascade');
             */
 			$table->date('date');
-			$table->float('amount', 8, 2);
+			$table->float('amount', precision: 53)->default(0);
 			$table->tinyInteger('status')->default(0);
             $table->timestamps(6);
         });

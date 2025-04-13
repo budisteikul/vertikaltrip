@@ -25,7 +25,7 @@ class CreateProductsTable extends Migration
             $table->float('min_participant',24,2)->default(1);
 
             $table->boolean('deposit_percentage')->default(true);
-            $table->float('deposit_amount',24,2)->default(0);
+            $table->float('deposit_amount', precision: 53)->default(0);
 
             $table->timestamps(6);
         });

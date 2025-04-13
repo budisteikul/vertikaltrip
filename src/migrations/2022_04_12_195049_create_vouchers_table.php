@@ -16,7 +16,7 @@ class CreateVouchersTable extends Migration
         Schema::create('vouchers', function (Blueprint $table) {
             $table->id();
             $table->string('code')->nullable();
-            $table->float('amount',24,2)->default(0);
+            $table->float('amount', precision: 53)->default(0);
             $table->boolean('is_percentage')->default(true);
             $table->timestamps(6);
         });

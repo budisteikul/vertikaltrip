@@ -35,11 +35,11 @@ class CreateShoppingcartPaymentsTable extends Migration
             $table->string('va_number')->nullable();
             $table->text('qrcode')->nullable();
 
-            $table->float('amount',24,2)->default(0);
-            $table->float('net',24,2)->default(0);
+            $table->float('amount', precision: 53)->default(0);
+            $table->float('net', precision: 53)->default(0);
 
             $table->string('currency')->default('USD');
-            $table->float('rate',24,2)->default(0);
+            $table->float('rate', precision: 53)->default(0);
             $table->string('rate_from')->nullable();
             $table->string('rate_to')->nullable();
 

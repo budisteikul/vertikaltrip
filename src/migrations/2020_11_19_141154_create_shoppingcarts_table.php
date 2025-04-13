@@ -24,15 +24,15 @@ class CreateShoppingcartsTable extends Migration
             $table->string('promo_code')->nullable();
             
             $table->string('currency')->default('USD');
-            $table->float('subtotal',24,2)->default(0);
-            $table->float('discount',24,2)->default(0);
-            $table->float('tax',24,2)->default(0);
-            $table->float('fee',24,2)->default(0);
-            $table->float('admin',24,2)->default(0);
-            $table->float('total',24,2)->default(0);
+            $table->float('subtotal', precision: 53)->default(0);
+            $table->float('discount', precision: 53)->default(0);
+            $table->float('tax', precision: 53)->default(0);
+            $table->float('fee', precision: 53)->default(0);
+            $table->float('admin', precision: 53)->default(0);
+            $table->float('total', precision: 53)->default(0);
 
-            $table->float('due_now',24,2)->default(0);
-            $table->float('due_on_arrival',24,2)->default(0);
+            $table->float('due_now', precision: 53)->default(0);
+            $table->float('due_on_arrival', precision: 53)->default(0);
 
             $table->string('url')->nullable();
             $table->string('referer')->nullable();
