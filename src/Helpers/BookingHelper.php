@@ -221,17 +221,19 @@ class BookingHelper {
 						$shoppingcart_product_detail->shoppingcart_product_id = $shoppingcart_product->id;
 						$shoppingcart_product_detail->type = 'product';
 						$shoppingcart_product_detail->title = $shoppingcart_product->title;
-						$shoppingcart_product_detail->people = $data['activityBookings'][$i]['totalParticipants'];
+						
 						$shoppingcart_product_detail->qty = $s_quantity;
 						$shoppingcart_product_detail->price = $s_price;
 
 						if($bookingChannel=="Viator")
 						{
 							$shoppingcart_product_detail->unit_price = 'Price per booking';
+							$shoppingcart_product_detail->people = $data['activityBookings'][$i]['totalParticipants'];
 						}
 						else
 						{
 							$shoppingcart_product_detail->unit_price = $customlineitems[$j]['title'];
+							$shoppingcart_product_detail->people = 0;
 						}
 						
 
