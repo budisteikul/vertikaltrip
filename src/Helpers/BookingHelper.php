@@ -1544,8 +1544,7 @@ class BookingHelper {
 		
         $contents = BokunHelper::get_calendar($activityId,$year,$month);
         
-        //print_r($contents);
-        //exit();
+        
         $value[] = $contents->firstAvailableDay;
         
 
@@ -1673,15 +1672,16 @@ class BookingHelper {
                 $query->where('booking_status','CONFIRMED');
 			    //$query->where('booking_channel','WEBSITE')->orWhere('booking_channel','AIRBNB');
             })
-		->where('product_id',$activityId)->whereYear('date','=',$year)->whereMonth('date','=',$month)->whereDate('date', '>=', Carbon::now())->groupBy(['date'])->select('date')->get();
+		->where('product_id',$activityId)->whereYear('date','=',$year)->whereMonth('date','=',$month)->whereDate('date', '>=', Carbon::now())->groupBy(['rate'])->groupBy(['date'])->select('rate','date')->get();
 
 		foreach($group_shoppingcart_products as $group_shoppingcart_product)
         {
         	$date = Carbon::parse($group_shoppingcart_product->date)->format('Y-m-d');
         	$time = Carbon::parse($group_shoppingcart_product->date)->format('H:i');
+        	$rate = $group_shoppingcart_product->rate;
         	$people = ShoppingcartProductDetail::with('shoppingcart_product')
-            	->WhereHas('shoppingcart_product', function($query) use ($date,$activityId) {
-            	$query->whereDate('date','=',$date)->where(['product_id'=>$activityId])->WhereHas('shoppingcart', function($query) {
+            	->WhereHas('shoppingcart_product', function($query) use ($date,$activityId,$rate) {
+            	$query->whereDate('date','=',$date)->where(['product_id'=>$activityId])->where('rate',$rate)->WhereHas('shoppingcart', function($query) {
               		return $query->where('booking_status','CONFIRMED');
               		//return $query->where('booking_channel','WEBSITE')->orWhere('booking_channel','AIRBNB');
             	});
@@ -1693,11 +1693,12 @@ class BookingHelper {
             	"date" => $date,
             	"time" => $time,
             	"people" => $people,
+            	"rate" => $rate,
             	"min_participant" => $min_participant,
         	];
         }
 
-
+        
         if(count($bookings)>0)
         {
         	foreach($value as $firstDay)
@@ -1708,28 +1709,45 @@ class BookingHelper {
 					{
 						if($booking->date == $firstDay->fullDate)
 						{
+							
+
+							
+
 							if($availability->activityAvailability->startTime==$booking->time)
 							{
-                        		$availability->data->bookedParticipants +=  $booking->people;
-								$availability->data->availabilityCount -= $booking->people;
 
-								$availability->activityAvailability->bookedParticipants +=  $booking->people;
-								$availability->activityAvailability->availabilityCount -= $booking->people;
+								//print_r($availability->activityAvailability->rates[0]->title);
+								//exit();
+								if($availability->activityAvailability->rates[0]->title==$booking->rate)
+								{
+									//==============================================================
+                        			$availability->data->bookedParticipants +=  $booking->people;
+									$availability->data->availabilityCount -= $booking->people;
 
-								// cek cek aja
-								if($booking->people>=$booking->min_participant)
-								{
-									$availability->activityAvailability->minParticipantsToBookNow = 1;
-								}
-								if($booking->people>=$booking->min_participant)
-								{
-									$availability->data->minParticipantsToBookNow = 1;
-								}
+									$availability->activityAvailability->bookedParticipants +=  $booking->people;
+									$availability->activityAvailability->availabilityCount -= $booking->people;
+
+									// cek cek aja
+									if($booking->people>=$booking->min_participant)
+									{
+										$availability->activityAvailability->minParticipantsToBookNow = 1;
+									}
+									if($booking->people>=$booking->min_participant)
+									{
+										$availability->data->minParticipantsToBookNow = 1;
+									}
                                         
-								$availability->availabilityCount -= $booking->people;
+									$availability->availabilityCount -= $booking->people;
 
-								if($availability->availabilityCount<=0) $firstDay->soldOut = true;
+									if($availability->availabilityCount<=0) $firstDay->soldOut = true;
+									//==============================================================
+								}
 							}
+
+
+
+
+
 
 						}
 					}
