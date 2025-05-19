@@ -1784,29 +1784,31 @@ class BookingHelper {
 
 											if($availability->activityAvailability->startTime==$booking->time)
 											{
-												$availability->data->bookedParticipants +=  $booking->people;
-                                            	$availability->data->availabilityCount -= $booking->people;
+												if($availability->activityAvailability->rates[0]->title==$booking->rate)
+												{
+													$availability->data->bookedParticipants +=  $booking->people;
+                                            		$availability->data->availabilityCount -= $booking->people;
 
-                                            	$availability->activityAvailability->bookedParticipants +=  $booking->people;
-                                            	$availability->activityAvailability->availabilityCount -= $booking->people;
+                                            		$availability->activityAvailability->bookedParticipants +=  $booking->people;
+                                            		$availability->activityAvailability->availabilityCount -= $booking->people;
                                         	
-                                        		// cek cek aja
-                                        		if($booking->people>=$booking->min_participant)
-												{
-													$availability->activityAvailability->minParticipantsToBookNow = 1;
-												}
-												if($booking->people>=$booking->min_participant)
-												{
-													$availability->data->minParticipantsToBookNow = 1;
-												}
+                                        			// cek cek aja
+                                        			if($booking->people>=$booking->min_participant)
+													{
+														$availability->activityAvailability->minParticipantsToBookNow = 1;
+													}
+													if($booking->people>=$booking->min_participant)
+													{
+														$availability->data->minParticipantsToBookNow = 1;
+													}
 
 
-                                            	$availability->availabilityCount -= $booking->people;
+                                            		$availability->availabilityCount -= $booking->people;
 
-                                            	if($availability->availabilityCount<=0) $day->soldOut = true;
+                                            		if($availability->availabilityCount<=0) $day->soldOut = true;
+                                            	}
 											}
-
-                                            	
+                                            
                                         }
                                     }
                                 }
