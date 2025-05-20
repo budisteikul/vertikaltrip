@@ -122,6 +122,12 @@ class APIController extends Controller
                 'name' => 'Anisa',
                 'description' => '',
             ];
+
+            $tourGuides[] = [
+                'image' => config('site.assets').'/img/guide/jasmine03.jpeg',
+                'name' => 'Jasmine',
+                'description' => '',
+            ];
         
             
             $services[] = [
@@ -228,7 +234,14 @@ class APIController extends Controller
                 'name' => 'Anisa',
                 'description' => '',
             ];
-        
+            
+            $tourGuides[] = [
+                'image' => config('site.assets').'/img/guide/jasmine03.jpeg',
+                'name' => 'Jasmine',
+                'description' => '',
+            ];
+
+            /*
             $tourGuides[] = [
                 'image' => config('site.assets').'/img/guide/dea01.jpeg',
                 'name' => 'Dea',
@@ -240,6 +253,7 @@ class APIController extends Controller
                 'name' => 'Dharma',
                 'description' => '',
             ];
+            */
 
             $services[] = [
                 'icon' => '<i class="fa fa-4x fa-bolt mb-2" style="color: #c53c46"></i>',
