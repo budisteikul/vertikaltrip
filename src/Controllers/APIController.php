@@ -128,6 +128,12 @@ class APIController extends Controller
                 'name' => 'Jasmine',
                 'description' => '',
             ];
+
+            $tourGuides[] = [
+                'image' => config('site.assets').'/img/guide/dhea01.jpeg',
+                'name' => 'Dhea',
+                'description' => '',
+            ];
         
             
             $services[] = [
@@ -238,6 +244,12 @@ class APIController extends Controller
             $tourGuides[] = [
                 'image' => config('site.assets').'/img/guide/jasmine03.jpeg',
                 'name' => 'Jasmine',
+                'description' => '',
+            ];
+
+            $tourGuides[] = [
+                'image' => config('site.assets').'/img/guide/dhea01.jpeg',
+                'name' => 'Dhea',
                 'description' => '',
             ];
 
