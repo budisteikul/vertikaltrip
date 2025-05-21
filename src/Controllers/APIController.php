@@ -179,11 +179,13 @@ class APIController extends Controller
                 'type' => 'outsite'
             ];
 
+            /*
             $usefullLink[] = [
                 'title' => 'Careers',
                 'link' => '/page/careers',
                 'type' => 'insite'
             ];
+            */
         }
         else
         {
@@ -305,11 +307,13 @@ class APIController extends Controller
                 'type' => 'outsite'
             ];
 
+            /*
             $usefullLink[] = [
                 'title' => 'Careers',
                 'link' => '/page/careers',
                 'type' => 'insite'
             ];
+            */
             
         }
         
