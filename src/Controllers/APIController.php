@@ -111,29 +111,18 @@ class APIController extends Controller
             $tourGuide_title = 'Meet The Jogja Foodie Guide';
             $tourGuide_description = 'Is a group of unique individuals who share the same passions. We do believe you will have fun and experience something new with us';
 
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/kalika02.jpg',
-                'name' => 'Kalika',
-                'description' => '',
-            ];
+            $guides = json_decode(config('site.guides'));
 
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/anisa01.jpeg',
-                'name' => 'Anisa',
-                'description' => '',
-            ];
+            foreach($guides as $guide)
+            {
+                $tourGuides[] = [
+                    'image' => config('site.assets').'/img/guide/'.$guide->photo,
+                    'name' => $guide->name,
+                    'description' => '',
+                ];
+            }
 
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/jasmine03.jpeg',
-                'name' => 'Jasmine',
-                'description' => '',
-            ];
-
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/dhea01.jpeg',
-                'name' => 'Dhea',
-                'description' => '',
-            ];
+            
         
             
             $services[] = [
@@ -231,29 +220,16 @@ class APIController extends Controller
             $tourGuide_description = 'Is a group of unique individuals who share the same passions. We do believe you will have fun and experience something new with us';
 
 
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/kalika02.jpg',
-                'name' => 'Kalika',
-                'description' => '',
-            ];
+            $guides = json_decode(config('site.guides'));
 
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/anisa01.jpeg',
-                'name' => 'Anisa',
-                'description' => '',
-            ];
-            
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/jasmine03.jpeg',
-                'name' => 'Jasmine',
-                'description' => '',
-            ];
-
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/dhea01.jpeg',
-                'name' => 'Dhea',
-                'description' => '',
-            ];
+            foreach($guides as $guide)
+            {
+                $tourGuides[] = [
+                    'image' => config('site.assets').'/img/guide/'.$guide->photo,
+                    'name' => $guide->name,
+                    'description' => '',
+                ];
+            }
 
             /*
             $tourGuides[] = [
