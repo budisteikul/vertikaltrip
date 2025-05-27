@@ -777,7 +777,7 @@ class ContentHelper {
             $cancellationPolicy = '
             <div class="mb-4">
                 <h3 class="mb-3">Cancellation Policy</h3>
-                <li>Bookings are fully refundable up to the time of the event</li>
+                <span>Bookings are fully refundable up to the time of the event</span>
             </div>';
         }
         else if($content->cancellationPolicy->simpleCutoffHours==0)
@@ -785,7 +785,7 @@ class ContentHelper {
             $cancellationPolicy = '
             <div class="mb-4">
                 <h3 class="mb-3">Cancellation Policy</h3>
-                <li>Bookings are Non-refundable</li>
+                <span>Bookings are Non-refundable</span>
             </div>';
         }
         else
@@ -793,7 +793,7 @@ class ContentHelper {
             $cancellationPolicy = '
             <div class="mb-4">
                 <h3 class="mb-3">Cancellation Policy</h3>
-                <li>Full refund if cancelled at least '. GeneralHelper::hourToDay($content->cancellationPolicy->simpleCutoffHours) .' before the event</li>
+                <span>Full refund if cancelled at least '. GeneralHelper::hourToDay($content->cancellationPolicy->simpleCutoffHours) .' before the event</span>
             </div>';
         }
 
