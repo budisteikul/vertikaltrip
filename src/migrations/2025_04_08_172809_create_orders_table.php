@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date')->nullable();
             $table->string('tour')->nullable();
+            $table->float('guide', precision: 53)->default(0);
             $table->float('pax', precision: 53)->default(0);
             $table->float('total', precision: 53)->default(0);
             $table->json('transactions')->nullable();
