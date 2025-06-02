@@ -275,24 +275,11 @@ class APIController extends Controller
     public function navbar($sessionId)
     {
         
-        if(str_contains(GeneralHelper::url(), 'jogjafoodtour') || str_contains(GeneralHelper::url(), 'vertikaltrip'))
-        {
             //$slug = Slug::where('type','category')->where('slug','yogyakarta')->latest('id')->firstOrFail();
             //$categories = Category::where('parent_id',0)->where('id',$slug->link_id)->get();
             $categories = Category::where('parent_id',0)->select(['name','slug'])->get();
             $logo = config('site.assets').'/img/header/'.config('site.logo');
-        }
-        else if(str_contains(GeneralHelper::url(), 'ubudfoodtour'))
-        {
-            $slug = Slug::where('type','category')->where('slug','bali')->latest('id')->firstOrFail();
-            $categories = Category::where('parent_id',0)->where('id',$slug->link_id)->get();
-            $logo = config('site.assets').'/img/header/vertikaltrip.png';
-        }
-        else
-        {
-            $categories = Category::where('parent_id',0)->select(['name','slug'])->get();
-            $logo = config('site.assets').'/img/header/vertikaltrip.png';
-        }
+        
 
 
         return response()->json([
