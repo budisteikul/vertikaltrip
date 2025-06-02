@@ -75,7 +75,7 @@ class APIController extends Controller
             <img src="'.config('site.assets').'/img/header/'.config('site.logo').'" alt="Jogja Food Tour" />
             <hr class="hr-theme" />
             <p class="text-faded">
-                Explore Yogyakarta’s rich culinary heritage as we take you off the beaten path to taste authentic local dishes, from legendary street food stalls to hidden family-run eateries. Led by passionate local guides, this tour offers more than just delicious food—it’s a deep dive into the culture, history, and flavors that make Jogja unique.
+                '.config('site.description').'
             </p>';
 
             $featured = '
@@ -145,7 +145,8 @@ class APIController extends Controller
             ];
 
             $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br /><i class="fas fa-envelope"></i> Email : guide@vertikaltrip.com<br /><i class="fab fa-whatsapp-square"></i> WhatsApp : +62 895 3000 0030';
-            $footerTitle = '<span style="font-size:12px;">© 2018 - 2025 Jogja Food Tour (Vertikal Trip). All Rights Reserved</span>';
+
+            $footerTitle = '<span style="font-size:14px;">'.config('sites.footer').'</span>';
 
             /*
             $footerPaymentChannels = [
@@ -247,11 +248,11 @@ class APIController extends Controller
             'tourGuide_title' => $tourGuide_title,
             'tourGuide_description' => $tourGuide_description,
 
-            'footerPartnersTitle' => '<b style="font-size:16px">Also available on</b>',
-            'footerPaymentChannelsTitle' => '<b style="font-size:16px">Online payments</b>',
-            'footerUsefullLinksTitle' => '<b style="font-size:16px">Useful Links</b>',
-            'footerPrivacytermsTitle' => '<b style="font-size:16px">Privacy & Terms</b>',
-            'footerWhatsappTitle' => '<b style="font-size:16px">Looking for the info?</b>',
+            'footerPartnersTitle' => '<b style="font-size:18px">Also available on</b>',
+            'footerPaymentChannelsTitle' => '<b style="font-size:18px">Online payments</b>',
+            'footerUsefullLinksTitle' => '<b style="font-size:18px">Useful Links</b>',
+            'footerPrivacytermsTitle' => '<b style="font-size:18px">Privacy & Terms</b>',
+            'footerWhatsappTitle' => '<b style="font-size:18px">Looking for the info?</b>',
 
             'footerUsefullLinks' => $usefullLink,
             'footerPrivacyterms' => $dataPrivacyTerm,
