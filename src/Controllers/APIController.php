@@ -70,17 +70,12 @@ class APIController extends Controller
         
         $analytic = LogHelper::analytic();
 
-        if(str_contains(GeneralHelper::url(), 'jogjafoodtour') || str_contains(GeneralHelper::url(), 'vertikaltrip'))
-        {
-
-            
+         
             $headerBox = '
             <img src="'.config('site.assets').'/img/header/'.config('site.logo').'" alt="Jogja Food Tour" />
             <hr class="hr-theme" />
             <p class="text-faded">
-                Join us on this experience to try authentic dishes, play traditional games, travel on a becak, learn interesting fun facts about city, interact with locals and many more.
-                <br />
-                Enjoy Jogja Like Locals!
+                Explore Yogyakarta’s rich culinary heritage as we take you off the beaten path to taste authentic local dishes, from legendary street food stalls to hidden family-run eateries. Led by passionate local guides, this tour offers more than just delicious food—it’s a deep dive into the culture, history, and flavors that make Jogja unique.
             </p>';
 
             $featured = '
@@ -175,123 +170,7 @@ class APIController extends Controller
                 'type' => 'insite'
             ];
             */
-        }
-        else
-        {
-
-
-            
-
-            $headerBox = '
-            <img src="'.config('site.assets').'/img/header/vertikaltrip.png" alt="Vertikal Trip" width="250" />
-            <hr class="hr-theme" />
-            
-            <h3 class="text-white" style="line-height:1.5">MUST TRY THE COMBINATION CULTURE AND GASTRONOMY ACTIVIES IN INDONESIA</h3>
-            
-            <p class="text-faded">
-                Join us on this activity to try authentic local dishes, learn interesting fun facts about city, interact with locals and many more. Our team will accompany your journey and making you feel like a local!
-            </p>
-            
-            ';
-
-            $featured = '
-                
-                <div class="row pb-0">
-                    <div class="col-lg-8 text-center mx-auto">
-                        <h3 class="section-heading" style="margin-top:50px;">Featured on </h3>
-                        <hr class="hr-theme" />
-                        <a class="text-muted" rel="noreferrer" target="_blank" href="https://www.silverkris.com/yogyakarta-the-way-to-this-citys-heart-is-through-its-food/"><img src="'.config('site.assets').'/img/content/silkwinds-magazine-logo.png" alt="Silkwinds | Jogja Food Tour" style={{ marginTop: "4px" }} class="img-fluid rounded img-thumbnail" /></a>
-                    </div>
-                </div>
-
-                 <div class="row text-center">
-                    <div class="col-md-8 mx-auto">
-                        
-                    </div>
-                </div>
-                
-            ';
-
-            $siteTitle = env('APP_NAME');
-
-            $headerBackground = config('site.assets').'/img/header/background-food.jpg';
-
-            $tourGuide_title = 'Meet the Vertikal Trip Team';
-            $tourGuide_description = 'Is a group of unique individuals who share the same passions. We do believe you will have fun and experience something new with us';
-
-
-            $guides = json_decode(config('site.guides'));
-
-            foreach($guides as $guide)
-            {
-                $tourGuides[] = [
-                    'image' => config('site.assets').'/img/guide/'.$guide->photo,
-                    'name' => $guide->name,
-                    'description' => '',
-                ];
-            }
-
-            /*
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/dea01.jpeg',
-                'name' => 'Dea',
-                'description' => '',
-            ];
         
-            $tourGuides[] = [
-                'image' => config('site.assets').'/img/guide/dharma01.jpeg',
-                'name' => 'Dharma',
-                'description' => '',
-            ];
-            */
-
-            $services[] = [
-                'icon' => '<i class="fa fa-4x fa-bolt mb-2" style="color: #c53c46"></i>',
-                'name' => 'Instant Confirmation',
-                'description' => 'To secure your spot while keeping your plans flexible. Your booking are confirmed automatically!',
-            ];
-
-            $services[] = [
-                'icon' => '<i class="fas fa-4x fa-phone-alt mb-2" style="color: #c53c46"></i>',
-                'name' => '24/7 Support',
-                'description' => 'Stay Connected with us! With 24/7 Support.',
-            ];
-
-            $services[] = [
-                'icon' => '<i class="fas fa-4x fa-history mb-2" style="color: #c53c46"></i>',
-                'name' => 'Full Refund',
-                'description' => 'Have your plans changed? No worries! You can cancel the booking anytime!',
-            ];
-
-            $services[] = [
-                'icon' => '<i class="fas fa-4x fa-thumbs-up mb-2" style="color: #c53c46"></i>',
-                'name' => 'Great Local Food',
-                'description' => 'Too many options and afraid of tourist traps? We only take you to great places where locals go!',
-            ];
-
-            $company = '<strong>VERTIKAL TRIP</strong><br />Perum Guwosari Blok XII No 190<br>Bantul  55751 INDONESIA<br /><i class="fas fa-envelope"></i> Email : guide@vertikaltrip.com<br /><i class="fab fa-whatsapp-square"></i> WhatsApp : +62 895 3000 0030';
-            $footerTitle = '<span style="font-size:12px;">© 2018 - 2025 VERTIKAL TRIP. All Rights Reserved</span>';
-
-            $footerPaymentChannels = [
-                '<img height="30" class="mt-2" src="'.config('site.assets').'/img/footer/line-1.png" alt="Payment Channels" /><br />',
-                '<img height="30" class="mt-2" src="'.config('site.assets').'/img/footer/line-5.png" alt="Payment Channels" /><br />'
-            ];
-
-            $usefullLink[] = [
-                'title' => 'Meeting Point',
-                'link' => 'https://map.vertikaltrip.com',
-                'type' => 'outsite'
-            ];
-
-            /*
-            $usefullLink[] = [
-                'title' => 'Careers',
-                'link' => '/page/careers',
-                'type' => 'insite'
-            ];
-            */
-            
-        }
         
 
         
