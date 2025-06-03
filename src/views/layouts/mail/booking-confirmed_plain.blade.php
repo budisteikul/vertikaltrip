@@ -15,7 +15,7 @@ Your booking number is : {{$shoppingcart->confirmation_code}}
 Follow link below to to download your invoice.
 {!!env("APP_URL")!!}/booking/receipt/{{$shoppingcart->session_id}}/{{$shoppingcart->confirmation_code}}
 Follow link below to know way to the meeting point.
-https://map.vertikaltrip.com
+https://map.jogjafoodtour.com
 
 Our guide will contact you in the day of the tour via Whatsapp or Email. If you have any question, feel free to contact us.
 See you there :) 

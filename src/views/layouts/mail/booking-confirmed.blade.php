@@ -148,7 +148,7 @@ table.body .article {
                                        
                                         <hr style="height:1px;border:none;color:#EEE;background-color:#EEE;" />
                                         Follow link below to know way to the meeting point.<br>
-                                        <a href="https://map.vertikaltrip.com" target="_blank" style="text-decoration: none;">https://map.vertikaltrip.com
+                                        <a href="https://map.jogjafoodtour.com" target="_blank" style="text-decoration: none;">https://map.jogjafoodtour.com
                                         </a>
                                         <hr style="height:1px;border:none;color:#EEE;background-color:#EEE;" />
                               </td>
