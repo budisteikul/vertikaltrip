@@ -2283,7 +2283,6 @@ class BookingHelper {
 			$date = $shoppingcart->shoppingcart_payment->expiration_date;
 		}
 
-
 		if($date!==null)
 		{
 			$due_date = $date;
@@ -2303,7 +2302,7 @@ class BookingHelper {
 			{
 				foreach($shoppingcart->shoppingcart_products()->get() as $shoppingcart_product)
 				{
-				$date_arr[] = $shoppingcart_product->date;
+					$date_arr[] = $shoppingcart_product->date;
             	}
 			}
 
@@ -2314,6 +2313,7 @@ class BookingHelper {
         	});
 
         	$due_date = $date_arr[0];
+        	$due_date = Carbon::createFromFormat('Y-m-d H:i:s', $due_date)->addHours(-24);
 		}
 		
 

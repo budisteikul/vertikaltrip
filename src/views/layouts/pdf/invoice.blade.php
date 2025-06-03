@@ -279,6 +279,8 @@ footer {
               
                   <div class="date" style=" line-height: 18px; font-size:14px;">Due Date : {{ Carbon\Carbon::parse($BookingHelper->due_date($shoppingcart,"database"))->format('d F Y  H:i') }}</div>
                 @endif
+
+
           </div>           
            </td>
          </tr>
