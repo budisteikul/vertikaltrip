@@ -140,6 +140,7 @@ class BookingHelper {
 
 				$shoppingcart_product->title = $data['activityBookings'][$i]['product']['title'];
 				$shoppingcart_product->rate = $data['activityBookings'][$i]['rateTitle'];
+				//$shoppingcart_product->rate = "Open Trip";
 				$shoppingcart_product->date = ProductHelper::texttodate($data['activityBookings'][$i]['invoice']['dates']);
 				$shoppingcart_product->cancellation = 'Referring to '.$bookingChannel.' policy';
 				$shoppingcart_product->save();
@@ -1688,6 +1689,8 @@ class BookingHelper {
             	})->get()->sum('people');
 
             $min_participant = Product::where('bokun_id',$activityId)->first()->min_participant;
+
+            if($rate!="Private Tour") $rate = "Open Trip";
 
             $bookings[] = (object)[
             	"date" => $date,
