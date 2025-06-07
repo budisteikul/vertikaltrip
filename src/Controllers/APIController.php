@@ -31,8 +31,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
-
-use budisteikul\vertikaltrip\Helpers\ProductHelper;
+use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
 
 class APIController extends Controller
 {
@@ -44,7 +43,11 @@ class APIController extends Controller
     
     public function test(Request $request)
     {
-        print_r("Hello");
+        /* 
+        $openai = New OpenAIHelper;
+        $net = $openai->openai('Terima kasih telah memesan tur kami. Tur kuliner akan dimulai pukul 18.30pm dan meeting point kita di Tugu Jogja (Yogyakarta Monument). DImohon untuk menunggu di dekat tanda "Tugu Golong Gilig"');
+        print_r($net);
+        */
     }
 
     public function cancellation($sessionId,$confirmationCode)

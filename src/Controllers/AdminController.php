@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
 use Illuminate\Support\Facades\Cache;
 use budisteikul\vertikaltrip\Helpers\BokunHelper;
+use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
 
 class AdminController extends Controller
 {
@@ -45,7 +46,18 @@ class AdminController extends Controller
         return response($response, 201);
     }
 
-    
+    public function openai(Request $request)
+    {
+        $request->validate([
+            'text' => 'required'
+        ]);
+        $text = $request->text;
+        $openai = New OpenAIHelper;
+        $data = $openai->openai($text);
+        return response()->json([
+                'text' => $data
+            ], 200);
+    }
 
     public function product_sync(Request $request)
     {
