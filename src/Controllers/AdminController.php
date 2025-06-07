@@ -10,6 +10,7 @@ use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
 use Illuminate\Support\Facades\Cache;
 use budisteikul\vertikaltrip\Helpers\BokunHelper;
 use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -48,19 +49,21 @@ class AdminController extends Controller
 
     public function openai(Request $request)
     {
-        //header("Access-Control-Allow-Origin: *");
-        $json = json_decode($request->getContent());
-        //print_r($json->text);
-        //exit;
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'text' => 'required'
         ]);
         
-        $text = $json->text;
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json($errors);
+        }
+        
+        //$json = json_decode($request->getContent());
+        $text = $request->text;
 
         $openai = New OpenAIHelper;
-        $data = $openai->openai($text);
+        $data = $openai->openai($text,'Make it in english and polished');
         return response()->json([
                 'text' => $data
             ], 200);

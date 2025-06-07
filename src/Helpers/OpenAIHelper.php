@@ -3,7 +3,7 @@ namespace budisteikul\vertikaltrip\Helpers;
 
 class OpenAIHelper {
 
-	public function openai($input)
+	public function openai($input,$prompt)
 	{
 		$data_json = new \stdClass();
 		$data_json->model = 'gpt-4.1-mini';
@@ -16,7 +16,7 @@ class OpenAIHelper {
       				"content": [
         				{
           					"type": "input_text",
-          					"text": "Make it english and polished"
+          					"text": "'.$prompt.'"
         				}
       				]
     			},
