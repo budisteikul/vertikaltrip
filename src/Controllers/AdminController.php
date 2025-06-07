@@ -48,14 +48,16 @@ class AdminController extends Controller
 
     public function openai(Request $request)
     {
+        //header("Access-Control-Allow-Origin: *");
         $json = json_decode($request->getContent());
-        print_r($json->text);
-        exit;
+        //print_r($json->text);
+        //exit;
 
         $request->validate([
             'text' => 'required'
         ]);
-        $text = $request->text;
+        
+        $text = $json->text;
 
         $openai = New OpenAIHelper;
         $data = $openai->openai($text);
