@@ -52,11 +52,12 @@ class AdminController extends Controller
                 'text' => $request->text
             ], 200);
         exit;
+        
         $request->validate([
             'text' => 'required'
         ]);
         $text = $request->text;
-        
+
         $openai = New OpenAIHelper;
         $data = $openai->openai($text);
         return response()->json([
