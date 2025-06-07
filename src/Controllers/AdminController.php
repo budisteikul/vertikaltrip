@@ -48,10 +48,8 @@ class AdminController extends Controller
 
     public function openai(Request $request)
     {
-        
-        return response()->json([
-                'text' => $request->text
-            ], 200);
+        $json = json_decode($request->getContent());
+        print_r($json->text);
         exit;
 
         $request->validate([
