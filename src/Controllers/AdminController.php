@@ -51,21 +51,20 @@ class AdminController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'text' => 'required'
+            'message_text' => 'required'
         ]);
         
+
         if ($validator->fails()) {
             $errors = $validator->errors();
             return response()->json($errors);
         }
-        
-        //$json = json_decode($request->getContent());
-        $text = $request->text;
 
         $openai = New OpenAIHelper;
-        $data = $openai->openai($text,'Make it in english and polished');
+        $data = $openai->openai($request->message_text,'Make it in english and polished');
         return response()->json([
-                'text' => $data
+                'id' => 1,
+                'message_text' => $data
             ], 200);
     }
 
