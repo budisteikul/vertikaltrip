@@ -48,10 +48,15 @@ class AdminController extends Controller
 
     public function openai(Request $request)
     {
+        return response()->json([
+                'text' => $request->text
+            ], 200);
+        exit;
         $request->validate([
             'text' => 'required'
         ]);
         $text = $request->text;
+        
         $openai = New OpenAIHelper;
         $data = $openai->openai($text);
         return response()->json([
