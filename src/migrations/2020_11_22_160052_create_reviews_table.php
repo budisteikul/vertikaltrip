@@ -29,7 +29,7 @@ class CreateReviewsTable extends Migration
             $table->string('user')->nullable();
             $table->string('title')->nullable();
             $table->text('text')->nullable();
-            $table->float('rating')->nullable();
+            $table->float('rating', precision: 53)->nullable();
             $table->dateTime('date')->nullable();
             $table->string('link')->nullable();
             

@@ -18,6 +18,9 @@ class CreateChannelsTable extends Migration
 			$table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->tinyInteger('invoice')->default(1);
+            $table->tinyInteger('can_review')->default(1);
+            $table->tinyInteger('can_booking')->default(1);
+            $table->tinyInteger('status')->default(1);
             $table->timestamps(6);
         });
     }
