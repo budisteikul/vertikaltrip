@@ -576,7 +576,7 @@ class ContentHelper {
 
             $dataObj[] = array(
                 'id' => $category->id,
-                'name' => $category->name .' | by Vertikal Trip',
+                'name' => $category->name,
                 'description' => $category->description,
                 'slug' => $category->slug,
                 'products' => $dataObj2,
@@ -630,7 +630,7 @@ class ContentHelper {
         
         $dataObj[] = array(
                 'id' => $category->id,
-                'name' => $category->name .' | by Vertikal Trip',
+                'name' => $category->name,
                 'description' => $category->description,
                 'slug' => $category->slug,
                 'products' => $dataObj2,
