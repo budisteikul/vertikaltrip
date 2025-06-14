@@ -13,4 +13,4 @@
     
 
 	//Schedule
-	Route::post('/api/schedule', 'budisteikul\vertikaltrip\Controllers\AdminController@schedule')->middleware(['SettingMiddleware']);
+	Route::post('/api/schedule', 'budisteikul\vertikaltrip\Controllers\AdminController@schedule')->middleware(['SettingMiddleware','auth:sanctum']);
