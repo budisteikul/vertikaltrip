@@ -19,11 +19,22 @@ class AdminController extends Controller
 {
     
 	
-    public function get_schedule()
+    public function schedule(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'month' => 'required',
+            'year' => 'required'
+        ]);
+        
+
+        if ($validator->fails()) {
+            $errors = $validator->errors();
+            return response()->json($errors);
+        }
+
         $bokun_id = "";
-        $month = 7;
-        $year = 2025;
+        $month = $request->month;
+        $year = $request->year;
 
         //$data = [];
         
