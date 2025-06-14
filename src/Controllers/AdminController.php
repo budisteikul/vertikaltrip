@@ -4,6 +4,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use budisteikul\vertikaltrip\Models\User;
+use budisteikul\vertikaltrip\Models\ShoppingcartProduct;
+use budisteikul\vertikaltrip\Models\ShoppingcartProductDetail;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
@@ -12,10 +14,85 @@ use budisteikul\vertikaltrip\Helpers\BokunHelper;
 use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
 use Illuminate\Support\Facades\Validator;
 
+
 class AdminController extends Controller
 {
     
 	
+    public function test()
+    {
+        $bokun_id = "";
+        $month = 7;
+        $year = 2025;
+
+        $data = [];
+        
+
+        $a_date = $year ."-".$month."-23";
+        $a_date = date("Y-m-t", strtotime($a_date));
+        $lastdate = substr($a_date,8,2);
+
+        for($i=01;$i<=$lastdate;$i++)
+        {
+            $b_date = $year ."-".$month."-". $i;
+            $date = date("Y-m-d", strtotime($b_date));
+
+            $total = 0;
+            
+            
+
+            if($bokun_id!="")
+            {
+                $products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
+                    return $query->where('booking_status','CONFIRMED');
+                })->where('product_id',$bokun_id)->whereDate('date',$date)->get();
+            }
+            else
+            {
+                $products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
+                    return $query->where('booking_status','CONFIRMED');
+                })->whereDate('date',$date)->get();
+            }
+            
+
+            foreach($products as $product)
+            {
+                $product_details = ShoppingcartProductDetail::where('shoppingcart_product_id',$product->id)->get();
+                foreach($product_details as $product_detail)
+                {
+                    $total += $product_detail->people;
+                }
+            }
+
+            $data[] = (object)[
+                'date' => $date,
+                'total' => $total
+            ];
+            //print_r($date.'<br />');
+        }
+
+
+        
+        print_r($data);
+        //echo $lastdate;
+
+        /*
+        $total = 0;
+        $products = ShoppingcartProduct::whereHas('shoppingcart', function ($query) {
+            return $query->where('booking_status','CONFIRMED');
+        })->where('product_id',$id->bokun_id)->whereDate('date',$date)->get();
+        foreach($products as $product)
+        {
+            $product_details = ShoppingcartProductDetail::where('shoppingcart_product_id',$product->id)->get();
+            foreach($product_details as $product_detail)
+            {
+                $total += $product_detail->people;
+            }
+        }
+        return $total;
+        */
+    }
+
     public function __construct()
     {
         
