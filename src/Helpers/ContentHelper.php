@@ -379,10 +379,10 @@ class ContentHelper {
         {
             $currency = 'IDR';
             $total = GeneralHelper::numberFormat(BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,$currency),$currency);
-            $rate = '<small><strong>Pay in '.$currency.'</strong></small>';
+            $rate = '<small><strong>Pay in '.$currency.'</strong><br />Please make sure your Wise account has sufficient balance.</small>';
             if($shoppingcart->currency!=$currency)
             {
-                $rate = '<small><strong>Charge in '.$currency.'</strong>, '. BookingHelper::text_rate($shoppingcart,$currency).'</small>';
+                $rate = '<small><strong>Charge in '.$currency.'</strong>, '. BookingHelper::text_rate($shoppingcart,$currency).'<br />Please make sure your Wise account has sufficient balance.</small>';
             }
 
             $dataShoppingcart[0]["wise_currency"] = $currency;
