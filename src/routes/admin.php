@@ -13,4 +13,4 @@
     
 
 	//Schedule
-	Route::get('/test', 'budisteikul\vertikaltrip\Controllers\AdminController@test')->middleware(['SettingMiddleware']);
+	Route::post('/api/test', 'budisteikul\vertikaltrip\Controllers\AdminController@test')->middleware(['SettingMiddleware']);
