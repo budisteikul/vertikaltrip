@@ -19,13 +19,13 @@ class AdminController extends Controller
 {
     
 	
-    public function test()
+    public function get_schedule()
     {
         $bokun_id = "";
         $month = 7;
         $year = 2025;
 
-        $data = [];
+        //$data = [];
         
 
         $a_date = $year ."-".$month."-23";
@@ -64,8 +64,9 @@ class AdminController extends Controller
                 }
             }
 
-            $data[] = (object)[
-                'date' => $date,
+            $data[] = [
+                'full_date' => $date,
+                'date' => substr($date,8,2),
                 'total' => $total
             ];
             //print_r($date.'<br />');
@@ -73,7 +74,9 @@ class AdminController extends Controller
 
 
         
-        print_r($data);
+        return response()->json([
+                'data' => $data
+            ], 200);
         //echo $lastdate;
 
         /*
