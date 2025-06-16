@@ -226,7 +226,7 @@ class PaymentHelper {
                         $amount = $shoppingcart->shoppingcart_payment->amount;
                         $currency = $shoppingcart->shoppingcart_payment->currency;
                         return '
-                            <div class="card mb-1">
+                            <div id="aaa" class="card mb-1">
                                 <span class="badge badge-info invoice-color-info" style="font-size:18px; ">
                                 Waiting for payment <br /><b id="payment_timer" class="text-white"  style="font-size:12px; font-weight: lighter;"><i class="fa fa-spinner fa-spin fa-fw"></i></b></span>
                                 </div>
@@ -257,7 +257,9 @@ class PaymentHelper {
                                             <b>OR</b>
                                             <br />
                                             <br />
-                                            <a href="'.env('APP_API_URL').'/payment/change/'.$shoppingcart->session_id.'/'. $shoppingcart->confirmation_code .'" class="text-theme">Change payment method</a>
+                                                <div id="changePaymentMethod">
+                                                    <a onclick="changePaymentMethod(\''.env('APP_API_URL').'/payment/change/'.$shoppingcart->session_id.'/'. $shoppingcart->confirmation_code .'\'); return false;" href="#aaa" class="text-theme">Change payment method</a>
+                                                </div>
                                             </div>
 
                                             

@@ -1181,6 +1181,7 @@ class APIController extends Controller
             
         }
 
+        
 
         function submitDisabled()
         {
@@ -1294,6 +1295,13 @@ class APIController extends Controller
                 $(element +"_button").tooltip("hide");
                 $(element +"_button").tooltip("show");
                 hideTooltip(element +"_button");
+            }
+
+            function changePaymentMethod(url)
+            {
+                $("#changePaymentMethod").html(\'<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;processing...\');
+                window.location=url;
+                return false;
             }
 
             function hideTooltip(element) {
