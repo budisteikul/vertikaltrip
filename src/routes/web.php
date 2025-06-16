@@ -31,8 +31,10 @@
 
 	//Create Payment
 	Route::post('/api/payment/checkout', 'budisteikul\vertikaltrip\Controllers\PaymentController@checkout')->middleware(['SettingMiddleware']);
+
 	//Change Payment
 	Route::get('/api/payment/change/{sessionId}/{confirmationCode}', 'budisteikul\vertikaltrip\Controllers\PaymentController@change')->middleware(['SettingMiddleware']);
+	
 	//Stripe
 	Route::get('/api/payment/stripe/jscript/{sessionId}', 'budisteikul\vertikaltrip\Controllers\PaymentController@stripe_jscript')->middleware(['SettingMiddleware']);
 	Route::post('/api/payment/stripe', 'budisteikul\vertikaltrip\Controllers\PaymentController@createpaymentstripe')->middleware(['SettingMiddleware']);

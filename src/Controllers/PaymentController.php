@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use budisteikul\vertikaltrip\Helpers\BookingHelper;
 use budisteikul\vertikaltrip\Helpers\PaymentHelper;
 use budisteikul\vertikaltrip\Helpers\XenditHelper;
+use budisteikul\vertikaltrip\Helpers\BokunHelper;
 use budisteikul\vertikaltrip\Models\Shoppingcart;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
@@ -23,25 +24,59 @@ class PaymentController extends Controller
     
     public function change($sessionId,$confirmationCode)
     {
-
-            
-
             $shoppingcart = Shoppingcart::where('session_id',$sessionId)->where('confirmation_code',$confirmationCode)->where('booking_status','PENDING')->first();
             if($shoppingcart)
             {
+                //==========================================================================
+                
+                foreach($shoppingcart->shoppingcart_products as $shoppingcart_product)
+                {
+                    $data = [];
+                    foreach($shoppingcart_product->shoppingcart_product_details as $shoppingcart_product_detail)
+                    {
+                        
+                        //$data_1 = [];
+                        for($i=1;$i<=$shoppingcart_product_detail->qty;$i++)
+                        {
+
+                            $data_1[] = [
+                                "pricingCategoryId" => $shoppingcart_product_detail->pricing_id,
+                                "quantity" => 1
+                            ];
+                        }
+                        
+                    }
+
+                    $data = [
+                        "activityId" => $shoppingcart_product->product_id,
+                        "date" => substr($shoppingcart_product->date,0,10),
+                        "startTimeId" => $shoppingcart_product->start_time_id,
+                        "rateId" => $shoppingcart_product->rate_id,
+                        "pricingCategoryBookings" => $data_1
+                    ];
+                    
+                    //print_r($data);
+                    //exit();
+                    $aaa = BokunHelper::get_addshoppingcart($shoppingcart->session_id,$data);
+                    //print_r($aaa);
+                }
+                
+                
+                //==========================================================================
+                
                 $url = $shoppingcart->url;
                 
                 $shoppingcart_json = BookingHelper::shoppingcart_dbtojson($shoppingcart->id);
                 $shoppingcart_json = BookingHelper::save_shoppingcart($shoppingcart->session_id,$shoppingcart_json);
 
+                //$shoppingcart->booking_status = 'CANCELED';
+                //$shoppingcart->save();
+                //$shoppingcart->shoppingcart_payment->payment_status = 3;
+                //$shoppingcart->shoppingcart_payment->save();
 
-                $shoppingcart->booking_status = 'CANCELED';
-                $shoppingcart->save();
-                $shoppingcart->shoppingcart_payment->payment_status = 3;
-                $shoppingcart->shoppingcart_payment->save();
-
-                //$shoppingcart->delete();
+                $shoppingcart->delete();
                 return redirect()->away($url.'/booking/checkout');
+                
             }
 
             return response()->json([
