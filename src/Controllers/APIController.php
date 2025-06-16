@@ -1299,12 +1299,13 @@ class APIController extends Controller
 
             function changePaymentMethod(url)
             {
-                
+
                 $("#changePaymentMethod").html(\'<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;processing...\');
                 //window.location.href = url;
                 
                 $.get(url, function(data){
-                    
+                        window.stopListenerReceipt;
+                        //window.location.href = "/booking/checkout";
                         window.openAppRoute(\'/booking/checkout\');
                    
                 });

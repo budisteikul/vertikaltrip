@@ -250,6 +250,7 @@ class PaymentController extends Controller
             $confirmation_code = $shoppingcart->confirmation_code;
             $redirect = '/booking/receipt/'.$session_id.'/'.$confirmation_code;
             $jscript = '
+                
                 afterCheckout("'.$redirect.'");
             ';
             return response($jscript)->header('Content-Type', 'application/javascript');
