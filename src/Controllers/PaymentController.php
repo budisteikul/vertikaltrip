@@ -7,10 +7,10 @@ use budisteikul\vertikaltrip\Helpers\BookingHelper;
 use budisteikul\vertikaltrip\Helpers\PaymentHelper;
 use budisteikul\vertikaltrip\Helpers\XenditHelper;
 use budisteikul\vertikaltrip\Helpers\BokunHelper;
+use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
 use budisteikul\vertikaltrip\Models\Shoppingcart;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Cache;
-use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
 use Ramsey\Uuid\Uuid;
 
 class PaymentController extends Controller
@@ -27,6 +27,14 @@ class PaymentController extends Controller
             $shoppingcart = Shoppingcart::where('session_id',$sessionId)->where('confirmation_code',$confirmationCode)->where('booking_status','PENDING')->first();
             if($shoppingcart)
             {
+
+                //==========================================================================
+                //clear cart
+                $old_shoppingcart = FirebaseHelper::read('shoppingcart/'.$shoppingcart->session_id);
+                foreach($old_shoppingcart->shoppingcarts[0]->products as $old_product)
+                {
+                    BokunHelper::get_removeactivity($shoppingcart->session_id,$old_product->booking_id);
+                }
                 //==========================================================================
                 
                 foreach($shoppingcart->shoppingcart_products as $shoppingcart_product)
