@@ -61,10 +61,6 @@ class PaymentController extends Controller
                 }
 
                 //exit();
-                //$aaa = BokunHelper::get_addshoppingcart($shoppingcart->session_id,$data);
-                    //print_r($aaa);
-                //print_r($data);
-                //exit();
                 //==========================================================================
                 
                 $url = $shoppingcart->url;
