@@ -1304,7 +1304,7 @@ class APIController extends Controller
                 //window.location.href = url;
                 
                 $.get(url, function(data){
-                        window.stopListenerReceipt;
+                        
                         //window.location.href = "/booking/checkout";
                         window.openAppRoute(\'/booking/checkout\');
                    
