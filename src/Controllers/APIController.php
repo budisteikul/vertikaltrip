@@ -1299,16 +1299,16 @@ class APIController extends Controller
 
             function changePaymentMethod(url)
             {
-
+                
                 $("#changePaymentMethod").html(\'<i class="fa fa-spinner fa-spin"></i>&nbsp;&nbsp;processing...\');
-                window.location.href = url;
-                /*
+                //window.location.href = url;
+                
                 $.get(url, function(data){
                     
                         window.openAppRoute(\'/booking/checkout\');
                    
                 });
-                */
+                
             }
 
             function hideTooltip(element) {
@@ -1324,7 +1324,14 @@ class APIController extends Controller
 
             function payment_timer(due_date,session_id,confirmation_code)
             {
-                 clearInterval(document.getElementById("timer_id").value);
+                try
+                {
+                    clearInterval(document.getElementById("timer_id").value);
+                }
+                catch{
+
+                }
+                 
 
                  var x = {};
                  var countDownDate = new Date(due_date).getTime();
@@ -1378,8 +1385,16 @@ class APIController extends Controller
                         
                     }
                     
+                    try
+                    {
+                        document.getElementById("timer_id").value = x[due_date];
+                    }
+                    catch
+                    {
 
-                    document.getElementById("timer_id").value = x[due_date];
+                    }
+                    
+
                     if (distance < 0) {
                         clearInterval(x[due_date]);
                         document.getElementById("payment_timer").innerHTML = "Payment expired";

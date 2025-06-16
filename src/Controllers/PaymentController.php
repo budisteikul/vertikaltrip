@@ -30,12 +30,13 @@ class PaymentController extends Controller
 
                 //==========================================================================
                 //clear cart
+                //FirebaseHelper::delete('receipt/'.$shoppingcart->session_id);
                 $old_shoppingcart = FirebaseHelper::read('shoppingcart/'.$shoppingcart->session_id);
                 foreach($old_shoppingcart->shoppingcarts[0]->products as $old_product)
                 {
                     BokunHelper::get_removeactivity($shoppingcart->session_id,$old_product->booking_id);
                 }
-                //FirebaseHelper::delete('shoppingcart/'.$shoppingcart->session_id);
+                
                 //==========================================================================
                 
                 foreach($shoppingcart->shoppingcart_products as $shoppingcart_product)
@@ -82,16 +83,18 @@ class PaymentController extends Controller
                 //$shoppingcart->shoppingcart_payment->payment_status = 3;
                 //$shoppingcart->shoppingcart_payment->save();
 
+
                 $shoppingcart->delete();
-                return redirect()->away($url.'/booking/checkout');
+
+                //return redirect()->away($url.'/booking/checkout');
                 
             }
-            /*
+            
             return response()->json([
                 'message' => "success"
             ], 200);
-            */
-            return redirect()->away(env('APP_URL').'/booking/checkout');
+            
+            //return redirect()->away(env('APP_URL').'/booking/checkout');
             
     }
 
