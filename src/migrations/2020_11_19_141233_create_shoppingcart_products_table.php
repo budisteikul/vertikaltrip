@@ -26,6 +26,9 @@ class CreateShoppingcartProductsTable extends Migration
             $table->string('product_confirmation_code')->nullable();
             
             $table->string('product_id')->nullable();
+            $table->string('rate_id')->nullable();
+            $table->string('start_time_id')->nullable();
+
             $table->string('image')->nullable();
             $table->string('title')->nullable();
             $table->string('rate')->nullable();

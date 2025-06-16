@@ -381,6 +381,9 @@ class BookingHelper {
 				}
 			}
 
+			$sp_rate_id = $activity[$i]->rate->id;
+			$sp_start_time_id = $activity[$i]->rate->id;
+
 			$sp_title = $activity[$i]->activity->title;
 			$sp_rate = $activity[$i]->rate->title;
 			$sp_currency = $contents->customerInvoice->currency;
@@ -413,6 +416,7 @@ class BookingHelper {
 						$unitPrice = $lineitems[$z]->title;
 					}
 					
+					$spd_pricing_id = $activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId;
 
 					if($type_product=="product")
 					{
@@ -431,6 +435,7 @@ class BookingHelper {
 						//===============================================================
 						$ShoppingcartProductDetails[] = (object) array(
 							'type' => $spd_type,
+							'pricing_id' => $spd_pricing_id,
 							'title' => $spd_title,
 							'people' => $spd_people,
 							'qty' => $spd_qty,
@@ -466,6 +471,7 @@ class BookingHelper {
 						
 						$ShoppingcartProductDetails[] = (object) array(
 							'type' => $spd_type,
+							'pricing_id' => $spd_pricing_id,
 							'title' => $spd_title,
 							'people' => $spd_people,
 							'qty' => $spd_qty,
@@ -503,6 +509,7 @@ class BookingHelper {
 						
 						$ShoppingcartProductDetails[] = (object) array(
 							'type' => $spd_type,
+							'pricing_id' => $spd_pricing_id,
 							'title' => $spd_title,
 							'people' => $spd_people,
 							'qty' => $spd_qty,
@@ -532,6 +539,8 @@ class BookingHelper {
 				'product_confirmation_code' => $sp_product_confirmation_code,
 				'booking_id' => $sp_booking_id,
 				'product_id' => $sp_product_id,
+				'rate_id' => $sp_rate_id,
+				'start_time_id' => $sp_start_time_id,
 				'image' => $sp_image,
 				'title' => $sp_title,
 				'rate' => $sp_rate,
@@ -870,6 +879,10 @@ class BookingHelper {
 					$sp_image = ImageHelper::thumbnail($product);
 				}
 			}
+
+			$sp_rate_id = $activity[$i]->rate->id;
+			$sp_start_time_id = $activity[$i]->startTime->id;
+
 			$sp_title = $activity[$i]->activity->title;
 			$sp_rate = $activity[$i]->rate->title;
 			$sp_currency = $contents->customerInvoice->currency;
@@ -904,6 +917,8 @@ class BookingHelper {
 						$unitPrice = $lineitems[$z]->title;
 					}
 
+					$spd_pricing_id = $activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId;
+
 					if($type_product=="product")
 					{
 						
@@ -920,6 +935,7 @@ class BookingHelper {
 
 						$ShoppingcartProductDetails[] = (object) array(
 							'type' => $spd_type,
+							'pricing_id' => $spd_pricing_id,
 							'title' => $spd_title,
 							'people' => $spd_people,
 							'qty' => $spd_qty,
@@ -954,6 +970,7 @@ class BookingHelper {
 
 						$ShoppingcartProductDetails[] = (object) array(
 							'type' => $spd_type,
+							'pricing_id' => $spd_pricing_id,
 							'title' => $spd_title,
 							'people' => $spd_people,
 							'qty' => $spd_qty,
@@ -987,6 +1004,7 @@ class BookingHelper {
 						
 						$ShoppingcartProductDetails[] = (object) array(
 							'type' => $spd_type,
+							'pricing_id' => $spd_pricing_id,
 							'title' => $spd_title,
 							'people' => $spd_people,
 							'qty' => $spd_qty,
@@ -1014,6 +1032,8 @@ class BookingHelper {
 				'product_confirmation_code' => $sp_product_confirmation_code,
 				'booking_id' => $sp_booking_id,
 				'product_id' => $sp_product_id,
+				'rate_id' => $sp_rate_id,
+				'start_time_id' => $sp_start_time_id,
 				'image' => $sp_image,
 				'title' => $sp_title,
 				'rate' => $sp_rate,
@@ -1937,6 +1957,7 @@ class BookingHelper {
             {
                 $ShoppingcartProductDetails[] = (object) array(
                     'type' => $product_detail->type,
+                    'pricing_id' => $product_detail->pricing_id,
                     'title' => $product_detail->title,
                     'people' => $product_detail->people,
                     'qty' => $product_detail->qty,
@@ -1955,6 +1976,8 @@ class BookingHelper {
 
             $ShoppingcartProducts[] = (object) array(
                 'booking_id' => $product->booking_id,
+                'rate_id' => $product->rate_id,
+                'start_time_id' => $product->start_time_id,
                 'product_confirmation_code' => $product->product_confirmation_code,
                 'product_id' => $product->product_id,
                 'image' => $product->image,
@@ -2113,6 +2136,8 @@ class BookingHelper {
 			if(isset($product->booking_id)) $shoppingcart_product->booking_id = $product->booking_id;
 			if(isset($product->product_confirmation_code)) $shoppingcart_product->product_confirmation_code = $product->product_confirmation_code;
 			if(isset($product->product_id)) $shoppingcart_product->product_id = $product->product_id;
+			if(isset($product->rate_id)) $shoppingcart_product->rate_id = $product->rate_id;
+			if(isset($product->start_time_id)) $shoppingcart_product->start_time_id = $product->start_time_id;
 			if(isset($product->image)) $shoppingcart_product->image = $product->image;
 			if(isset($product->title)) $shoppingcart_product->title = $product->title;
 			if(isset($product->rate)) $shoppingcart_product->rate = $product->rate;
@@ -2133,6 +2158,7 @@ class BookingHelper {
 				$shoppingcart_product_detail->shoppingcart_product_id = $shoppingcart_product->id;
 
 				if(isset($product_detail->type)) $shoppingcart_product_detail->type = $product_detail->type;
+				if(isset($product_detail->pricing_id)) $shoppingcart_product_detail->pricing_id = $product_detail->pricing_id;
 				if(isset($product_detail->title)) $shoppingcart_product_detail->title = $product_detail->title;
 				if(isset($product_detail->people)) $shoppingcart_product_detail->people = $product_detail->people;
 				if(isset($product_detail->qty)) $shoppingcart_product_detail->qty = $product_detail->qty;

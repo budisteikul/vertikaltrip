@@ -22,7 +22,8 @@ class CreateShoppingcartProductDetailsTable extends Migration
                   ->onDelete('cascade')->onUpdate('cascade');
             
             $table->string('type')->default('product');
-                
+            $table->string('pricing_id')->nullable();
+
             $table->string('title')->nullable();
             $table->string('people')->nullable();
             $table->string('qty')->nullable();
