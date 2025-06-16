@@ -76,20 +76,17 @@ class PaymentController extends Controller
                 $shoppingcart_json = BookingHelper::shoppingcart_dbtojson($shoppingcart->id);
                 $shoppingcart_json = BookingHelper::save_shoppingcart($shoppingcart->session_id,$shoppingcart_json);
 
-                //$shoppingcart->booking_status = 'CANCELED';
-                //$shoppingcart->save();
-                //$shoppingcart->shoppingcart_payment->payment_status = 3;
-                //$shoppingcart->shoppingcart_payment->save();
+                $shoppingcart->booking_status = 'CANCELED';
+                $shoppingcart->save();
+                $shoppingcart->shoppingcart_payment->payment_status = 3;
+                $shoppingcart->shoppingcart_payment->save();
 
-                $shoppingcart->delete();
+                //$shoppingcart->delete();
                 return redirect()->away($url.'/booking/checkout');
                 
             }
 
-            return response()->json([
-                        'id' => "0",
-                        'message' => "error",
-                    ]);
+            return redirect()->away(env('APP_URL').'/booking/checkout');
             
     }
 
