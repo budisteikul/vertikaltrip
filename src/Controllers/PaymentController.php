@@ -35,7 +35,7 @@ class PaymentController extends Controller
                     foreach($shoppingcart_product->shoppingcart_product_details as $shoppingcart_product_detail)
                     {
                         
-                        //$data_1 = [];
+                        $data_1 = [];
                         for($i=1;$i<=$shoppingcart_product_detail->qty;$i++)
                         {
 
@@ -55,13 +55,16 @@ class PaymentController extends Controller
                         "pricingCategoryBookings" => $data_1
                     ];
                     
+                    
                     //print_r($data);
-                    //exit();
-                    $aaa = BokunHelper::get_addshoppingcart($shoppingcart->session_id,$data);
-                    //print_r($aaa);
+                    BokunHelper::get_addshoppingcart($shoppingcart->session_id,$data);
                 }
-                
-                
+
+                //exit();
+                //$aaa = BokunHelper::get_addshoppingcart($shoppingcart->session_id,$data);
+                    //print_r($aaa);
+                //print_r($data);
+                //exit();
                 //==========================================================================
                 
                 $url = $shoppingcart->url;
