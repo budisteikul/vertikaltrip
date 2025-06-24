@@ -236,8 +236,11 @@ class PaymentController extends Controller
 
     public function wise_jscript($sessionId)
     {
+
         $shoppingcart = BookingHelper::read_shoppingcart($sessionId);
+       
         $shoppingcart->booking_status = 'PENDING';
+
         BookingHelper::save_shoppingcart($sessionId,$shoppingcart);
         BookingHelper::set_confirmationCode($sessionId);
         
