@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('tour')->nullable();
             $table->float('guide', precision: 53)->default(0);
             $table->float('pax', precision: 53)->default(0);
+            $table->float('fee', precision: 53)->default(0);
+            $table->float('cost', precision: 53)->default(0);
             $table->float('total', precision: 53)->default(0);
             $table->json('transactions')->nullable();
             $table->text('note')->nullable();
