@@ -381,20 +381,34 @@ footer {
 
 <br />
 
+@if($shoppingcart->shoppingcart_payment->payment_provider=="none")
+<div style="margin-top: 0px;">
+  @foreach($shoppingcart->shoppingcart_products()->get() as $shoppingcart_product)
+  @php
+  $question = $BookingHelper->get_answer_product($shoppingcart,$shoppingcart_product->booking_id);
+  @endphp
+  <div>{!! $question !!}</div>
+  @endforeach
+</div>
+@endif
+
 @if($shoppingcart->shoppingcart_payment->payment_provider!="none")
-<div id="notices" style="margin-top: 10px;float:right;">
+<div id="notices" style="margin-top: 15px;float:right;">
   <div style="font-size: 14px; color: #AAAAAA; line-height: 18px; font-weight: bold; ">PAYMENT STATUS</div>  
   <div class="notice"><small>{!! $PaymentHelper->get_paymentStatus($shoppingcart) !!}</small></div>
 </div>
 @endif
 
 @if($shoppingcart->shoppingcart_payment->payment_provider=="none")
+<div>
 <h2 style="margin-bottom:3px;">Payment Details</h2>
 <strong>Bank : </strong>BCA (Bank Central Asia)<br />
 <strong>Bank Swift : </strong>CENAIDJA<br />
 <strong>Account Name : </strong>VERTIKAL TRIP INDONESIA<br />
 <strong>Account Number : </strong>1690423860<br />
+</div>
 @endif
+
 <div style="clear: both;"></div>
 <footer>
   This invoice is provided by the system and is legitimate without signature and seal

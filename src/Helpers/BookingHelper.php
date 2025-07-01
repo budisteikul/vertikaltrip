@@ -298,7 +298,7 @@ class BookingHelper {
 							$shoppingcart_question->type = 'activityBookings';
 							$shoppingcart_question->booking_id = $data['activityBookings'][$i]['bookingId'];
 							$shoppingcart_question->question_id = $data['activityBookings'][$i]['notes'][$k]['type'];
-							$shoppingcart_question->label = "Note from ". $bookingChannel;
+							$shoppingcart_question->label = "Note";
 							$shoppingcart_question->order = $order;
 							$shoppingcart_question->answer = $data['activityBookings'][$i]['notes'][$k]['body'];
 							$shoppingcart_question->save();
@@ -2595,7 +2595,15 @@ class BookingHelper {
 		
 		if($value!="")
 		{
-			$value = '<div class="card mb-2 mt-2"><div class="card-body bg-light"><i>Additional Information</i><br />'. nl2br($value) .'</div></div>';
+			if($shoppingcart->booking_channel=="WEBSITE")
+			{
+				$value = '<div class="card mb-2 mt-2"><div class="card-body bg-light"><i>Additional Information</i><br />'. nl2br($value) .'</div></div>';
+			}
+			else
+			{
+				$value = '<div class="card mb-2 mt-2"><div class="card-body bg-light">'. nl2br($value) .'</div></div>';	
+			}
+			
 		}
 		
         return $value;
@@ -2636,6 +2644,7 @@ class BookingHelper {
 		$path = config('site.assets') .'/img/pdf/qrcode-logo.png';
 		$qrcode = base64_encode(QrCode::errorCorrection('H')->format('png')->merge($path,1,false)->size(1024)->margin(0)->generate(env('APP_API_URL') .'/pdf/invoice/'.$shoppingcart->session_id.'/Invoice-'.$shoppingcart->confirmation_code.'.pdf'  ));
 		$main_contact = self::get_answer_contact($shoppingcart);
+
         $pdf = PDF::setOptions(['tempDir' =>  storage_path(),'fontDir' => storage_path(),'fontCache' => storage_path(),'isRemoteEnabled' => true])->loadView('vertikaltrip::layouts.pdf.invoice', compact('shoppingcart','qrcode'))->setPaper('a4', 'portrait');
         if($shoppingcart->booking_channel=="WEBSITE")
         {
