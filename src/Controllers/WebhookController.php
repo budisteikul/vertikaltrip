@@ -274,7 +274,7 @@ class WebhookController extends Controller
             $booking_json = json_decode($data);
             
 
-            print_r($booking_json);
+            
 
             if(!isset($booking_json->booking_confirmation_code))
             {
@@ -293,6 +293,8 @@ class WebhookController extends Controller
                 return response('DATA TIDAK LENGKAP STEP 2', 200)->header('Content-Type', 'text/plain');
                 //$booking_json->booking_confirmation_code = BookingHelper::get_ticket();
             }
+            
+            print_r($booking_json);
             
             if(strtolower($booking_json->p_time)=="night" && strtolower($booking_json->p_location)=="yogyakarta")
             {
