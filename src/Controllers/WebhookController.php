@@ -252,7 +252,7 @@ class WebhookController extends Controller
             $command = 'Extract data with JSON object format as 
 
             {
-                "booking_confirmation_code" : get reference number booking,
+                "booking_confirmation_code" : get reference number or confirmation code booking,
                 "booking_channel" : name sender,
                 "booking_note" : "",
                 "tour_name" : offer or booking name has been booked,
@@ -261,7 +261,7 @@ class WebhookController extends Controller
                 "participant_phone" : get participant phone,
                 "participant_email" : get participant email,
                 "participant_total" : get total participant,
-                "p_time" : night or morning,
+                "p_time" : night or morning or evening,
                 "p_location" : yogyakarta or bali
             }
 
@@ -285,7 +285,11 @@ class WebhookController extends Controller
             {
                 $booking_json->p_product_id = 7424;
             }
-            else if($booking_json->p_time=="day" && $booking_json->p_location=="yogyakarta")
+            else if($booking_json->p_time=="evening" && $booking_json->p_location=="yogyakarta")
+            {
+                $booking_json->p_product_id = 7424;
+            }
+            else if($booking_json->p_time=="morning" && $booking_json->p_location=="yogyakarta")
             {
                 $booking_json->p_product_id = 10091;
             }
