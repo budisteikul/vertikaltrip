@@ -261,7 +261,7 @@ class WebhookController extends Controller
                 "participant_phone" : "+6285743112112",
                 "participant_email" : "guide@vertikaltrip.com",
                 "participant_total" : 2,
-                "p_time" : night or day,
+                "p_time" : night or morning,
                 "p_location" : yogyakarta or bali
             }
 
