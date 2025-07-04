@@ -240,7 +240,7 @@ class WebhookController extends Controller
         {
             $subject = $request->input("subject");
             $body = $request->input("body-plain");
-            $text = $subject ." ". $body;
+            $text = $body;
 
             if($subject=="")
             {
@@ -252,17 +252,17 @@ class WebhookController extends Controller
             $command = 'Extract data with JSON object format as 
 
             {
-                "booking_confirmation_code" : get reference number or confirmation code booking,
-                "booking_channel" : name sender,
+                "booking_confirmation_code" : get reference number or confirmation code,
+                "booking_channel" : name of sender GetyourGuide or Airbnb,
                 "booking_note" : "",
                 "tour_name" : offer or booking name has been booked,
-                "tour_date" : format YYYY-mm-dd HH:ii:ss,
+                "tour_date" : date of the tour, format YYYY-mm-dd HH:ii:ss,
                 "participant_name" : get participant name,
                 "participant_phone" : get participant phone,
                 "participant_email" : get participant email,
                 "participant_total" : get total participant,
-                "p_time" : night or morning or evening,
-                "p_location" : yogyakarta or bali
+                "p_time" : night or morning or evening from tour date,
+                "p_location" : yogyakarta or bali from tour name
             }
 
             Set "" if don\'t have data';
@@ -281,20 +281,22 @@ class WebhookController extends Controller
                 return response('DATA TIDAK LENGKAP STEP 2', 200)->header('Content-Type', 'text/plain');
             }
             
-            if($booking_json->p_time=="night" && $booking_json->p_location=="yogyakarta")
+            if(strtolower($booking_json->p_time)=="night" && strtolower($booking_json->p_location)=="yogyakarta")
             {
                 $booking_json->p_product_id = 7424;
             }
-            else if($booking_json->p_time=="evening" && $booking_json->p_location=="yogyakarta")
+            else if(strtolower($booking_json->p_time)=="evening" && strtolower($booking_json->p_location)=="yogyakarta")
             {
                 $booking_json->p_product_id = 7424;
             }
-            else if($booking_json->p_time=="morning" && $booking_json->p_location=="yogyakarta")
+            else if(strtolower($booking_json->p_time)=="morning" && strtolower($booking_json->p_location)=="yogyakarta")
             {
                 $booking_json->p_product_id = 10091;
             }
             else
             {
+                print_r("p_time". strtolower($booking_json->p_time));
+                print_r("p_location". strtolower($booking_json->p_location));
                 return response('DATA TIDAK LENGKAP STEP 3', 200)->header('Content-Type', 'text/plain');
             }
 
