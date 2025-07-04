@@ -10,6 +10,7 @@ use budisteikul\vertikaltrip\Helpers\TaskHelper;
 use budisteikul\vertikaltrip\Helpers\LogHelper;
 use budisteikul\vertikaltrip\Helpers\WhatsappHelper;
 use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
+use budisteikul\vertikaltrip\Helpers\GeneralHelper;
 
 use budisteikul\vertikaltrip\Models\Shoppingcart;
 use budisteikul\vertikaltrip\Models\ShoppingcartProduct;
@@ -239,12 +240,14 @@ class WebhookController extends Controller
         {
             $subject = $request->input("subject");
             $body = $request->input("body-plain");
-            $text = $subject ." ". $body;
+            $text = $body;
 
             if($subject=="")
             {
-                return response('DATA TIDAK LENGKAP', 200)->header('Content-Type', 'text/plain');
+                return response('DATA TIDAK LENGKAP STEP 1', 200)->header('Content-Type', 'text/plain');
             }
+
+            //$booking_confirmation_code = GeneralHelper::get_string_between($text,"Reference number: "," ");
 
             $command = 'Extract data with JSON object format as 
 
@@ -258,8 +261,8 @@ class WebhookController extends Controller
                 "participant_phone" : "+6285743112112",
                 "participant_email" : "guide@vertikaltrip.com",
                 "participant_total" : 2,
-                "p_time" : "night or day",
-                "p_location" : "yogyakarta or bali"
+                "p_time" : night or day,
+                "p_location" : yogyakarta or bali
             }
 
             Set "" if don\'t have data';
@@ -270,9 +273,12 @@ class WebhookController extends Controller
             $data = $openai->openai($text,$command);
             $booking_json = json_decode($data);
             
-            if($booking_json->booking_confirmation_code=="")
+
+            //print_r($booking_json);
+
+            if(!isset($booking_json->booking_confirmation_code))
             {
-                return response('DATA TIDAK LENGKAP', 200)->header('Content-Type', 'text/plain');
+                return response('DATA TIDAK LENGKAP STEP 2', 200)->header('Content-Type', 'text/plain');
             }
             
             if($booking_json->p_time=="night" && $booking_json->p_location=="yogyakarta")
@@ -285,7 +291,7 @@ class WebhookController extends Controller
             }
             else
             {
-                return response('DATA TIDAK LENGKAP', 200)->header('Content-Type', 'text/plain');
+                return response('DATA TIDAK LENGKAP STEP 3', 200)->header('Content-Type', 'text/plain');
             }
 
             $check_first = Shoppingcart::where('confirmation_code',$booking_json->booking_confirmation_code)->first();

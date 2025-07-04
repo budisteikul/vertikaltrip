@@ -6,10 +6,10 @@ class OpenAIHelper {
 	public function openai($input,$prompt)
 	{
 		$data_json = new \stdClass();
-		$data_json->model = 'gpt-4.1-mini';
+		$data_json->model = 'gpt-4.1-nano';
 		
 		$data_json->input = '{
-  			"model": "gpt-4.1-mini",
+  			"model": "gpt-4.1-nano",
   			"input": [
     			{
       				"role": "system",
