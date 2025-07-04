@@ -270,7 +270,10 @@ class WebhookController extends Controller
             $data = $openai->openai($text,$command);
             $booking_json = json_decode($data);
             
-
+            if($booking_json->booking_confirmation_code=="")
+            {
+                return response('DATA TIDAK LENGKAP', 200)->header('Content-Type', 'text/plain');
+            }
             
             if($booking_json->p_time=="night" && $booking_json->p_location=="yogyakarta")
             {
