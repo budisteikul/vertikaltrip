@@ -240,7 +240,7 @@ class WebhookController extends Controller
         {
             $subject = $request->input("subject");
             $body = $request->input("body-plain");
-            $text = $body;
+            $text = $subject ." ". $body;
 
             if($subject=="")
             {
@@ -252,11 +252,11 @@ class WebhookController extends Controller
             $command = 'Extract data with JSON object format as 
 
             {
-                "booking_confirmation_code" : "TEST-123",
-                "booking_channel" : "Airbnb",
-                "booking_note" : "note booking",
-                "tour_name" : "Jogja Night Food Tour",
-                "tour_date" : "2025-07-05 18:30:00",
+                "booking_confirmation_code" : get reference number booking,
+                "booking_channel" : name sender,
+                "booking_note" : "",
+                "tour_name" : offer or booking name has been booked,
+                "tour_date" : format YYYY-mm-dd HH:ii:ss,
                 "participant_name" : "John Doe",
                 "participant_phone" : "+6285743112112",
                 "participant_email" : "guide@vertikaltrip.com",
@@ -274,7 +274,7 @@ class WebhookController extends Controller
             $booking_json = json_decode($data);
             
 
-            //print_r($booking_json);
+            print_r($booking_json);
 
             if(!isset($booking_json->booking_confirmation_code))
             {
@@ -373,6 +373,8 @@ class WebhookController extends Controller
             $shoppingcart_question->label = "Note";
             $shoppingcart_question->answer = $booking_json->booking_note;
             $shoppingcart_question->save();
+
+            BookingHelper::shoppingcart_notif($shoppingcart);
 
             /*
             $json = json_decode($request->getContent());
