@@ -278,7 +278,20 @@ class WebhookController extends Controller
 
             if(!isset($booking_json->booking_confirmation_code))
             {
+                $data = $openai->openai($text,$command);
+                $booking_json = json_decode($data);
+            }
+
+            if(!isset($booking_json->booking_confirmation_code))
+            {
+                $data = $openai->openai($text,$command);
+                $booking_json = json_decode($data);
+            }
+
+            if(!isset($booking_json->booking_confirmation_code))
+            {
                 return response('DATA TIDAK LENGKAP STEP 2', 200)->header('Content-Type', 'text/plain');
+                //$booking_json->booking_confirmation_code = BookingHelper::get_ticket();
             }
             
             if(strtolower($booking_json->p_time)=="night" && strtolower($booking_json->p_location)=="yogyakarta")
