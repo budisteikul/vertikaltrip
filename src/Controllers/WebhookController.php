@@ -241,6 +241,11 @@ class WebhookController extends Controller
             $body = $request->input("body-plain");
             $text = $subject ." ". $body;
 
+            if($subject=="")
+            {
+                return response('DATA TIDAK LENGKAP', 200)->header('Content-Type', 'text/plain');
+            }
+
             $command = 'Extract data with JSON object format as 
 
             {
