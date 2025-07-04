@@ -236,7 +236,7 @@ class WebhookController extends Controller
             }
         }
 
-        if($webhook_app=="create_booking")
+        if($webhook_app=="create_booking_with_email")
         {
             $subject = $request->input("subject");
             $body = $request->input("body-plain");
