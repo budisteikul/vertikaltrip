@@ -265,7 +265,7 @@ class WebhookController extends Controller
                 "p_location" : yogyakarta or bali from tour name
             }
 
-            Set "" if don\'t have data';
+            Set null if don\'t have data';
 
 
             
@@ -295,7 +295,7 @@ class WebhookController extends Controller
             }
             
             print_r($booking_json);
-            
+
             if(strtolower($booking_json->p_time)=="night" && strtolower($booking_json->p_location)=="yogyakarta")
             {
                 $booking_json->p_product_id = 7424;
