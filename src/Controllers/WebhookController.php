@@ -257,10 +257,10 @@ class WebhookController extends Controller
                 "booking_note" : "",
                 "tour_name" : offer or booking name has been booked,
                 "tour_date" : format YYYY-mm-dd HH:ii:ss,
-                "participant_name" : "John Doe",
-                "participant_phone" : "+6285743112112",
-                "participant_email" : "guide@vertikaltrip.com",
-                "participant_total" : 2,
+                "participant_name" : get participant name,
+                "participant_phone" : get participant phone,
+                "participant_email" : get participant email,
+                "participant_total" : get total participant,
                 "p_time" : night or morning,
                 "p_location" : yogyakarta or bali
             }
