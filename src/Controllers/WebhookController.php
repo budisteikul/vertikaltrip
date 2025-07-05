@@ -18,6 +18,7 @@ use budisteikul\vertikaltrip\Models\ShoppingcartProductDetail;
 use budisteikul\vertikaltrip\Models\ShoppingcartQuestion;
 use budisteikul\vertikaltrip\Models\ShoppingcartPayment;
 use budisteikul\vertikaltrip\Models\Contact;
+use budisteikul\vertikaltrip\Models\Product;
 
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
@@ -305,15 +306,18 @@ class WebhookController extends Controller
 
             if(strtolower($booking_json->p_time)=="night" && strtolower($booking_json->p_location)=="yogyakarta")
             {
-                $booking_json->p_product_id = 7424;
+                $product = Product::findOrFail(1);
+                $booking_json->p_product_id = $product->bokun_id;
             }
             else if(strtolower($booking_json->p_time)=="evening" && strtolower($booking_json->p_location)=="yogyakarta")
             {
-                $booking_json->p_product_id = 7424;
+                $product = Product::findOrFail(1);
+                $booking_json->p_product_id = $product->bokun_id;
             }
             else if(strtolower($booking_json->p_time)=="morning" && strtolower($booking_json->p_location)=="yogyakarta")
             {
-                $booking_json->p_product_id = 10091;
+                $product = Product::findOrFail(44);
+                $booking_json->p_product_id = $product->bokun_id;
             }
             else
             {
