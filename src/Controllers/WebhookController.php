@@ -33,11 +33,7 @@ class WebhookController extends Controller
     
     public function webhook($webhook_app,Request $request)
     {
-        if($webhook_app=="test")
-        {
-            $message = BookingHelper::schedule_bydate("2025-07-05");
-            print_r($message);
-        }
+        
 
         if($webhook_app=="whatsapp")
         {
