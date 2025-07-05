@@ -260,7 +260,7 @@ class WebhookController extends Controller
 
             {
                 "booking_confirmation_code" : get reference number or confirmation code,
-                "booking_channel" : name of sender GetyourGuide or Airbnb,
+                "booking_channel" : name of sender GetYourGuide or Airbnb,
                 "booking_note" : "",
                 "tour_name" : offer or booking name has been booked,
                 "tour_date" : date of the tour, format YYYY-mm-dd HH:ii:ss,
