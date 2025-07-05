@@ -33,6 +33,12 @@ class WebhookController extends Controller
     
     public function webhook($webhook_app,Request $request)
     {
+        if($webhook_app=="test")
+        {
+            $message = BookingHelper::schedule_bydate("2025-07-05");
+            print_r($message);
+        }
+
         if($webhook_app=="whatsapp")
         {
             
@@ -294,7 +300,7 @@ class WebhookController extends Controller
                 //$booking_json->booking_confirmation_code = BookingHelper::get_ticket();
             }
             
-            print_r($booking_json);
+            //print_r($booking_json);
 
             if(strtolower($booking_json->p_time)=="night" && strtolower($booking_json->p_location)=="yogyakarta")
             {
@@ -310,8 +316,8 @@ class WebhookController extends Controller
             }
             else
             {
-                print_r("p_time". strtolower($booking_json->p_time));
-                print_r("p_location". strtolower($booking_json->p_location));
+                //print_r("p_time". strtolower($booking_json->p_time));
+                //print_r("p_location". strtolower($booking_json->p_location));
                 return response('DATA TIDAK LENGKAP STEP 3', 200)->header('Content-Type', 'text/plain');
             }
 
@@ -334,6 +340,7 @@ class WebhookController extends Controller
             $shoppingcart_product = new ShoppingcartProduct();
             $shoppingcart_product->shoppingcart_id = $shoppingcart->id;
             $shoppingcart_product->product_id = $booking_json->p_product_id;
+            $shoppingcart_product->booking_id = 'bookingId_'. $shoppingcart->id;
             $shoppingcart_product->title = $booking_json->tour_name;
             $shoppingcart_product->rate = "Open Trip";
             $shoppingcart_product->date = $booking_json->tour_date;
@@ -359,6 +366,7 @@ class WebhookController extends Controller
             $shoppingcart_question->type = "mainContactDetails";
             $shoppingcart_question->when_to_ask = "booking";
             $shoppingcart_question->question_id = "firstName";
+            $shoppingcart_question->label = "First name";
             $shoppingcart_question->answer = $booking_json->participant_name;
             $shoppingcart_question->save();
 
@@ -367,6 +375,7 @@ class WebhookController extends Controller
             $shoppingcart_question->type = "mainContactDetails";
             $shoppingcart_question->when_to_ask = "booking";
             $shoppingcart_question->question_id = "lastName";
+            $shoppingcart_question->label = "Last name";
             $shoppingcart_question->answer = null;
             $shoppingcart_question->save();
 
@@ -375,6 +384,7 @@ class WebhookController extends Controller
             $shoppingcart_question->type = "mainContactDetails";
             $shoppingcart_question->when_to_ask = "booking";
             $shoppingcart_question->question_id = "phoneNumber";
+            $shoppingcart_question->label = "Phone number";
             $shoppingcart_question->answer = $booking_json->participant_phone;
             $shoppingcart_question->save();
 
@@ -383,6 +393,7 @@ class WebhookController extends Controller
             $shoppingcart_question->type = "mainContactDetails";
             $shoppingcart_question->when_to_ask = "booking";
             $shoppingcart_question->question_id = "email";
+            $shoppingcart_question->label = "Email";
             $shoppingcart_question->answer = $booking_json->participant_email;
             $shoppingcart_question->save();
 
@@ -391,6 +402,7 @@ class WebhookController extends Controller
             $shoppingcart_question->type = "activityBookings";
             $shoppingcart_question->when_to_ask = "booking";
             $shoppingcart_question->question_id = "GENERAL";
+            $shoppingcart_question->booking_id = 'bookingId_'. $shoppingcart->id;
             $shoppingcart_question->label = "Note";
             $shoppingcart_question->answer = $booking_json->booking_note;
             $shoppingcart_question->save();
