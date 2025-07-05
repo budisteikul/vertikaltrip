@@ -382,7 +382,7 @@ footer {
 <br />
 
 @if($shoppingcart->shoppingcart_payment->payment_provider=="none")
-<div style="margin-top: 0px;">
+<div style="margin-top: -100px; font-size: 12px;">
   @foreach($shoppingcart->shoppingcart_products()->get() as $shoppingcart_product)
   @php
   $question = $BookingHelper->get_answer_product($shoppingcart,$shoppingcart_product->booking_id);

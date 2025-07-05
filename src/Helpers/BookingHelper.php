@@ -2597,7 +2597,7 @@ class BookingHelper {
 		{
 			if($shoppingcart->booking_channel=="WEBSITE")
 			{
-				$value = '<div class="card mb-2 mt-2"><div class="card-body bg-light"><i>Additional Information</i><br />'. nl2br($value) .'</div></div>';
+				$value = '<div class="card mb-2 mt-2"><div class="card-body bg-light"><i class="text-secondary">Additional Information</i><br />'. nl2br($value) .'</div></div>';
 			}
 			else
 			{
