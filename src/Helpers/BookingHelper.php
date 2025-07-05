@@ -2744,7 +2744,7 @@ class BookingHelper {
                 }
                 
                 $product_questions2 = "";
-                $questions2 = ShoppingcartQuestion::where('booking_id',$id->booking_id)->get();
+                $questions2 = ShoppingcartQuestion::where('booking_id',$id->booking_id)->where('shoppingcart_id', $id->shoppingcart->id)->get();
                 foreach($questions2 as $question2)
                 {
                 	$product_questions2 .= $question2->answer;
