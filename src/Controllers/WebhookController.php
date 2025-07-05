@@ -240,16 +240,21 @@ class WebhookController extends Controller
 
         if($webhook_app=="create_booking_with_email")
         {
+
+            $token = $request->input("token");
+            $timestamp = $request->input("timestamp");
+            $signature = $request->input("signature");
+
+            $hmac = hash_hmac('sha256', $timestamp.$token, env("MAILGUN_WEBHOOK_SECRET"));
+
+            if($hmac!=$signature)
+            {
+                return response('SIGNATURE INVALID', 200)->header('Content-Type', 'text/plain');
+            }
+
             $subject = $request->input("subject");
             $body = $request->input("body-html");
             $text = $body;
-
-            if($subject=="")
-            {
-                return response('DATA TIDAK LENGKAP STEP 1', 200)->header('Content-Type', 'text/plain');
-            }
-
-            //$booking_confirmation_code = GeneralHelper::get_string_between($text,"Reference number: "," ");
 
             $command = 'Extract data with JSON object format as 
 
