@@ -166,16 +166,40 @@ h2.name {
 }
 
 footer {
+  
+  
+  
+}
+
+
+.footer-div1 {
+  
+  display: block;
+    position: fixed;
+    bottom: 100;
+
+  color: #000000;
+  width: 100%;
+  height: 30px;
+  
+  padding: 8px 0;
+  text-align: left;
+
+}
+
+.footer-div2 {
+  
+  display: block;
+    position: fixed;
+    bottom: 0;
+
   color: #777777;
   width: 100%;
   height: 30px;
   border-top: 1px solid #AAAAAA;
   padding: 8px 0;
   text-align: center;
-  
-  display: block;
-    position: fixed;
-    bottom: 0;
+
 }
 
 .invoice-hilang
@@ -399,7 +423,12 @@ footer {
 </div>
 @endif
 
-@if($shoppingcart->shoppingcart_payment->payment_provider=="none")
+
+
+<div style="clear: both;"></div>
+<footer>
+  <div class="footer-div1">
+   @if($shoppingcart->shoppingcart_payment->payment_provider=="none")
 <div>
 <h2 style="margin-bottom:3px;">Payment Details</h2>
 <strong>Bank : </strong>BCA (Bank Central Asia)<br />
@@ -407,11 +436,12 @@ footer {
 <strong>Account Name : </strong>VERTIKAL TRIP INDONESIA<br />
 <strong>Account Number : </strong>1690423860<br />
 </div>
-@endif
+@endif 
 
-<div style="clear: both;"></div>
-<footer>
+  </div>
+  <div class="footer-div2">
   This invoice is provided by the system and is legitimate without signature and seal
+</div>
 </footer>
 </body>
 </html>
