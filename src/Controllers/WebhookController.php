@@ -275,15 +275,12 @@ class WebhookController extends Controller
 
             Set null if don\'t have data';
 
-
             
             $openai = New OpenAIHelper;
             $data = $openai->openai($text,$command);
             $booking_json = json_decode($data);
             
-
-            
-
+            //coba 2 kali lagi
             if(!isset($booking_json->booking_confirmation_code))
             {
                 $data = $openai->openai($text,$command);
@@ -299,17 +296,10 @@ class WebhookController extends Controller
             if(!isset($booking_json->booking_confirmation_code))
             {
                 return response('DATA TIDAK LENGKAP STEP 2', 200)->header('Content-Type', 'text/plain');
-                //$booking_json->booking_confirmation_code = BookingHelper::get_ticket();
             }
-            
-            //print_r($booking_json);
 
-            if(strtolower($booking_json->p_time)=="night" && strtolower($booking_json->p_location)=="yogyakarta")
-            {
-                $product = Product::findOrFail(1);
-                $booking_json->p_product_id = $product->bokun_id;
-            }
-            else if(strtolower($booking_json->p_time)=="evening" && strtolower($booking_json->p_location)=="yogyakarta")
+            
+            if((strtolower($booking_json->p_time)=="night" || strtolower($booking_json->p_time)=="evening") && strtolower($booking_json->p_location)=="yogyakarta")
             {
                 $product = Product::findOrFail(1);
                 $booking_json->p_product_id = $product->bokun_id;
@@ -321,8 +311,6 @@ class WebhookController extends Controller
             }
             else
             {
-                //print_r("p_time". strtolower($booking_json->p_time));
-                //print_r("p_location". strtolower($booking_json->p_location));
                 return response('DATA TIDAK LENGKAP STEP 3', 200)->header('Content-Type', 'text/plain');
             }
 
@@ -331,9 +319,7 @@ class WebhookController extends Controller
             {
                 return response('DUPLICATE', 200)->header('Content-Type', 'text/plain');
             }
-            //print_r($booking_json->booking_channel);
             
-            //exit();
 
             $shoppingcart = new Shoppingcart();
             $shoppingcart->booking_status = "CONFIRMED";
@@ -414,16 +400,6 @@ class WebhookController extends Controller
 
             BookingHelper::shoppingcart_notif($shoppingcart);
 
-            /*
-            $json = json_decode($request->getContent());
-            if(isset($json->webhook_key))
-            {
-                if($json->webhook_key==env('APP_KEY'))
-                {
-                    BookingHelper::confirm_transaction(null,$json);
-                }
-            }
-            */
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 
