@@ -35,6 +35,11 @@ class WebhookController extends Controller
     public function webhook($webhook_app,Request $request)
     {
         
+        if($webhook_app=="test")
+        {
+            
+            exit();
+        }
 
         if($webhook_app=="whatsapp")
         {
@@ -296,7 +301,7 @@ class WebhookController extends Controller
                 
                 BookingHelper::shoppingcart_notif($shoppingcart);
             }
-            
+
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 
@@ -414,13 +419,20 @@ class WebhookController extends Controller
             $shoppingcart_payment->payment_provider = "none";
             $shoppingcart_payment->save();
 
+            
+            $lastName = '';
+            $fullName = $booking_json->participant_name;
+            $arr_fullName = explode(" ",$fullName,2);
+            $firstName = $arr_fullName[0];
+            if(isset($arr_fullName[1])) $lastName = $arr_fullName[1];
+
             $shoppingcart_question = new ShoppingcartQuestion();
             $shoppingcart_question->shoppingcart_id = $shoppingcart->id;
             $shoppingcart_question->type = "mainContactDetails";
             $shoppingcart_question->when_to_ask = "booking";
             $shoppingcart_question->question_id = "firstName";
             $shoppingcart_question->label = "First name";
-            $shoppingcart_question->answer = $booking_json->participant_name;
+            $shoppingcart_question->answer = $firstName;
             $shoppingcart_question->save();
 
             $shoppingcart_question = new ShoppingcartQuestion();
@@ -429,7 +441,7 @@ class WebhookController extends Controller
             $shoppingcart_question->when_to_ask = "booking";
             $shoppingcart_question->question_id = "lastName";
             $shoppingcart_question->label = "Last name";
-            $shoppingcart_question->answer = null;
+            $shoppingcart_question->answer = $lastName;
             $shoppingcart_question->save();
 
             $shoppingcart_question = new ShoppingcartQuestion();
