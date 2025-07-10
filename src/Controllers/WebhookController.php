@@ -239,6 +239,68 @@ class WebhookController extends Controller
             }
         }
 
+
+        if($webhook_app=="cancel_booking_with_email")
+        {
+            $token = $request->input("token");
+            $timestamp = $request->input("timestamp");
+            $signature = $request->input("signature");
+
+            $hmac = hash_hmac('sha256', $timestamp.$token, env("MAILGUN_WEBHOOK_SECRET"));
+
+            if($hmac!=$signature)
+            {
+                return response('SIGNATURE INVALID', 200)->header('Content-Type', 'text/plain');
+            }
+
+            $subject = $request->input("subject");
+            $body = $request->input("body-html");
+            $text = $body;
+
+            $command = 'Extract data with JSON object format as 
+
+            {
+                "booking_confirmation_code" : get reference number or confirmation code
+            }
+
+            ';
+
+            
+            $openai = New OpenAIHelper;
+            $data = $openai->openai($text,$command);
+            $booking_json = json_decode($data);
+
+            //coba 2 kali lagi
+            if(!isset($booking_json->booking_confirmation_code))
+            {
+                $data = $openai->openai($text,$command);
+                $booking_json = json_decode($data);
+            }
+
+            if(!isset($booking_json->booking_confirmation_code))
+            {
+                $data = $openai->openai($text,$command);
+                $booking_json = json_decode($data);
+            }
+
+            if(!isset($booking_json->booking_confirmation_code))
+            {
+                return response('DATA TIDAK LENGKAP STEP 2', 200)->header('Content-Type', 'text/plain');
+            }
+
+            $shoppingcart = Shoppingcart::where('confirmation_code',$booking_json->booking_confirmation_code)->first();
+            if($shoppingcart)
+            {
+                $shoppingcart->booking_status = 'CANCELED';
+                $shoppingcart->save();
+                
+                BookingHelper::shoppingcart_notif($shoppingcart);
+            }
+            
+            return response('OK', 200)->header('Content-Type', 'text/plain');
+        }
+
+
         if($webhook_app=="create_booking_with_email")
         {
 
