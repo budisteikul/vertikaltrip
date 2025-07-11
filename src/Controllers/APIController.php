@@ -692,7 +692,7 @@ class APIController extends Controller
             
             if($product)
             {
-                $resources = Review::where('product_id',$product->link_id)->newQuery();
+                $resources = Review::where('product_id',$product->link_id)->orderBy('date','desc')->orderBy('id','desc')->newQuery();
             }
             else
             {
