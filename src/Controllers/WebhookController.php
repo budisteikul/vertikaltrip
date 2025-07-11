@@ -265,7 +265,7 @@ class WebhookController extends Controller
             $command = 'Extract data with JSON object format as 
 
             {
-                "booking_confirmation_code" : get reference number or confirmation code
+                "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses ta or gyg
             }
 
             ';
