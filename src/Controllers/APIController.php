@@ -696,7 +696,7 @@ class APIController extends Controller
             }
             else
             {
-                $resources = Review::query();
+                $resources = Review::orderBy('date','desc')->orderBy('id','desc')->newQuery();
             }
             
             return Datatables::eloquent($resources)
