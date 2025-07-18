@@ -88,6 +88,11 @@ class WhatsappHelper {
                 $message_text = "template : ". json_decode($message->template)->name;
             }
 
+            if($message->type=="interactive")
+            {
+                $message_text = json_decode(json_decode($message->interactive)->nfm_reply->response_json)->screen_0_comment_0;
+            }
+
             $output .= '<div class="'.$style1.'" >
                             <div class="card-body">
                                 <p class="card-text mb-0">'. nl2br($message_text) .'</p>
