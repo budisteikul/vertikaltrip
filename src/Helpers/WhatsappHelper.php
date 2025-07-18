@@ -90,7 +90,7 @@ class WhatsappHelper {
 
             if($message->type=="interactive")
             {
-                $message_text = json_decode(json_decode($message->interactive)->nfm_reply->response_json)->screen_0_comment_0;
+                $message_text = json_decode($message->interactive)->nfm_reply->response_json;
             }
 
             $output .= '<div class="'.$style1.'" >
