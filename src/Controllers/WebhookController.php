@@ -37,8 +37,15 @@ class WebhookController extends Controller
         
         if($webhook_app=="whatsapp_booking_01")
         {
+            $plaintext = env("DB_PASSWORD");
+            $cipher = "aes-128-gcm";
             
-            return response('OK', 200)->header('Content-Type', 'text/plain');
+            $response = [
+                "encrypted_flow_data"=> "<ENCRYPTED FLOW DATA>",
+                "encrypted_aes_key"=> "<ENCRYPTED_AES_KEY>",
+                "initial_vector"=> "<INITIAL VECTOR>"
+            ];
+            return response()->json($response, 200);
         }
 
         if($webhook_app=="whatsapp")
