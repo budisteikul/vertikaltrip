@@ -26,13 +26,12 @@ class WhatsappHelper {
     public function decryptRequest($body)
     {
         $privatePem = Storage::disk('gcs')->get('credentials/whatsapp/private.pem');
-
         $encryptedAesKey = base64_decode($body['encrypted_aes_key']);
         $encryptedFlowData = base64_decode($body['encrypted_flow_data']);
         $initialVector = base64_decode($body['initial_vector']);
 
         // Decrypt the AES key created by the client
-        $rsa = RSA::load($privatePem,env("DB_PASSWORD"))
+        $rsa = RSA::load($privatePem,env("REDIS_PASSWORD"))
             ->withPadding(RSA::ENCRYPTION_OAEP)
             ->withHash('sha256')
             ->withMGFHash('sha256');

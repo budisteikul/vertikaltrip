@@ -51,27 +51,53 @@ class WebhookController extends Controller
             $whatsapp = new WhatsappHelper;
             $decryptedData = $whatsapp->decryptRequest($body);
             
-            //LogHelper::log(json_decode($decryptedData, true),$webhook_app);
+            //Storage::disk('local')->put('log/log-wa-'. date('YmdHis') .'-'.Uuid::uuid4()->toString().'.txt', json_encode($decryptedData["decryptedBody"], JSON_PRETTY_PRINT));
+            
 
-            $date = [
-                        [
-                            "id"=> "2024-01-01",
-                            "title"=> "Mon Jan 01 2024"
-                        ],
-                        [
-                            "id"=> "2024-01-02",
-                            "title"=> "Mon Jan 02 2024"
+            if($decryptedData["decryptedBody"]["action"]=="ping")
+            {
+                $screen = [
+                    "data" => [
+                        "status" => "active"
+                    ]
+                ];
+            }
+            else if(isset($decryptedData["decryptedBody"]["data"]["step"]))
+            {
+                if($decryptedData["decryptedBody"]["data"]["step"]=="confirm_booking")
+                {
+                    $screen = [
+                        "screen" => "SUCCESS",
+                        "data" => []
+                    ];
+                }
+                else
+                {
+                    $screen = [
+                        "screen" => "SUMMARY",
+                        "data" => [
+                            "appointment"=> GeneralHelper::dateFormat($decryptedData["decryptedBody"]["data"]["date"],6) ."\n".$decryptedData["decryptedBody"]["data"]["time"]."\n". $decryptedData["decryptedBody"]["data"]["participant"] ." adults",
+                            "more_details"=> $decryptedData["decryptedBody"]["data"]["more_details"],
+                            "date"=> $decryptedData["decryptedBody"]["data"]["date"],
+                            "time"=> $decryptedData["decryptedBody"]["data"]["time"],
+                            "participant"=> $decryptedData["decryptedBody"]["data"]["participant"],
+                            "head_information"=> "Total Price :\nIDR 1,000,000",
+                            "body_information"=> "Please pay in cash directly to your guide at the meeting point before the tour starts.",
+                            "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            "step"=> "confirm_booking",
+                            "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"]
                         ]
                     ];
-
-            $time = [
-                        [
-                            "id"=> "18:30",
-                            "title"=> "18:30"
-                        ]
-                    ];
-
-            $participant = [
+                }
+                
+                    
+            }
+            else
+            {
+                
+                if(isset($decryptedData["decryptedBody"]["data"]["trigger"]))
+                {
+                    $participant = [
                         [
                             "id"=> "1",
                             "title"=> "1 adult"
@@ -81,22 +107,71 @@ class WebhookController extends Controller
                             "title"=> "2 adults"
                         ]
                     ];
+                }
+                else
+                {
+                    $participant = [
+                        [
+                            "id"=> "1",
+                            "title"=> "1 adult"
+                        ],
+                        [
+                            "id"=> "2",
+                            "title"=> "2 adults"
+                        ],
+                        [
+                            "id"=> "3",
+                            "title"=> "3 adults"
+                        ],
+                        [
+                            "id"=> "4",
+                            "title"=> "4 adults"
+                        ]
+                    ];
+                }
 
-            $screen = [
-                "screen" => "APPOINTMENT",
-                "data" => [
-                    "date" => $date,
-                    "is_date_enabled" => true,
-                    "time" => $time,
-                    "is_time_enabled" => true,
-                    "participant" => $participant,
-                    "is_participant_enabled" => true,
-                    "information"=> "Price : IDR 500,000 / participant",
-                    "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                    "step"=> "step_1",
-                    "tour_name"=> "Yogyakarta Night Walking and Food Tour"
-                ]
-            ];
+                
+
+                $date = [
+                        [
+                            "id"=> "2024-01-01",
+                            "title"=> GeneralHelper::dateFormat("2024-01-01",6)
+                        ],
+                        [
+                            "id"=> "2024-01-02",
+                            "title"=> GeneralHelper::dateFormat("2024-01-02",6)
+                        ]
+                    ];
+
+                $time = [
+                        [
+                            "id"=> "18:30",
+                            "title"=> "18:30"
+                        ]
+                    ];
+
+                
+
+
+
+                $screen = [
+                    "screen" => "APPOINTMENT",
+                    "data" => [
+                        "date" => $date,
+                        "is_date_enabled" => true,
+                        "time" => $time,
+                        "is_time_enabled" => true,
+                        "participant" => $participant,
+                        "is_participant_enabled" => true,
+                        "information"=> "Price : IDR 500,000 / participant",
+                        "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        "step"=> "step_1",
+                        "tour_name"=> "Yogyakarta Night Walking and Food Tour"
+                    ]
+                ];
+
+            }
+            
 
 
 
