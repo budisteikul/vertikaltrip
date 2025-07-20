@@ -171,7 +171,7 @@ class WebhookController extends Controller
                             $message = BookingHelper::schedule_bydate($date);
                             $whatsapp->sendText($from,$message->text);
 
-                            if(!empty($message->contacts))
+                            if(!empty($message->contacts) || $message->contacts!="")
                             {
                                 $whatsapp->sendContact($from,$message->contacts);
                             }
@@ -196,7 +196,7 @@ class WebhookController extends Controller
                             $message = BookingHelper::schedule_bydate($date);
                             
 
-                            if(!empty($message->contacts))
+                            if(!empty($message->contacts) || $message->contacts!="")
                             {
                                 $whatsapp->sendContact($from,$message->contacts);
                             }
