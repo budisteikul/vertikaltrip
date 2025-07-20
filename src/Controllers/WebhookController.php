@@ -11,6 +11,7 @@ use budisteikul\vertikaltrip\Helpers\LogHelper;
 use budisteikul\vertikaltrip\Helpers\WhatsappHelper;
 use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
 use budisteikul\vertikaltrip\Helpers\GeneralHelper;
+use budisteikul\vertikaltrip\Helpers\SettingHelper;
 
 use budisteikul\vertikaltrip\Models\Shoppingcart;
 use budisteikul\vertikaltrip\Models\ShoppingcartProduct;
@@ -22,6 +23,9 @@ use budisteikul\vertikaltrip\Models\Product;
 
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
+
+use phpseclib3\Crypt\RSA;
+use phpseclib3\Crypt\AES;
 
 class WebhookController extends Controller
 {
@@ -35,17 +39,69 @@ class WebhookController extends Controller
     public function webhook($webhook_app,Request $request)
     {
         
+        if($webhook_app=="test")
+        {
+            //$body = json_decode($request->getContent(), true);
+            //LogHelper::log(json_decode($body, true),$webhook_app);
+        }
+
         if($webhook_app=="whatsapp_booking_01")
         {
-            $plaintext = env("DB_PASSWORD");
-            $cipher = "aes-128-gcm";
+            $body = json_decode($request->getContent(), true);
+            $whatsapp = new WhatsappHelper;
+            $decryptedData = $whatsapp->decryptRequest($body);
             
-            $response = [
-                "encrypted_flow_data"=> "<ENCRYPTED FLOW DATA>",
-                "encrypted_aes_key"=> "<ENCRYPTED_AES_KEY>",
-                "initial_vector"=> "<INITIAL VECTOR>"
+            //LogHelper::log(json_decode($decryptedData, true),$webhook_app);
+
+            $date = [
+                        [
+                            "id"=> "2024-01-01",
+                            "title"=> "Mon Jan 01 2024"
+                        ],
+                        [
+                            "id"=> "2024-01-02",
+                            "title"=> "Mon Jan 02 2024"
+                        ]
+                    ];
+
+            $time = [
+                        [
+                            "id"=> "18:30",
+                            "title"=> "18:30"
+                        ]
+                    ];
+
+            $participant = [
+                        [
+                            "id"=> "1",
+                            "title"=> "1 adult"
+                        ],
+                        [
+                            "id"=> "2",
+                            "title"=> "2 adults"
+                        ]
+                    ];
+
+            $screen = [
+                "screen" => "APPOINTMENT",
+                "data" => [
+                    "date" => $date,
+                    "is_date_enabled" => true,
+                    "time" => $time,
+                    "is_time_enabled" => true,
+                    "participant" => $participant,
+                    "is_participant_enabled" => true,
+                    "information"=> "Price : IDR 500,000 / participant",
+                    "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                    "step"=> "step_1",
+                    "tour_name"=> "Yogyakarta Night Walking and Food Tour"
+                ]
             ];
-            return response()->json($response, 200);
+
+
+
+            $resBody = $whatsapp->encryptResponse($screen, $decryptedData['aesKeyBuffer'], $decryptedData['initialVectorBuffer']);
+            return $resBody;
         }
 
         if($webhook_app=="whatsapp")
