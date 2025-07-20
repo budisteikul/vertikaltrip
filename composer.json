@@ -23,7 +23,8 @@
         "stripe/stripe-php": "^16.2",
         "symfony/http-client": "^7.1",
         "symfony/mailgun-mailer": "^7.1",
-        "laravel/sanctum": "^4.0"
+        "laravel/sanctum": "^4.0",
+        "phpseclib/phpseclib": "^3.0"
     },
     "autoload": {
         "psr-0": {
