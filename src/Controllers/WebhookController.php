@@ -35,10 +35,10 @@ class WebhookController extends Controller
     public function webhook($webhook_app,Request $request)
     {
         
-        if($webhook_app=="test")
+        if($webhook_app=="whatsapp_booking_01")
         {
             
-            exit();
+            return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 
         if($webhook_app=="whatsapp")
