@@ -259,6 +259,8 @@ class WebhookController extends Controller
             
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+                LogHelper::log(json_decode($request->getContent(), true),$webhook_app);
+                
                 $json = $request->getContent();
                 $data = json_decode($json);
 
