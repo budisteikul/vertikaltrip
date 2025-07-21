@@ -88,7 +88,7 @@ class WebhookController extends Controller
                             "participant"=> $decryptedData["decryptedBody"]["data"]["participant"],
                             "head_information"=> "Total Price :\nIDR ". GeneralHelper::numberFormat($total_price,"IDR"),
                             "body_information"=> "Please pay in cash directly to your guide at the meeting point before the tour starts.",
-                            "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                            "session_id"=> $decryptedData["decryptedBody"]["data"]["session_id"],
                             "step"=> "confirm_booking",
                             "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"]
                         ]
@@ -169,7 +169,7 @@ class WebhookController extends Controller
                         "participant" => $participant,
                         "is_participant_enabled" => true,
                         "information"=> "Price : IDR 500,000 / participant",
-                        "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+                        "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name
                     ]
