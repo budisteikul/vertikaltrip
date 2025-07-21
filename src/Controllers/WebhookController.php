@@ -56,7 +56,7 @@ class WebhookController extends Controller
             $decryptedData = $whatsapp->decryptRequest($body);
 
             $tour_id = $request->input("tour_id");
-            $payment = (bool)$request->input("payment");
+            $payment = $request->input("payment");
             $product = Product::findOrFail($tour_id);
             $content = BokunHelper::get_product($product->bokun_id);
 
@@ -94,7 +94,7 @@ class WebhookController extends Controller
                 else
                 {
                     
-                    if($payment)
+                    if($payment!="")
                     {
                         $body_information = "Pay online";
                     }
