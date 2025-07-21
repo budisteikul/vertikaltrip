@@ -2821,7 +2821,7 @@ class BookingHelper {
                 $date = Carbon::now()->addDays($j)->format('Y-m-d');
                 $year = substr($date,0,4);
                 $month = substr($date,5,2);
-                $contents = BokunHelper::get_calendar_admin($activityId,$year,$month);
+                $contents = BokunHelper::get_calendar_admin($activityId,$year,$month,600);
                 $max_participant = 0;
                 
                 //print_r($contents);

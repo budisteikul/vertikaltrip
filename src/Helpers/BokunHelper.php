@@ -261,10 +261,21 @@ class BokunHelper {
 
         if($year=="") $year = date('Y');
         if($month=="") $month = date('m');
-      
-        $value = Cache::rememberForever('_bokunCalendarForever_'. $currency .'_'. $lang .'_'. $year .'_'. $month .'_'. $activityId , function() use ($activityId,$currency,$lang,$year,$month) {
+      	
+        if($cache=="forever")
+        {
+        	$value = Cache::rememberForever('_bokunCalendarForever_'. $currency .'_'. $lang .'_'. $year .'_'. $month .'_'. $activityId , function() use ($activityId,$currency,$lang,$year,$month) {
     		return self::bokunWidget_connect('/snippets/activity/'.$activityId.'/calendar/json/'.$year.'/'.$month .'?lang='.$lang.'&currency='.$currency);
-		});
+			});
+        }
+        else
+        {
+        	$value = Cache::remember('_bokunCalendar'.$cache.'_'. $currency .'_'. $lang .'_'. $year .'_'. $month .'_'. $activityId ,$cache, function() use ($activityId,$currency,$lang,$year,$month) {
+    		return self::bokunWidget_connect('/snippets/activity/'.$activityId.'/calendar/json/'.$year.'/'.$month .'?lang='.$lang.'&currency='.$currency);
+			});
+        }
+        
+
 
 		$value = json_decode($value);
 		return $value;
