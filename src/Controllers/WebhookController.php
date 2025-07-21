@@ -165,16 +165,16 @@ class WebhookController extends Controller
 
                 
 
-                    $date = [
-                                [
-                                    "id"=> "2024-01-01",
-                                    "title"=> GeneralHelper::dateFormat("2024-01-01",6)
-                                ],
-                                [
-                                    "id"=> "2024-01-02",
-                                    "title"=> GeneralHelper::dateFormat("2024-01-02",6)
-                                ]
-                            ];
+                $date = [
+                            [
+                                "id"=> "2024-01-01",
+                                "title"=> GeneralHelper::dateFormat("2024-01-01",6)
+                            ],
+                            [
+                                "id"=> "2024-01-02",
+                                "title"=> GeneralHelper::dateFormat("2024-01-02",6)
+                            ]
+                        ];
 
                     
 
