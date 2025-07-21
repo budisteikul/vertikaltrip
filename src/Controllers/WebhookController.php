@@ -39,17 +39,19 @@ class WebhookController extends Controller
     public function webhook($webhook_app,Request $request)
     {
         
-        if($webhook_app=="test")
-        {
-            //$body = json_decode($request->getContent(), true);
-            //LogHelper::log(json_decode($body, true),$webhook_app);
-        }
+        
 
         if($webhook_app=="whatsapp_booking_01")
         {
+
             $body = json_decode($request->getContent(), true);
             $whatsapp = new WhatsappHelper;
             $decryptedData = $whatsapp->decryptRequest($body);
+
+            $tour_id = $request->input("tour_id");
+            $product = Product::findOrFail($tour_id);
+
+            //$booking_json->p_product_id = $product->bokun_id;
             
             //Storage::disk('local')->put('log/log-wa-'. date('YmdHis') .'-'.Uuid::uuid4()->toString().'.txt', json_encode($decryptedData["decryptedBody"], JSON_PRETTY_PRINT));
             
@@ -73,6 +75,9 @@ class WebhookController extends Controller
                 }
                 else
                 {
+                    $price = 500000;
+                    $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
+                    
                     $screen = [
                         "screen" => "SUMMARY",
                         "data" => [
@@ -81,7 +86,7 @@ class WebhookController extends Controller
                             "date"=> $decryptedData["decryptedBody"]["data"]["date"],
                             "time"=> $decryptedData["decryptedBody"]["data"]["time"],
                             "participant"=> $decryptedData["decryptedBody"]["data"]["participant"],
-                            "head_information"=> "Total Price :\nIDR 1,000,000",
+                            "head_information"=> "Total Price :\nIDR ". GeneralHelper::numberFormat($total_price,"IDR"),
                             "body_information"=> "Please pay in cash directly to your guide at the meeting point before the tour starts.",
                             "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
                             "step"=> "confirm_booking",
@@ -165,8 +170,8 @@ class WebhookController extends Controller
                         "is_participant_enabled" => true,
                         "information"=> "Price : IDR 500,000 / participant",
                         "session_id"=> "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-                        "step"=> "step_1",
-                        "tour_name"=> "Yogyakarta Night Walking and Food Tour"
+                        "step"=> "init",
+                        "tour_name"=> $product->name
                     ]
                 ];
 
