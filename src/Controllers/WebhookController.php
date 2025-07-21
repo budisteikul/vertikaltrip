@@ -78,15 +78,18 @@ class WebhookController extends Controller
                     $price = 500000;
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
                     
+                    $more_details = '';
+                    if(isset($decryptedData["decryptedBody"]["data"]["more_details"])) $more_details = $decryptedData["decryptedBody"]["data"]["more_details"];
+
                     $screen = [
                         "screen" => "SUMMARY",
                         "data" => [
                             "appointment"=> GeneralHelper::dateFormat($decryptedData["decryptedBody"]["data"]["date"],6) ."\n".$decryptedData["decryptedBody"]["data"]["time"]."\n". $decryptedData["decryptedBody"]["data"]["participant"] ." adults",
-                            "more_details"=> $decryptedData["decryptedBody"]["data"]["more_details"],
+                            "more_details"=> $more_details,
                             "date"=> $decryptedData["decryptedBody"]["data"]["date"],
                             "time"=> $decryptedData["decryptedBody"]["data"]["time"],
                             "participant"=> $decryptedData["decryptedBody"]["data"]["participant"],
-                            "head_information"=> "Total Price :\nIDR ". GeneralHelper::numberFormat($total_price,"IDR"),
+                            "head_information"=> "Total Price :\n".config('site.currency')." ". GeneralHelper::numberFormat($total_price,config('site.currency')),
                             "body_information"=> "Please pay in cash directly to your guide at the meeting point before the tour starts.",
                             "session_id"=> $decryptedData["decryptedBody"]["data"]["session_id"],
                             "step"=> "confirm_booking",
