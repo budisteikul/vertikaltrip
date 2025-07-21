@@ -42,7 +42,69 @@ class WebhookController extends Controller
         if($webhook_app=="test")
         {
 
-            
+            $aaa = BookingHelper::next_availability(7424,20);
+            foreach($aaa as $x)
+                    {
+                        if($x->date=="2025-07-22")
+                        {
+                            $availability_participant = $x->max_participant - $x->booking;
+                        }
+                        
+                    }
+
+                    for($i=1;$i<$availability_participant;$i++)
+                    {
+                        $unit = "adult";
+                        if($i>1) $unit = "adults";
+                        $participant1[] = [
+                            "id"=> (string)$i,
+                            "title"=> (string)$i." ".(string)$unit
+                        ];
+                    }
+
+            print_r($participant1);
+
+            $participant = [
+                                        [
+                                            "id"=> "1",
+                                            "title"=> "1 adult"
+                                        ],
+                                        [
+                                            "id"=> "2",
+                                            "title"=> "2 adults"
+                                        ],
+                                        [
+                                            "id"=> "3",
+                                            "title"=> "3 adults"
+                                        ],
+                                        [
+                                            "id"=> "4",
+                                            "title"=> "4 adults"
+                                        ]
+                                    ];
+            print_r($participant);
+
+            foreach($aaa as $x)
+            {
+                $date[] = [
+                    "id"=> $x->date,
+                    "title"=> GeneralHelper::dateFormat($x->date,6)
+                ];
+            }
+
+            //print_r($date);
+
+            $ccc = [
+                            [
+                                "id"=> "2024-01-01",
+                                "title"=> GeneralHelper::dateFormat("2024-01-01",6)
+                            ],
+                            [
+                                "id"=> "2024-01-02",
+                                "title"=> GeneralHelper::dateFormat("2024-01-02",6)
+                            ]
+                        ];
+            //print_r($ccc);
 
 
             exit();
@@ -151,8 +213,8 @@ class WebhookController extends Controller
                         $unit = "adult";
                         if($i>1) $unit = "adults";
                         $participant[] = [
-                            "id"=> $i,
-                            "title"=> $i." ".$unit
+                            "id"=> (string)$i,
+                            "title"=> (string)$i." ".(string)$unit
                         ];
                     }
                    
