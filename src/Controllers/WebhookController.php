@@ -173,7 +173,7 @@ class WebhookController extends Controller
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name,
-                        "bokun_id"=> $product->bokun_id
+                        "bokun_id"=> (string)$product->bokun_id
                     ]
                 ];
 
