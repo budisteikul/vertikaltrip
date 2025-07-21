@@ -20,12 +20,12 @@ use budisteikul\vertikaltrip\Models\ShoppingcartQuestion;
 use budisteikul\vertikaltrip\Models\ShoppingcartPayment;
 use budisteikul\vertikaltrip\Models\Contact;
 use budisteikul\vertikaltrip\Models\Product;
+use budisteikul\vertikaltrip\Models\CloseOut;
 
 use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
-use phpseclib3\Crypt\RSA;
-use phpseclib3\Crypt\AES;
+use Carbon\Carbon;
 
 class WebhookController extends Controller
 {
@@ -39,7 +39,36 @@ class WebhookController extends Controller
     public function webhook($webhook_app,Request $request)
     {
         
-        
+        if($webhook_app=="test")
+        {
+
+            $aaa = BookingHelper::next_availability(7424,20);
+
+            foreach($aaa as $x)
+            {
+                $date[] = [
+                    "id"=> $x->date,
+                    "title"=> GeneralHelper::dateFormat($x->date,6)
+                ];
+            }
+
+            print_r($date);
+
+            $ccc = [
+                            [
+                                "id"=> "2024-01-01",
+                                "title"=> GeneralHelper::dateFormat("2024-01-01",6)
+                            ],
+                            [
+                                "id"=> "2024-01-02",
+                                "title"=> GeneralHelper::dateFormat("2024-01-02",6)
+                            ]
+                        ];
+            print_r($ccc);
+
+
+            exit();
+        }
 
         if($webhook_app=="whatsapp_booking_01")
         {
@@ -177,23 +206,15 @@ class WebhookController extends Controller
 
                 
                 //Init flow
-                $date = [
-                            [
-                                "id"=> "2024-01-01",
-                                "title"=> GeneralHelper::dateFormat("2024-01-01",6)
-                            ],
-                            [
-                                "id"=> "2024-01-02",
-                                "title"=> GeneralHelper::dateFormat("2024-01-02",6)
-                            ]
-                        ];
-
-                    
-
+                $next_availability = BookingHelper::next_availability($product->bokun_id,20);
+                foreach($next_availability as $x)
+                {
+                    $date[] = [
+                        "id"=> $x->date,
+                        "title"=> GeneralHelper::dateFormat($x->date,6)
+                    ];
+                }
                 
-
-
-
                 $screen = [
                     "screen" => "APPOINTMENT",
                     "data" => [

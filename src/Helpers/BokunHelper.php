@@ -254,6 +254,22 @@ class BokunHelper {
 		return $value;
 	}
 
+	public static function get_calendar_admin($activityId,$year="",$month="")
+	{
+		$currency = self::env_bokunCurrency();
+        $lang = self::env_bokunLang();
+
+        if($year=="") $year = date('Y');
+        if($month=="") $month = date('m');
+      
+        $value = Cache::rememberForever('_bokunCalendarForever_'. $currency .'_'. $lang .'_'. $year .'_'. $month .'_'. $activityId , function() use ($activityId,$currency,$lang,$year,$month) {
+    		return self::bokunWidget_connect('/snippets/activity/'.$activityId.'/calendar/json/'.$year.'/'.$month .'?lang='.$lang.'&currency='.$currency);
+		});
+
+		$value = json_decode($value);
+		return $value;
+	}
+	
 	public static function get_calendar_new($activityId,$year="",$month="")
 	{
 		$currency = self::env_bokunCurrency();

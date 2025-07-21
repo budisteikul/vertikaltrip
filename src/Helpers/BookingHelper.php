@@ -2808,5 +2808,76 @@ class BookingHelper {
         return '';
 	}
 
+	public static function next_availability($activityId,$count,$rate="Open Trip")
+	{
+
+			$date_now = date('Y-m-d');
+            $i = 1;
+            $j = 1;
+            $data = [];
+            while($i<=$count)
+            {
+                $availability = true;
+                $date = Carbon::now()->addDays($j)->format('Y-m-d');
+                $year = substr($date,0,4);
+                $month = substr($date,5,2);
+                $contents = BokunHelper::get_calendar_admin($activityId,$year,$month);
+                $max_participant = 0;
+                
+                //print_r($contents);
+                foreach($contents->weeks as $week)
+                        {
+                            foreach($week->days as $day)
+                            {
+                                if($day->fullDate==$date)
+                                {
+                                    if($day->empty==1)
+                                    {
+                                        $availability = false;
+                                    }
+
+                                    if(isset($day->availabilities[0]))
+                                    {
+                                        $max_participant = $day->availabilities[0]->data->availabilityCount;
+                                    }
+                                    else
+                                    {
+                                        $availability = false;
+                                    }
+                                    
+                                }
+                            }
+                        }
+
+                $closeout = CloseOut::where('bokun_id',$activityId)->where('date',$date)->first();
+                if($closeout) $availability = false;
+
+                
+                $people = ShoppingcartProductDetail::with('shoppingcart_product')
+                                ->WhereHas('shoppingcart_product', function($query) use ($date,$activityId,$rate) {
+                                $query->whereDate('date','=',$date)->where(['product_id'=>$activityId])->where('rate',$rate)->WhereHas('shoppingcart', function($query) {
+                                return $query->where('booking_status','CONFIRMED');
+                            });
+                            })->get()->sum('people');
+
+               
+                if($max_participant-$people<=0) $availability = false;
+
+                if($availability)
+                {
+                    $i++;
+                    $data[] = (object)[
+                    	"date" => $date,
+                    	"booking" => $people,
+                    	"max_participant" => $max_participant
+                    ];
+                }
+                
+                
+                $j++;
+            }
+        return (object)$data;
+	}
+
 }
 ?>
