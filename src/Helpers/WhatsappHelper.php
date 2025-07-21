@@ -71,33 +71,7 @@ class WhatsappHelper {
         FirebaseHelper::write('messages/'.$contact->id,$output);
     }
 
-    public function whatsapp_to_booking_json($json)
-    {
-        $contact = $json->entry[0]->changes[0]->value->contacts[0];
-        $message = $json->entry[0]->changes[0]->value->messages[0];
-
-        $name = null;
-        if(isset($contact->profile->name)) $name = $contact->profile->name;
-        $contact_id = $this->contact($contact->wa_id,$name);
-
-        $data_flow = json_decode($message->interactive->nfm_reply->response_json);
-        
-        $data = [
-                "booking_confirmation_code" => BookingHelper::get_ticket(),
-                "booking_channel" => "Whatsapp",
-                "booking_note" => $data_flow->more_details,
-                "tour_name" => $data_flow->tour_name,
-                "tour_date" => $data_flow->date." ".$data_flow->time.":00",
-                "participant_name" => $name,
-                "participant_phone" => $contact->wa_id,
-                "participant_email" => "",
-                "participant_total" => $data_flow->participant,
-                "product_id" => $data_flow->bokun_id
-            ];
-
-        $booking_json = (object)$data;
-        return $booking_json;
-    }
+    
 
     function encryptResponse($response, $aesKeyBuffer, $initialVectorBuffer)
     {

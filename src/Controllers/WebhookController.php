@@ -352,8 +352,33 @@ class WebhookController extends Controller
                             }
                         break;
                         case "interactive":
+                            $data_flow = $data->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json;
+                            
+                            if(isset($data_flow->step))
+                            {
+                                if($data_flow->step=="confirm_booking")
+                                {
+                                    $data1 = [
+                                        "booking_confirmation_code" => BookingHelper::get_ticket(),
+                                        "booking_channel" => "Whatsapp",
+                                        "booking_note" => $data_flow->more_details,
+                                        "tour_name" => $data_flow->tour_name,
+                                        "tour_date" => $data_flow->date." ".$data_flow->time.":00",
+                                        "participant_name" => $name,
+                                        "participant_phone" => $from,
+                                        "participant_email" => "",
+                                        "participant_total" => $data_flow->participant,
+                                        "product_id" => $data_flow->bokun_id
+                                    ];
+
+                                    $booking_json = (object)$data1;
+                                    $shoppingcart = BookingHelper::booking_by_json($booking_json);
+                                    BookingHelper::shoppingcart_notif($shoppingcart);
+                                }
+                            }
+                            
                             /*
-                            $data_flow = json_decode($json->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json);
+                            
                             if($data_flow->step=="confirm_booking")
                             {
                                 $booking_json = $whatsapp->whatsapp_to_booking_json($data);
