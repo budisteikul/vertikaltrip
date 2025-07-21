@@ -52,13 +52,10 @@ class WebhookController extends Controller
             $product = Product::findOrFail($tour_id);
             $content = BokunHelper::get_product($product->bokun_id);
 
-            //$booking_json->p_product_id = $product->bokun_id;
-            
-            //Storage::disk('local')->put('log/log-wa-'. date('YmdHis') .'-'.Uuid::uuid4()->toString().'.txt', json_encode($decryptedData["decryptedBody"], JSON_PRETTY_PRINT));
-            
 
             if($decryptedData["decryptedBody"]["action"]=="ping")
             {
+                //health check
                 $screen = [
                     "data" => [
                         "status" => "active"
@@ -69,6 +66,7 @@ class WebhookController extends Controller
             {
                 if($decryptedData["decryptedBody"]["data"]["step"]=="confirm_booking")
                 {
+                    //success
                     $screen = [
                         "screen" => "SUCCESS",
                         "data" => []
@@ -76,6 +74,7 @@ class WebhookController extends Controller
                 }
                 else
                 {
+                    //summary
                     $price = $content->nextDefaultPriceMoney->amount;
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
                     
@@ -107,58 +106,77 @@ class WebhookController extends Controller
                 
                 if(isset($decryptedData["decryptedBody"]["data"]["trigger"]))
                 {
+                    //After selected date
                     $participant = [
-                        [
-                            "id"=> "1",
-                            "title"=> "1 adult"
-                        ],
-                        [
-                            "id"=> "2",
-                            "title"=> "2 adults"
-                        ]
-                    ];
+                                        [
+                                            "id"=> "1",
+                                            "title"=> "1 adult"
+                                        ],
+                                        [
+                                            "id"=> "2",
+                                            "title"=> "2 adults"
+                                        ],
+                                        [
+                                            "id"=> "3",
+                                            "title"=> "3 adults"
+                                        ],
+                                        [
+                                            "id"=> "4",
+                                            "title"=> "4 adults"
+                                        ]
+                                    ];
+
+                    $time = [
+                                [
+                                    "id"=> "18:30",
+                                    "title"=> "18:30"
+                                ]
+                            ];
                 }
                 else
                 {
+                    //Init flow
                     $participant = [
-                        [
-                            "id"=> "1",
-                            "title"=> "1 adult"
-                        ],
-                        [
-                            "id"=> "2",
-                            "title"=> "2 adults"
-                        ],
-                        [
-                            "id"=> "3",
-                            "title"=> "3 adults"
-                        ],
-                        [
-                            "id"=> "4",
-                            "title"=> "4 adults"
-                        ]
-                    ];
+                                        [
+                                            "id"=> "1",
+                                            "title"=> "1 adult"
+                                        ],
+                                        [
+                                            "id"=> "2",
+                                            "title"=> "2 adults"
+                                        ],
+                                        [
+                                            "id"=> "3",
+                                            "title"=> "3 adults"
+                                        ],
+                                        [
+                                            "id"=> "4",
+                                            "title"=> "4 adults"
+                                        ]
+                                    ];
+
+                    $time = [
+                                [
+                                    "id"=> "18:30",
+                                    "title"=> "18:30"
+                                ]
+                            ];
                 }
 
                 
 
-                $date = [
-                        [
-                            "id"=> "2024-01-01",
-                            "title"=> GeneralHelper::dateFormat("2024-01-01",6)
-                        ],
-                        [
-                            "id"=> "2024-01-02",
-                            "title"=> GeneralHelper::dateFormat("2024-01-02",6)
-                        ]
-                    ];
+                    $date = [
+                                [
+                                    "id"=> "2024-01-01",
+                                    "title"=> GeneralHelper::dateFormat("2024-01-01",6)
+                                ],
+                                [
+                                    "id"=> "2024-01-02",
+                                    "title"=> GeneralHelper::dateFormat("2024-01-02",6)
+                                ]
+                            ];
 
-                $time = [
-                        [
-                            "id"=> "18:30",
-                            "title"=> "18:30"
-                        ]
-                    ];
+                    
 
                 
 
