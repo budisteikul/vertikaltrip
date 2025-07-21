@@ -352,7 +352,7 @@ class WebhookController extends Controller
                             }
                         break;
                         case "interactive":
-                            $data_flow = $json->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json;
+                            $data_flow = json_decode($json->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json);
                             if($data_flow->step=="confirm_booking")
                             {
                                 $booking_json = $whatsapp->whatsapp_to_booking_json($data);

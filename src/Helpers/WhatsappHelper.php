@@ -80,7 +80,7 @@ class WhatsappHelper {
         if(isset($contact->profile->name)) $name = $contact->profile->name;
         $contact_id = $this->contact($contact->wa_id,$name);
 
-        $data_flow = $message->interactive->nfm_reply->response_json;
+        $data_flow = json_decode($message->interactive->nfm_reply->response_json);
         
         $data = [
                 "booking_confirmation_code" => BookingHelper::get_ticket(),
