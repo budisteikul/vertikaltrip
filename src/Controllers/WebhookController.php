@@ -81,6 +81,14 @@ class WebhookController extends Controller
             $product = Product::findOrFail($tour_id);
             $content = BokunHelper::get_product($product->bokun_id);
 
+            $next_availability = BookingHelper::next_availability($product->bokun_id,20);
+                foreach($next_availability as $x)
+                {
+                    $date[] = [
+                        "id"=> $x->date,
+                        "title"=> GeneralHelper::dateFormat($x->date,6)
+                    ];
+                }
 
             if($decryptedData["decryptedBody"]["action"]=="ping")
             {
@@ -205,15 +213,8 @@ class WebhookController extends Controller
                 }
 
                 
-                //Init flow
-                $next_availability = BookingHelper::next_availability($product->bokun_id,20);
-                foreach($next_availability as $x)
-                {
-                    $date[] = [
-                        "id"=> $x->date,
-                        "title"=> GeneralHelper::dateFormat($x->date,6)
-                    ];
-                }
+               
+                
                 
                 $screen = [
                     "screen" => "APPOINTMENT",
