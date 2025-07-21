@@ -100,7 +100,7 @@ class WebhookController extends Controller
                     }
                     else
                     {
-                        $body_information = "Please pay in cash directly to your guide at the meeting point before the tour starts.";
+                        $body_information = "Payment Instruction :\nPlease pay in cash directly to your guide at the meeting point before the tour starts.";
                     }
                     //summary
                     $price = $content->nextDefaultPriceMoney->amount;
