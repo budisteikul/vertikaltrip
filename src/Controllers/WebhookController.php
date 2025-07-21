@@ -97,10 +97,12 @@ class WebhookController extends Controller
                     if($payment!="")
                     {
                         $body_information = "Pay online";
+                        $payment="on";
                     }
                     else
                     {
                         $body_information = "Payment Instruction :\nPlease pay in cash directly to your guide at the meeting point before the tour starts.";
+                        $payment="off";
                     }
                     //summary
                     $price = $content->nextDefaultPriceMoney->amount;
@@ -122,7 +124,8 @@ class WebhookController extends Controller
                             "session_id"=> $decryptedData["decryptedBody"]["data"]["session_id"],
                             "step"=> "confirm_booking",
                             "bokun_id"=> $decryptedData["decryptedBody"]["data"]["bokun_id"],
-                            "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"]
+                            "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"],
+                            "payment"=> $payment
                         ]
                     ];
                 }
