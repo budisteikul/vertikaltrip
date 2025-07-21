@@ -42,8 +42,7 @@ class WebhookController extends Controller
         if($webhook_app=="test")
         {
 
-            $content = BokunHelper::get_product(7424);
-            print_r($content->startTimes[0]->hour);
+            
 
 
             exit();
@@ -57,6 +56,7 @@ class WebhookController extends Controller
             $decryptedData = $whatsapp->decryptRequest($body);
 
             $tour_id = $request->input("tour_id");
+            $payment = (bool)$request->input("payment");
             $product = Product::findOrFail($tour_id);
             $content = BokunHelper::get_product($product->bokun_id);
 
@@ -81,7 +81,7 @@ class WebhookController extends Controller
             else if(isset($decryptedData["decryptedBody"]["data"]["step"]))
             {
                 
-                $flow_payment = false;
+                
 
                 if($decryptedData["decryptedBody"]["data"]["step"]=="confirm_booking")
                 {
@@ -94,7 +94,7 @@ class WebhookController extends Controller
                 else
                 {
                     
-                    if($flow_payment)
+                    if($payment)
                     {
                         $body_information = "Pay online";
                     }
