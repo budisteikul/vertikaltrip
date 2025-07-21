@@ -254,7 +254,7 @@ class BokunHelper {
 		return $value;
 	}
 
-	public static function get_calendar_admin($activityId,$year="",$month="")
+	public static function get_calendar_admin($activityId,$year="",$month="",$cache="forever")
 	{
 		$currency = self::env_bokunCurrency();
         $lang = self::env_bokunLang();
@@ -269,7 +269,7 @@ class BokunHelper {
 		$value = json_decode($value);
 		return $value;
 	}
-	
+
 	public static function get_calendar_new($activityId,$year="",$month="")
 	{
 		$currency = self::env_bokunCurrency();

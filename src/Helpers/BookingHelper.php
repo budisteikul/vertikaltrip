@@ -2812,7 +2812,7 @@ class BookingHelper {
 	{
 
 			$date_now = date('Y-m-d');
-            $i = 1;
+            $i = 0;
             $j = 1;
             $data = [];
             while($i<=$count)

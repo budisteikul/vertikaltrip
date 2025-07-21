@@ -82,13 +82,13 @@ class WebhookController extends Controller
             $content = BokunHelper::get_product($product->bokun_id);
 
             $next_availability = BookingHelper::next_availability($product->bokun_id,20);
-                foreach($next_availability as $x)
-                {
+            foreach($next_availability as $x)
+            {
                     $date[] = [
                         "id"=> $x->date,
                         "title"=> GeneralHelper::dateFormat($x->date,6)
                     ];
-                }
+            }
 
             if($decryptedData["decryptedBody"]["action"]=="ping")
             {
@@ -201,6 +201,22 @@ class WebhookController extends Controller
                                         [
                                             "id"=> "4",
                                             "title"=> "4 adults"
+                                        ],
+                                        [
+                                            "id"=> "5",
+                                            "title"=> "5 adults"
+                                        ],
+                                        [
+                                            "id"=> "6",
+                                            "title"=> "6 adults"
+                                        ],
+                                        [
+                                            "id"=> "7",
+                                            "title"=> "7 adults"
+                                        ],
+                                        [
+                                            "id"=> "8",
+                                            "title"=> "8 adults"
                                         ]
                                     ];
 
