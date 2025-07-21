@@ -41,9 +41,22 @@ class WebhookController extends Controller
         
         if($webhook_app=="test")
         {
-
-            
-
+            exit();
+            $data = [
+                "booking_confirmation_code" => BookingHelper::get_ticket(),
+                "booking_channel" => "whatsapp",
+                "booking_note" => "",
+                "tour_name" => "Jogja Night Food Tour",
+                "tour_date" => "2025-07-22 18:30:00",
+                "participant_name" => "budi",
+                "participant_phone" => "+6285743112112",
+                "participant_email" => "",
+                "participant_total" => "2",
+                "product_id" => "7424"
+            ];
+            $booking_json = (object)$data;
+            //print_r($booking_json);
+            BookingHelper::booking_by_json($booking_json);
 
             exit();
         }
