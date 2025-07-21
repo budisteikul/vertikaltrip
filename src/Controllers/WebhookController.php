@@ -360,22 +360,27 @@ class WebhookController extends Controller
                             {
                                 if($data_flow->step=="confirm_booking")
                                 {
-                                    $data1 = [
-                                        "booking_confirmation_code" => BookingHelper::get_ticket(),
-                                        "booking_channel" => "Whatsapp",
-                                        "booking_note" => $data_flow->more_details,
-                                        "tour_name" => $data_flow->tour_name,
-                                        "tour_date" => $data_flow->date." ".$data_flow->time.":00",
-                                        "participant_name" => $name,
-                                        "participant_phone" => $from,
-                                        "participant_email" => "",
-                                        "participant_total" => $data_flow->participant,
-                                        "product_id" => $data_flow->bokun_id
-                                    ];
+                                    $check_booking = Shoppingcart::where('session_id',$data_flow->session_id)->first();
+                                    if(!$check_booking)
+                                    {
+                                        $data1 = [
+                                            "booking_confirmation_code" => BookingHelper::get_ticket(),
+                                            "booking_channel" => "Whatsapp",
+                                            "booking_note" => $data_flow->more_details,
+                                            "tour_name" => $data_flow->tour_name,
+                                            "tour_date" => $data_flow->date." ".$data_flow->time.":00",
+                                            "participant_name" => $name,
+                                            "participant_phone" => $from,
+                                            "participant_email" => "",
+                                            "participant_total" => $data_flow->participant,
+                                            "product_id" => $data_flow->bokun_id
+                                        ];
 
-                                    $booking_json = (object)$data1;
-                                    $shoppingcart = BookingHelper::booking_by_json($booking_json);
-                                    BookingHelper::shoppingcart_notif($shoppingcart);
+                                        $booking_json = (object)$data1;
+                                        $shoppingcart = BookingHelper::booking_by_json($booking_json);
+                                        BookingHelper::shoppingcart_notif($shoppingcart);
+                                    }
+                                    
                                 }
                             }
                             
