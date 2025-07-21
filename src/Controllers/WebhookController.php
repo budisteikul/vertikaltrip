@@ -90,6 +90,7 @@ class WebhookController extends Controller
                             "body_information"=> "Please pay in cash directly to your guide at the meeting point before the tour starts.",
                             "session_id"=> $decryptedData["decryptedBody"]["data"]["session_id"],
                             "step"=> "confirm_booking",
+                            "bokun_id"=> $decryptedData["decryptedBody"]["data"]["bokun_id"],
                             "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"]
                         ]
                     ];
@@ -171,7 +172,8 @@ class WebhookController extends Controller
                         "information"=> "Price : IDR 500,000 / participant",
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
-                        "tour_name"=> $product->name
+                        "tour_name"=> $product->name,
+                        "bokun_id"=> $product->bokun_id
                     ]
                 ];
 
