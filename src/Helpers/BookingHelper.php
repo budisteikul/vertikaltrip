@@ -2879,5 +2879,92 @@ class BookingHelper {
         return (object)$data;
 	}
 
+	public static function booking_by_json($booking_json)
+	{
+			$shoppingcart = new Shoppingcart();
+            $shoppingcart->booking_status = "CONFIRMED";
+            $shoppingcart->session_id = Uuid::uuid4()->toString();
+            $shoppingcart->booking_channel = $booking_json->booking_channel;
+            $shoppingcart->confirmation_code = $booking_json->booking_confirmation_code;
+            $shoppingcart->save();
+
+            $shoppingcart_product = new ShoppingcartProduct();
+            $shoppingcart_product->shoppingcart_id = $shoppingcart->id;
+            $shoppingcart_product->product_id = $booking_json->product_id;
+            $shoppingcart_product->booking_id = 'bookingId_'. $shoppingcart->id;
+            $shoppingcart_product->title = $booking_json->tour_name;
+            $shoppingcart_product->rate = "Open Trip";
+            $shoppingcart_product->date = $booking_json->tour_date;
+            $shoppingcart_product->cancellation = "Referring to ".$booking_json->booking_channel." policy";
+            $shoppingcart_product->save();
+
+            $shoppingcart_product_detail = new ShoppingcartProductDetail();
+            $shoppingcart_product_detail->shoppingcart_product_id = $shoppingcart_product->id;
+            $shoppingcart_product_detail->type = "product";
+            $shoppingcart_product_detail->title = $booking_json->tour_name;
+            $shoppingcart_product_detail->unit_price = "Persons";
+            $shoppingcart_product_detail->people = $booking_json->participant_total;
+            $shoppingcart_product_detail->qty = $booking_json->participant_total;
+            $shoppingcart_product_detail->save();
+            
+            $shoppingcart_payment = new ShoppingcartPayment();
+            $shoppingcart_payment->shoppingcart_id = $shoppingcart->id;
+            $shoppingcart_payment->payment_provider = "none";
+            $shoppingcart_payment->save();
+
+            
+            $lastName = '';
+            $fullName = $booking_json->participant_name;
+            $arr_fullName = explode(" ",$fullName,2);
+            $firstName = $arr_fullName[0];
+            if(isset($arr_fullName[1])) $lastName = $arr_fullName[1];
+
+            $shoppingcart_question = new ShoppingcartQuestion();
+            $shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+            $shoppingcart_question->type = "mainContactDetails";
+            $shoppingcart_question->when_to_ask = "booking";
+            $shoppingcart_question->question_id = "firstName";
+            $shoppingcart_question->label = "First name";
+            $shoppingcart_question->answer = $firstName;
+            $shoppingcart_question->save();
+
+            $shoppingcart_question = new ShoppingcartQuestion();
+            $shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+            $shoppingcart_question->type = "mainContactDetails";
+            $shoppingcart_question->when_to_ask = "booking";
+            $shoppingcart_question->question_id = "lastName";
+            $shoppingcart_question->label = "Last name";
+            $shoppingcart_question->answer = $lastName;
+            $shoppingcart_question->save();
+
+            $shoppingcart_question = new ShoppingcartQuestion();
+            $shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+            $shoppingcart_question->type = "mainContactDetails";
+            $shoppingcart_question->when_to_ask = "booking";
+            $shoppingcart_question->question_id = "phoneNumber";
+            $shoppingcart_question->label = "Phone number";
+            $shoppingcart_question->answer = $booking_json->participant_phone;
+            $shoppingcart_question->save();
+
+            $shoppingcart_question = new ShoppingcartQuestion();
+            $shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+            $shoppingcart_question->type = "mainContactDetails";
+            $shoppingcart_question->when_to_ask = "booking";
+            $shoppingcart_question->question_id = "email";
+            $shoppingcart_question->label = "Email";
+            $shoppingcart_question->answer = $booking_json->participant_email;
+            $shoppingcart_question->save();
+
+            $shoppingcart_question = new ShoppingcartQuestion();
+            $shoppingcart_question->shoppingcart_id = $shoppingcart->id;
+            $shoppingcart_question->type = "activityBookings";
+            $shoppingcart_question->when_to_ask = "booking";
+            $shoppingcart_question->question_id = "GENERAL";
+            $shoppingcart_question->booking_id = 'bookingId_'. $shoppingcart->id;
+            $shoppingcart_question->label = "Note";
+            $shoppingcart_question->answer = $booking_json->booking_note;
+            $shoppingcart_question->save();
+	}
+
 }
 ?>
