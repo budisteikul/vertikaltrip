@@ -64,6 +64,9 @@ class WebhookController extends Controller
             }
             else if(isset($decryptedData["decryptedBody"]["data"]["step"]))
             {
+                
+                $flow_payment = false;
+
                 if($decryptedData["decryptedBody"]["data"]["step"]=="confirm_booking")
                 {
                     //success
@@ -74,6 +77,15 @@ class WebhookController extends Controller
                 }
                 else
                 {
+                    
+                    if($flow_payment)
+                    {
+                        $body_information = "Pay online";
+                    }
+                    else
+                    {
+                        $body_information = "Please pay in cash directly to your guide at the meeting point before the tour starts.";
+                    }
                     //summary
                     $price = $content->nextDefaultPriceMoney->amount;
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
@@ -90,7 +102,7 @@ class WebhookController extends Controller
                             "time"=> $decryptedData["decryptedBody"]["data"]["time"],
                             "participant"=> $decryptedData["decryptedBody"]["data"]["participant"],
                             "head_information"=> "Total Price :\n".$content->nextDefaultPriceMoney->currency." ". GeneralHelper::numberFormat($total_price,$content->nextDefaultPriceMoney->currency),
-                            "body_information"=> "Please pay in cash directly to your guide at the meeting point before the tour starts.",
+                            "body_information"=> $body_information,
                             "session_id"=> $decryptedData["decryptedBody"]["data"]["session_id"],
                             "step"=> "confirm_booking",
                             "bokun_id"=> $decryptedData["decryptedBody"]["data"]["bokun_id"],
