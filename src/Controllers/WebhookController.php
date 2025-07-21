@@ -260,7 +260,7 @@ class WebhookController extends Controller
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 LogHelper::log(json_decode($request->getContent(), true),$webhook_app);
-                
+
                 $json = $request->getContent();
                 $data = json_decode($json);
 
@@ -354,7 +354,7 @@ class WebhookController extends Controller
                             }
                         break;
                         case "interactive":
-                            $data_flow = $data->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json;
+                            $data_flow = json_decode($data->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json);
                             
                             if(isset($data_flow->step))
                             {
