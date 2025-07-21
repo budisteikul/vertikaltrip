@@ -352,9 +352,19 @@ class WebhookController extends Controller
                             }
                         break;
                         case "interactive":
-                            $booking_json = $whatsapp->whatsapp_to_booking_json($data);
-                            BookingHelper::booking_by_json($booking_json);
-                            $message = 'Not supported message. Type: '.$type;
+                            $data_flow = $json->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json;
+                            if($data_flow->step=="confirm_booking")
+                            {
+                                $booking_json = $whatsapp->whatsapp_to_booking_json($data);
+                                $shoppingcart = BookingHelper::booking_by_json($booking_json);
+                                BookingHelper::shoppingcart_notif($shoppingcart);
+                            }
+                            else
+                            {
+                                $message = 'Not supported message. Type: '.$type;
+                            }
+                            
+                            
                         break;
                         default:
                             $message = 'Not supported message. Type: '.$type;
@@ -430,8 +440,9 @@ class WebhookController extends Controller
                     
                 
                     
-                
-                curl_setopt_array($ch = curl_init(), array(
+                if($message!="")
+                {
+                    curl_setopt_array($ch = curl_init(), array(
                         CURLOPT_URL => "https://api.pushover.net/1/messages.json",
                         CURLOPT_POSTFIELDS => array(
                             "token" => env('PUSHOVER_TOKEN'),
@@ -442,8 +453,10 @@ class WebhookController extends Controller
                             "url_title" => "Reply"
                         ),
                     ));
-                curl_exec($ch);
-                curl_close($ch);
+                    curl_exec($ch);
+                    curl_close($ch);
+                }
+                
 
                 return response('OK', 200)->header('Content-Type', 'text/plain');
             }
@@ -605,7 +618,7 @@ class WebhookController extends Controller
             }
             
 
-            BookingHelper::booking_by_json($booking_json);
+            $shoppingcart = BookingHelper::booking_by_json($booking_json);
 
             BookingHelper::shoppingcart_notif($shoppingcart);
 

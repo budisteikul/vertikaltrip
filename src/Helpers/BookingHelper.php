@@ -2964,6 +2964,8 @@ class BookingHelper {
             $shoppingcart_question->label = "Note";
             $shoppingcart_question->answer = $booking_json->booking_note;
             $shoppingcart_question->save();
+
+            return $shoppingcart;
 	}
 
 }
