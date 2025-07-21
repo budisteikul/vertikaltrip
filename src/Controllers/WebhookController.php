@@ -12,7 +12,7 @@ use budisteikul\vertikaltrip\Helpers\WhatsappHelper;
 use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
 use budisteikul\vertikaltrip\Helpers\GeneralHelper;
 use budisteikul\vertikaltrip\Helpers\SettingHelper;
-
+use budisteikul\vertikaltrip\Helpers\BokunHelper;
 use budisteikul\vertikaltrip\Models\Shoppingcart;
 use budisteikul\vertikaltrip\Models\ShoppingcartProduct;
 use budisteikul\vertikaltrip\Models\ShoppingcartProductDetail;
