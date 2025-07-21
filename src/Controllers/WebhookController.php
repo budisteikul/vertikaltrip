@@ -208,7 +208,7 @@ class WebhookController extends Controller
 
                     
 
-                    for($i=1;$i<$availability_participant;$i++)
+                    for($i=1;$i<=$availability_participant;$i++)
                     {
                         $unit = "adult";
                         if($i>1) $unit = "adults";
