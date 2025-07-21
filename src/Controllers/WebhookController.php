@@ -204,8 +204,8 @@ class WebhookController extends Controller
                 
                     $time = [
                                 [
-                                   "id"=> (string)$content->startTimes[0]->hour .":". (string)$content->startTimes[0]->minute,
-                                    "title"=> (string)$content->startTimes[0]->hour .":". (string)$content->startTimes[0]->minute
+                                   "id"=> GeneralHelper::digitFormat($content->startTimes[0]->hour,2) .":". GeneralHelper::digitFormat($content->startTimes[0]->minute,2),
+                                    "title"=> GeneralHelper::digitFormat($content->startTimes[0]->hour,2) .":". GeneralHelper::digitFormat($content->startTimes[0]->minute,2)
                                 ]
                             ];
                 
