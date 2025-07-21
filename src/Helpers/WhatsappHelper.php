@@ -6,11 +6,98 @@ use budisteikul\vertikaltrip\Models\Contact;
 use budisteikul\vertikaltrip\Models\Message;
 use budisteikul\vertikaltrip\Helpers\GeneralHelper;
 use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
+use budisteikul\vertikaltrip\Helpers\BookingHelper;
 
 use phpseclib3\Crypt\RSA;
 use phpseclib3\Crypt\AES;
 
 class WhatsappHelper {
+
+    public function messages($id)
+    {
+        $contact = Contact::where('id',$id)->firstOrFail();
+        $messages = Message::where('contact_id',$contact->id)->orderBy('created_at','desc')->get();
+
+        $output = '';
+        foreach($messages as $message)
+        {
+            $style1 = 'card bg-light mb-2';
+            if($message->from==null)
+            {
+                $style1 = 'card text-white bg-success mb-2';
+            }
+
+            $message_text = '';
+            if($message->type=="text")
+            {
+                $message_text = json_decode($message->text)->body;
+            }
+
+            if($message->type=="image")
+            {
+                $image = json_decode($message->image);
+                $image_link = '';
+                if(isset($image->link)) $image_link = $image->link;
+                $image_text = '<img src="'.$image_link.'" class="img-thumbnail mb-2" style="max-height: 200px;">';
+                $message_text = $image_text;
+                if(isset($image->caption)) $message_text = $image_text.'<br />'. $image->caption;
+            }
+
+            if($message->type=="reaction")
+            {
+                $message_text = json_decode($message->reaction)->emoji;
+            }
+
+            if($message->type=="template")
+            {
+                $message_text = "template : ". json_decode($message->template)->name;
+            }
+
+            if($message->type=="interactive")
+            {
+                $message_text = json_decode($message->interactive)->nfm_reply->response_json;
+            }
+
+            $output .= '<div class="'.$style1.'" >
+                            <div class="card-body">
+                                <p class="card-text mb-0">'. nl2br($message_text) .'</p>
+                                <small>'.GeneralHelper::dateFormat($message->created_at,2).'</small>
+                                <br />
+                                <small>'.$message->status.'</small>
+                            </div>
+                        </div>';
+        }
+
+        FirebaseHelper::write('messages/'.$contact->id,$output);
+    }
+
+    public function whatsapp_to_booking_json($json)
+    {
+        $contact = $json->entry[0]->changes[0]->value->contacts[0];
+        $message = $json->entry[0]->changes[0]->value->messages[0];
+
+        $name = null;
+        if(isset($contact->profile->name)) $name = $contact->profile->name;
+        $contact_id = $this->contact($contact->wa_id,$name);
+
+        $data_flow = $message->interactive->nfm_reply->response_json;
+        
+        $data = [
+                "booking_confirmation_code" => BookingHelper::get_ticket(),
+                "booking_channel" => "Whatsapp",
+                "booking_note" => $data_flow->more_details,
+                "tour_name" => $data_flow->tour_name,
+                "tour_date" => $data_flow->date." ".$data_flow->time.":00",
+                "participant_name" => $name,
+                "participant_phone" => $contact->wa_id,
+                "participant_email" => "",
+                "participant_total" => $data_flow->participant,
+                "product_id" => $data_flow->bokun_id
+            ];
+
+        $booking_json = (object)$data;
+        return $booking_json;
+    }
 
     function encryptResponse($response, $aesKeyBuffer, $initialVectorBuffer)
     {
@@ -111,63 +198,7 @@ class WhatsappHelper {
         }
     }
 
-    public function messages($id)
-    {
-        $contact = Contact::where('id',$id)->firstOrFail();
-        $messages = Message::where('contact_id',$contact->id)->orderBy('created_at','desc')->get();
-
-        $output = '';
-        foreach($messages as $message)
-        {
-            $style1 = 'card bg-light mb-2';
-            if($message->from==null)
-            {
-                $style1 = 'card text-white bg-success mb-2';
-            }
-
-            $message_text = '';
-            if($message->type=="text")
-            {
-                $message_text = json_decode($message->text)->body;
-            }
-
-            if($message->type=="image")
-            {
-                $image = json_decode($message->image);
-                $image_link = '';
-                if(isset($image->link)) $image_link = $image->link;
-                $image_text = '<img src="'.$image_link.'" class="img-thumbnail mb-2" style="max-height: 200px;">';
-                $message_text = $image_text;
-                if(isset($image->caption)) $message_text = $image_text.'<br />'. $image->caption;
-            }
-
-            if($message->type=="reaction")
-            {
-                $message_text = json_decode($message->reaction)->emoji;
-            }
-
-            if($message->type=="template")
-            {
-                $message_text = "template : ". json_decode($message->template)->name;
-            }
-
-            if($message->type=="interactive")
-            {
-                $message_text = json_decode($message->interactive)->nfm_reply->response_json;
-            }
-
-            $output .= '<div class="'.$style1.'" >
-                            <div class="card-body">
-                                <p class="card-text mb-0">'. nl2br($message_text) .'</p>
-                                <small>'.GeneralHelper::dateFormat($message->created_at,2).'</small>
-                                <br />
-                                <small>'.$message->status.'</small>
-                            </div>
-                        </div>';
-        }
-
-        FirebaseHelper::write('messages/'.$contact->id,$output);
-    }
+    
 
     public function setStatusMessage($wa_id,$status)
     {
@@ -188,6 +219,8 @@ class WhatsappHelper {
             self::messages($message->contact_id);
         }
     }
+
+
 
     public function saveInboundMessage($json)
     {

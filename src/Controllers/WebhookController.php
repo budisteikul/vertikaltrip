@@ -280,6 +280,7 @@ class WebhookController extends Controller
                     $message_id = $data->entry[0]->changes[0]->value->statuses[0]->id;
                     $status = $data->entry[0]->changes[0]->value->statuses[0]->status;
                     $whatsapp->setStatusMessage($message_id,$status);
+                    return response('OK', 200)->header('Content-Type', 'text/plain');
                 }
 
 
@@ -351,6 +352,8 @@ class WebhookController extends Controller
                             }
                         break;
                         case "interactive":
+                            $booking_json = $whatsapp->whatsapp_to_booking_json($data);
+                            BookingHelper::booking_by_json($booking_json);
                             $message = 'Not supported message. Type: '.$type;
                         break;
                         default:
