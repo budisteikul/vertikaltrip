@@ -50,6 +50,7 @@ class WebhookController extends Controller
 
             $tour_id = $request->input("tour_id");
             $product = Product::findOrFail($tour_id);
+            $content = BokunHelper::get_product($product->bokun_id);
 
             //$booking_json->p_product_id = $product->bokun_id;
             
@@ -75,7 +76,7 @@ class WebhookController extends Controller
                 }
                 else
                 {
-                    $price = 500000;
+                    $price = $content->nextDefaultPriceMoney->amount;
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
                     
                     $more_details = 'no dietary';
@@ -89,7 +90,7 @@ class WebhookController extends Controller
                             "date"=> $decryptedData["decryptedBody"]["data"]["date"],
                             "time"=> $decryptedData["decryptedBody"]["data"]["time"],
                             "participant"=> $decryptedData["decryptedBody"]["data"]["participant"],
-                            "head_information"=> "Total Price :\n".config('site.currency')." ". GeneralHelper::numberFormat($total_price,config('site.currency')),
+                            "head_information"=> "Total Price :\n".$content->nextDefaultPriceMoney->currency." ". GeneralHelper::numberFormat($total_price,$content->nextDefaultPriceMoney->currency),
                             "body_information"=> "Please pay in cash directly to your guide at the meeting point before the tour starts.",
                             "session_id"=> $decryptedData["decryptedBody"]["data"]["session_id"],
                             "step"=> "confirm_booking",
@@ -172,7 +173,7 @@ class WebhookController extends Controller
                         "is_time_enabled" => true,
                         "participant" => $participant,
                         "is_participant_enabled" => true,
-                        "information"=> "Price : IDR 500,000 / participant",
+                        "information"=> "Price : ".$content->nextDefaultPriceMoney->currency." ".GeneralHelper::numberFormat($content->nextDefaultPriceMoney->amount,$content->nextDefaultPriceMoney->currency)." / participant",
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name,
