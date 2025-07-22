@@ -2903,7 +2903,7 @@ class BookingHelper {
             $shoppingcart_product->title = $booking_json->tour_name;
             $shoppingcart_product->rate = "Open Trip";
             $shoppingcart_product->date = $booking_json->tour_date;
-            $shoppingcart_product->cancellation = "Referring to ".$booking_json->booking_channel." policy";
+            $shoppingcart_product->cancellation = BookingHelper::get_cancellation($booking_json->tour_date,$content->cancellationPolicy->simpleCutoffHours);
             $shoppingcart_product->currency = config('site.currency');
             $shoppingcart_product->subtotal = $total_price;
             $shoppingcart_product->total = $total_price;
