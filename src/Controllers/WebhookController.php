@@ -155,7 +155,7 @@ class WebhookController extends Controller
                     if($decryptedData["decryptedBody"]["data"]["date"]!="") $date = $decryptedData["decryptedBody"]["data"]["date"];
                     foreach($next_availability as $x)
                     {
-                        if($x->date==$decryptedData["decryptedBody"]["data"]["date"])
+                        if($x->date==$date)
                         {
                             $availability_participant = $x->max_participant - $x->booking;
                         }
