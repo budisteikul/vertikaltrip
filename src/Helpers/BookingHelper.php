@@ -2881,6 +2881,10 @@ class BookingHelper {
 
 	public static function booking_by_json($booking_json)
 	{
+			$content = BokunHelper::get_product($booking_json->product_id);
+			$price = $content->nextDefaultPriceMoney->amount;
+			$total_price = $price * $booking_json->participant_total;
+
 			$shoppingcart = new Shoppingcart();
             $shoppingcart->booking_status = "CONFIRMED";
             $shoppingcart->session_id = Uuid::uuid4()->toString();
@@ -2896,6 +2900,10 @@ class BookingHelper {
             $shoppingcart_product->rate = "Open Trip";
             $shoppingcart_product->date = $booking_json->tour_date;
             $shoppingcart_product->cancellation = "Referring to ".$booking_json->booking_channel." policy";
+            $shoppingcart_product->currency = config('site.currency');
+            $shoppingcart_product->subtotal = $total_price;
+            $shoppingcart_product->total = $total_price;
+            $shoppingcart_product->due_now = $total_price;
             $shoppingcart_product->save();
 
             $shoppingcart_product_detail = new ShoppingcartProductDetail();
@@ -2905,6 +2913,10 @@ class BookingHelper {
             $shoppingcart_product_detail->unit_price = "Persons";
             $shoppingcart_product_detail->people = $booking_json->participant_total;
             $shoppingcart_product_detail->qty = $booking_json->participant_total;
+            $shoppingcart_product_detail->price = $price;
+            $shoppingcart_product_detail->currency = config('site.currency');
+            $shoppingcart_product_detail->subtotal = $total_price;
+            $shoppingcart_product_detail->total = $total_price;
             $shoppingcart_product_detail->save();
             
             $shoppingcart_payment = new ShoppingcartPayment();
