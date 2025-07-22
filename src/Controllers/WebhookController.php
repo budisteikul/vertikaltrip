@@ -366,7 +366,7 @@ class WebhookController extends Controller
                                     {
                                         $data1 = [
                                             "booking_confirmation_code" => BookingHelper::get_ticket(),
-                                            "booking_channel" => "Whatsapp",
+                                            "booking_channel" => "WEBSITE",
                                             "booking_note" => $data_flow->more_details,
                                             "tour_name" => $data_flow->tour_name,
                                             "tour_date" => $data_flow->date." ".$data_flow->time.":00",
