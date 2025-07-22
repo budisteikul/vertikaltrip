@@ -2890,6 +2890,10 @@ class BookingHelper {
             $shoppingcart->session_id = Uuid::uuid4()->toString();
             $shoppingcart->booking_channel = $booking_json->booking_channel;
             $shoppingcart->confirmation_code = $booking_json->booking_confirmation_code;
+            $shoppingcart->currency = config('site.currency');
+            $shoppingcart->subtotal = $total_price;
+            $shoppingcart->total = $total_price;
+            $shoppingcart->due_now = $total_price;
             $shoppingcart->save();
 
             $shoppingcart_product = new ShoppingcartProduct();
