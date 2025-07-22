@@ -152,6 +152,7 @@ class WebhookController extends Controller
                 {
                     //After selected date
                     //$decryptedData["decryptedBody"]["data"]["date"]
+                    $availability_participant = 8;
                     foreach($next_availability as $x)
                     {
                         if($x->date==$decryptedData["decryptedBody"]["data"]["date"])
