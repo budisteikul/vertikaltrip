@@ -2879,18 +2879,20 @@ class BookingHelper {
         return (object)$data;
 	}
 
-	public static function booking_by_json($booking_json)
+	public static function booking_by_json($booking_json,$currency=null)
 	{
+			if($currency==null) $currency = config('site.currency');
 			$content = BokunHelper::get_product($booking_json->product_id);
-			$price = $content->nextDefaultPriceMoney->amount;
-			$total_price = $price * $booking_json->participant_total;
+			$price = GeneralHelper::numberFormat(BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency),$currency);
+			$total_price = GeneralHelper::numberFormat($price * $booking_json->participant_total,$currency);
+
 
 			$shoppingcart = new Shoppingcart();
             $shoppingcart->booking_status = "CONFIRMED";
             $shoppingcart->session_id = $booking_json->session_id;
             $shoppingcart->booking_channel = $booking_json->booking_channel;
             $shoppingcart->confirmation_code = $booking_json->booking_confirmation_code;
-            $shoppingcart->currency = config('site.currency');
+            $shoppingcart->currency = $currency;
             $shoppingcart->subtotal = $total_price;
             $shoppingcart->total = $total_price;
             $shoppingcart->due_now = $total_price;
@@ -2904,7 +2906,7 @@ class BookingHelper {
             $shoppingcart_product->rate = "Open Trip";
             $shoppingcart_product->date = $booking_json->tour_date;
             $shoppingcart_product->cancellation = BookingHelper::get_cancellation($booking_json->tour_date,$content->cancellationPolicy->simpleCutoffHours);
-            $shoppingcart_product->currency = config('site.currency');
+            $shoppingcart_product->currency = $currency;
             $shoppingcart_product->subtotal = $total_price;
             $shoppingcart_product->total = $total_price;
             $shoppingcart_product->due_now = $total_price;
@@ -2918,7 +2920,7 @@ class BookingHelper {
             $shoppingcart_product_detail->people = $booking_json->participant_total;
             $shoppingcart_product_detail->qty = $booking_json->participant_total;
             $shoppingcart_product_detail->price = $price;
-            $shoppingcart_product_detail->currency = config('site.currency');
+            $shoppingcart_product_detail->currency = $currency;
             $shoppingcart_product_detail->subtotal = $total_price;
             $shoppingcart_product_detail->total = $total_price;
             $shoppingcart_product_detail->save();
