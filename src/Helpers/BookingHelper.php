@@ -2883,8 +2883,8 @@ class BookingHelper {
 	{
 			if($currency==null) $currency = config('site.currency');
 			$content = BokunHelper::get_product($booking_json->product_id);
-			$price = GeneralHelper::numberFormat(BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency),$currency);
-			$total_price = GeneralHelper::numberFormat($price * $booking_json->participant_total,$currency);
+			$price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
+			$total_price = $price * $booking_json->participant_total;
 
 
 			$shoppingcart = new Shoppingcart();

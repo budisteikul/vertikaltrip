@@ -141,7 +141,8 @@ class WebhookController extends Controller
                             "step"=> "confirm_booking",
                             "bokun_id"=> $decryptedData["decryptedBody"]["data"]["bokun_id"],
                             "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"],
-                            "payment"=> $payment
+                            "payment"=> $payment,
+                            "currency"=> $currency
                         ]
                     ];
                 }
