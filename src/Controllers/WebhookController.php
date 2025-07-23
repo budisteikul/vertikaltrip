@@ -516,7 +516,7 @@ class WebhookController extends Controller
             $command = 'Extract data with JSON object format as 
 
             {
-                "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses ta or gyg
+                "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses TA or GYG
             }
 
             ';
@@ -578,7 +578,7 @@ class WebhookController extends Controller
             $command = 'Extract data with JSON object format as 
 
             {
-                "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses ta or gyg,
+                "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses TA or GYG,
                 "booking_channel" : name of sender GetYourGuide or Airbnb,
                 "booking_note" : "",
                 "tour_name" : offer or booking name has been booked,
