@@ -68,7 +68,7 @@ class WebhookController extends Controller
 
             $tour_id = $request->input("tour_id");
             $payment = $request->input("payment");
-            $currency = $request->input("payment");
+            $currency = $request->input("currency");
             if($currency=="") $currency = config('site.currency');
 
             $product = Product::findOrFail($tour_id);
@@ -192,7 +192,7 @@ class WebhookController extends Controller
                         "is_time_enabled" => true,
                         "participant" => $participant,
                         "is_participant_enabled" => true,
-                        "information"=> "Price : ".$content->nextDefaultPriceMoney->currency." ".GeneralHelper::numberFormat(BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency),$currency)." / participant",
+                        "information"=> "Price : ".$currency ." ".GeneralHelper::numberFormat(BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency),$currency)." / participant",
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name,
