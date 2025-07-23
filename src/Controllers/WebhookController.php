@@ -349,10 +349,14 @@ class WebhookController extends Controller
                                     
                                 }
 
-                                $type = " New whatsapp booking";
+                                $message = 'New whatsapp booking';
+                            }
+                            else
+                            {
+                                $message = 'Not supported message. Type: '.$type;
                             }
                             
-                            $message = 'Not supported message. Type: '.$type;
+                            
                             
                         break;
                         default:
