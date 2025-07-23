@@ -581,7 +581,7 @@ class WebhookController extends Controller
                 "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses TA or GYG,
                 "booking_channel" : name of sender GetYourGuide or Airbnb,
                 "booking_note" : "",
-                "tour_name" : offer or booking name has been booked,
+                "tour_name" : offer or booking name has been booked usually the first word uses Yogyakarta or Bali,
                 "tour_date" : date of the tour, format YYYY-mm-dd HH:ii:ss,
                 "participant_name" : get participant name,
                 "participant_phone" : get participant phone,
