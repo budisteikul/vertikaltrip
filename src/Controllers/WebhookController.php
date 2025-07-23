@@ -13,6 +13,8 @@ use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
 use budisteikul\vertikaltrip\Helpers\GeneralHelper;
 use budisteikul\vertikaltrip\Helpers\SettingHelper;
 use budisteikul\vertikaltrip\Helpers\BokunHelper;
+use budisteikul\vertikaltrip\Helpers\FirebaseHelper;
+
 use budisteikul\vertikaltrip\Models\Shoppingcart;
 use budisteikul\vertikaltrip\Models\ShoppingcartProduct;
 use budisteikul\vertikaltrip\Models\ShoppingcartProductDetail;
@@ -360,10 +362,14 @@ class WebhookController extends Controller
                                             "participant_phone" => $from,
                                             "participant_email" => "",
                                             "participant_total" => $data_flow->participant,
-                                            "product_id" => $data_flow->bokun_id
+                                            "product_id" => $data_flow->bokun_id,
+                                            "payment_status" => "PENDING"
                                         ];
 
                                         $booking_json = (object)$data1;
+
+                                        FirebaseHelper::write("whatsapp_booking/". $booking_json->session_id,$booking_json);
+
                                         $shoppingcart = BookingHelper::booking_by_json($booking_json);
                                         BookingHelper::shoppingcart_notif($shoppingcart);
                                     }
