@@ -2887,7 +2887,7 @@ class BookingHelper {
 
 			$shoppingcart = new Shoppingcart();
             $shoppingcart->booking_status = "CONFIRMED";
-            $shoppingcart->session_id = Uuid::uuid4()->toString();
+            $shoppingcart->session_id = $booking_json->session_id;
             $shoppingcart->booking_channel = $booking_json->booking_channel;
             $shoppingcart->confirmation_code = $booking_json->booking_confirmation_code;
             $shoppingcart->currency = config('site.currency');

@@ -44,6 +44,8 @@ class WebhookController extends Controller
         if($webhook_app=="test")
         {
             
+            
+
             //$content = BokunHelper::get_product(7424);
             //print_r($content->cancellationPolicy->simpleCutoffHours);
             exit();
@@ -363,6 +365,7 @@ class WebhookController extends Controller
                                             "participant_email" => "",
                                             "participant_total" => $data_flow->participant,
                                             "product_id" => $data_flow->bokun_id,
+                                            "session_id" => $data_flow->session_id,
                                             "payment_status" => "PENDING"
                                         ];
 
@@ -645,6 +648,7 @@ class WebhookController extends Controller
             }
             
             $booking_json->tour_name = $product->name;
+            $booking_json->session_id = Uuid::uuid4()->toString();
 
             $shoppingcart = BookingHelper::booking_by_json($booking_json);
 
