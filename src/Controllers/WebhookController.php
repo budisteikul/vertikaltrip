@@ -398,7 +398,8 @@ class WebhookController extends Controller
                             {
                                 $whatsapp->sendContact($from,$message->contacts);
                             }
-                        
+                            
+                            return response('OK', 200)->header('Content-Type', 'text/plain');
                         break;
                         case "/contacts":
                             if(isset($varmessage[1]))
@@ -427,6 +428,8 @@ class WebhookController extends Controller
                             {
                                 $whatsapp->sendText($from,"There is no participant ". $date);
                             }
+
+                            return response('OK', 200)->header('Content-Type', 'text/plain');
                         break;
                         default:
                     }
