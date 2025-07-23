@@ -638,6 +638,7 @@ class WebhookController extends Controller
                 return response('DUPLICATE', 200)->header('Content-Type', 'text/plain');
             }
             
+            $booking_json->tour_name = $product->name;
 
             $shoppingcart = BookingHelper::booking_by_json($booking_json);
 
