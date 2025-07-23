@@ -62,6 +62,7 @@ class WebhookController extends Controller
             $payment = $request->input("payment");
             $product = Product::findOrFail($tour_id);
             $content = BokunHelper::get_product($product->bokun_id);
+            $availability_participant = 8;
 
             $next_availability = BookingHelper::next_availability($product->bokun_id,20);
             foreach($next_availability as $x)
@@ -83,8 +84,6 @@ class WebhookController extends Controller
             }
             else if(isset($decryptedData["decryptedBody"]["data"]["step"]))
             {
-                
-                
 
                 if($decryptedData["decryptedBody"]["data"]["step"]=="confirm_booking")
                 {
@@ -96,7 +95,7 @@ class WebhookController extends Controller
                 }
                 else
                 {
-                    
+                    //summary
                     if($payment!="")
                     {
                         $body_information = "Pay online";
@@ -107,7 +106,7 @@ class WebhookController extends Controller
                         $body_information = "Payment Instruction :\nPlease pay in cash directly to your guide at the meeting point before the tour starts.";
                         $payment="off";
                     }
-                    //summary
+                    
                     $price = $content->nextDefaultPriceMoney->amount;
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
                     
@@ -137,12 +136,9 @@ class WebhookController extends Controller
             }
             else
             {
-                
+                //APPOINTMENT
                 if(isset($decryptedData["decryptedBody"]["data"]["trigger"]))
                 {
-                    //After selected date
-                    //$decryptedData["decryptedBody"]["data"]["date"]
-                    $availability_participant = 8;
                     foreach($next_availability as $x)
                     {
                         if($x->date==$decryptedData["decryptedBody"]["data"]["date"])
@@ -151,70 +147,25 @@ class WebhookController extends Controller
                         }
                         
                     }
+                }
 
-                    
-
-                    for($i=1;$i<=$availability_participant;$i++)
-                    {
+                for($i=1;$i<=$availability_participant;$i++)
+                {
                         $unit = "adult";
                         if($i>1) $unit = "adults";
                         $participant[] = [
                             "id"=> (string)$i,
                             "title"=> (string)$i." ".(string)$unit
                         ];
-                    }
-                   
-
-                    
-                }
-                else
-                {
-                    //Init flow
-                    $participant = [
-                                        [
-                                            "id"=> "1",
-                                            "title"=> "1 adult"
-                                        ],
-                                        [
-                                            "id"=> "2",
-                                            "title"=> "2 adults"
-                                        ],
-                                        [
-                                            "id"=> "3",
-                                            "title"=> "3 adults"
-                                        ],
-                                        [
-                                            "id"=> "4",
-                                            "title"=> "4 adults"
-                                        ],
-                                        [
-                                            "id"=> "5",
-                                            "title"=> "5 adults"
-                                        ],
-                                        [
-                                            "id"=> "6",
-                                            "title"=> "6 adults"
-                                        ],
-                                        [
-                                            "id"=> "7",
-                                            "title"=> "7 adults"
-                                        ],
-                                        [
-                                            "id"=> "8",
-                                            "title"=> "8 adults"
-                                        ]
-                                    ];
-
-                    
                 }
 
                 
-                    $time = [
-                                [
-                                   "id"=> GeneralHelper::digitFormat($content->startTimes[0]->hour,2) .":". GeneralHelper::digitFormat($content->startTimes[0]->minute,2),
-                                    "title"=> GeneralHelper::digitFormat($content->startTimes[0]->hour,2) .":". GeneralHelper::digitFormat($content->startTimes[0]->minute,2)
-                                ]
-                            ];
+                $time = [
+                    [
+                        "id"=> GeneralHelper::digitFormat($content->startTimes[0]->hour,2) .":". GeneralHelper::digitFormat($content->startTimes[0]->minute,2),
+                        "title"=> GeneralHelper::digitFormat($content->startTimes[0]->hour,2) .":". GeneralHelper::digitFormat($content->startTimes[0]->minute,2)
+                    ]
+                ];
                 
                 
                 $screen = [
