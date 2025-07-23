@@ -336,8 +336,16 @@ class WebhookController extends Controller
 
                                         FirebaseHelper::write("whatsapp_booking/". $booking_json->session_id,$booking_json);
 
-                                        //$shoppingcart = BookingHelper::booking_by_json($booking_json);
-                                        //BookingHelper::shoppingcart_notif($shoppingcart);
+                                        if($data_flow->payment=="on")
+                                        {
+                                            $shoppingcart = BookingHelper::booking_by_json($booking_json);
+                                            BookingHelper::shoppingcart_notif($shoppingcart);
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+                                        
                                     }
                                     
                                 }
