@@ -323,6 +323,9 @@ class WebhookController extends Controller
                                     $check_booking = FirebaseHelper::read('whatsapp_booking/'.$data_flow->session_id);
                                     if(!$check_booking)
                                     {
+                                        $currency = config('site.currency');
+                                        if(isset($data_flow->currency)) $currency = $data_flow->currency;
+
                                         $data1 = [
                                             "booking_confirmation_code" => BookingHelper::get_ticket(),
                                             "booking_channel" => "WEBSITE",
@@ -340,7 +343,7 @@ class WebhookController extends Controller
 
                                         $booking_json = (object)$data1;
 
-                                        FirebaseHelper::write("whatsapp_booking/". $booking_json->session_id,$booking_json);
+                                        FirebaseHelper::write("whatsapp_booking/". $booking_json->session_id,$currency);
 
                                         $shoppingcart = BookingHelper::booking_by_json($booking_json,$data_flow->currency);
                                         BookingHelper::shoppingcart_notif($shoppingcart);
