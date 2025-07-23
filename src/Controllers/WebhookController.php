@@ -45,7 +45,15 @@ class WebhookController extends Controller
         {
             
             
-
+            $aaa = FirebaseHelper::read('whatsapp_booking/f5867da1-bd36-464a-b55b-ec607b06854');
+            if($aaa)
+            {
+                print_r("ada");
+            }
+            else
+            {
+                print_r("tidak ada");
+            }
             //$content = BokunHelper::get_product(7424);
             //print_r($content->cancellationPolicy->simpleCutoffHours);
             exit();
@@ -106,17 +114,19 @@ class WebhookController extends Controller
                         $body_information = "Payment Instruction :\nPlease pay in cash directly to your guide at the meeting point before the tour starts.";
                         $payment="off";
                     }
-                    
+
                     $price = $content->nextDefaultPriceMoney->amount;
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
                     
                     $more_details = 'no dietary';
                     if(isset($decryptedData["decryptedBody"]["data"]["more_details"])) $more_details = $decryptedData["decryptedBody"]["data"]["more_details"];
 
+                    $unit_price = "adult";
+                    if((int)$decryptedData["decryptedBody"]["data"]["participant"]>1) $unit_price = "adults";
                     $screen = [
                         "screen" => "SUMMARY",
                         "data" => [
-                            "appointment"=> GeneralHelper::dateFormat($decryptedData["decryptedBody"]["data"]["date"],6) ."\n".$decryptedData["decryptedBody"]["data"]["time"]."\n". $decryptedData["decryptedBody"]["data"]["participant"] ." adults",
+                            "appointment"=> GeneralHelper::dateFormat($decryptedData["decryptedBody"]["data"]["date"],6) ."\n".$decryptedData["decryptedBody"]["data"]["time"]."\n". $decryptedData["decryptedBody"]["data"]["participant"] ." ".$unit_price,
                             "more_details"=> $more_details,
                             "date"=> $decryptedData["decryptedBody"]["data"]["date"],
                             "time"=> $decryptedData["decryptedBody"]["data"]["time"],
@@ -296,13 +306,15 @@ class WebhookController extends Controller
                             }
                         break;
                         case "interactive":
+
                             $data_flow = json_decode($data->entry[0]->changes[0]->value->messages[0]->interactive->nfm_reply->response_json);
                             
                             if(isset($data_flow->step))
                             {
                                 if($data_flow->step=="confirm_booking")
                                 {
-                                    $check_booking = Shoppingcart::where('session_id',$data_flow->session_id)->first();
+                                    //$check_booking = Shoppingcart::where('session_id',$data_flow->session_id)->first();
+                                    $check_booking = FirebaseHelper::read('whatsapp_booking/'.$data_flow->session_id);
                                     if(!$check_booking)
                                     {
                                         $data1 = [
@@ -324,26 +336,15 @@ class WebhookController extends Controller
 
                                         FirebaseHelper::write("whatsapp_booking/". $booking_json->session_id,$booking_json);
 
-                                        $shoppingcart = BookingHelper::booking_by_json($booking_json);
-                                        BookingHelper::shoppingcart_notif($shoppingcart);
+                                        //$shoppingcart = BookingHelper::booking_by_json($booking_json);
+                                        //BookingHelper::shoppingcart_notif($shoppingcart);
                                     }
                                     
                                 }
+
+                                $type = " New whatsapp booking";
                             }
                             
-                            /*
-                            
-                            if($data_flow->step=="confirm_booking")
-                            {
-                                $booking_json = $whatsapp->whatsapp_to_booking_json($data);
-                                $shoppingcart = BookingHelper::booking_by_json($booking_json);
-                                BookingHelper::shoppingcart_notif($shoppingcart);
-                            }
-                            else
-                            {
-                                $message = 'Not supported message. Type: '.$type;
-                            }
-                            */
                             $message = 'Not supported message. Type: '.$type;
                             
                         break;
