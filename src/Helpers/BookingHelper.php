@@ -2923,11 +2923,39 @@ class BookingHelper {
             $shoppingcart_product_detail->total = $total_price;
             $shoppingcart_product_detail->save();
             
+
+
+
             $shoppingcart_payment = new ShoppingcartPayment();
             $shoppingcart_payment->shoppingcart_id = $shoppingcart->id;
             $shoppingcart_payment->payment_provider = "none";
+            
+            //1. AUTH 2.PAID 3.UNPAID 4.PENDING 5.REFUNDED
+            if(isset($booking_json->payment_status))
+            {
+            	switch($booking_json->payment_status)
+            	{
+            		case "AUTH":
+            			$shoppingcart_payment->payment_status = 1;
+            		break;
+            		case "PAID":
+            			$shoppingcart_payment->payment_status = 2;
+            		break;
+            		case "UNPAID":
+            			$shoppingcart_payment->payment_status = 3;
+            		break;
+            		case "PENDING":
+            			$shoppingcart_payment->payment_status = 4;
+            		break;
+            		case "REFUNDED":
+            			$shoppingcart_payment->payment_status = 5;
+            		break;
+            	}
+            }
+
             $shoppingcart_payment->save();
 
+            
             
             $lastName = '';
             $fullName = $booking_json->participant_name;
