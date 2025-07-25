@@ -11,6 +11,7 @@ use budisteikul\vertikaltrip\Models\Shoppingcart;
 
 use Illuminate\Support\Facades\Mail;
 use budisteikul\vertikaltrip\Mail\BookingConfirmedMail;
+use budisteikul\vertikaltrip\Mail\JogjaFoodTourQuestionMail;
 
 use budisteikul\vertikaltrip\Helpers\ProductHelper;
 use budisteikul\vertikaltrip\Helpers\BookingHelper;
