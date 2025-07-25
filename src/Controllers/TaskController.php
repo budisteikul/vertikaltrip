@@ -68,7 +68,7 @@ class TaskController extends Controller
 
         if($data->app=="mail_question")
         {
-            Mail::to($data->email)->cc([env("MAIL_FROM_ADDRESS")])->send(new JogjaFoodTourQuestionMail($data));
+            Mail::to($data->email)->send(new JogjaFoodTourQuestionMail($data));
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 
