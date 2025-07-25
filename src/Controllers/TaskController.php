@@ -65,6 +65,12 @@ class TaskController extends Controller
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 
+        if($data->app=="mail_question")
+        {
+            Mail::to($data->email)->cc([env("MAIL_FROM_ADDRESS")])->send(new JogjaFoodTourQuestionMail($data));
+            return response('OK', 200)->header('Content-Type', 'text/plain');
+        }
+
         if($data->app=="whatsapp")
         {
             $shoppingcart = Shoppingcart::where('session_id',$data->session_id)->where('confirmation_code',$data->confirmation_code)->first();
