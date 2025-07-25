@@ -1,7 +1,7 @@
 Hello {{$data->name}} 👋 
 Thank you for booking our food tour 
 
-The Food Tour will start {{ $data->time_description }} at {{ $data->time }} and our meeting point is at {{ $data->location }}.
+The food tour will start {{ $data->time_description }} at {{ $data->time }} and our meeting point is at {{ $data->location }}.
 
 Map : {{$data->map}}
 {{$data->map_description}}

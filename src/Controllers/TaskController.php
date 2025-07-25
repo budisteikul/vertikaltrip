@@ -25,7 +25,7 @@ class TaskController extends Controller
         
         $json = $request->getContent();
         
-        //TaskHelper::delete($json);
+        TaskHelper::delete($json);
 
 		$data = json_decode($json);
 
