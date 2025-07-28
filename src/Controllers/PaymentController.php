@@ -616,15 +616,13 @@ class PaymentController extends Controller
                     <span style="color: #D0D0D0; font-size: 12px; background-color: #FFFFFF; padding: 0 10px;">or pay with card</span>
                 </div>
             </div>
-            <div class="form-control mt-2 mb-2" style="height:47px;" id="card-element"></div>
+            <div class="form-control mt-2 mb-2 ml-0 mr-0" style="height:47px;" id="card-element"></div>
             <div id="card-errors" role="alert"></div>
+            
             <button style="height:47px;" class="btn btn-lg btn-block btn-theme" id="submit">
                 <i class="fas fa-lock"></i> <strong>Pay with card</strong>
             </button>
-            <div id="change_payment" class="mt-2">
-                <center><small><a href="#paymentMethod" class="text-theme" onClick="changePaymentMethod();">Click here</a> to change payment method</small>
-                </center>
-            </div>
+            
         </form>
 
         <div id="loader" class="mb-4"></div>
@@ -669,8 +667,8 @@ class PaymentController extends Controller
                  var style = {
                     base: {
                         color: "#32325d",
-                        fontSize: "16px",
-                        lineHeight: "34px"
+                        fontSize: "18px",
+                        lineHeight: "36px"
                     }
                  };
 
