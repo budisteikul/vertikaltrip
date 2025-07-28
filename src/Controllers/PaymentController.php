@@ -599,6 +599,278 @@ class PaymentController extends Controller
         return response($jscript)->header('Content-Type', 'application/javascript');
     }
 
+    public function wa_jscript($sessionId)
+    {
+        
+        
+        $shoppingcart = BookingHelper::read_shoppingcart($sessionId);
+        $amount = BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,'USD');
+        $amount = $amount * 100;
+
+        $payment_container = '<hr />
+        <form id="payment-form">
+            <div id="stripe-wallet" class="pt-2 pb-2 justify-content-center">
+                <h2>Pay with</h2>
+                <div id="payment-request-button"></div>
+                <div class="mt-2 mb-2" style="width: 100%; height: 12px; border-bottom: 1px solid #D0D0D0; text-align: center">
+                    <span style="color: #D0D0D0; font-size: 12px; background-color: #FFFFFF; padding: 0 10px;">or pay with card</span>
+                </div>
+            </div>
+            <div class="form-control mt-2 mb-2" style="height:47px;" id="card-element"></div>
+            <div id="card-errors" role="alert"></div>
+            <button style="height:47px;" class="btn btn-lg btn-block btn-theme" id="submit">
+                <i class="fas fa-lock"></i> <strong>Pay with card</strong>
+            </button>
+            <div id="change_payment" class="mt-2">
+                <center><small><a href="#paymentMethod" class="text-theme" onClick="changePaymentMethod();">Click here</a> to change payment method</small>
+                </center>
+            </div>
+        </form>
+
+        <div id="loader" class="mb-4"></div>
+        <div id="text-alert" class="text-center"></div>
+        ';
+        
+
+        $jscript = '
+        
+            $("#submitCheckout").slideUp("slow");
+            $("#paymentContainer").html(\''.str_replace(array("\r", "\n"), '', $payment_container).'\');
+
+                 var stripe = Stripe(\''. env("STRIPE_PUBLISHABLE_KEY") .'\', {
+                    apiVersion: "2020-08-27",
+                 });
+
+                 var paymentRequest = stripe.paymentRequest({
+                    country: \'US\',
+                    currency: \'usd\',
+                    total: {
+                        label: \''. env('APP_NAME') .'\',
+                        amount: '. $amount .',
+                    },
+                    requestPayerName: true,
+                    requestPayerEmail: true,
+                 });
+                 
+                 var elements = stripe.elements();
+
+                 var prButton = elements.create(\'paymentRequestButton\', {
+                    paymentRequest: paymentRequest,
+                 });
+
+                 paymentRequest.canMakePayment().then(function(result) {
+                    if (result) {
+                        prButton.mount(\'#payment-request-button\');
+                    } else {
+                        document.getElementById(\'stripe-wallet\').style.display = \'none\';
+                    }
+                 });
+                 
+                 var style = {
+                    base: {
+                        color: "#32325d",
+                        fontSize: "16px",
+                        lineHeight: "34px"
+                    }
+                 };
+
+                 var card = elements.create("card", { style: style });
+                 card.mount("#card-element");
+
+                var form = document.getElementById(\'payment-form\');
+                form.addEventListener(\'submit\', function(ev) {
+                   
+                    ev.preventDefault();
+
+                    $("#alert-payment").slideUp("slow");
+                    $("#submit").attr("disabled", true);
+                    $("#submit").html(\' <i class="fa fa-spinner fa-spin fa-fw"></i>  processing... \');
+
+                    $.ajax({
+                    beforeSend: function(request) {
+                        request.setRequestHeader(\'sessionId\', \''. $shoppingcart->session_id .'\');
+                    },
+                    type: \'POST\',
+                    url: \''. env('APP_API_URL') .'/payment/stripe\'
+                }).done(function( data ) {
+                    
+                    $("#loader").show();
+                    $("#payment-form").slideUp("slow");  
+                    $("#proses").hide();
+                    $("#loader").addClass("loader");
+                    $("#text-alert").show();
+                    $("#text-alert").prepend( "Please wait and do not close the browser or refresh the page" );
+
+                    stripe.confirmCardPayment(data.intent.client_secret, {
+                        payment_method: {
+                            card: card
+                        }
+                    }).then(function(result) {
+
+                        if (result.error) {
+
+                            $("#text-alert").hide();
+                            $("#text-alert").empty();
+                            $("#loader").hide();
+                            $("#loader").removeClass("loader");
+                            $("#payment-form").slideDown("slow");
+                            $("#submit").attr("disabled", false);
+                            $("#submit").html(\'<i class="fas fa-lock"></i> <strong>Pay with card</strong>\');
+                            $(\'#alert-payment\').html(\'<div id="alert-failed" class="alert alert-danger text-center mt-2" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> \'+ result.error.message +\'</h2></div>\');
+                            $(\'#alert-payment\').fadeIn("slow");
+
+                        } else {
+                            
+                            if (result.paymentIntent.status === \'succeeded\' || result.paymentIntent.status === \'requires_capture\') {
+                                
+                                $.ajax({
+                                data: {
+                                    "authorizationID": result.paymentIntent.id,
+                                    "sessionId": \''.$sessionId.'\',
+                                },
+                                type: \'POST\',
+                                url: \''. url('/api') .'/payment/stripe/confirm\'
+                                }).done(function(data) {
+                                if(data.id=="1")
+                                {
+                                    $("#text-alert").hide();
+                                    $("#text-alert").empty();
+                                    $("#loader").hide();
+                                    $("#loader").removeClass("loader");
+                                    $(\'#alert-payment\').html(\'<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>\');
+                                    $(\'#alert-payment\').fadeIn("slow");
+                                    setTimeout(function (){
+                                        afterCheckout(data.message);
+                                    }, 1000); 
+                                }
+
+                                }).fail(function(error) {
+                                    
+                                });
+
+                            }
+                        }
+                    });
+                });
+
+
+                });
+
+
+
+                paymentRequest.on(\'paymentmethod\', async(e) => {
+
+                    const {intent} = await fetch("'. env('APP_API_URL') .'/payment/stripe", {
+                        method: "POST",
+                        credentials: \'same-origin\',
+                        headers: {
+                            "sessionId" : "'. $shoppingcart->session_id .'",
+                        },
+                    }).then(r => r.json());
+                    
+                    const {error,paymentIntent} = await stripe.confirmCardPayment(intent.client_secret,{
+                            payment_method: e.paymentMethod.id
+                        }, {handleActions:false});
+                    
+                    $("#payment-form").slideUp("slow");  
+                    $("#proses").hide();
+                    $("#loader").addClass("loader");
+                    $("#text-alert").show();
+                    $("#text-alert").prepend( "Please wait and do not close the browser or refresh the page" );
+
+                    if(error) {
+                        e.complete("fail");
+                        $("#text-alert").hide();
+                        $("#text-alert").empty();
+                        $("#loader").hide();
+                        $("#loader").removeClass("loader");
+                        $(\'#alert-payment\').html(\'<div id="alert-failed" class="alert alert-danger text-center mt-2" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Failed</h2></div>\');
+                        $(\'#alert-payment\').fadeIn("slow");
+                    }
+
+                    e.complete("success");
+
+                    if(paymentIntent.status == "requires_action")
+                    {
+                        stripe.confirmCardPayment(intent.client_secret).then(function(result){
+                            if(result.error)
+                            {
+                                // failed
+                                e.complete("fail");
+                                $("#text-alert").hide();
+                                $("#text-alert").empty();
+                                $("#loader").hide();
+                                $("#loader").removeClass("loader");
+                                $(\'#alert-payment\').html(\'<div id="alert-failed" class="alert alert-danger text-center mt-2" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-frown"></i> Payment Failed</h2></div>\');
+                                $(\'#alert-payment\').fadeIn("slow");
+                            }
+                            else
+                            {
+                                // success
+                                $.ajax({
+                                data: {
+                                    "authorizationID": paymentIntent.id,
+                                    "sessionId": \''.$sessionId.'\',
+                                },
+                                type: \'POST\',
+                                url: \''. url('/api') .'/payment/stripe/confirm\'
+                                }).done(function(data) {
+                                if(data.id=="1")
+                                {
+                                    e.complete("success");
+                                    $("#text-alert").hide();
+                                    $("#text-alert").empty();
+                                    $("#loader").hide();
+                                    $("#loader").removeClass("loader");
+                                    $(\'#alert-payment\').html(\'<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>\');
+                                    $(\'#alert-payment\').fadeIn("slow");
+                                    setTimeout(function (){
+                                        afterCheckout(data.message);
+                                    }, 1000); 
+                                }
+
+                                }).fail(function(error) {
+                                    
+                                });
+                            }
+                        });
+                        
+                    } else {
+                                // success
+                                $.ajax({
+                                data: {
+                                    "authorizationID": paymentIntent.id,
+                                    "sessionId": \''.$sessionId.'\',
+                                },
+                                type: \'POST\',
+                                url: \''. url('/api') .'/payment/stripe/confirm\'
+                                }).done(function(data) {
+                                if(data.id=="1")
+                                {
+                                    e.complete("success");
+                                    $("#text-alert").hide();
+                                    $("#text-alert").empty();
+                                    $("#loader").hide();
+                                    $("#loader").removeClass("loader");
+                                    $(\'#alert-payment\').html(\'<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>\');
+                                    $(\'#alert-payment\').fadeIn("slow");
+                                    setTimeout(function (){
+                                        afterCheckout(data.message);
+                                    }, 1000); 
+                                }
+
+                                }).fail(function(error) {
+                                    
+                                });
+                    }
+
+                });
+            
+
+        ';
+        return response($jscript)->header('Content-Type', 'application/javascript');
+    }
+
 
     public function paypal_jscript($sessionId)
     {
