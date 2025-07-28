@@ -640,10 +640,8 @@ class PaymentController extends Controller
                             \'sessionId\': \''.$sessionId.'\'
                             }
                     }).then(function(res) {
-
                             return res.json();
                     }).then(function(data) {
-                            console.log(data);
                             return data.result.id;
                     });
                 },
