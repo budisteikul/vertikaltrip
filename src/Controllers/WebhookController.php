@@ -341,19 +341,24 @@ class WebhookController extends Controller
                                         {
                                             $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
                                             $components = [
-                                            [
-                                                "type"=> "button",
-                                                "sub_type"=> "url",
-                                                "index"=> 0,
-                                                "parameters" => [[
-                                                    "type" => "text",
-                                                    "text" => $shoppingcart->session_id
-                                                ]]
-                                            ]
+                                                [
+                                                    "type"=> "button",
+                                                    "sub_type"=> "url",
+                                                    "index"=> 0,
+                                                    "parameters" => [[
+                                                        "type" => "text",
+                                                        "text" => $shoppingcart->session_id
+                                                    ]]
+                                                ],
+                                                [
+                                                    "type"=> "button",
+                                                    "sub_type"=> "url",
+                                                    "index"=> 1
+                                                ]
                                             ];
             
                                             $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate($from,"online_payment", $components, "en_US");
+                                            $whatsapp->sendTemplate($from,"online_payment_01", $components);
                                         }
                                         else
                                         {
