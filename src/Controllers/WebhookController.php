@@ -100,7 +100,7 @@ class WebhookController extends Controller
                     //summary
                     if($payment!="")
                     {
-                        $body_information = $decryptedData["decryptedBody"]["data"]["participant"] ." x ".$currency." ". ($price * 1);
+                        $body_information = $decryptedData["decryptedBody"]["data"]["participant"] ." x ".$currency." ". GeneralHelper::numberFormat($price,$currency);
                         $payment="on";
                     }
                     else
@@ -125,7 +125,7 @@ class WebhookController extends Controller
                             "date"=> $decryptedData["decryptedBody"]["data"]["date"],
                             "time"=> $decryptedData["decryptedBody"]["data"]["time"],
                             "participant"=> $decryptedData["decryptedBody"]["data"]["participant"],
-                            "head_information"=> "Total Price :\n".$currency." ". $total_price,
+                            "head_information"=> "Total Price :\n".$currency." ". GeneralHelper::numberFormat($total_price,$currency),
                             "body_information"=> $body_information,
                             "session_id"=> $decryptedData["decryptedBody"]["data"]["session_id"],
                             "step"=> "confirm_booking",
@@ -183,7 +183,7 @@ class WebhookController extends Controller
                         "is_time_enabled" => true,
                         "participant" => $participant,
                         "is_participant_enabled" => true,
-                        "information"=> "Price : ".$currency ." ". $price * 1 ." / participant",
+                        "information"=> "Price : ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant",
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name,
