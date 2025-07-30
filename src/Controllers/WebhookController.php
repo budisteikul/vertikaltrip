@@ -43,7 +43,23 @@ class WebhookController extends Controller
         
         if($webhook_app=="test")
         {
+                        $components = [
+                                            [
+                                                "type"=> "header",
+                                                "parameters"=>[[
+                                                    "type"=>"image",
+                                                    "url"=>"https://storage.googleapis.com/storage.vertikaltrip.com/images/w_600-h_400/f813633e-6566-4df8-a9ae-42f1003bbdea.jpg"
+                                                ]]
+                                            ],
+                                            [
+                                                "type"=> "button",
+                                                "sub_type"=> "flow",
+                                                "index"=> 0
+                                            ]
+                                      ];
             
+                                            $whatsapp = new WhatsappHelper;
+                                            $whatsapp->sendTemplate("6285743112112","jogja_night_food_tour", $components, "en_US");
             exit();
         }
 
