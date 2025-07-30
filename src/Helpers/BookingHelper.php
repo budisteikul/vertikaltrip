@@ -2903,15 +2903,15 @@ class BookingHelper {
                     'title' => $product_detail->title,
                     'people' => $product_detail->people,
                     'qty' => $product_detail->qty,
-                    'price' => $product_detail->price,
+                    'price' => GeneralHelper::numberFormat($product_detail->price,$product_detail->currency),
                     'unit_price' => $product_detail->unit_price,
                     'currency' => $product_detail->currency,
-                    'subtotal' => $product_detail->subtotal,
-                    'discount' => $product_detail->discount,
-                    'tax' => $product_detail->tax,
-                    'fee' => $product_detail->fee,
-                    'admin' => $product_detail->admin,
-                    'total' => $product_detail->total
+                    'subtotal' => GeneralHelper::numberFormat($product_detail->subtotal,$product_detail->currency),
+                    'discount' => GeneralHelper::numberFormat($product_detail->discount,$product_detail->currency),
+                    'tax' => GeneralHelper::numberFormat($product_detail->tax,$product_detail->currency),
+                    'fee' => GeneralHelper::numberFormat($product_detail->fee,$product_detail->currency),
+                    'admin' => GeneralHelper::numberFormat($product_detail->admin,$product_detail->currency),
+                    'total' => GeneralHelper::numberFormat($product_detail->total,$product_detail->currency)
                 );
             }
             
@@ -2928,14 +2928,14 @@ class BookingHelper {
                 'date' => $product->date,
                 'cancellation' => $product->cancellation,
                 'currency' =>  $product->currency,
-                'subtotal' => $product->subtotal,
-                'discount' => $product->discount,
-                'tax' => $product->tax,
-                'fee' => $product->fee,
-                'admin' => $product->admin,
-                'total' => $product->total,
-                'due_now' => $product->due_now,
-                'due_on_arrival' => $product->due_on_arrival,
+                'subtotal' => GeneralHelper::numberFormat($product->subtotal,$product->currency),
+                'discount' => GeneralHelper::numberFormat($product->discount,$product->currency),
+                'tax' => GeneralHelper::numberFormat($product->tax,$product->currency),
+                'fee' => GeneralHelper::numberFormat($product->fee,$product->currency),
+                'admin' => GeneralHelper::numberFormat($product->admin,$product->currency),
+                'total' => GeneralHelper::numberFormat($product->total,$product->currency),
+                'due_now' => GeneralHelper::numberFormat($product->due_now,$product->currency),
+                'due_on_arrival' => GeneralHelper::numberFormat($product->due_on_arrival,$product->currency),
                 'product_details' => $ShoppingcartProductDetails
             );
             
@@ -3009,16 +3009,16 @@ class BookingHelper {
         $shoppingcart_json->confirmation_code = $shoppingcart->confirmation_code;
         $shoppingcart_json->promo_code = $shoppingcart->promo_code;
         $shoppingcart_json->currency = $shoppingcart->currency;
-        $shoppingcart_json->subtotal = $shoppingcart->subtotal;
-        $shoppingcart_json->discount = $shoppingcart->discount;
+        $shoppingcart_json->subtotal = GeneralHelper::numberFormat($shoppingcart->subtotal,$shoppingcart->currency);
+        $shoppingcart_json->discount = GeneralHelper::numberFormat($shoppingcart->discount,$shoppingcart->currency);
 
-        $shoppingcart_json->tax = $shoppingcart->tax;
-        $shoppingcart_json->fee = $shoppingcart->fee;
-        $shoppingcart_json->admin = $shoppingcart->admin;
+        $shoppingcart_json->tax = GeneralHelper::numberFormat($shoppingcart->tax,$shoppingcart->currency);
+        $shoppingcart_json->fee = GeneralHelper::numberFormat($shoppingcart->fee,$shoppingcart->currency);
+        $shoppingcart_json->admin = GeneralHelper::numberFormat($shoppingcart->admin,$shoppingcart->currency);
 
-        $shoppingcart_json->total = $shoppingcart->total;
-        $shoppingcart_json->due_now = $shoppingcart->due_now;
-        $shoppingcart_json->due_on_arrival = $shoppingcart->due_on_arrival;
+        $shoppingcart_json->total = GeneralHelper::numberFormat($shoppingcart->total,$shoppingcart->currency);
+        $shoppingcart_json->due_now = GeneralHelper::numberFormat($shoppingcart->due_now,$shoppingcart->currency);
+        $shoppingcart_json->due_on_arrival = GeneralHelper::numberFormat($shoppingcart->due_on_arrival,$shoppingcart->currency);
         $shoppingcart_json->url = $shoppingcart->url;
         $shoppingcart_json->referer = $shoppingcart->referer;
         
