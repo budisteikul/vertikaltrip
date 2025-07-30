@@ -43,8 +43,8 @@ class WebhookController extends Controller
         
         if($webhook_app=="test")
         {
-            $components = [
-                                    [
+            $components = (object)[
+                                    (object)[
                                         "type"=> "button",
                                         "sub_type"=> "flow",
                                         "index"=> 0,
