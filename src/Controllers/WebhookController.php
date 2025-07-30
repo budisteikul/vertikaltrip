@@ -48,7 +48,9 @@ class WebhookController extends Controller
                                                 "type"=> "header",
                                                 "parameters"=>[[
                                                     "type"=>"image",
-                                                    "url"=>"https://storage.googleapis.com/storage.vertikaltrip.com/images/w_600-h_400/f813633e-6566-4df8-a9ae-42f1003bbdea.jpg"
+                                                    "image"=>[
+                                                        "link"=>"https://storage.googleapis.com/storage.vertikaltrip.com/images/w_600-h_400/f813633e-6566-4df8-a9ae-42f1003bbdea.jpg"
+                                                    ]
                                                 ]]
                                             ],
                                             [
