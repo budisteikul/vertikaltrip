@@ -94,10 +94,13 @@ class WebhookController extends Controller
                 }
                 else
                 {
+                    $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
+                    $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
+
                     //summary
                     if($payment!="")
                     {
-                        $body_information = "Pay online";
+                        $body_information = $decryptedData["decryptedBody"]["data"]["participant"] ." x ".$currency." ". ($price * 1);
                         $payment="on";
                     }
                     else
@@ -107,8 +110,7 @@ class WebhookController extends Controller
                     }
 
                     
-                    $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
-                    $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
+                    
                     
                     $more_details = 'no dietary';
                     if(isset($decryptedData["decryptedBody"]["data"]["more_details"])) $more_details = $decryptedData["decryptedBody"]["data"]["more_details"];
