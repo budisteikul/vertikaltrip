@@ -41,7 +41,24 @@ class WebhookController extends Controller
     public function webhook($webhook_app,Request $request)
     {
         
-       
+        if($webhook_app=="test")
+        {
+            $components = [
+                                    [
+                                        "type"=> "button",
+                                        "sub_type"=> "flow",
+                                        "index"=> 0,
+                                        "parameters" => [
+                                            "type" => "text",
+                                            "text" => "xxxx-xxxx-xxxx-xxxx"
+                                        ]
+                                    ]
+                            ];
+            
+            $whatsapp = new WhatsappHelper;
+            $whatsapp->sendTemplate("6285743112112","online_payment", $components, "en_US");
+            exit();
+        }
 
         if($webhook_app=="whatsapp_booking_01")
         {
