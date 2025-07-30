@@ -385,7 +385,7 @@ class WebhookController extends Controller
                     
                     
                     //==================================================
-                    if($message=="make a booking" || $message=="Make a booking")
+                    if(strtolower($message)=="make a booking")
                     {
                         $components = [
                                             [
