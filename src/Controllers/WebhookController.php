@@ -108,7 +108,7 @@ class WebhookController extends Controller
 
                     
                     $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
-                    $total_price = GeneralHelper::numberFormat($price * $decryptedData["decryptedBody"]["data"]["participant"],$currency);
+                    $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
                     
                     $more_details = 'no dietary';
                     if(isset($decryptedData["decryptedBody"]["data"]["more_details"])) $more_details = $decryptedData["decryptedBody"]["data"]["more_details"];
