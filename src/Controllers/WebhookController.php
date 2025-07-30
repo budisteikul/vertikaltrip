@@ -48,7 +48,7 @@ class WebhookController extends Controller
                                         "type"=> "button",
                                         "sub_type"=> "flow",
                                         "index"=> 0,
-                                        "parameters" => [
+                                        "parameters" => (object)[
                                             "type" => "text",
                                             "text" => "xxxx-xxxx-xxxx-xxxx"
                                         ]
