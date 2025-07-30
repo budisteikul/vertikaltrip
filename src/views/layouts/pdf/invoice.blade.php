@@ -345,9 +345,9 @@ footer {
                         {{ $shoppingcart_product_detail->unit_price }}
                         @endif
                     </td>
-                    <td class="unit">{{ $GeneralHelper->numberFormat($shoppingcart_product_detail->price) }}</td>
+                    <td class="unit">{{ $GeneralHelper->numberFormat($shoppingcart_product_detail->price,$shoppingcart_product_detail->currency) }}</td>
                     <td class="qty">{{ $shoppingcart_product_detail->qty }}</td>
-                    <td class="total">{{ $GeneralHelper->numberFormat($shoppingcart_product_detail->subtotal) }}</td>
+                    <td class="total">{{ $GeneralHelper->numberFormat($shoppingcart_product_detail->subtotal,$shoppingcart_product_detail->currency) }}</td>
                   </tr>
                         </tbody>
                         <?php
@@ -365,7 +365,7 @@ footer {
           <tr>
             <td colspan="2"></td>
             <td colspan="2">DISCOUNT</td>
-            <td>({{ $GeneralHelper->numberFormat($discount) }})</td>
+            <td>({{ $GeneralHelper->numberFormat($discount,$shoppingcart->currency) }})</td>
           </tr>
           @endif
 
@@ -377,26 +377,26 @@ footer {
               $unique_fee = $shoppingcart->shoppingcart_payment->amount - $total;
               $total = $total + $unique_fee;
             @endphp
-            <td>{{ $GeneralHelper->numberFormat($unique_fee) }}</td>
+            <td>{{ $GeneralHelper->numberFormat($unique_fee,$shoppingcart->currency) }}</td>
           </tr>
           @endif
           
           <tr>
             <td colspan="2"></td>
             <td colspan="2">TOTAL</td>
-            <td>{{ $GeneralHelper->numberFormat($total) }}</td>
+            <td>{{ $GeneralHelper->numberFormat($total,$shoppingcart->currency) }}</td>
           </tr>
           @if($shoppingcart->due_on_arrival>0)
           <tr>
             <td colspan="2"></td>
             <td colspan="2">DUE ON ARRIVAL ({{$shoppingcart->currency}})</td>
-            <td>{{ $GeneralHelper->numberFormat($shoppingcart->due_on_arrival) }}</td>
+            <td>{{ $GeneralHelper->numberFormat($shoppingcart->due_on_arrival,$shoppingcart->currency) }}</td>
           </tr>
           @endif
           <tr>
             <td colspan="2"></td>
             <td colspan="2">DUE NOW ({{$shoppingcart->currency}})</td>
-            <td>{{ $GeneralHelper->numberFormat($total) }}</td>
+            <td>{{ $GeneralHelper->numberFormat($total,$shoppingcart->currency) }}</td>
           </tr>
           
           
