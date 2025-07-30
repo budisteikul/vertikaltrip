@@ -43,10 +43,7 @@ class WebhookController extends Controller
         
         if($webhook_app=="test")
         {
-            $currency = "USD";
-            $price = BookingHelper::convert_currency(500000,"IDR",$currency);
-            $total_price = GeneralHelper::numberFormat($price * 2,$currency);
-            print_r($total_price);
+           
             exit();
         }
 
