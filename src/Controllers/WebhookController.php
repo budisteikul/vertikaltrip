@@ -405,7 +405,7 @@ class WebhookController extends Controller
                                       ];
             
                         $whatsapp = new WhatsappHelper;
-                        $whatsapp->sendTemplate($from,"jogja_night_food_tour", $components, "en_US");
+                        $whatsapp->sendTemplate($from,"jogja_night_food_tour_01", $components);
                         return response('OK', 200)->header('Content-Type', 'text/plain');
                     }
 
