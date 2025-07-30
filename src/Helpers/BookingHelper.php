@@ -371,7 +371,6 @@ class BookingHelper {
 			}
 			else
 			{
-
 				$product = Product::where('bokun_id',$activity[$i]->activity->id)->first();
 				if($product)
 				{
@@ -2747,7 +2746,8 @@ class BookingHelper {
 			$content = BokunHelper::get_product($booking_json->product_id);
 			$price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
 			$total_price = $price * $booking_json->participant_total;
-
+			$product = Product::where('bokun_id',$booking_json->product_id)->first(); 
+			$image = ImageHelper::thumbnail($product);
 
 			$shoppingcart = new Shoppingcart();
             $shoppingcart->booking_status = "CONFIRMED";
@@ -2766,6 +2766,7 @@ class BookingHelper {
             $shoppingcart_product->booking_id = 'bookingId_'. $shoppingcart->id;
             $shoppingcart_product->title = $booking_json->tour_name;
             $shoppingcart_product->rate = "Open Trip";
+            $shoppingcart_product->image = $image;
             $shoppingcart_product->date = $booking_json->tour_date;
             $shoppingcart_product->cancellation = BookingHelper::get_cancellation($booking_json->tour_date,$content->cancellationPolicy->simpleCutoffHours);
             $shoppingcart_product->currency = $currency;
