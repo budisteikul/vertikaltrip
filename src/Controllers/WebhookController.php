@@ -43,20 +43,7 @@ class WebhookController extends Controller
         
         if($webhook_app=="test")
         {
-           $components = [
-                                                [
-                                                    "type"=> "button",
-                                                    "sub_type"=> "url",
-                                                    "index"=> 0,
-                                                    "parameters" => [[
-                                                        "type" => "text",
-                                                        "text" => "uuid-uuid-uuid-uuid"
-                                                    ]]
-                                                ]
-                                            ];
-            
-                                            $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate("6285743112112","online_payment_01", $components);
+           
             exit();
         }
 
@@ -362,11 +349,6 @@ class WebhookController extends Controller
                                                         "type" => "text",
                                                         "text" => $shoppingcart->session_id
                                                     ]]
-                                                ],
-                                                [
-                                                    "type"=> "button",
-                                                    "sub_type"=> "url",
-                                                    "index"=> 1
                                                 ]
                                             ];
             
