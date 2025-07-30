@@ -48,7 +48,7 @@ class ContentHelper {
                     $product_subtotal += $product_detail->subtotal;
                     $product_discount += $product_detail->discount;
                     $product_total += $product_detail->total;
-                    $product_detail_asText .= $product_detail->qty .' x '. $product_detail->unit_price .' ('. GeneralHelper::numberFormat($product_detail->price) .') <br />';
+                    $product_detail_asText .= $product_detail->qty .' x '. $product_detail->unit_price .' ('. GeneralHelper::numberFormat($product_detail->price,$shoppingcart_product->currency) .') <br />';
                 }
 
             }
@@ -57,11 +57,11 @@ class ContentHelper {
 
             if($product_discount>0)
             {
-                $product_total_asText = '<strike class="text-muted">'.GeneralHelper::numberFormat($product_subtotal).'</strike><br /><b>'.GeneralHelper::numberFormat($product_total).'</b>';
+                $product_total_asText = '<strike class="text-muted">'.GeneralHelper::numberFormat($product_subtotal).'</strike><br /><b>'.GeneralHelper::numberFormat($product_total,$shoppingcart_product->currency).'</b>';
             }
             else
             {
-                $product_total_asText = '<b>'.GeneralHelper::numberFormat($product_total).'</b>';
+                $product_total_asText = '<b>'.GeneralHelper::numberFormat($product_total,$shoppingcart_product->currency).'</b>';
             }
 
             $dataPickup = array();
@@ -71,11 +71,11 @@ class ContentHelper {
                 {
                     if($product_detail->discount > 0)
                     {
-                        $pickup_price_asText = '<strike class="text-muted">'. GeneralHelper::numberFormat($product_detail->subtotal) .'</strike><br /><b>'. GeneralHelper::numberFormat($product_detail->total) .'</b>';
+                        $pickup_price_asText = '<strike class="text-muted">'. GeneralHelper::numberFormat($product_detail->subtotal,$shoppingcart_product->currency) .'</strike><br /><b>'. GeneralHelper::numberFormat($product_detail->total,$shoppingcart_product->currency) .'</b>';
                     }
                     else
                     {
-                        $pickup_price_asText = '<b>'. GeneralHelper::numberFormat($product_detail->total) .'</b>';
+                        $pickup_price_asText = '<b>'. GeneralHelper::numberFormat($product_detail->total,$shoppingcart_product->currency) .'</b>';
                     }
 
                     $dataPickup[] = array(
@@ -98,11 +98,11 @@ class ContentHelper {
                     $extra_unit_price_asText = $product_detail->qty .' '. $product_detail->unit_price;
                     if($product_detail->discount > 0)
                     {
-                        $extra_price_asText = '<strike class="text-muted">'. GeneralHelper::numberFormat($product_detail->subtotal) .'</strike><br /><b>'. GeneralHelper::numberFormat($product_detail->total) .'</b>';
+                        $extra_price_asText = '<strike class="text-muted">'. GeneralHelper::numberFormat($product_detail->subtotal,$shoppingcart_product->currency) .'</strike><br /><b>'. GeneralHelper::numberFormat($product_detail->total,$shoppingcart_product->currency) .'</b>';
                     }
                     else
                     {
-                        $extra_price_asText = '<b>'. GeneralHelper::numberFormat($product_detail->total) .'</b>';
+                        $extra_price_asText = '<b>'. GeneralHelper::numberFormat($product_detail->total,$shoppingcart_product->currency) .'</b>';
                     }
 
                     
@@ -283,11 +283,11 @@ class ContentHelper {
                 'confirmation_code' => $shoppingcart->confirmation_code,
                 'promo_code' => $shoppingcart->promo_code,
                 'currency' => $shoppingcart->currency,
-                'subtotal' => GeneralHelper::numberFormat($shoppingcart->subtotal),
-                'discount' => GeneralHelper::numberFormat($shoppingcart->discount),
-                'total' => GeneralHelper::numberFormat($shoppingcart->total),
-                'due_now' => GeneralHelper::numberFormat($shoppingcart->due_now),
-                'due_on_arrival' => GeneralHelper::numberFormat($shoppingcart->due_on_arrival),
+                'subtotal' => GeneralHelper::numberFormat($shoppingcart->subtotal,$shoppingcart->currency),
+                'discount' => GeneralHelper::numberFormat($shoppingcart->discount,$shoppingcart->currency),
+                'total' => GeneralHelper::numberFormat($shoppingcart->total,$shoppingcart->currency),
+                'due_now' => GeneralHelper::numberFormat($shoppingcart->due_now,$shoppingcart->currency),
+                'due_on_arrival' => GeneralHelper::numberFormat($shoppingcart->due_on_arrival,$shoppingcart->currency),
                 'products' => $dataProducts,
                 'mainQuestions' => $dataMainQuestion,
                 'productQuestions' => $dataProductQuestion,
