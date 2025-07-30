@@ -108,7 +108,7 @@ class WebhookController extends Controller
 
                     
                     $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
-                    $total_price = GeneralHelper::numberFormat($price * $decryptedData["decryptedBody"]["data"]["participant"],$currency);
+                    $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
                     
                     $more_details = 'no dietary';
                     if(isset($decryptedData["decryptedBody"]["data"]["more_details"])) $more_details = $decryptedData["decryptedBody"]["data"]["more_details"];
@@ -180,7 +180,7 @@ class WebhookController extends Controller
                         "is_time_enabled" => true,
                         "participant" => $participant,
                         "is_participant_enabled" => true,
-                        "information"=> "Price : ".$currency ." ".GeneralHelper::numberFormat(BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency),$currency)." / participant",
+                        "information"=> "Price : ".$currency ." ".BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency)." / participant",
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name,
