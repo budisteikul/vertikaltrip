@@ -52,11 +52,6 @@ class WebhookController extends Controller
                                                         "type" => "text",
                                                         "text" => "uuid-uuid-uuid-uuid"
                                                     ]]
-                                                ],
-                                                [
-                                                    "type"=> "button",
-                                                    "sub_type"=> "url",
-                                                    "index"=> 1
                                                 ]
                                             ];
             
