@@ -43,25 +43,10 @@ class WebhookController extends Controller
         
         if($webhook_app=="test")
         {
-                        $components = [
-                                            [
-                                                "type"=> "header",
-                                                "parameters"=>[[
-                                                    "type"=>"image",
-                                                    "image"=>[
-                                                        "link"=>"https://storage.googleapis.com/storage.vertikaltrip.com/images/w_600-h_400/f813633e-6566-4df8-a9ae-42f1003bbdea.jpg"
-                                                    ]
-                                                ]]
-                                            ],
-                                            [
-                                                "type"=> "button",
-                                                "sub_type"=> "flow",
-                                                "index"=> 0
-                                            ]
-                                      ];
-            
-                                            $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate("6285743112112","jogja_night_food_tour", $components, "en_US");
+            $currency = "USD";
+            $price = BookingHelper::convert_currency(500000,"IDR",$currency);
+            $total_price = GeneralHelper::numberFormat($price * 2,$currency);
+            print_r($total_price);
             exit();
         }
 
@@ -400,6 +385,30 @@ class WebhookController extends Controller
                     
                     
                     //==================================================
+                    if($message=="make a booking")
+                    {
+                        $components = [
+                                            [
+                                                "type"=> "header",
+                                                "parameters"=>[[
+                                                    "type"=>"image",
+                                                    "image"=>[
+                                                        "link"=>"https://storage.googleapis.com/storage.vertikaltrip.com/images/w_600-h_400/f813633e-6566-4df8-a9ae-42f1003bbdea.jpg"
+                                                    ]
+                                                ]]
+                                            ],
+                                            [
+                                                "type"=> "button",
+                                                "sub_type"=> "flow",
+                                                "index"=> 0
+                                            ]
+                                      ];
+            
+                        $whatsapp = new WhatsappHelper;
+                        $whatsapp->sendTemplate($from,"jogja_night_food_tour", $components, "en_US");
+                        return response('OK', 200)->header('Content-Type', 'text/plain');
+                    }
+
                     $varmessage = explode(" ",$message);
                     switch(strtolower($varmessage[0]))
                     {
