@@ -46,7 +46,7 @@ class WebhookController extends Controller
             $components = [
                                     [
                                         "type"=> "button",
-                                        "sub_type"=> "flow",
+                                        "sub_type"=> "url",
                                         "index"=> 0,
                                         "parameters" => [[
                                             "type" => "text",
