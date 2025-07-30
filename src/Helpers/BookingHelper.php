@@ -2881,6 +2881,7 @@ class BookingHelper {
 		$shoppingcart_json = BookingHelper::shoppingcart_dbtojson($id);
 		BookingHelper::save_shoppingcart($shoppingcart_json->session_id,$shoppingcart_json);
 		Shoppingcart::find($id)->delete();
+		return $shoppingcart_json;
 	}
 
 	public static function shoppingcart_dbtojson($id)
