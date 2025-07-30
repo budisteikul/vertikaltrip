@@ -170,6 +170,7 @@ class WebhookController extends Controller
                     ]
                 ];
                 
+                $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
                 
                 $screen = [
                     "screen" => "APPOINTMENT",
@@ -180,7 +181,7 @@ class WebhookController extends Controller
                         "is_time_enabled" => true,
                         "participant" => $participant,
                         "is_participant_enabled" => true,
-                        "information"=> "Price : ".$currency ." ".GeneralHelper::numberFormat(BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency),$currency)." / participant",
+                        "information"=> "Price : ".$currency ." ".$price." / participant",
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name,
