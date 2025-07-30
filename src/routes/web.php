@@ -38,9 +38,10 @@
 	//Stripe
 	Route::get('/api/payment/stripe/jscript/{sessionId}', 'budisteikul\vertikaltrip\Controllers\PaymentController@stripe_jscript')->middleware(['SettingMiddleware']);
 	Route::post('/api/payment/stripe', 'budisteikul\vertikaltrip\Controllers\PaymentController@createpaymentstripe')->middleware(['SettingMiddleware']);
+	
 	//Stripe WA
 	Route::get('/api/payment/wa/jscript/{sessionId}', 'budisteikul\vertikaltrip\Controllers\PaymentController@wa_jscript')->middleware(['SettingMiddleware']);
-	Route::post('/api/payment/wa', 'budisteikul\vertikaltrip\Controllers\PaymentController@createpaymentstripe')->middleware(['SettingMiddleware']);
+	
 	//Xendit
 	Route::get('/api/payment/xendit/jscript/{sessionId}', 'budisteikul\vertikaltrip\Controllers\PaymentController@xendit_jscript')->middleware(['SettingMiddleware']);
 	Route::post('/api/payment/xendit', 'budisteikul\vertikaltrip\Controllers\PaymentController@createpaymentxendit')->middleware(['SettingMiddleware']);
