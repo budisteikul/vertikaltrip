@@ -335,8 +335,6 @@ class BookingHelper {
 			
 			return $shoppingcart;
 	}
-
-	
 	
 	public static function insert_shoppingcart($contents,$id)
 	{
@@ -1943,145 +1941,7 @@ class BookingHelper {
         return $status;
 	}
 
-	public static function shoppingcart_dbtojson($id)
-	{
-		$shoppingcart = Shoppingcart::find($id);
-
-		$shoppingcart_json = new \stdClass();
-        
-        $ShoppingcartProducts = [];
-        foreach($shoppingcart->shoppingcart_products as $product)
-        {
-            $ShoppingcartProductDetails = [];   
-            foreach($product->shoppingcart_product_details as $product_detail)
-            {
-                $ShoppingcartProductDetails[] = (object) array(
-                    'type' => $product_detail->type,
-                    'pricing_id' => $product_detail->pricing_id,
-                    'title' => $product_detail->title,
-                    'people' => $product_detail->people,
-                    'qty' => $product_detail->qty,
-                    'price' => $product_detail->price,
-                    'unit_price' => $product_detail->unit_price,
-                    'currency' => $product_detail->currency,
-                    'subtotal' => $product_detail->subtotal,
-                    'discount' => $product_detail->discount,
-                    'tax' => $product_detail->tax,
-                    'fee' => $product_detail->fee,
-                    'admin' => $product_detail->admin,
-                    'total' => $product_detail->total
-                );
-            }
-            
-
-            $ShoppingcartProducts[] = (object) array(
-                'booking_id' => $product->booking_id,
-                'rate_id' => $product->rate_id,
-                'start_time_id' => $product->start_time_id,
-                'product_confirmation_code' => $product->product_confirmation_code,
-                'product_id' => $product->product_id,
-                'image' => $product->image,
-                'title' => $product->title,
-                'rate' => $product->rate,
-                'date' => $product->date,
-                'cancellation' => $product->cancellation,
-                'currency' =>  $product->currency,
-                'subtotal' => $product->subtotal,
-                'discount' => $product->discount,
-                'tax' => $product->tax,
-                'fee' => $product->fee,
-                'admin' => $product->admin,
-                'total' => $product->total,
-                'due_now' => $product->due_now,
-                'due_on_arrival' => $product->due_on_arrival,
-                'product_details' => $ShoppingcartProductDetails
-            );
-            
-        }
-        $shoppingcart_json->products = $ShoppingcartProducts;
-
-
-        $ShoppingcartQuestions = [];
-        foreach($shoppingcart->shoppingcart_questions as $question)
-        {
-
-            $ShoppingcartQuestionOptions = [];
-            foreach($question->shoppingcart_question_options as $question_option)
-            {
-                $ShoppingcartQuestionOptions[] = (object) array(
-                    'label' => $question_option->label,
-                    'value' => $question_option->value,
-                    'order' => $question_option->order
-                );
-            }
-
-            $ShoppingcartQuestions[] = (object) array(
-                'type' => $question->type,
-                'when_to_ask' => $question->when_to_ask,
-                'booking_id' => $question->booking_id,
-                'participant_number' => $question->participant_number,
-                'question_id' => $question->question_id,
-                'label' => $question->label,
-                'data_type' => $question->data_type,
-                'data_format' => $question->data_format,
-                'required' => $question->required,
-                'select_option' => $question->select_option,
-                'select_multiple' => $question->select_multiple,
-                'help' => $question->help,
-                'answer' => $question->answer,
-                'order' => $question->order,
-                'question_options' => $ShoppingcartQuestionOptions
-            );
-        }
-        $shoppingcart_json->questions = $ShoppingcartQuestions;
-
-        
-        $ShoppingcartPayment = (object) array(
-                'order_id' => $shoppingcart->shoppingcart_payment->order_id,
-                'authorization_id' => $shoppingcart->shoppingcart_payment->authorization_id,
-                'payment_provider' => $shoppingcart->shoppingcart_payment->payment_provider,
-                'payment_type' => $shoppingcart->shoppingcart_payment->payment_type,
-                'payment_description' => $shoppingcart->shoppingcart_payment->payment_description,
-                'bank_name' => $shoppingcart->shoppingcart_payment->bank_name,
-                'bank_code' => $shoppingcart->shoppingcart_payment->bank_code,
-                'va_number' => $shoppingcart->shoppingcart_payment->va_number,
-                'qrcode' => $shoppingcart->shoppingcart_payment->qrcode,
-                'amount' => $shoppingcart->shoppingcart_payment->amount,
-                'net' => $shoppingcart->shoppingcart_payment->net,
-                'currency' => $shoppingcart->shoppingcart_payment->currency,
-                'rate' => $shoppingcart->shoppingcart_payment->rate,
-                'rate_from' => $shoppingcart->shoppingcart_payment->rate_from,
-                'rate_to' => $shoppingcart->shoppingcart_payment->rate_to,
-                'link' => $shoppingcart->shoppingcart_payment->link,
-                'redirect' => $shoppingcart->shoppingcart_payment->redirect,
-                'expiration_date' => $shoppingcart->shoppingcart_payment->expiration_date,
-                'payment_status' => $shoppingcart->shoppingcart_payment->payment_status
-        );
-        
-        $shoppingcart_json->payment = $ShoppingcartPayment;
-        
-
-        $shoppingcart_json->booking_status = $shoppingcart->booking_status;
-        $shoppingcart_json->session_id = $shoppingcart->session_id;
-        $shoppingcart_json->booking_channel = $shoppingcart->booking_channel;
-        $shoppingcart_json->confirmation_code = $shoppingcart->confirmation_code;
-        $shoppingcart_json->promo_code = $shoppingcart->promo_code;
-        $shoppingcart_json->currency = $shoppingcart->currency;
-        $shoppingcart_json->subtotal = $shoppingcart->subtotal;
-        $shoppingcart_json->discount = $shoppingcart->discount;
-
-        $shoppingcart_json->tax = $shoppingcart->tax;
-        $shoppingcart_json->fee = $shoppingcart->fee;
-        $shoppingcart_json->admin = $shoppingcart->admin;
-
-        $shoppingcart_json->total = $shoppingcart->total;
-        $shoppingcart_json->due_now = $shoppingcart->due_now;
-        $shoppingcart_json->due_on_arrival = $shoppingcart->due_on_arrival;
-        $shoppingcart_json->url = $shoppingcart->url;
-        $shoppingcart_json->referer = $shoppingcart->referer;
-        
-		return $shoppingcart_json;
-	}
+	
 
 	public static function send_webhook($curl_url,$curl_data)
 	{
@@ -2879,6 +2739,8 @@ class BookingHelper {
         return (object)$data;
 	}
 
+
+
 	public static function booking_by_json($booking_json,$currency=null)
 	{
 			if($currency==null) $currency = config('site.currency');
@@ -3012,6 +2874,153 @@ class BookingHelper {
             $shoppingcart_question->save();
 
             return $shoppingcart;
+	}
+
+	public static function move_dbtoshoppingcart($id)
+	{
+		$shoppingcart_json = BookingHelper::shoppingcart_dbtojson($id);
+		BookingHelper::save_shoppingcart($shoppingcart_json->session_id,$shoppingcart_json);
+		Shoppingcart::find($id)->delete();
+	}
+
+	public static function shoppingcart_dbtojson($id)
+	{
+		$shoppingcart = Shoppingcart::find($id);
+
+		$shoppingcart_json = new \stdClass();
+        
+        $ShoppingcartProducts = [];
+        foreach($shoppingcart->shoppingcart_products as $product)
+        {
+            $ShoppingcartProductDetails = [];   
+            foreach($product->shoppingcart_product_details as $product_detail)
+            {
+                $ShoppingcartProductDetails[] = (object) array(
+                    'type' => $product_detail->type,
+                    'pricing_id' => $product_detail->pricing_id,
+                    'title' => $product_detail->title,
+                    'people' => $product_detail->people,
+                    'qty' => $product_detail->qty,
+                    'price' => $product_detail->price,
+                    'unit_price' => $product_detail->unit_price,
+                    'currency' => $product_detail->currency,
+                    'subtotal' => $product_detail->subtotal,
+                    'discount' => $product_detail->discount,
+                    'tax' => $product_detail->tax,
+                    'fee' => $product_detail->fee,
+                    'admin' => $product_detail->admin,
+                    'total' => $product_detail->total
+                );
+            }
+            
+
+            $ShoppingcartProducts[] = (object) array(
+                'booking_id' => $product->booking_id,
+                'rate_id' => $product->rate_id,
+                'start_time_id' => $product->start_time_id,
+                'product_confirmation_code' => $product->product_confirmation_code,
+                'product_id' => $product->product_id,
+                'image' => $product->image,
+                'title' => $product->title,
+                'rate' => $product->rate,
+                'date' => $product->date,
+                'cancellation' => $product->cancellation,
+                'currency' =>  $product->currency,
+                'subtotal' => $product->subtotal,
+                'discount' => $product->discount,
+                'tax' => $product->tax,
+                'fee' => $product->fee,
+                'admin' => $product->admin,
+                'total' => $product->total,
+                'due_now' => $product->due_now,
+                'due_on_arrival' => $product->due_on_arrival,
+                'product_details' => $ShoppingcartProductDetails
+            );
+            
+        }
+        $shoppingcart_json->products = $ShoppingcartProducts;
+
+
+        $ShoppingcartQuestions = [];
+        foreach($shoppingcart->shoppingcart_questions as $question)
+        {
+
+            $ShoppingcartQuestionOptions = [];
+            foreach($question->shoppingcart_question_options as $question_option)
+            {
+                $ShoppingcartQuestionOptions[] = (object) array(
+                    'label' => $question_option->label,
+                    'value' => $question_option->value,
+                    'order' => $question_option->order
+                );
+            }
+
+            $ShoppingcartQuestions[] = (object) array(
+                'type' => $question->type,
+                'when_to_ask' => $question->when_to_ask,
+                'booking_id' => $question->booking_id,
+                'participant_number' => $question->participant_number,
+                'question_id' => $question->question_id,
+                'label' => $question->label,
+                'data_type' => $question->data_type,
+                'data_format' => $question->data_format,
+                'required' => $question->required,
+                'select_option' => $question->select_option,
+                'select_multiple' => $question->select_multiple,
+                'help' => $question->help,
+                'answer' => $question->answer,
+                'order' => $question->order,
+                'question_options' => $ShoppingcartQuestionOptions
+            );
+        }
+        $shoppingcart_json->questions = $ShoppingcartQuestions;
+
+        
+        $ShoppingcartPayment = (object) array(
+                'order_id' => $shoppingcart->shoppingcart_payment->order_id,
+                'authorization_id' => $shoppingcart->shoppingcart_payment->authorization_id,
+                'payment_provider' => $shoppingcart->shoppingcart_payment->payment_provider,
+                'payment_type' => $shoppingcart->shoppingcart_payment->payment_type,
+                'payment_description' => $shoppingcart->shoppingcart_payment->payment_description,
+                'bank_name' => $shoppingcart->shoppingcart_payment->bank_name,
+                'bank_code' => $shoppingcart->shoppingcart_payment->bank_code,
+                'va_number' => $shoppingcart->shoppingcart_payment->va_number,
+                'qrcode' => $shoppingcart->shoppingcart_payment->qrcode,
+                'amount' => $shoppingcart->shoppingcart_payment->amount,
+                'net' => $shoppingcart->shoppingcart_payment->net,
+                'currency' => $shoppingcart->shoppingcart_payment->currency,
+                'rate' => $shoppingcart->shoppingcart_payment->rate,
+                'rate_from' => $shoppingcart->shoppingcart_payment->rate_from,
+                'rate_to' => $shoppingcart->shoppingcart_payment->rate_to,
+                'link' => $shoppingcart->shoppingcart_payment->link,
+                'redirect' => $shoppingcart->shoppingcart_payment->redirect,
+                'expiration_date' => $shoppingcart->shoppingcart_payment->expiration_date,
+                'payment_status' => $shoppingcart->shoppingcart_payment->payment_status
+        );
+        
+        $shoppingcart_json->payment = $ShoppingcartPayment;
+        
+
+        $shoppingcart_json->booking_status = $shoppingcart->booking_status;
+        $shoppingcart_json->session_id = $shoppingcart->session_id;
+        $shoppingcart_json->booking_channel = $shoppingcart->booking_channel;
+        $shoppingcart_json->confirmation_code = $shoppingcart->confirmation_code;
+        $shoppingcart_json->promo_code = $shoppingcart->promo_code;
+        $shoppingcart_json->currency = $shoppingcart->currency;
+        $shoppingcart_json->subtotal = $shoppingcart->subtotal;
+        $shoppingcart_json->discount = $shoppingcart->discount;
+
+        $shoppingcart_json->tax = $shoppingcart->tax;
+        $shoppingcart_json->fee = $shoppingcart->fee;
+        $shoppingcart_json->admin = $shoppingcart->admin;
+
+        $shoppingcart_json->total = $shoppingcart->total;
+        $shoppingcart_json->due_now = $shoppingcart->due_now;
+        $shoppingcart_json->due_on_arrival = $shoppingcart->due_on_arrival;
+        $shoppingcart_json->url = $shoppingcart->url;
+        $shoppingcart_json->referer = $shoppingcart->referer;
+        
+		return $shoppingcart_json;
 	}
 
 }

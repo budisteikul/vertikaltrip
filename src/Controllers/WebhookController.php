@@ -41,23 +41,7 @@ class WebhookController extends Controller
     public function webhook($webhook_app,Request $request)
     {
         
-        if($webhook_app=="test")
-        {
-            
-            
-            $aaa = FirebaseHelper::read('whatsapp_booking/f5867da1-bd36-464a-b55b-ec607b06854');
-            if($aaa)
-            {
-                print_r("ada");
-            }
-            else
-            {
-                print_r("tidak ada");
-            }
-            //$content = BokunHelper::get_product(7424);
-            //print_r($content->cancellationPolicy->simpleCutoffHours);
-            exit();
-        }
+       
 
         if($webhook_app=="whatsapp_booking_01")
         {
@@ -182,8 +166,7 @@ class WebhookController extends Controller
                     ]
                 ];
                 
-                //GeneralHelper::numberFormat(BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency),$currency);
-                //GeneralHelper::numberFormat($content->nextDefaultPriceMoney->amount,$content->nextDefaultPriceMoney->currency)
+                
                 $screen = [
                     "screen" => "APPOINTMENT",
                     "data" => [
@@ -346,7 +329,17 @@ class WebhookController extends Controller
                                         FirebaseHelper::write("whatsapp_booking/". $booking_json->session_id,$currency);
 
                                         $shoppingcart = BookingHelper::booking_by_json($booking_json,$data_flow->currency);
-                                        BookingHelper::shoppingcart_notif($shoppingcart);
+
+                                        if($data_flow->payment=="on")
+                                        {
+                                            BookingHelper::move_dbtojson($shoppingcart->id);
+                                        }
+                                        else
+                                        {
+                                            BookingHelper::shoppingcart_notif($shoppingcart);
+                                        }
+
+                                        
                                         
                                     }
                                     
