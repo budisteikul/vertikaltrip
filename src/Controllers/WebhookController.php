@@ -353,7 +353,7 @@ class WebhookController extends Controller
                                             ];
             
                                             $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate($from,"online_payment", $components, "en_US");
+                                            $whatsapp->sendTemplate($from,"online_payment_02", $components);
                                         }
                                         else
                                         {
