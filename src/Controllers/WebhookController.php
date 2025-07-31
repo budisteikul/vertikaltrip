@@ -309,10 +309,29 @@ class WebhookController extends Controller
                             {
                                 if($data_flow->step=="confirm_booking")
                                 {
-                                    //$check_booking = Shoppingcart::where('session_id',$data_flow->session_id)->first();
+                                    
                                     $check_booking = FirebaseHelper::read('whatsapp_booking/'.$data_flow->session_id);
                                     if(!$check_booking)
                                     {
+                                        // recheck availability
+                                        $next_availability = BookingHelper::next_availability($data_flow->bokun_id,30);
+                                        $availability_participant = 0;
+                                        foreach($next_availability as $x)
+                                        {
+                                            if($x->date==$data_flow->date)
+                                            {
+                                                $availability_participant = $x->max_participant - $x->booking;
+                                            }
+                        
+                                        }
+                                        if($data_flow->participant>$availability_participant)
+                                        {
+                                            $whatsapp = new WhatsappHelper;
+                                            $whatsapp->sendText($from,"Booking failed");
+                                            return response('OK', 200)->header('Content-Type', 'text/plain');
+                                        }
+
+
                                         $currency = config('site.currency');
                                         if(isset($data_flow->currency)) $currency = $data_flow->currency;
 
