@@ -314,6 +314,19 @@ class WebhookController extends Controller
                                     if(!$check_booking)
                                     {
                                         // recheck availability
+                                        //===================================================================
+                                        $content = BokunHelper::get_product($data_flow->bokun_id);
+                                        if($content->bookingCutoff>=1440)
+                                        {
+                                            $aaa = date('Y-m-d', strtotime('-'.$content->bookingCutoff.' minutes', strtotime($data_flow->date)));
+                                            if($aaa < date('Y-m-d ')) 
+                                            {
+                                                $whatsapp = new WhatsappHelper;
+                                                $whatsapp->sendText($from,"Availability is closed");
+                                                return response('OK', 200)->header('Content-Type', 'text/plain');
+                                            }   
+                                        }
+
                                         $next_availability = BookingHelper::next_availability($data_flow->bokun_id,30);
                                         $availability_participant = 0;
                                         foreach($next_availability as $x)
@@ -327,10 +340,10 @@ class WebhookController extends Controller
                                         if($data_flow->participant>$availability_participant)
                                         {
                                             $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendText($from,"Booking failed");
+                                            $whatsapp->sendText($from,"Availability is full");
                                             return response('OK', 200)->header('Content-Type', 'text/plain');
                                         }
-
+                                        //===================================================================
 
                                         $currency = config('site.currency');
                                         if(isset($data_flow->currency)) $currency = $data_flow->currency;
