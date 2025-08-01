@@ -330,7 +330,7 @@ class WebhookController extends Controller
                                         if($data_flow->participant>$availability_participant)
                                         {
                                             $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendText($from,"Availability is full");
+                                            $whatsapp->sendText($from,"Availability is full or closed");
                                             return response('OK', 200)->header('Content-Type', 'text/plain');
                                         }
                                         //===================================================================
