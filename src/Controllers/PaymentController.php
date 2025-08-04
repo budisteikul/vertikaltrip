@@ -602,6 +602,22 @@ class PaymentController extends Controller
     public function wa_jscript($sessionId)
     {
         
+        $next_availability = BookingHelper::next_availability($data_flow->bokun_id,30);
+        $availability_participant = 0;
+        foreach($next_availability as $x)
+        {
+            if($x->date==$data_flow->date)
+            {
+                $availability_participant = $x->max_participant - $x->booking;
+            }
+                        
+        }
+        if($data_flow->participant>$availability_participant)
+        {
+            BookingHelper::shoppingcart_clear($sessionId);
+            $jscript = 'window.openAppRoute("/payment/page/payment-expired")';
+            return response($jscript)->header('Content-Type', 'application/javascript');
+        }
         
         $shoppingcart = BookingHelper::read_shoppingcart($sessionId);
         $amount = BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,'USD');
@@ -738,7 +754,7 @@ class PaymentController extends Controller
                                     $(\'#alert-payment\').html(\'<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>\');
                                     $(\'#alert-payment\').fadeIn("slow");
                                     setTimeout(function (){
-                                        window.openAppRoute("/payment/successful");
+                                        window.openAppRoute("/payment/page/payment-successful");
                                     }, 1000); 
                                 }
 
@@ -823,7 +839,7 @@ class PaymentController extends Controller
                                     $(\'#alert-payment\').html(\'<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>\');
                                     $(\'#alert-payment\').fadeIn("slow");
                                     setTimeout(function (){
-                                        afterCheckout(data.message);
+                                        window.openAppRoute("/payment/page/payment-successful");
                                     }, 1000); 
                                 }
 
@@ -853,7 +869,7 @@ class PaymentController extends Controller
                                     $(\'#alert-payment\').html(\'<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>\');
                                     $(\'#alert-payment\').fadeIn("slow");
                                     setTimeout(function (){
-                                        afterCheckout(data.message);
+                                        window.openAppRoute("/payment/page/payment-successful");
                                     }, 1000); 
                                 }
 
