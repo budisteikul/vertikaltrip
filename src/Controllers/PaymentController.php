@@ -602,8 +602,6 @@ class PaymentController extends Controller
     public function wa_jscript($sessionId)
     {
         $shoppingcart = BookingHelper::read_shoppingcart($sessionId);
-        print_r($shoppingcart->products[0]->product_details[0]->qty);
-        /*
         
 
         $next_availability = BookingHelper::next_availability($data_flow->bokun_id,30);
@@ -616,13 +614,13 @@ class PaymentController extends Controller
             }
                         
         }
-        if($data_flow->participant>$availability_participant)
+        if($shoppingcart->products[0]->product_details[0]->qty>$availability_participant)
         {
             BookingHelper::shoppingcart_clear($sessionId);
             $jscript = '';
             return response($jscript)->header('Content-Type', 'application/javascript');
         }
-        */
+        
 
         
         $amount = BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,'USD');
