@@ -602,7 +602,7 @@ class PaymentController extends Controller
     public function wa_jscript($sessionId)
     {
         $shoppingcart = BookingHelper::read_shoppingcart($sessionId);
-        print_r(substr($shoppingcart,0,10));
+        print_r(substr($shoppingcart->products[0]->date,0,10));
         exit();        
 
         $next_availability = BookingHelper::next_availability($shoppingcart->products[0]->product_id,30);
