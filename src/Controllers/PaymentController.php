@@ -615,7 +615,7 @@ class PaymentController extends Controller
         if($data_flow->participant>$availability_participant)
         {
             BookingHelper::shoppingcart_clear($sessionId);
-            $jscript = 'window.openAppRoute("/payment/page/payment-expired")';
+            $jscript = '';
             return response($jscript)->header('Content-Type', 'application/javascript');
         }
         
