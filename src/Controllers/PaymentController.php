@@ -615,7 +615,7 @@ class PaymentController extends Controller
         if($data_flow->participant>$availability_participant)
         {
             BookingHelper::shoppingcart_clear($sessionId);
-            $jscript = '';
+            $jscript = 'window.openAppRoute("/payment/page/not-found");';
             return response($jscript)->header('Content-Type', 'application/javascript');
         }
         
