@@ -602,9 +602,10 @@ class PaymentController extends Controller
     public function wa_jscript($sessionId)
     {
         $shoppingcart = BookingHelper::read_shoppingcart($sessionId);
-        
+        print_r($shoppingcart);
+        exit();        
 
-        $next_availability = BookingHelper::next_availability($data_flow->bokun_id,30);
+        $next_availability = BookingHelper::next_availability($shoppingcart->products[0]->product_id,30);
         $availability_participant = 0;
         foreach($next_availability as $x)
         {
