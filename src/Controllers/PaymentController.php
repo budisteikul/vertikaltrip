@@ -602,20 +602,21 @@ class PaymentController extends Controller
     public function wa_jscript($sessionId)
     {
         $shoppingcart = BookingHelper::read_shoppingcart($sessionId);
-        print_r(substr($shoppingcart->products[0]->date,0,10));
-        exit();        
+        $flow_date = substr($shoppingcart->products[0]->date,0,10);
+        $flow_participant = $shoppingcart->products[0]->product_details[0]->qty;
+        $flow_bokun_id = $shoppingcart->products[0]->product_id;
 
-        $next_availability = BookingHelper::next_availability($shoppingcart->products[0]->product_id,30);
+        $next_availability = BookingHelper::next_availability($flow_bokun_id,30);
         $availability_participant = 0;
         foreach($next_availability as $x)
         {
-            if($x->date==$data_flow->date)
+            if($x->date==$flow_date)
             {
                 $availability_participant = $x->max_participant - $x->booking;
             }
                         
         }
-        if($shoppingcart->products[0]->product_details[0]->qty>$availability_participant)
+        if($flow_participant>$availability_participant)
         {
             BookingHelper::shoppingcart_clear($sessionId);
             $jscript = '';
