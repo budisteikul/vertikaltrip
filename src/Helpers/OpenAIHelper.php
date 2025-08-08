@@ -34,7 +34,7 @@ class OpenAIHelper {
 		
 		$data = json_decode($this->POST('/v1/responses',$data_json));
 		
-		return $data;
+		return $data->output[1]->content[0]->text;
 	}
 
 	private function POST($url,$data,$headers=NULL){
