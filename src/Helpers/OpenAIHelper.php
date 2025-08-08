@@ -12,7 +12,7 @@ class OpenAIHelper {
   			"model": "gpt-5",
   			"input": [
     			{
-      				"role": "developer",
+      				"role": "system",
       				"content": [
         				{
           					"type": "input_text",
@@ -33,7 +33,8 @@ class OpenAIHelper {
 		}';
 		
 		$data = json_decode($this->POST('/v1/responses',$data_json));
-		
+		print_r($data);
+        exit();
 		return $data->output[0]->content[0]->text;
 	}
 
