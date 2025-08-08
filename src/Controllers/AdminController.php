@@ -152,7 +152,7 @@ class AdminController extends Controller
         }
 
         $openai = New OpenAIHelper;
-        $data = $openai->openai($request->message_text,'Make it in english and polished');
+        $data = $openai->openai($request->message_text,'buat dalam bahasa inggris yang santai');
         return response()->json([
                 'id' => 1,
                 'message_text' => $data
