@@ -12,7 +12,7 @@ class OpenAIHelper {
   			"model": "gpt-5",
   			"input": [
     			{
-      				"role": "system",
+      				"role": "developer",
       				"content": [
         				{
           					"type": "input_text",
