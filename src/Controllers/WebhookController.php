@@ -341,9 +341,12 @@ class WebhookController extends Controller
                                         $currency = config('site.currency');
                                         if(isset($data_flow->currency)) $currency = $data_flow->currency;
 
+                                        $booking_channel = "WEBSITE";
+                                        if($data_flow->payment=="off") $booking_channel = "OFFLINE SALE";
+
                                         $data1 = [
                                             "booking_confirmation_code" => BookingHelper::get_ticket(),
-                                            "booking_channel" => "WEBSITE",
+                                            "booking_channel" => $booking_channel,
                                             "booking_note" => $data_flow->more_details,
                                             "tour_name" => $data_flow->tour_name,
                                             "tour_date" => $data_flow->date." ".$data_flow->time.":00",
