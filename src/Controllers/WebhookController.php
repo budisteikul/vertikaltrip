@@ -63,6 +63,9 @@ class WebhookController extends Controller
             $content = BokunHelper::get_product($product->bokun_id);
             $availability_participant = 8;
 
+            $day = 30;
+            if($payment=="off") $day = 2;
+
             $next_availability = BookingHelper::next_availability($product->bokun_id,30);
             foreach($next_availability as $x)
             {
