@@ -66,7 +66,7 @@ class WebhookController extends Controller
             $day = 30;
             if($payment=="off") $day = 2;
 
-            $next_availability = BookingHelper::next_availability($product->bokun_id,30);
+            $next_availability = BookingHelper::next_availability($product->bokun_id,$day);
             foreach($next_availability as $x)
             {
                     $date[] = [
