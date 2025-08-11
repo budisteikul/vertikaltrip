@@ -98,7 +98,7 @@ class WebhookController extends Controller
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
 
                     //summary
-                    if($payment!="")
+                    if($payment=="on")
                     {
                         $body_information = $decryptedData["decryptedBody"]["data"]["participant"] ." x ".$currency." ". GeneralHelper::numberFormat($price,$currency);
                         $payment="on";
