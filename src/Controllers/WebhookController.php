@@ -460,14 +460,16 @@ class WebhookController extends Controller
                             $message = BookingHelper::schedule_bydate($date);
                             $whatsapp->sendText($from,$message->text);
 
+                            /*
                             if(!empty($message->contacts) || $message->contacts!="")
                             {
                                 $whatsapp->sendContact($from,$message->contacts);
                             }
+                            */
                             
                             return response('OK', 200)->header('Content-Type', 'text/plain');
                         break;
-                        case "/contacts":
+                        case "/contact":
                             if(isset($varmessage[1]))
                             {
                                 if (preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$varmessage[1])) {
