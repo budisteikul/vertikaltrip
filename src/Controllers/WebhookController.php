@@ -157,6 +157,11 @@ class WebhookController extends Controller
                     }
                 }
 
+                if($payment=="off")
+                {
+                    $availability_participant = 8;
+                }
+
                 for($i=1;$i<=$availability_participant;$i++)
                 {
                         $unit = "adult";
