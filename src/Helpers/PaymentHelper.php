@@ -251,7 +251,7 @@ class PaymentHelper {
                                             <br />
                                             <br />
                                             <div class="col-12 text-center">
-                                            <a href="https://wise.com/pay/business/vertikaltripllc?amount='. (float)$shoppingcart->shoppingcart_payment->amount .'&currency='. $shoppingcart->shoppingcart_payment->currency .'"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
+                                            <a href="https://wise.com/pay/business/vertikaltripllc?amount='. (float)$shoppingcart->shoppingcart_payment->amount .'&currency='. $shoppingcart->shoppingcart_payment->currency .'&description='.$shoppingcart->confirmation_code.'"><img src="'.config('site.assets').'/img/payment/pww-button.svg"></a>
                                             <br />
                                             <br />
                                             <b>OR</b>
