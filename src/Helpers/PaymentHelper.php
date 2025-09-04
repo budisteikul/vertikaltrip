@@ -238,16 +238,11 @@ class PaymentHelper {
                                             
                                             <div>
 
-                                            
-                                            <!-- 
-                                            Total : <b>'. $currency .' '. GeneralHelper::numberFormat($total,$currency) .'</b>
+                                            Invoice number : <b>'. $shoppingcart->confirmation_code .'</b>
                                             <br />
-                                            Booking fee : <b>'. $currency .' '. GeneralHelper::numberFormat($booking_fee,$currency) .'</b>
-                                            <br />
-                                            -->
                                             Amount to pay : <b>'. $currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,$currency) .'</b>
                                             <br />
-                                             Click the button below and pay with correct amount
+                                             Click the button below to pay your invoice
                                             <br />
                                             <br />
                                             <div class="col-12 text-center">
