@@ -2509,7 +2509,7 @@ class BookingHelper {
         {
         	if($main_contact->email!="")
         	{
-        		$pdf->setEncryption($main_contact->email);
+        		//$pdf->setEncryption($main_contact->email);
         	}
         }
         

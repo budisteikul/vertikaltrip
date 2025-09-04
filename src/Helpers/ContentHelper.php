@@ -411,7 +411,7 @@ class ContentHelper {
                     $invoice = '<a target="_blank" class="text-theme" href="'.url('/api').'/pdf/invoice/'. $shoppingcart->session_id .'/Invoice-'. $shoppingcart->confirmation_code .'.pdf"><h5><i class="far fa-file-pdf"></i> Invoice-'. $shoppingcart->confirmation_code .'.pdf</h5></a>';
                     if($main_contact->email!="")
                     {
-                        $invoice .= '<small>Password : your email address</small>';
+                        //$invoice .= '<small>Password : your email address</small>';
                     }
                 }
             
@@ -475,8 +475,8 @@ class ContentHelper {
 
         //if($firstName!="") $firstName = GeneralHelper::mask_name($firstName);
         //if($lastName!="") $lastName = GeneralHelper::mask_name($lastName);
-        if($phoneNumber!="") $phoneNumber = GeneralHelper::mask_phoneNumber($phoneNumber);
-        if($email!="") $email = GeneralHelper::mask_email($email);
+        //if($phoneNumber!="") $phoneNumber = GeneralHelper::mask_phoneNumber($phoneNumber);
+        //if($email!="") $email = GeneralHelper::mask_email($email);
 
 
         $dataObj = array(
