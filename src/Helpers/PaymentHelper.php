@@ -238,9 +238,10 @@ class PaymentHelper {
                                             
                                             <div>
 
-                                            Invoice number : <b>'. $shoppingcart->confirmation_code .'</b>
+                                            <a target="_blank" class="text-theme" href="'.url('/api').'/pdf/invoice/'. $shoppingcart->session_id .'/Invoice-'. $shoppingcart->confirmation_code .'.pdf"><i class="far fa-file-pdf"></i> Invoice-'. $shoppingcart->confirmation_code .'.pdf</a>
                                             <br />
                                             Amount to pay : <b>'. $currency .' '. GeneralHelper::numberFormat($shoppingcart->shoppingcart_payment->amount,$currency) .'</b>
+                                            <br />
                                             <br />
                                              Click the button below to pay your invoice
                                             <br />
