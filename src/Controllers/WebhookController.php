@@ -65,7 +65,8 @@ class WebhookController extends Controller
                                             ];
             
                                             $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate("6285743112112","online_payment", $components);
+                                            $aaa = $whatsapp->sendTemplate("6285743112112","online_payment", $components);
+                                            print_r($aaa);
             exit();
         }
 
