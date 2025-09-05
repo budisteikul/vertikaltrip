@@ -43,30 +43,7 @@ class WebhookController extends Controller
         
         if($webhook_app=="test")
         {
-           $components = [
-                                                [
-                                                    "type"=> "button",
-                                                    "sub_type"=> "url",
-                                                    "index"=> 0,
-                                                    "parameters" => [[
-                                                        "type" => "text",
-                                                        "text" => "vertikaltripllc"
-                                                    ]]
-                                                ],
-                                                [
-                                                    "type"=> "button",
-                                                    "sub_type"=> "url",
-                                                    "index"=> 1,
-                                                    "parameters" => [[
-                                                        "type" => "text",
-                                                        "text" => "aaaa/Invoice-aaa.pdf"
-                                                    ]]
-                                                ]
-                                            ];
-            
-                                            $whatsapp = new WhatsappHelper;
-                                            $aaa = $whatsapp->sendTemplate("6285743112112","online_payment", $components,"en_US");
-                                            print_r($aaa);
+           
             exit();
         }
 
@@ -427,7 +404,7 @@ class WebhookController extends Controller
                                             ];
             
                                             $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate($from,"online_payment", $components);
+                                            $whatsapp->sendTemplate($from,"pay_with_wise", $components);
                                             
                                         }
                                         else
