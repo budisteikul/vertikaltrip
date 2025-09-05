@@ -66,7 +66,15 @@ class PaymentHelper {
         
         while($check)
         {
-            $i += 1;
+            if($currency=="IDR")
+            {
+                $i += 1;
+            }
+            else
+            {
+                $i += 0.01;
+            }
+            
             $uniqueID = $amount + $i;
             $check = ShoppingcartPayment::where('currency',$currency)->where('amount',$uniqueID)->where('payment_status',4)->first();
         }

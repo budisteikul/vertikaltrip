@@ -374,6 +374,9 @@ class WebhookController extends Controller
                                         if($data_flow->payment=="on")
                                         {
                                             $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
+                                            $response = PaymentHelper::create_payment($shoppingcart->id,"wise");
+                                            $shoppingcart = BookingHelper::confirm_booking($sessionId);
+
                                             $components = [
                                                 [
                                                     "type"=> "button",
@@ -381,13 +384,22 @@ class WebhookController extends Controller
                                                     "index"=> 0,
                                                     "parameters" => [[
                                                         "type" => "text",
-                                                        "text" => $shoppingcart->session_id
+                                                        "text" => "vertikaltripllc?amount=".(float)$shoppingcart->shoppingcart_payment->amount ."&currency=". $shoppingcart->shoppingcart_payment->currency ."&description=".$shoppingcart->confirmation_code
+                                                    ]]
+                                                ],
+                                                [
+                                                    "type"=> "button",
+                                                    "sub_type"=> "url",
+                                                    "index"=> 1,
+                                                    "parameters" => [[
+                                                        "type" => "text",
+                                                        "text" => $shoppingcart->session_id ."/Invoice-". $shoppingcart->confirmation_code .".pdf"
                                                     ]]
                                                 ]
                                             ];
             
                                             $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate($from,"online_payment_02", $components);
+                                            $whatsapp->sendTemplate($from,"online_payment", $components);
                                         }
                                         else
                                         {
