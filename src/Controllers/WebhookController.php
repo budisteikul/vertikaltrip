@@ -374,10 +374,10 @@ class WebhookController extends Controller
                                         if($data_flow->payment=="on")
                                         {
                                             $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
-                                            //$response = PaymentHelper::create_payment($shoppingcart->id,"wise");
-                                            $shoppingcart = BookingHelper::confirm_booking($sessionId);
+                                            $response = PaymentHelper::create_payment($shoppingcart->session_id,"wise");
+                                            $shoppingcart = BookingHelper::confirm_booking($shoppingcart->session_id);
 
-                                            /*
+                                            
                                             $components = [
                                                 [
                                                     "type"=> "button",
@@ -401,7 +401,7 @@ class WebhookController extends Controller
             
                                             $whatsapp = new WhatsappHelper;
                                             $whatsapp->sendTemplate($from,"online_payment", $components);
-                                            */
+                                            
                                         }
                                         else
                                         {
