@@ -460,7 +460,7 @@ class PaymentHelper {
             break;
             case "wise":
                 $payment_provider = 'wise';
-                $currency = 'IDR';
+                $currency = $shoppingcart->currency;
 
                 //$smallamount = substr($shoppingcart->confirmation_code,9,3);
 
