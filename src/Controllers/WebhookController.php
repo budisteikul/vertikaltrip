@@ -374,6 +374,10 @@ class WebhookController extends Controller
                                         if($data_flow->payment=="on")
                                         {
                                             $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
+                                            $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
+                                            $shoppingcart->booking_status = "PENDING";
+                                            $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
+
                                             $response = PaymentHelper::create_payment($shoppingcart->session_id,"wise");
                                             $shoppingcart = BookingHelper::confirm_booking($shoppingcart->session_id);
 
