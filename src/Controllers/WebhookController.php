@@ -377,6 +377,7 @@ class WebhookController extends Controller
                                             $response = PaymentHelper::create_payment($shoppingcart->id,"wise");
                                             $shoppingcart = BookingHelper::confirm_booking($sessionId);
 
+                                            /*
                                             $components = [
                                                 [
                                                     "type"=> "button",
@@ -400,6 +401,7 @@ class WebhookController extends Controller
             
                                             $whatsapp = new WhatsappHelper;
                                             $whatsapp->sendTemplate($from,"online_payment", $components);
+                                            */
                                         }
                                         else
                                         {
@@ -715,7 +717,7 @@ class WebhookController extends Controller
         if($webhook_app=="wise")
         {
             
-            //LogHelper::log(json_decode($request->getContent(), true),$webhook_app);
+            LogHelper::log(json_decode($request->getContent(), true),$webhook_app);
 
             
             $is_test = $request->header('X-Test-Notification');
