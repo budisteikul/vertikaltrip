@@ -391,15 +391,6 @@ class WebhookController extends Controller
                                                         "type" => "text",
                                                         "text" => "vertikaltripllc?amount=".(float)$shoppingcart->shoppingcart_payment->amount ."&currency=". $shoppingcart->shoppingcart_payment->currency ."&description=".$shoppingcart->confirmation_code
                                                     ]]
-                                                ],
-                                                [
-                                                    "type"=> "button",
-                                                    "sub_type"=> "url",
-                                                    "index"=> 1,
-                                                    "parameters" => [[
-                                                        "type" => "text",
-                                                        "text" => $shoppingcart->session_id ."/Invoice-". $shoppingcart->confirmation_code .".pdf"
-                                                    ]]
                                                 ]
                                             ];
             
