@@ -2613,9 +2613,8 @@ class BookingHelper {
                 $phone = GeneralHelper::phoneNumber($question->phoneNumber);
 				$phone2 = new PhoneNumber('+'. $phone);
             	$countryCode = $phone2->getCountry();
-            	$dialCode = $phone2->getCountryCallingCode();
 
-				$text .= "- ". $question->firstName ." ". $question->lastName ." (". $countryCode ." +".$dialCode.")\n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
+				$text .= "- ". $question->firstName ." ". $question->lastName ." (". $countryCode .")\n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
 
 				
 
