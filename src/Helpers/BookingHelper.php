@@ -29,6 +29,7 @@ use \PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use View;
 use Illuminate\Support\Facades\Storage;
+use Propaganistas\LaravelPhone\PhoneNumber;
 
 class BookingHelper {
 
@@ -2609,9 +2610,14 @@ class BookingHelper {
                 	$product_questions2 .= $question2->answer;
                 }
                 
-				$text .= "- ". $question->firstName ." ". $question->lastName ." \n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
+                $phone = GeneralHelper::phoneNumber($question->phoneNumber);
+				$phone2 = new PhoneNumber('+'. $phone);
+            	$countryCode = $phone2->getCountry();
 
-				$phone = GeneralHelper::phoneNumber($question->phoneNumber);
+				$text .= "- ". $question->firstName ." ". $question->lastName ." (". $countryCode .")\n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
+
+				
+
 				$contacts[] = [
 					"name" => [
                     	"formatted_name" => $question->firstName .' '. $question->lastName,
