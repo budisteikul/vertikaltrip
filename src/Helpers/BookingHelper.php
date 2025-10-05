@@ -2615,7 +2615,7 @@ class BookingHelper {
             	$countryCode = $phone2->getCountry();
             	$dialCode = $phone2->getCountryCallingCode();
 
-				$text .= "- ". $question->firstName ." ". $question->lastName ." (". $countryCode ." +"..")\n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
+				$text .= "- ". $question->firstName ." ". $question->lastName ." (". $countryCode ." +".$dialCode.")\n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
 
 				
 
