@@ -1155,7 +1155,8 @@ class APIController extends Controller
 
         $jscript = '
         
-        var navBar = $("#menuBottom");
+
+        var navBar = $("#MenuBottom");
         var inputFields = $("input, textarea");
         inputFields.on("focus", function() {
             navBar.hide(); // Hide the navigation bar
