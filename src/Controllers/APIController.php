@@ -227,11 +227,16 @@ class APIController extends Controller
             $siteContent = ['header','service','feature','review','guide'];
         }
         
+        $categories = Category::where('parent_id',0)->select(['name','slug'])->get();
+        $logo = config('site.assets').'/img/header/'.config('site.logo');
+        
 
         $response = [
             'mainUrl' => GeneralHelper::url(),
-
+            'logo' => $logo,
             'siteContent' => $siteContent,
+
+            'categories' => $categories,
 
             'jscripts' => $jscripts,
             'analytic' => $analytic,
