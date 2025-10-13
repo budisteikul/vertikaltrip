@@ -1155,7 +1155,6 @@ class APIController extends Controller
 
         $jscript = '
         
-
         
 
         var submit_text;
