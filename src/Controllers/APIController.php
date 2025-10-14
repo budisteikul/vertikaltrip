@@ -792,7 +792,7 @@ class APIController extends Controller
     {
             $contents = new \stdClass();
             $sessionId = $id;
-        
+            
             $value = BookingHelper::read_shoppingcart($sessionId);
             if($value==null)
             {

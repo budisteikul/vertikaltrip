@@ -257,8 +257,7 @@ class BookingHelper {
 				//==============================================================================
 
 
-				//print_r($data['activityBookings'][$i]['notes'][0]['body']);
-				//exit();
+				
 				ShoppingcartProduct::where('id',$shoppingcart_product->id)->update([
 					'currency'=>$currency,
 					'subtotal'=>$subtotal_product,
@@ -414,7 +413,12 @@ class BookingHelper {
 						$unitPrice = $lineitems[$z]->title;
 					}
 					
-					$spd_pricing_id = $activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId;
+					
+					$spd_pricing_id = 0;
+					if(isset($activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId))
+					{
+						$spd_pricing_id = $activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId;
+					}
 
 					if($type_product=="product")
 					{
@@ -915,7 +919,11 @@ class BookingHelper {
 						$unitPrice = $lineitems[$z]->title;
 					}
 
-					$spd_pricing_id = $activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId;
+					$spd_pricing_id = 0;
+					if(isset($activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId))
+					{
+						$spd_pricing_id = $activity[$i]->pricingCategoryBookings[$z]->pricingCategoryId;
+					}
 
 					if($type_product=="product")
 					{
