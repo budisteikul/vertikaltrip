@@ -672,8 +672,9 @@ class APIController extends Controller
             table.on("page.dt", function(o){
                 var oldStart = 0;
                 if ( o._iDisplayStart != oldStart ) {
-                    var targetOffset = $("#review").offset().top;
-                    $("html, body").animate({scrollTop: targetOffset}, 500, "easeInOutExpo");
+                    //var targetOffset = $("#review").offset().top;
+                    //$("html, body").animate({scrollTop: targetOffset}, 500, "easeInOutExpo");
+                    document.getElementById("root").scrollIntoView();
                     document.getElementById("loadingReviews").style.display = "block";
                     document.getElementById("dataTables-example").style.display = "none";
                     oldStart = o._iDisplayStart;
