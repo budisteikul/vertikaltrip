@@ -674,7 +674,7 @@ class APIController extends Controller
                 if ( o._iDisplayStart != oldStart ) {
                     //var targetOffset = $("#review").offset().top;
                     //$("html, body").animate({scrollTop: targetOffset}, 500, "easeInOutExpo");
-                    document.getElementById("root").scrollIntoView();
+                    document.getElementById("review").scrollIntoView();
                     document.getElementById("loadingReviews").style.display = "block";
                     document.getElementById("dataTables-example").style.display = "none";
                     oldStart = o._iDisplayStart;
