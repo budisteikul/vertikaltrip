@@ -1020,6 +1020,7 @@ class APIController extends Controller
         window.i18nLang = \''. env("BOKUN_LANG") .'\';
 
         try { 
+                $("#titleProduct").empty();
                 $("#titleProduct").append(\''. $product->name .'\');
         } catch(err) {  
         }
