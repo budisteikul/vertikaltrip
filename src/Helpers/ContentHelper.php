@@ -812,6 +812,7 @@ class ContentHelper {
         $dataObj = array(
                 'id' => $product->id,
                 'name' => $product->name,
+                'slug' => $product->slug,
                 'durationText' => $durationText,
                 'difficultyLevel' => $difficultyLevel,
                 'privateActivity' => $privateActivity,
