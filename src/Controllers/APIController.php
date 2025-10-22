@@ -1065,7 +1065,7 @@ class APIController extends Controller
                 onAvailabilitySelected: function(selectedRate, selectedDate, selectedAvailability) {
                 },
                 onAddedToCart: function(cart) {
-                    
+
                     window.openAppRoute(\'/booking/checkout\');
                 },
         
