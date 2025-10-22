@@ -1066,7 +1066,7 @@ class APIController extends Controller
                 },
                 onAddedToCart: function(cart) {
 
-                    window.openAppRoute(\'/booking/checkout\');
+                    window.openAppRoute(\'/booking/checkout?trackingCode=\');
                 },
         
                 calendarMonth: '.$month.',
