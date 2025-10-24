@@ -230,6 +230,33 @@ class APIController extends Controller
         $categories = Category::where('parent_id',0)->select(['name','slug'])->get();
         $logo = config('site.assets').'/img/header/'.config('site.logo');
         
+        $menuBottom[] = [
+            'icon' => 'fas fa-atlas fa-2x fa-fw',
+            'text' => 'Tours',
+            'path' => '/tours',
+            'target' => '_self'
+        ];
+
+        $menuBottom[] = [
+            'icon' => 'fas fa-shopping-cart fa-2x fa-fw',
+            'text' => 'Cart',
+            'path' => '/booking/checkout',
+            'target' => '_self'
+        ];
+
+        $menuBottom[] = [
+            'icon' => 'fas fa-file-signature fa-2x fa-fw',
+            'text' => 'My Order',
+            'path' => '/booking/lastorder',
+            'target' => '_self'
+        ];
+
+        $menuBottom[] = [
+            'icon' => 'fab fa-whatsapp fa-2x fa-fw',
+            'text' => 'WhatsApp',
+            'path' => 'https://wa.me/6289530000030',
+            'target' => '_blank'
+        ];
 
         $response = [
             'mainUrl' => GeneralHelper::url(),
@@ -237,7 +264,7 @@ class APIController extends Controller
             'siteContent' => $siteContent,
 
             'categories' => $categories,
-
+            'menuBottom' => $menuBottom,
             'jscripts' => $jscripts,
             'analytic' => $analytic,
             'assets' => config('site.assets'),
