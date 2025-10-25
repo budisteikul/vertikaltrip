@@ -531,7 +531,7 @@ class APIController extends Controller
 
     public function categories()
     {
-        
+        /*
         if(str_contains(GeneralHelper::url(), 'jogjafoodtour') || str_contains(GeneralHelper::url(), 'vertikaltrip'))
         {
             $slug = Slug::where('type','category')->where('slug','yogyakarta')->latest('id')->firstOrFail();
@@ -548,9 +548,9 @@ class APIController extends Controller
         {
             $dataObj = ContentHelper::view_categories();
         }
-        
+        */
 
-        
+        $dataObj = ContentHelper::view_categories();
 
         return response()->json([
             'message' => 'success',
