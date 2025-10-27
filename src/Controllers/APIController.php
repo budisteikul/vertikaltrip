@@ -254,7 +254,7 @@ class APIController extends Controller
         $menuBottom[] = [
             'icon' => 'fab fa-whatsapp fa-2x fa-fw',
             'text' => 'WhatsApp',
-            'path' => 'https://wa.me/6289530000030',
+            'path' => 'https://wa.me/'.config('site.customerservice_wa'),
             'target' => '_blank'
         ];
 
@@ -287,7 +287,7 @@ class APIController extends Controller
 
             'footerUsefullLinks' => $usefullLink,
             'footerPrivacyterms' => $dataPrivacyTerm,
-            'footerWhatsapp' => '6289530000030',
+            'footerWhatsapp' => config('site.customerservice_wa'),
             'footerCompany' => $company,
             'footerTitle' => $footerTitle,
             'footerPartners' => $footerPartners,
