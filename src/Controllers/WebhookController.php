@@ -477,14 +477,19 @@ class WebhookController extends Controller
                             foreach($guides as $guide)
                             {
 
-                                if($guide->wa==$from || $from==config('site.admin_wa'))
+                                if($guide->wa==$from)
                                 {
                                     $message = BookingHelper::schedule_bydate($date);
                                     $whatsapp->sendText($from,$message->text);
                                 }
+
                             }
 
-                            
+                            if($from==config('site.admin_wa'))
+                            {
+                                    $message = BookingHelper::schedule_bydate($date);
+                                    $whatsapp->sendText($from,$message->text);
+                            }
 
                             
                             return response('OK', 200)->header('Content-Type', 'text/plain');
@@ -512,7 +517,7 @@ class WebhookController extends Controller
                             foreach($guides as $guide)
                             {
 
-                                if($guide->wa==$from || config('site.admin_wa'))
+                                if($guide->wa==$from)
                                 {
                                     if(!empty($message->contacts) || $message->contacts!="")
                                     {
@@ -525,7 +530,17 @@ class WebhookController extends Controller
                                 }
                             }
 
-                            
+                            if($from==config('site.admin_wa'))
+                            {
+                                    if(!empty($message->contacts) || $message->contacts!="")
+                                    {
+                                        $whatsapp->sendContact($from,$message->contacts);
+                                    }
+                                    else
+                                    {
+                                        $whatsapp->sendText($from,"There is no participant ". $date);
+                                    }
+                            }
 
                             return response('OK', 200)->header('Content-Type', 'text/plain');
                         break;
