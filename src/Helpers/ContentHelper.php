@@ -312,7 +312,7 @@ class ContentHelper {
             $dataShoppingcart[0]["xendit_total"] = $total;
             $dataShoppingcart[0]["xendit_rate"] = $rate;
             $dataShoppingcart[0]["xendit_label"] = '
-                <strong class="mb-1 text-small">Debit or Credit Card</strong>
+                <strong class="mb-1 text-small">Card or Wallet</strong>
                 <div class="ml-0 mb-1 mt-2">
                     <img src="'. config('site.assets') .'/img/payment/xendit-card-payment.png" style="max-height:35px" class="img-fluid" alt="Payment Logo" />
                 </div>';
