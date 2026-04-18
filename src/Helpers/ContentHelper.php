@@ -312,7 +312,7 @@ class ContentHelper {
             $dataShoppingcart[0]["xendit_total"] = $total;
             $dataShoppingcart[0]["xendit_rate"] = $rate;
             $dataShoppingcart[0]["xendit_label"] = '
-                <strong class="mb-1 text-small">Card or Wallet</strong>
+                <strong class="mb-1 text-small">Debit or Credit Card</strong>
                 <div class="ml-0 mb-1 mt-2">
                     <img src="'. config('site.assets') .'/img/payment/xendit-card-payment.png" style="max-height:35px" class="img-fluid" alt="Payment Logo" />
                 </div>';
@@ -332,7 +332,7 @@ class ContentHelper {
             $dataShoppingcart[0]["stripe_total"] = $total;
             $dataShoppingcart[0]["stripe_rate"] =  $rate;
             $dataShoppingcart[0]["stripe_label"] = '
-                <strong class="mb-1">Debit or Credit Card
+                <strong class="mb-1">Card or Wallet
                     <img class="ml-2" src="'. config('site.assets') .'/img/payment/stripe.png" height="15" alt="Card Payment" />
                 </strong>
                 <div class="ml-0 mb-1 mt-2">
