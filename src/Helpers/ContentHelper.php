@@ -325,7 +325,7 @@ class ContentHelper {
             $rate = '<small><strong>Charge in '.$currency.'</strong></small>';
             if($shoppingcart->currency!=$currency)
             {
-                $rate = '<small><strong>Charge in '.$currency.'</strong>, '. BookingHelper::text_rate($shoppingcart,$currency).'</small>';
+                $rate = '<small><strong>Charge in '.$currency.'</strong>, '. BookingHelper::text_rate($shoppingcart,$currency).'<i>One-time payment only. We do not store any of your payment information.</i></small>';
             }
 
             $dataShoppingcart[0]["stripe_currency"] = $currency;
@@ -379,10 +379,10 @@ class ContentHelper {
         {
             $currency = 'IDR';
             $total = GeneralHelper::numberFormat(BookingHelper::convert_currency($shoppingcart->due_now,$shoppingcart->currency,$currency),$currency);
-            $rate = '<small><b>Pay in IDR</b><br />Please make sure your Wise account has sufficient balance.</small>';
+            $rate = '<small><b>Pay in IDR</b><br /><i>Please make sure your Wise account has sufficient balance.</i></small>';
             if($shoppingcart->currency!=$currency)
             {
-                $rate = '<small><strong>Charge in '.$currency.'</strong>, '. BookingHelper::text_rate($shoppingcart,$currency).'<br />Please make sure your Wise account has sufficient balance.</small>';
+                $rate = '<small><strong>Charge in '.$currency.'</strong>, '. BookingHelper::text_rate($shoppingcart,$currency).'<br /><i>Please make sure your Wise account has sufficient balance.</i></small>';
             }
 
             $dataShoppingcart[0]["wise_currency"] = $currency;
