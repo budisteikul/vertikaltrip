@@ -27,8 +27,8 @@ class CreateProductsTable extends Migration
             $table->boolean('deposit_percentage')->default(true);
             $table->float('deposit_amount', precision: 53)->default(0);
 
-            
-            $table->tinyInteger('is_recomended')->default(0);
+            $table->string('promo')->nullable();
+            $table->tinyInteger('is_recommended')->default(0);
             $table->tinyInteger('status')->default(1);
             $table->timestamps(6);
         });
