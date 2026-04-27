@@ -835,6 +835,7 @@ class ContentHelper {
                 'agendaItems' => $dataObj5,
                 'images' => $image,
                 'rating' => $rating,
+                'promo' => $product->promo,
             );
 
         return $dataObj;
