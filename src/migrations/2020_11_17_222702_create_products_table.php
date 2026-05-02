@@ -17,6 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
 			
 			$table->string('name');
+            $table->string('excerpt')->nullable();
             $table->string('slug');
 			
 			$table->bigInteger('category_id')->default(0);
