@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use budisteikul\vertikaltrip\Models\User;
+use budisteikul\vertikaltrip\Models\Product;
 use budisteikul\vertikaltrip\Models\ShoppingcartProduct;
 use budisteikul\vertikaltrip\Models\ShoppingcartProductDetail;
 use Illuminate\Support\Facades\Hash;
@@ -166,7 +167,16 @@ class AdminController extends Controller
         ]);
         $activityId = $request->activityId;
         Cache::forget('_bokunProductById_'. config('site.currency') .'_'. env("BOKUN_LANG") .'_'.$activityId);
-        BokunHelper::get_product($activityId);
+        $value = BokunHelper::get_product($activityId);
+        if($value=="")
+        {
+            return response()->json([
+                    "message" => "Activity not found"
+                ]);
+        }
+
+        $product = Product::where('bokun_id',$activityId)->update(['excerpt' => $value->excerpt]);
+
         return response()->json([
                 'message' => 'success'
             ], 200);
