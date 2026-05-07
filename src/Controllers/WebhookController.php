@@ -511,13 +511,13 @@ class WebhookController extends Controller
                             }
 
                             $message = BookingHelper::schedule_bydate($date);
-                            $contacts = $message->contacts;
+                            $contactz = $message->contacts;
 
-                            for($z=0;$z<count($contacts);$z++)
+                            for($z=0;$z<count($contactz);$z++)
                             {
-                                if($contacts[$z]['phones'][0]['phone']=="+")
+                                if($contactz[$z]['phones'][0]['phone']=="+")
                                 {
-                                    unset($contacts[$z]);
+                                    unset($contactz[$z]);
                                 }
                             }
                             
@@ -528,9 +528,9 @@ class WebhookController extends Controller
 
                                 if($guide->wa==$from)
                                 {
-                                    if(!empty($contacts) || $contacts!="")
+                                    if(!empty($contactz) || $contactz!="")
                                     {
-                                        $whatsapp->sendContact($from,$contacts);
+                                        $whatsapp->sendContact($from,$contactz);
                                     }
                                     else
                                     {
@@ -541,9 +541,9 @@ class WebhookController extends Controller
 
                             if($from==config('site.admin_wa'))
                             {
-                                    if(!empty($contacts) || $contacts!="")
+                                    if(!empty($contactz) || $contactz!="")
                                     {
-                                        $whatsapp->sendContact($from,$contacts);
+                                        $whatsapp->sendContact($from,$contactz);
                                     }
                                     else
                                     {

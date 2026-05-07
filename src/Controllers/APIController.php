@@ -44,6 +44,22 @@ class APIController extends Controller
     public function test(Request $request)
     {
         
+
+                            $message = BookingHelper::schedule_bydate('2026-05-07');
+                            $contacts = $message->contacts;
+
+                            for($z=0;$z<count($contacts);$z++)
+                            {
+                                //print_r($contacts[$z]['phones'][0]['phone']);
+                                if($contacts[$z]['phones'][0]['phone']=="+")
+                                {
+                                    //unset($contacts[$z]);
+                                }
+                            }
+
+                            print_r($contacts);
+
+        //print_r($message->contacts);
     }
 
     public function cancellation($sessionId,$confirmationCode)
