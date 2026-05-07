@@ -104,6 +104,7 @@
 	//LOG
 	Route::post('/logger/{identifier}', 'budisteikul\vertikaltrip\Controllers\LogController@log')->middleware(['SettingMiddleware']);
 
-		
+	
+	//Route::get('/test', 'budisteikul\vertikaltrip\Controllers\APIController@test')->middleware(['SettingMiddleware']);	
 
 	

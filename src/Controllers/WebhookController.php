@@ -511,6 +511,15 @@ class WebhookController extends Controller
                             }
 
                             $message = BookingHelper::schedule_bydate($date);
+                            $contacts = $message->contacts;
+
+                            for($z=0;$z<count($contacts);$z++)
+                            {
+                                if($contacts[$z]['phones'][0]['phone']=="+")
+                                {
+                                    unset($contacts[$z]);
+                                }
+                            }
                             
                             $guides = json_decode(config('site.guides'));
 
@@ -519,9 +528,9 @@ class WebhookController extends Controller
 
                                 if($guide->wa==$from)
                                 {
-                                    if(!empty($message->contacts) || $message->contacts!="")
+                                    if(!empty($contacts) || $contacts!="")
                                     {
-                                        $whatsapp->sendContact($from,$message->contacts);
+                                        $whatsapp->sendContact($from,$contacts);
                                     }
                                     else
                                     {
@@ -532,9 +541,9 @@ class WebhookController extends Controller
 
                             if($from==config('site.admin_wa'))
                             {
-                                    if(!empty($message->contacts) || $message->contacts!="")
+                                    if(!empty($contacts) || $contacts!="")
                                     {
-                                        $whatsapp->sendContact($from,$message->contacts);
+                                        $whatsapp->sendContact($from,$contacts);
                                     }
                                     else
                                     {
