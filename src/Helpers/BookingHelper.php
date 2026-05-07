@@ -300,7 +300,7 @@ class BookingHelper {
 							$shoppingcart_question->question_id = $data['activityBookings'][$i]['notes'][$k]['type'];
 							$shoppingcart_question->label = "Note";
 							$shoppingcart_question->order = $order;
-							$shoppingcart_question->answer = $data['activityBookings'][$i]['notes'][$k]['body'];
+							$shoppingcart_question->answer = GeneralHelper::get_string_between($data['activityBookings'][$i]['notes'][$k]['body'],'--- Special requirement: ---','---');
 							$shoppingcart_question->save();
 							$order++;
 						}

@@ -23,6 +23,7 @@ use budisteikul\vertikaltrip\Models\Partner;
 use budisteikul\vertikaltrip\Models\Shoppingcart;
 use budisteikul\vertikaltrip\Models\ShoppingcartProduct;
 use budisteikul\vertikaltrip\Models\ShoppingcartCancellation;
+use budisteikul\vertikaltrip\Models\ShoppingcartQuestion;
 
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -43,7 +44,7 @@ class APIController extends Controller
     
     public function test(Request $request)
     {
-        
+               
 
     }
 
