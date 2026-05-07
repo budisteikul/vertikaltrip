@@ -511,16 +511,17 @@ class WebhookController extends Controller
                             }
 
                             $message = BookingHelper::schedule_bydate($date);
-                            $contactz = $message->contacts;
-
+                            
+                            $json_contact = $message->contacts;
                             for($z=0;$z<count($contactz);$z++)
                             {
-                                if($contactz[$z]['phones'][0]['phone']=="+")
+                                if($json_contact[$z]['phones'][0]['phone']=="+")
                                 {
-                                    unset($contactz[$z]);
+                                    unset($json_contact[$z]);
                                 }
                             }
-                            
+                            $json_contact = array_values($json_contact);
+
                             $guides = json_decode(config('site.guides'));
 
                             foreach($guides as $guide)
@@ -528,9 +529,9 @@ class WebhookController extends Controller
 
                                 if($guide->wa==$from)
                                 {
-                                    if(!empty($contactz) || $contactz!="")
+                                    if(!empty($json_contact) || $json_contact!="")
                                     {
-                                        $whatsapp->sendContact($from,$contactz);
+                                        $whatsapp->sendContact($from,$json_contact);
                                     }
                                     else
                                     {
@@ -541,9 +542,9 @@ class WebhookController extends Controller
 
                             if($from==config('site.admin_wa'))
                             {
-                                    if(!empty($contactz) || $contactz!="")
+                                    if(!empty($json_contact) || $json_contact!="")
                                     {
-                                        $whatsapp->sendContact($from,$contactz);
+                                        $whatsapp->sendContact($from,$json_contact);
                                     }
                                     else
                                     {
