@@ -2618,14 +2618,9 @@ class BookingHelper {
                 	$product_questions2 .= $question2->answer;
                 }
                 
-                $phone = '';
-                if(isset($question->phoneNumber))
-                {
-                	$phone = GeneralHelper::phoneNumber($question->phoneNumber);
-					$phone2 = new PhoneNumber('+'. $phone);
-            		$countryCode = $phone2->getCountry();
-                }
-                
+                $phone = GeneralHelper::phoneNumber($question->phoneNumber);
+				$phone2 = new PhoneNumber('+'. $phone);
+            	$countryCode = $phone2->getCountry();
 
 				$text .= "- ". $question->firstName ." ". $question->lastName ." (". $countryCode .")\n _". $id->shoppingcart->booking_channel ." ".$people." pax_ \n `". $product_questions2 ."` \n \n";
 
