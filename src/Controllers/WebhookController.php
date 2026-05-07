@@ -519,7 +519,7 @@ class WebhookController extends Controller
 
                                 if($guide->wa==$from)
                                 {
-                                    if(!empty($message->contacts) || $message->contacts!="")
+                                    if(isset($message->contacts) && (!empty($message->contacts) || $message->contacts!=""))
                                     {
                                         $whatsapp->sendContact($from,$message->contacts);
                                     }
@@ -532,7 +532,7 @@ class WebhookController extends Controller
 
                             if($from==config('site.admin_wa'))
                             {
-                                    if(!empty($message->contacts) || $message->contacts!="")
+                                    if(isset($message->contacts) && (!empty($message->contacts) || $message->contacts!=""))
                                     {
                                         $whatsapp->sendContact($from,$message->contacts);
                                     }
