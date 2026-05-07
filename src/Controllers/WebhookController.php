@@ -513,7 +513,7 @@ class WebhookController extends Controller
                             $message = BookingHelper::schedule_bydate($date);
                             
                             $json_contact = $message->contacts;
-                            for($z=0;$z<count($contactz);$z++)
+                            for($z=0;$z<count($json_contact);$z++)
                             {
                                 if($json_contact[$z]['phones'][0]['phone']=="+")
                                 {
