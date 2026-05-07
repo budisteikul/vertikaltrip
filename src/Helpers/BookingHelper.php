@@ -183,14 +183,14 @@ class BookingHelper {
 						$shoppingcart_product_detail->qty = $s_quantity;
 						$shoppingcart_product_detail->price = $s_price;
 
-						if($bookingChannel=="Viator")
-						{
-							$shoppingcart_product_detail->unit_price = 'Price per booking';
-						}
-						else
-						{
+						//if($bookingChannel=="Viator")
+						//{
+							//$shoppingcart_product_detail->unit_price = 'Price per booking';
+						//}
+						//else
+						//{
 							$shoppingcart_product_detail->unit_price = $lineitems[$j]['title'];
-						}
+						//}
 						
 
 						$subtotal = $s_price * $s_quantity;

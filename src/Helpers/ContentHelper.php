@@ -896,14 +896,14 @@ class ContentHelper {
 			{
 				if($shoppingcart_product_detail->type=="product" || $shoppingcart_product_detail->type=="extra")
 				{
-					if($shoppingcart_product_detail->unit_price == "Price per booking")
-					{
-						$product .= $shoppingcart_product_detail->qty .' '. $shoppingcart_product_detail->unit_price .' ('. $shoppingcart_product_detail->people .' Person)<br>';
-					}
-					else
-					{
+					//if($shoppingcart_product_detail->unit_price == "Price per booking")
+					//{
+						//$product .= $shoppingcart_product_detail->qty .' '. $shoppingcart_product_detail->unit_price .' ('. $shoppingcart_product_detail->people .' Person)<br>';
+					//}
+					//else
+					//{
 						$product .= $shoppingcart_product_detail->qty .' '. $shoppingcart_product_detail->unit_price .'<br>';
-					}
+					//}
                                 
 				}
 				else if($shoppingcart_product_detail->type=="pickup")
