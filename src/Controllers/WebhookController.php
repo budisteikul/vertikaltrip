@@ -682,14 +682,15 @@ class WebhookController extends Controller
                 "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses TA or GYG,
                 "booking_channel" : name of sender GetYourGuide or Airbnb,
                 "booking_note" : "",
-                "tour_name" : offer or booking name has been booked, usually the word uses Yogyakarta or Bali,
+                "tour_name" : offer or booking name has been booked, usually the word uses Yogyakarta or Bali or Semarang,
                 "tour_date" : date of the tour, format YYYY-mm-dd HH:ii:ss,
+                "tour_option" : is it Short Route Tour or not, answer with short or long,
                 "participant_name" : get participant name,
                 "participant_phone" : get participant phone,
                 "participant_email" : get participant email,
                 "participant_total" : get total participant,
                 "p_time" : night or morning or evening from tour date,
-                "p_location" : yogyakarta or bali from tour name
+                "p_location" : yogyakarta or bali or semarang from tour name
             }
 
             Set null if don\'t have data';
@@ -711,6 +712,7 @@ class WebhookController extends Controller
                 $data = $openai->openai($text,$command);
                 $booking_json = json_decode($data);
             }
+
 
             if(!isset($booking_json->booking_confirmation_code))
             {
@@ -739,7 +741,16 @@ class WebhookController extends Controller
                 return response('DUPLICATE', 200)->header('Content-Type', 'text/plain');
             }
             
-            $booking_json->tour_name = $product->name;
+            if($booking_json->tour_option="short" || $booking_json->booking_channel=="Airbnb")
+            {
+                $booking_json->tour_name = "Short Food Tour";
+            }
+            else
+            {
+                $booking_json->tour_name = $product->name;
+            }
+
+            
             $booking_json->session_id = Uuid::uuid4()->toString();
 
             $shoppingcart = BookingHelper::booking_by_json($booking_json);
