@@ -684,7 +684,7 @@ class WebhookController extends Controller
                 "booking_note" : "",
                 "tour_name" : offer or booking name has been booked, usually the word uses Yogyakarta or Bali or Semarang,
                 "tour_date" : date of the tour, format YYYY-mm-dd HH:ii:ss,
-                "tour_option" : is it Short Route Tour or not, answer with short or long,
+                "tour_option" : is it Short Route Tour or Full Experience Tour, answer with "short" for Short Route Tour or "full" for Full Experience Tour or "not know" for not knowing,
                 "participant_name" : get participant name,
                 "participant_phone" : get participant phone,
                 "participant_email" : get participant email,
