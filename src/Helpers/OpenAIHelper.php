@@ -3,18 +3,23 @@ namespace budisteikul\vertikaltrip\Helpers;
 
 class OpenAIHelper {
 
-	public function openai($input)
+	public function openai($input,$prompt)
 	{
 		$data_json = new \stdClass();
 		$data_json->model = 'gpt-5';
 		
 		$data_json->input = '{
-            "prompt": {
-                "id": "pmpt_6a02d14c2ae4819794cb1bcc8772db7d02de004110aee8d8",
-                "version": "3"
-            },
-  			"model": "gpt-5.5",
+            "model": "gpt-5.5",
   			"input": [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "input_text",
+                            "text": "'.$prompt.'"
+                        }
+                    ]
+                },
     			{
       				"role": "user",
       				"content": [
