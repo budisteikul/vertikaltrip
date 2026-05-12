@@ -682,9 +682,8 @@ class WebhookController extends Controller
                 "booking_confirmation_code" : get the reference number or confirmation code usually the first letter uses TA or GYG,
                 "booking_channel" : name of sender GetYourGuide or Airbnb,
                 "booking_note" : "",
-                "tour_name" : offer or booking name has been booked, usually the word uses Yogyakarta or Bali or Semarang,
+                "tour_name" : offer or booking name or tour title has been booked, usually the word uses Yogyakarta or Bali or Semarang,
                 "tour_date" : date of the tour, format YYYY-mm-dd HH:ii:ss,
-                "tour_option" : is it Short Route Tour or Full Experience Tour, answer with "short" for Short Route Tour or "full" for Full Experience Tour or "not know" for not knowing,
                 "participant_name" : get participant name,
                 "participant_phone" : get participant phone,
                 "participant_email" : get participant email,
@@ -730,6 +729,11 @@ class WebhookController extends Controller
                 $product = Product::findOrFail(44);
                 $booking_json->product_id = $product->bokun_id;
             }
+            else if($booking_json->p_location=="semarang")
+            {
+                $product = Product::findOrFail(75);
+                $booking_json->product_id = $product->bokun_id;
+            }
             else
             {
                 return response('DATA TIDAK LENGKAP STEP 3', 200)->header('Content-Type', 'text/plain');
@@ -741,14 +745,14 @@ class WebhookController extends Controller
                 return response('DUPLICATE', 200)->header('Content-Type', 'text/plain');
             }
             
-            if($booking_json->tour_option="short" || $booking_json->booking_channel=="Airbnb")
-            {
-                $booking_json->tour_name = "Short Food Tour";
-            }
-            else
-            {
-                $booking_json->tour_name = $product->name;
-            }
+            //if($booking_json->booking_channel=="Airbnb")
+            //{
+                //$booking_json->tour_name = "Short Food Tour";
+            //}
+            //else
+            //{
+                //$booking_json->tour_name = $product->name;
+            //}
 
             
             $booking_json->session_id = Uuid::uuid4()->toString();
