@@ -11,7 +11,7 @@ class OpenAIHelper {
 		$data_json->input = '{
             "prompt": {
                 "id": "pmpt_6a02d14c2ae4819794cb1bcc8772db7d02de004110aee8d8",
-                "version": "1"
+                "version": "2"
             },
   			"model": "gpt-5",
   			"input": [
