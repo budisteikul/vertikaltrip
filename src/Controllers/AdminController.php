@@ -153,7 +153,7 @@ class AdminController extends Controller
         }
 
         $openai = New OpenAIHelper;
-        $data = $openai->openai($request->message_text);
+        $data = $openai->openai($request->message_text,'Jawab pertanyaan sebagai food tour operator di Yogyakarta (jogjafoodtour.com)');
         return response()->json([
                 'id' => 1,
                 'message_text' => $data
