@@ -6,4 +6,4 @@ The food tour will start {{ $data->time_description }} at {{ $data->time }} and 
 Map : {{$data->map}}
 {{$data->map_description}}
 
-By the way, do you have any food allergy or dietary restrictions?
+By the way, do you/does anyone in your group have any food allergy or dietary restrictions?
