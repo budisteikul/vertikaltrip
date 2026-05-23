@@ -8,6 +8,7 @@ class OpenAIHelper {
 		$data_json = new \stdClass();
 		$data_json->model = 'gpt-5';
 		
+        /*
 		$data_json->input = '{
             "model": "gpt-5.5",
   			"input": [
@@ -31,6 +32,22 @@ class OpenAIHelper {
     			}
   			]
 		}';
+        */
+
+        $data_json->input = '{
+            "model": "gpt-5.5",
+            "input": [
+                {
+                    "role": "system",
+                    "content": "'.$prompt.'"
+                },
+                {
+                    "role": "user",
+                    "content": "'.$input.'"
+                }
+            ],
+            "temperature" : "0.7"
+        }';
 		
 		$data = json_decode($this->POST('/v1/responses',$data_json));
 		
