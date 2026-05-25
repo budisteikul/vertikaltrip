@@ -751,7 +751,7 @@ class WebhookController extends Controller
             }
 
            
-            $needle = "Short Food Tour";
+            $needle = "Short Route Tour";
             if (str_contains($text, $needle)) {
                 $booking_json->tour_name = "Short Food Tour";
             }
