@@ -34,6 +34,8 @@ use Illuminate\Support\Facades\Storage;
 
 use budisteikul\vertikaltrip\Helpers\OpenAIHelper;
 
+use budisteikul\vertikaltrip\Helpers\WiseHelper;
+
 class APIController extends Controller
 {
     
@@ -45,7 +47,7 @@ class APIController extends Controller
     public function test(Request $request)
     {
                
-
+        
     }
 
     public function cancellation($sessionId,$confirmationCode)
