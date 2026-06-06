@@ -191,10 +191,6 @@ class APIController extends Controller
 
 
 
-        
-
-
-
         $dataPrivacyTerm[] = [
             'title' => 'Terms and Conditions',
             'link' => '/page/terms-and-conditions'
@@ -204,8 +200,6 @@ class APIController extends Controller
             'title' => 'Privacy Policy',
             'link' => '/page/privacy-policy'
         ];
-
-        
 
         
 
@@ -796,6 +790,7 @@ class APIController extends Controller
                     //}
                     
                     
+                    $from_text = '';
                     if($product)
                     {
                         $output = $user.$rating.' '.$star_text.'<br />'.$title.$text.$from_text;
