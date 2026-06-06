@@ -782,15 +782,12 @@ class APIController extends Controller
                     $rating = '<span class="text-warning">'. $star .'</span>';
                     $text =  $resource->text .'<br />';
                     
-                    //$post_title = "";
-                    //if(!$product)
-                    //{
-                        $product_name = Product::findOrFail($resource->product_id);
-                        $post_title = 'Review of '. $product_name->name.' <br />';
-                    //}
+                    $product_name = Product::findOrFail($resource->product_id);
+                    $post_title = 'Review of '. $product_name->name.' <br />';
                     
                     
                     $from_text = '';
+                    $title = '';
                     if($product)
                     {
                         $output = $user.$rating.' '.$star_text.'<br />'.$title.$text.$from_text;
@@ -801,8 +798,6 @@ class APIController extends Controller
                     }
                     
 
-                    //$output = $user.$post_title.$rating.$title.$text;
-                    //$output = $user.$post_title.$title.$text;
                     
                     return '<div class="bd-callout bd-callout-theme shadow-sm rounded ml-0 mr-0" style="margin-top:5px;margin-bottom:5px;" >'. $output .'</div>';
                 })
