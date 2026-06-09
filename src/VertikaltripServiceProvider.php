@@ -62,6 +62,7 @@ class VertikaltripServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__.'/migrations/2019_09_30_132534_create_fin_transactions_table.php');
 
         $this->loadMigrationsFrom(__DIR__.'/migrations/2025_04_08_172809_create_orders_table.php');
+        $this->loadMigrationsFrom(__DIR__.'/migrations/2026_06_09_124233_create_fin_investments_table.php');
         */
         
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
