@@ -45,9 +45,8 @@ class APIController extends Controller
     }
     
     public function test(Request $request)
-    {
-               
-        
+    {      
+        return redirect()->away('https://wise.com/pay/business/vertikaltripllc?description=50000');
     }
 
     public function cancellation($sessionId,$confirmationCode)
