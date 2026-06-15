@@ -774,16 +774,23 @@ class WebhookController extends Controller
                 return response('DUPLICATE', 200)->header('Content-Type', 'text/plain');
             }
             
+            //AIRBNB
             if($booking_json->booking_channel=="Airbnb")
             {
                 $booking_json->tour_name = "Short Food Tour";
+                $needle = "morning";
+                if (str_contains($text, $needle)) {
+                    $booking_json->tour_name = "Taste Yogyakarta's morning cuisine";
+                }
             }
 
-           
+            //GYG
             $needle = "Short Route Tour";
             if (str_contains($text, $needle)) {
                 $booking_json->tour_name = "Short Food Tour";
             }
+
+
 
             //else
             //{
