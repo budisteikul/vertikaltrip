@@ -373,30 +373,59 @@ class WebhookController extends Controller
 
                                         if($data_flow->payment=="on")
                                         {
-                                            $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
-                                            $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
-                                            $shoppingcart->booking_status = "PENDING";
-                                            $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
+                                            if($currency=="IDR")
+                                            {
+                                                $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
+                                                $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
+                                                $shoppingcart->booking_status = "PENDING";
+                                                $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
 
-                                            $response = PaymentHelper::create_payment($shoppingcart->session_id,"wise");
-                                            $shoppingcart = BookingHelper::confirm_booking($shoppingcart->session_id);
+                                                $response = PaymentHelper::create_payment($shoppingcart->session_id,"wise");
+                                                $shoppingcart = BookingHelper::confirm_booking($shoppingcart->session_id);
 
                                             
-                                            $components = [
-                                                [
-                                                    "type"=> "button",
-                                                    "sub_type"=> "url",
-                                                    "index"=> 0,
-                                                    "parameters" => [[
+                                                $components = [
+                                                    [
+                                                        "type"=> "button",
+                                                        "sub_type"=> "url",
+                                                        "index"=> 0,
+                                                        "parameters" => [[
                                                         "type" => "text",
                                                         "text" => "vertikaltripllc?amount=".(float)$shoppingcart->shoppingcart_payment->amount ."&currency=". $shoppingcart->shoppingcart_payment->currency ."&description=".$shoppingcart->confirmation_code
-                                                    ]]
-                                                ]
-                                            ];
+                                                        ]]
+                                                    ]
+                                                ];
             
-                                            $whatsapp = new WhatsappHelper;
-                                            $whatsapp->sendTemplate($from,"pay_with_wise", $components);
+                                                $whatsapp = new WhatsappHelper;
+                                                $whatsapp->sendTemplate($from,"pay_with_wise", $components);
+                                            }
+
+                                            if($currency=="USD")
+                                            {
+                                                $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
+                                                $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
+                                                $shoppingcart->booking_status = "PENDING";
+                                                $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
+
+                                                $response = PaymentHelper::create_payment($shoppingcart->session_id,"stripe");
+                                                
+
                                             
+                                                $components = [
+                                                    [
+                                                        "type"=> "button",
+                                                        "sub_type"=> "url",
+                                                        "index"=> 0,
+                                                        "parameters" => [[
+                                                            "type" => "text",
+                                                            "text" => $shoppingcart->session_id
+                                                        ]]
+                                                    ]
+                                                ];
+            
+                                                $whatsapp = new WhatsappHelper;
+                                                $whatsapp->sendTemplate($from,"pay_with_stripe", $components);
+                                            }
                                         }
                                         else
                                         {
