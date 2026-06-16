@@ -29,7 +29,7 @@ class ThankyouForBookingMail extends Mailable
     public function build()
     {
         $data = $this->data;
-        $mail = $this->text('vertikaltrip::layouts.mail.thank-you-for-booking_plain')
+        $mail = $this->view('vertikaltrip::layouts.mail.thank-you-for-booking_plain')
                     ->subject('Jogja Food Tour')
                     ->with('data',$data);
         

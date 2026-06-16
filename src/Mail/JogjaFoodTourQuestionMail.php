@@ -34,7 +34,7 @@ class JogjaFoodTourQuestionMail extends Mailable
     public function build()
     {
         $data = $this->data;
-        $mail = $this->text('vertikaltrip::layouts.mail.jogja-food-tour-question_plain')
+        $mail = $this->view('vertikaltrip::layouts.mail.jogja-food-tour-question_plain')
                     ->subject('Jogja Food Tour')
                     ->with('data',$data);
         
