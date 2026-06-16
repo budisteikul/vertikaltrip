@@ -75,7 +75,10 @@ class TaskController extends Controller
 
         if($data->app=="thank_you_for_booking")
         {
-            Mail::to($data->email)->send(new ThankyouForBookingMail($data));
+            if($data->email!="")
+            {
+                Mail::to($data->email)->send(new ThankyouForBookingMail($data));
+            }
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 
