@@ -12,6 +12,7 @@ use budisteikul\vertikaltrip\Models\Shoppingcart;
 use Illuminate\Support\Facades\Mail;
 use budisteikul\vertikaltrip\Mail\BookingConfirmedMail;
 use budisteikul\vertikaltrip\Mail\JogjaFoodTourQuestionMail;
+use budisteikul\vertikaltrip\Mail\ThankyouForBookingMail;
 
 use budisteikul\vertikaltrip\Helpers\ProductHelper;
 use budisteikul\vertikaltrip\Helpers\BookingHelper;
@@ -69,6 +70,12 @@ class TaskController extends Controller
         if($data->app=="mail_question")
         {
             Mail::to($data->email)->send(new JogjaFoodTourQuestionMail($data));
+            return response('OK', 200)->header('Content-Type', 'text/plain');
+        }
+
+        if($data->app=="thank_you_for_booking")
+        {
+            Mail::to($data->email)->send(new ThankyouForBookingMail($data));
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 

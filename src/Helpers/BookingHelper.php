@@ -1395,6 +1395,22 @@ class BookingHelper {
 		
 	}
 
+	public static function thankyouforbooking_notif($shoppingcart)
+	{
+
+        $email = $shoppingcart->shoppingcart_questions()->select('answer')->where('type','mainContactDetails')->where('question_id','email')->first()->answer;
+        $firstName = $shoppingcart->shoppingcart_questions()->select('answer')->where('type','mainContactDetails')->where('question_id','firstName')->first()->answer;
+
+
+		$payload = new \stdClass();
+		$payload->app = 'thank_you_for_booking';
+		$payload->email = $email;
+		$payload->name = $firstName;
+
+		TaskHelper::create($payload);
+		
+	}
+
 	public static function shoppingcart_clear($sessionId)
 	{
 		BokunHelper::get_removepromocode($sessionId);
