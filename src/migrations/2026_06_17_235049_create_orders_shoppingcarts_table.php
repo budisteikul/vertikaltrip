@@ -24,6 +24,7 @@ return new class extends Migration
                   ->references('id')->on('shoppingcarts')
                   ->onDelete('cascade')->onUpdate('cascade');
 
+            $table->text('note')->nullable();
             $table->timestamps(6);
         });
     }
