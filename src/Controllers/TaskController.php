@@ -67,7 +67,7 @@ class TaskController extends Controller
             return response('OK', 200)->header('Content-Type', 'text/plain');
         }
 
-        if($data->app=="mail_question")
+        if($data->app=="mail_reminder")
         {
             Mail::to($data->email)->send(new JogjaFoodTourQuestionMail($data));
             return response('OK', 200)->header('Content-Type', 'text/plain');
