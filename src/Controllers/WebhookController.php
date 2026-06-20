@@ -63,6 +63,8 @@ class WebhookController extends Controller
             $content = BokunHelper::get_product($product->bokun_id);
             $availability_participant = 8;
 
+            $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
+
             $day = 30;
             if($payment=="off") $day = 2;
 
@@ -97,7 +99,7 @@ class WebhookController extends Controller
                 }
                 else
                 {
-                    $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
+                    
                     $total_price = $price * $decryptedData["decryptedBody"]["data"]["participant"];
 
                     //summary
@@ -181,7 +183,7 @@ class WebhookController extends Controller
                     ]
                 ];
                 
-                $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
+                
 
                 $screen = [
                     "screen" => "APPOINTMENT",
@@ -381,6 +383,9 @@ class WebhookController extends Controller
                                             {
                                                 $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
                                                 $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
+                                                //============================================
+
+                                                //============================================
                                                 $shoppingcart->booking_status = "PENDING";
                                                 $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
 
@@ -408,6 +413,9 @@ class WebhookController extends Controller
                                             {
                                                 $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
                                                 $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
+                                                //============================================
+
+                                                //============================================
                                                 $shoppingcart->booking_status = "PENDING";
                                                 $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
 
