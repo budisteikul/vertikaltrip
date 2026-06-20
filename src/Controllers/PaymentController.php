@@ -759,7 +759,7 @@ class PaymentController extends Controller
                                     $(\'#alert-payment\').html(\'<div id="alert-success" class="alert alert-primary text-center" role="alert"><h2 style="margin-bottom:10px; margin-top:10px;"><i class="far fa-smile"></i> Payment Successful!</h2></div>\');
                                     $(\'#alert-payment\').fadeIn("slow");
                                     setTimeout(function (){
-                                        window.openAppRoute("/payment/successful");
+                                        window.openAppRoute("/payment/page/payment-successful");
                                     }, 1000); 
                                 }
 
