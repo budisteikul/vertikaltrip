@@ -65,7 +65,7 @@ class WebhookController extends Controller
 
             $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
 
-            $price = $price - ($price * 10/100);
+            $price = 450000;
 
             $day = 30;
             if($payment=="off") $day = 2;
