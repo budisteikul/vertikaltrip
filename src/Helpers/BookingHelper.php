@@ -2782,8 +2782,11 @@ class BookingHelper {
 	{
 			if($currency==null) $currency = config('site.currency');
 			$content = BokunHelper::get_product($booking_json->product_id);
-			//$price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
-			$price = $booking_json->price;
+			
+
+			$price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
+			if(isset($booking_json->price)) $price = $booking_json->price;
+			
 			$total_price = $price * $booking_json->participant_total;
 			$product = Product::where('bokun_id',$booking_json->product_id)->first(); 
 			$image = ImageHelper::thumbnail($product);
