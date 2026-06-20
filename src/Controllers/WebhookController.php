@@ -115,7 +115,7 @@ class WebhookController extends Controller
                     
                     
                     
-                    $more_details = 'no dietary';
+                    $more_details = 'No dietary';
                     if(isset($decryptedData["decryptedBody"]["data"]["more_details"])) $more_details = $decryptedData["decryptedBody"]["data"]["more_details"];
 
                     $unit_price = "adult";
@@ -134,6 +134,7 @@ class WebhookController extends Controller
                             "step"=> "confirm_booking",
                             "bokun_id"=> $decryptedData["decryptedBody"]["data"]["bokun_id"],
                             "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"],
+                            "name"=> $decryptedData["decryptedBody"]["data"]["name"],
                             "payment"=> $payment,
                             "currency"=> $currency
                         ]
@@ -350,13 +351,16 @@ class WebhookController extends Controller
                                         $booking_channel = "WEBSITE";
                                         if($data_flow->payment=="off") $booking_channel = "OFFLINE SALE";
 
+                                        $participant_name = $name;
+                                        if(isset($data_flow->name)) $participant_name = $data_flow->name;
+
                                         $data1 = [
                                             "booking_confirmation_code" => BookingHelper::get_ticket(),
                                             "booking_channel" => $booking_channel,
                                             "booking_note" => $data_flow->more_details,
                                             "tour_name" => $data_flow->tour_name,
                                             "tour_date" => $data_flow->date." ".$data_flow->time.":00",
-                                            "participant_name" => $name,
+                                            "participant_name" => $participant_name,
                                             "participant_phone" => $from,
                                             "participant_email" => "",
                                             "participant_total" => $data_flow->participant,
