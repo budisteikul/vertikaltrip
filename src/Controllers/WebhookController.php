@@ -65,6 +65,8 @@ class WebhookController extends Controller
 
             $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
 
+            $price = $price - ($price * 10/100);
+
             $day = 30;
             if($payment=="off") $day = 2;
 
@@ -384,7 +386,7 @@ class WebhookController extends Controller
                                                 $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
                                                 $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
                                                 //============================================
-
+                                                //BookingHelper::apply_promocode($shoppingcart->session_id,'WHATSAPP_PROMO');
                                                 //============================================
                                                 $shoppingcart->booking_status = "PENDING";
                                                 $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
@@ -414,7 +416,7 @@ class WebhookController extends Controller
                                                 $shoppingcart = BookingHelper::move_dbtoshoppingcart($shoppingcart->id);
                                                 $shoppingcart = BookingHelper::read_shoppingcart($shoppingcart->session_id);
                                                 //============================================
-
+                                                //BookingHelper::apply_promocode($shoppingcart->session_id,'WHATSAPP_PROMO');
                                                 //============================================
                                                 $shoppingcart->booking_status = "PENDING";
                                                 $shoppingcart = BookingHelper::save_shoppingcart($shoppingcart->session_id, $shoppingcart);
