@@ -65,7 +65,7 @@ class WebhookController extends Controller
 
             $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
 
-            $discount = (float)config('site.whatsapp_promo');
+            $discount = (int)config('site.whatsapp_promo');
             if($discount>0)
             {
                 $price = $price - ($price * $discount / 100);
@@ -145,7 +145,7 @@ class WebhookController extends Controller
                             "tour_name"=> $decryptedData["decryptedBody"]["data"]["tour_name"],
                             "name"=> $decryptedData["decryptedBody"]["data"]["name"],
                             "payment"=> $payment,
-                            "price"=> $price,
+                            "price"=> (string)$price,
                             "currency"=> $currency
                         ]
                     ];
