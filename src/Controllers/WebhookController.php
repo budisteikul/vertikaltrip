@@ -67,11 +67,11 @@ class WebhookController extends Controller
 
             $discount = (float)config('site.whatsapp_promo');
             $old_price = $price;
-            $information = "Price : ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant"
+            $information = "Price : ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant";
             if($discount>0)
             {
                 $price = $price - ($price * $discount / 100);
-                $information = "Price : ~".$currency ." ". GeneralHelper::numberFormat($old_price,$currency) ."~ ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant"
+                $information = "Price : ~".$currency ." ". GeneralHelper::numberFormat($old_price,$currency) ."~ ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant";
             }
             
 
