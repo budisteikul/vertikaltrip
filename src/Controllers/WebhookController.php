@@ -71,7 +71,8 @@ class WebhookController extends Controller
             if($discount>0)
             {
                 $price = $price - ($price * $discount / 100);
-                $information = "Price : <strike>".$currency ." ". GeneralHelper::numberFormat($old_price,$currency) ."</strike> ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant";
+                $information = "🎉 Discount Applied!
+The price has been reduced from ".$currency ." ". GeneralHelper::numberFormat($old_price,$currency) ." to ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant. Enjoy your savings!";
             }
             
 
