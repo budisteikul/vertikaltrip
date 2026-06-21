@@ -66,9 +66,12 @@ class WebhookController extends Controller
             $price = BookingHelper::convert_currency($content->nextDefaultPriceMoney->amount,config('site.currency'),$currency);
 
             $discount = (float)config('site.whatsapp_promo');
+            $old_price = $price;
+            $information = "Price : ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant"
             if($discount>0)
             {
                 $price = $price - ($price * $discount / 100);
+                $information = "Price : ~".$currency ." ". GeneralHelper::numberFormat($old_price,$currency) ."~ ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant"
             }
             
 
@@ -202,7 +205,7 @@ class WebhookController extends Controller
                         "is_time_enabled" => true,
                         "participant" => $participant,
                         "is_participant_enabled" => true,
-                        "information"=> "Price : ".$currency ." ". GeneralHelper::numberFormat($price,$currency) ." / participant",
+                        "information"=> $information,
                         "session_id"=> Uuid::uuid4()->toString(),
                         "step"=> "init",
                         "tour_name"=> $product->name,
