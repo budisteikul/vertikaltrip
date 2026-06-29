@@ -614,12 +614,18 @@ The price has been reduced from ".$currency ." ". GeneralHelper::numberFormat($o
                     
                 if($message!="")
                 {
+                    $from_text = '+'. $from;
+                    $contact = Contact::where('wa_id',$from)->first();
+                    if($contact)
+                    {
+                        $from_text = $contact->name;
+                    }
                     curl_setopt_array($ch = curl_init(), array(
                         CURLOPT_URL => "https://api.pushover.net/1/messages.json",
                         CURLOPT_POSTFIELDS => array(
                             "token" => env('PUSHOVER_TOKEN'),
                             "user" => env('PUSHOVER_USER'),
-                            "title" => 'New Message: +'. $from,
+                            "title" => 'New Message: '. $from_text,
                             "message" => $message,
                             "url" => env("APP_ADMIN_URL").'/cms/contact/'.$whatsapp->contact($from).'/edit/',
                             "url_title" => "Reply"
