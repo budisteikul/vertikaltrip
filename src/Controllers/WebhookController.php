@@ -486,7 +486,7 @@ The price has been reduced from ".$currency ." ". GeneralHelper::numberFormat($o
                                                 "parameters"=>[[
                                                     "type"=>"image",
                                                     "image"=>[
-                                                        "link"=>"https://storage.googleapis.com/storage.vertikaltrip.com/images/w_600-h_400/f813633e-6566-4df8-a9ae-42f1003bbdea.jpg"
+                                                        "link"=>"https://storage.googleapis.com/storage.vertikaltrip.com/images/w_600-h_400/ad1c565b-3dda-4289-bfe4-ef6dc4764fa6.jpg"
                                                     ]
                                                 ]]
                                             ],
